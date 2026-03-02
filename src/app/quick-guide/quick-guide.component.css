@@ -70,6 +70,19 @@
   color: #5a4632;
 }
 
+.donation {
+  margin-top: 24px;
+  padding: 10px 6px;
+  text-align: center;
+  color: #6b5140;
+  font-size: 0.9rem;
+}
+
+.pix-key {
+  font-weight: 600;
+  color: #4b3626;
+}
+
 .category-panel {
   background: rgba(255, 248, 235, 0.8);
   border: 1px solid #e1cdb4;

@@ -129,7 +129,7 @@
       {
         "id": "ataque",
         "name": "Ataque",
-        "description": "d20 + bonus de ataque vs CA. Acerto causa dano; 20 natural e acerto critico."
+        "description": "d20 + bonus de ataque vs CA. Acerto causa dano. 20 natural e acerto critico."
       },
       {
         "id": "acoes-no-turno",
@@ -176,7 +176,7 @@
       {
         "id": "acao-influence",
         "name": "Influenciar",
-        "description": "Teste social para alterar a atitude de uma criatura."
+        "description": "Interacao social para alterar a atitude de uma criatura via pericias. Adestrar Animais (tangir Besta/Monstruosidade). Enganacao (enganar criatura que entende voce). Intimidacao (intimidar). Persuasao (persuadir criatura que entende voce)."
       },
       {
         "id": "acao-magic",
