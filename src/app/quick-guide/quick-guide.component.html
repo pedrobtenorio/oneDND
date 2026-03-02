@@ -1,0 +1,44 @@
+<mat-toolbar class="topbar">
+  <span class="title">Guia Rapido — One D&amp;D</span>
+</mat-toolbar>
+
+<section class="page">
+  <div class="search">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Buscar regra</mat-label>
+      <input
+        matInput
+        [formControl]="searchControl"
+        placeholder="Ex: vantagem, ataque, descanso"
+      >
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <ng-container *ngIf="filteredCategories$ | async as categories">
+    <mat-accordion class="accordion" multi>
+      <mat-expansion-panel
+        class="category-panel"
+        *ngFor="let category of categories; trackBy: trackCategory"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ category.title }}</mat-panel-title>
+          <mat-panel-description>{{ category.items.length }} itens</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="items">
+          <article class="rule-card" *ngFor="let item of category.items; trackBy: trackItem">
+            <h4>{{ item.name }}</h4>
+            <ul class="effects">
+              <li *ngFor="let effect of item.effects">{{ effect }}</li>
+            </ul>
+          </article>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <div class="empty" *ngIf="categories.length === 0">
+      Nenhum resultado encontrado.
+    </div>
+  </ng-container>
+</section>

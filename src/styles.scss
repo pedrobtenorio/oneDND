@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Source+Serif+4:wght@300;400;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Source Serif 4', 'Times New Roman', serif;
+  background:
+    radial-gradient(circle at top, rgba(255, 250, 237, 0.8), transparent 55%),
+    radial-gradient(circle at 20% 40%, rgba(242, 225, 205, 0.6), transparent 45%),
+    #f1e3cf;
+  color: #2c2012;
+}
+
+input,
+select,
+button {
+  font-family: inherit;
+}

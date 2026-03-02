@@ -1,0 +1,398 @@
+[
+  {
+    "id": "testes-d20",
+    "title": "Testes d20",
+    "items": [
+      {
+        "id": "vantagem-desvantagem",
+        "name": "Vantagem e Desvantagem",
+        "description": "Rola dois d20 e fica com o maior (vantagem) ou o menor (desvantagem). Vantagens nao acumulam."
+      },
+      {
+        "id": "teste-pericia",
+        "name": "Teste de Pericia",
+        "description": "d20 + modificador de atributo + bonus de proficiencia (se aplicavel) contra uma CD."
+      },
+      {
+        "id": "teste-salvaguarda",
+        "name": "Teste de Salvaguarda",
+        "description": "d20 + modificador de atributo + bonus de proficiencia (se aplicavel) contra uma CD."
+      }
+    ]
+  },
+  {
+    "id": "pericias",
+    "title": "Perícias",
+    "items": [
+      {
+        "id": "acrobacia",
+        "name": "Acrobacia (DES)",
+        "description": "Manter equilibrio; desviar de armadilha; atravessar terreno dificil; fazer malabarismos; balancar no lustre."
+      },
+      {
+        "id": "adestrar-animais",
+        "name": "Adestrar Animais (SAB)",
+        "description": "Controlar montaria; acalmar animal; treinar companheiro; entender intencoes."
+      },
+      {
+        "id": "arcanismo",
+        "name": "Arcanismo (INT)",
+        "description": "Conhecimento sobre magias; itens magicos; tradicoes arcanas; monstros; planos de existencia."
+      },
+      {
+        "id": "atletismo",
+        "name": "Atletismo (FOR)",
+        "description": "Erguer grade; escalar penhasco; quebrar amarras; saltar abismo; carregar aliado; nadar em corredeiras."
+      },
+      {
+        "id": "enganacao",
+        "name": "Enganacao (CAR)",
+        "description": "Ludibriar guarda; vender mercadoria falsa; usar disfarce; se passar por oficial; bajulacao falsa."
+      },
+      {
+        "id": "historia",
+        "name": "Historia (INT)",
+        "description": "Conhecimento sobre eventos; pessoas; nacoes; conflitos; culturas; civilizacoes perdidas."
+      },
+      {
+        "id": "intuicao",
+        "name": "Intuicao (SAB)",
+        "description": "Perceber intencoes reais; reconhecer controle mental; detectar mentiras; avaliar confianca."
+      },
+      {
+        "id": "intimidacao",
+        "name": "Intimidacao (CAR)",
+        "description": "Exigir lealdade; espantar fera; interrogar prisioneiro; desmoralizar inimigos."
+      },
+      {
+        "id": "investigacao",
+        "name": "Investigacao (INT)",
+        "description": "Encontrar porta secreta; vasculhar arquivo; identificar falsificacao; decifrar codigo; analisar cena do crime."
+      },
+      {
+        "id": "medicina",
+        "name": "Medicina (SAB)",
+        "description": "Estabilizar aliado; realizar cirurgia; diagnosticar doenca; tratar veneno; identificar causa da morte."
+      },
+      {
+        "id": "natureza",
+        "name": "Natureza (INT)",
+        "description": "Conhecimento sobre terreno; plantas; animais; clima; fenomenos naturais; estacoes."
+      },
+      {
+        "id": "percepcao",
+        "name": "Percepcao (SAB)",
+        "description": "Escutar conversa; avistar monstro oculto; reconhecer emboscada; detectar armadilha; notar simbolo secreto."
+      },
+      {
+        "id": "atuacao",
+        "name": "Atuacao (CAR)",
+        "description": "Tocar instrumento; entreter plateia; impressionar nobre; dancar; encenar historia; inspirar aliados."
+      },
+      {
+        "id": "persuasao",
+        "name": "Persuasao (CAR)",
+        "description": "Conseguir ajuda; obter informacao; justificar acoes; acalmar medos; negociar paz; convencer juiz."
+      },
+      {
+        "id": "religiao",
+        "name": "Religiao (INT)",
+        "description": "Conhecimento sobre deuses; preces e rituais; simbolos sagrados; ordens e cultos."
+      },
+      {
+        "id": "prestidigitacao",
+        "name": "Prestidigitacao (DES)",
+        "description": "Bater carteira; abrir algemas; trapacear em jogos; ocultar objeto; plantar evidencia."
+      },
+      {
+        "id": "furtividade",
+        "name": "Furtividade (DES)",
+        "description": "Mover-se em silencio; esconder-se nas sombras; se misturar na multidao; seguir alvo; armar emboscada; despistar perseguidores."
+      },
+      {
+        "id": "sobrevivencia",
+        "name": "Sobrevivencia (SAB)",
+        "description": "Evitar perigos naturais; seguir rastros; identificar covil; forragear; prever clima; cacar."
+      }
+    ]
+  },
+
+  {
+    "id": "combate",
+    "title": "Combate",
+    "items": [
+      {
+        "id": "iniciativa",
+        "name": "Iniciativa",
+        "description": "Cada criatura rola d20 + Mod Iniciativa (normalmente Mod dex). Ordem do maior para o menor."
+      },
+      {
+        "id": "ataque",
+        "name": "Ataque",
+        "description": "d20 + bonus de ataque vs CA. Acerto causa dano; 20 natural e acerto critico."
+      },
+      {
+        "id": "acoes-no-turno",
+        "name": "Acoes no Turno",
+        "description": "Em cada turno voce pode fazer: 1 Acao, 1 Acao Bonus (se disponivel), Movimento ate seu Deslocamento, 1 Interacao simples e 1 Reacao quando acionada."
+      }
+    ]
+  },
+
+  {
+    "id": "acoes-combate",
+    "title": "Ações de Combate",
+    "items": [
+      {
+        "id": "acao-ataque",
+        "name": "Ataque",
+        "description": "Realizar um ataque com arma ou desarmado."
+      },
+      {
+        "id": "acao-dash",
+        "name": "Disparada",
+        "description": "Voce ganha movimento adicional igual ao seu Deslocamento neste turno."
+      },
+      {
+        "id": "acao-disengage",
+        "name": "Desengajar",
+        "description": "Ate o fim do turno, seu movimento nao provoca ataques de oportunidade."
+      },
+      {
+        "id": "acao-dodge",
+        "name": "Esquivar",
+        "description": "Ate o inicio do proximo turno, ataques contra voce tem desvantagem e voce tem vantagem em salvaguardas de Destreza."
+      },
+      {
+        "id": "acao-help",
+        "name": "Ajudar",
+        "description": "Concede vantagem a um aliado em um teste ou ataque."
+      },
+      {
+        "id": "acao-hide",
+        "name": "Esconder",
+        "description": "Faça um teste de Furtividade para se ocultar. Se bem sucedido, voce fica invisivel."
+      },
+      {
+        "id": "acao-influence",
+        "name": "Influenciar",
+        "description": "Teste social para alterar a atitude de uma criatura."
+      },
+      {
+        "id": "acao-magic",
+        "name": "Conjurar Magia",
+        "description": "Conjurar uma magia ou usar um item magico."
+      },
+      {
+        "id": "acao-ready",
+        "name": "Preparar",
+        "description": "Defina um gatilho e use sua reacao para agir quando ele ocorrer."
+      },
+      {
+        "id": "acao-search",
+        "name": "Procurar",
+        "description": "Teste para perceber, avaliar ou encontrar algo."
+      },
+      {
+        "id": "acao-study",
+        "name": "Estudar",
+        "description": "Teste de conhecimento para analisar ou recordar informacao."
+      },
+      {
+        "id": "acao-utilize",
+        "name": "Utilizar",
+        "description": "Usar um objeto nao magico."
+      }
+    ]
+  },
+  {
+    "id": "ataques",
+    "title": "Ataques",
+    "items": [
+      {
+        "id": "rolagem-ataque",
+        "name": "Rolagem de Ataque",
+        "description": "d20 + atributo + proficiencia >= CA do alvo. Corpo a corpo: Mod For (Ou Des para acuidade) + proficiencia (se proficiente). Distancia: Mod Des + proficiencia (se proficiente). Magias: Mod de conjuracao + proficiencia."
+      },
+      {
+        "id": "classe-armadura-base",
+        "name": "Classe de Armadura",
+        "description": "CA base = 10 + Mod Des (+armadura, itens, magias, etc.)."
+      },
+      {
+        "id": "ataques-distancia",
+        "name": "Ataques a Distancia",
+        "description": "Ate o alcance curto: ataque normal. Ate o alcance longo: desvantagem no ataque. Se um inimigo estiver a 1,5 m de voce: desvantagem em ataques a distancia."
+      },
+      {
+        "id": "cobertura",
+        "name": "Cobertura",
+        "description": "Meia cobertura: +2 CA, +2 em salvaguardas de Des. Tres quartos de cobertura: +5 CA, +5 em salvaguardas de Des. Cobertura total: so pode ser alvo de efeitos em area."
+      },
+      {
+        "id": "acerto-critico",
+        "name": "Acerto Critico",
+        "description": "20 no d20: sempre acerta. 1 no d20: sempre erra."
+      },
+      {
+        "id": "rolagem-dano",
+        "name": "Rolagem de Dano",
+        "description": "Dados de dano da arma + Mod do atributo (o mesmo do ataque) + modificadores."
+      },
+      {
+        "id": "dano-critico",
+        "name": "Dano Critico",
+        "description": "Rola os dados de dano duas vezes e depois soma os modificadores. Tambem vale para dados adicionais, como Ataque Furtivo."
+      }
+    ]
+  },
+  {
+    "id": "perigos",
+    "title": "Perigos",
+    "items": [
+      {
+        "id": "queimando",
+        "name": "Queimando",
+        "description": "1d4 de dano de fogo no inicio do turno. Apagar ao se jogar no chao e rolar (acao)."
+      },
+      {
+        "id": "desidratacao",
+        "name": "Desidratacao",
+        "description": "Menos de metade da agua diaria: +1 Exaustao. Necessidade: Miudo 1/4 galao, Pequeno 1 galao, Medio 1 galao, Grande 4 galoes, Enorme 16 galoes, Colossal 64 galoes."
+      },
+      {
+        "id": "queda",
+        "name": "Queda",
+        "description": "1d6 de dano contundente a cada 3 m. Maximo 20d6. Cai no chao, a menos que o dano seja anulado."
+      },
+      {
+        "id": "desnutricao",
+        "name": "Desnutricao",
+        "description": "Menos de metade da comida diaria: +1 Exaustao. Necessidade: Miudo 1/4 libra, Pequeno 1 libra, Medio 1 libra, Grande 4 libras, Enorme 16 libras, Colossal 64 libras."
+      },
+      {
+        "id": "sufocamento",
+        "name": "Sufocamento",
+        "description": "Segura a respiracao por (1 + Mod CON) minutos. Ao sufocar: +1 Exaustao no fim do turno. Exaustao removida ao voltar a respirar."
+      }
+    ]
+  },
+  {
+    "id": "magia",
+    "title": "Magia",
+    "items": [
+      {
+        "id": "componentes",
+        "name": "Componentes",
+        "description": "Verbal, Somatico e Material. Itens ou foco podem substituir materiais sem custo."
+      },
+      {
+        "id": "concentracao",
+        "name": "Concentracao",
+        "description": "Apenas uma magia por vez. Falha se sofrer dano e nao passar em teste de CON."
+      },
+      {
+        "id": "rituais",
+        "name": "Rituais",
+        "description": "Magias com tag Ritual podem ser conjuradas sem gastar espaco, mas levam +10 min."
+      }
+    ]
+  },
+  {
+    "id": "condicoes",
+    "title": "Condições",
+    "items": [
+      {
+        "id": "cego",
+        "name": "Cego",
+        "description": "Falha automaticamente em testes que dependem de visão. Seus ataques têm desvantagem; ataques contra você têm vantagem."
+      },
+      {
+        "id": "enfeiticado",
+        "name": "Enfeitiçado",
+        "description": "Você não pode atacar quem o enfeitiçou. A criatura tem vantagem em testes sociais contra você."
+      },
+      {
+        "id": "surdo",
+        "name": "Surdo",
+        "description": "Falha automaticamente em testes que dependem de audição."
+      },
+      {
+        "id": "exaustao",
+        "name": "Exaustão",
+        "description": "Possui níveis de 1 a 5; no nível 6 ocorre morte. Cada nível impõe -2 em testes e -5 pés de deslocamento. Descanso longo remove 1 nível."
+      },
+      {
+        "id": "amedrontado",
+        "name": "Amedrontado",
+        "description": "Ataques e testes de habilidade têm desvantagem enquanto a fonte estiver visível. Você não pode se aproximar da fonte."
+      },
+      {
+        "id": "imobilizado",
+        "name": "Imobilizado",
+        "description": "Deslocamento 0. Você tem desvantagem em ataques contra qualquer alvo que não seja o imobilizador. O imobilizador pode movê-lo usando metade do movimento."
+      },
+      {
+        "id": "incapacitado",
+        "name": "Incapacitado",
+        "description": "Você não pode realizar ações nem falar. Concentração é encerrada. Tem desvantagem na iniciativa."
+      },
+      {
+        "id": "invisivel",
+        "name": "Invisível",
+        "description": "Não pode ser alvo direto. Seus ataques têm vantagem; ataques contra você têm desvantagem. Tem vantagem na iniciativa."
+      },
+      {
+        "id": "paralisado",
+        "name": "Paralisado",
+        "description": "Está incapacitado e com deslocamento 0. Falha automaticamente em salvaguardas de Força e Destreza. Ataques contra você têm vantagem e ataques corpo a corpo a até 1,5 m são críticos automáticos."
+      },
+      {
+        "id": "petrificado",
+        "name": "Petrificado",
+        "description": "Está incapacitado e com deslocamento 0. Falha automaticamente em salvaguardas de Força e Destreza. Ataques contra você têm vantagem. Possui resistência a todo dano e imunidade a veneno."
+      },
+      {
+        "id": "envenenado",
+        "name": "Envenenado",
+        "description": "Desvantagem em ataques e testes de habilidade."
+      },
+      {
+        "id": "caido",
+        "name": "Caído",
+        "description": "Levantar custa metade do deslocamento (ou pode rastejar). Seus ataques têm desvantagem. Ataques contra você têm vantagem se estiverem a até 1,5 m, ou desvantagem se estiverem mais distantes."
+      },
+      {
+        "id": "contido",
+        "name": "Contido",
+        "description": "Deslocamento 0. Seus ataques têm desvantagem; ataques contra você têm vantagem. Salvaguardas de Destreza têm desvantagem. Uma criatura contida pode usar uma acao para fazer um teste de Forca (Atletismo) contra a CD da magia e, em sucesso, se liberta."
+      },
+      {
+        "id": "atordoado",
+        "name": "Atordoado",
+        "description": "Está incapacitado. Falha automaticamente em salvaguardas de Força e Destreza. Ataques contra você têm vantagem."
+      },
+      {
+        "id": "inconsciente",
+        "name": "Inconsciente",
+        "description": "Está incapacitado e caído, com deslocamento 0. Falha automaticamente em salvaguardas de Força e Destreza. Ataques contra você têm vantagem e ataques corpo a corpo a até 1,5 m são críticos automáticos."
+      }
+    ]
+  },
+  {
+    "id": "descanso",
+    "title": "Descanso",
+    "items": [
+      {
+        "id": "descanso-curto",
+        "name": "Descanso Curto",
+        "description": "1 hora. Gasta dados de vida para recuperar PV; algumas habilidades recarregam."
+      },
+      {
+        "id": "descanso-longo",
+        "name": "Descanso Longo",
+        "description": "8 horas. Recupera PV e metade dos dados de vida gastos; remove exaustao 1."
+      }
+    ]
+  }
+]
