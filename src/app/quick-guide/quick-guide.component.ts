@@ -1,13 +1,14 @@
-import { Component, inject } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, QueryList, ViewChildren, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { combineLatest, map, startWith } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRoute } from '@angular/router';
 
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { MatExpansionModule } from '@angular/material/expansion';
+import { MatExpansionModule, MatExpansionPanel } from '@angular/material/expansion';
 
 import { GuideService } from '../services/guide.service';
 import { GuideCategory, GuideItem } from '../models/guide.models';
@@ -26,7 +27,6 @@ type GuideCategoryView = Omit<GuideCategory, 'items'> & {
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
@@ -35,8 +35,12 @@ type GuideCategoryView = Omit<GuideCategory, 'items'> & {
   templateUrl: './quick-guide.component.html',
   styleUrl: './quick-guide.component.css',
 })
-export class QuickGuideComponent {
+export class QuickGuideComponent implements AfterViewInit {
+  @ViewChildren(MatExpansionPanel) private readonly panels!: QueryList<MatExpansionPanel>;
+
   private readonly guideService = inject(GuideService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly destroyRef = inject(DestroyRef);
   readonly searchControl = new FormControl('', { nonNullable: true });
   readonly categories$ = this.guideService.getGuide();
 
@@ -46,6 +50,40 @@ export class QuickGuideComponent {
   ]).pipe(
     map(([categories, search]) => this.filterCategories(categories, search))
   );
+
+  ngAfterViewInit(): void {
+    combineLatest([
+      this.filteredCategories$,
+      this.route.fragment.pipe(startWith(null)),
+      this.panels.changes.pipe(startWith(this.panels)),
+    ])
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(([categories, fragment]) => {
+        if (!fragment) {
+          return;
+        }
+
+        const categoryIndex = categories.findIndex((category) =>
+          category.items.some((item) => item.id === fragment)
+        );
+
+        if (categoryIndex < 0) {
+          return;
+        }
+
+        const panel = this.panels.get(categoryIndex);
+        if (panel && !panel.expanded) {
+          panel.open();
+        }
+
+        setTimeout(() => {
+          const element = document.getElementById(fragment);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 0);
+      });
+  }
 
   private filterCategories(categories: GuideCategory[], search: string): GuideCategoryView[] {
     const query = this.normalizeSearchValue(search);
@@ -57,12 +95,8 @@ export class QuickGuideComponent {
         }
 
         const filteredItems = category.items.filter((item) => {
-          const name = this.normalizeSearchValue(item.name);
-          const description = this.normalizeSearchValue(item.description);
-          return (
-            name.includes(query) ||
-            description.includes(query)
-          );
+          const searchable = this.normalizeSearchValue(this.getSearchText(item));
+          return searchable.includes(query);
         });
 
         return { ...category, items: filteredItems };
@@ -72,7 +106,7 @@ export class QuickGuideComponent {
     const toView = (category: GuideCategory): GuideCategoryView => ({
       ...category,
       items: category.items.map((item) => {
-        const effects = this.splitEffects(item.description);
+        const effects = this.buildEffects(category.id, item.description);
         return { ...item, effects };
       }),
     });
@@ -86,6 +120,61 @@ export class QuickGuideComponent {
       .split(/\. +/g)
       .map((sentence) => sentence.replace(/\.$/, '').trim())
       .filter(Boolean);
+  }
+
+  private buildEffects(categoryId: string, description: string): string[] {
+    if (this.isInvocationCategory(categoryId) || !description) {
+      return [];
+    }
+    return this.splitEffects(description);
+  }
+
+  isInvocationCategory(categoryId: string): boolean {
+    return categoryId === 'invocacoes-familiares';
+  }
+
+  private getSearchText(item: GuideItem): string {
+    const stats = item.stats
+      ? item.stats.map((stat) => `${stat.label} ${stat.score} ${stat.mod} ${stat.save}`).join(' ')
+      : '';
+    return [
+      item.name,
+      item.description,
+      item.subtitle,
+      item.armorClass,
+      item.hitPoints,
+      item.speed,
+      stats,
+      item.immunities,
+      item.senses,
+      item.languages,
+      item.challenge,
+      item.traits,
+      item.actions,
+      item.acoes
+        ? item.acoes
+            .map((acao) => {
+              const alcance =
+                acao.alcance?.normal_m || acao.alcance?.maximo_m
+                  ? `${acao.alcance?.normal_m || ''} ${acao.alcance?.maximo_m || ''}`
+                  : acao.alcance_m || '';
+              return [
+                acao.nome,
+                acao.tipo_ataque,
+                acao.bonus_acerto,
+                alcance,
+                acao.dano?.medio,
+                acao.dano?.formula,
+                acao.dano?.tipo,
+              ]
+                .filter(Boolean)
+                .join(' ');
+            })
+            .join(' ')
+        : '',
+    ]
+      .filter(Boolean)
+      .join(' ');
   }
 
   private normalizeSearchValue(value: string): string {

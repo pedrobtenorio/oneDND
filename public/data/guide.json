@@ -380,6 +380,129 @@
     ]
   },
   {
+    "id": "invocacoes-familiares",
+    "title": "Invocações e Familiares",
+    "items": [
+      {
+        "id": "objetos-animados",
+        "name": "Objetos Animados",
+        "description": "Construto Grande ou Menor, Sem Alinhamento.",
+        "subtitle": "Construto Grande ou Menor, Sem Alinhamento",
+        "armorClass": "15",
+        "hitPoints": "10 (Médio ou menor), 20 (Grande), 40 (Enorme)",
+        "speed": "9 m",
+        "stats": [
+          { "label": "FOR", "score": 16, "mod": "+3", "save": "+3" },
+          { "label": "DES", "score": 10, "mod": "+0", "save": "+0" },
+          { "label": "CON", "score": 10, "mod": "+0", "save": "+0" },
+          { "label": "INT", "score": 3, "mod": "–4", "save": "–4" },
+          { "label": "SAB", "score": 3, "mod": "–4", "save": "–4" },
+          { "label": "CAR", "score": 1, "mod": "–5", "save": "–5" }
+        ],
+        "immunities": "Psíquico, Venenoso; Amedrontado, Enfeitiçado, Envenenado, Exaustão, Paralisado",
+        "senses": "Visão às Cegas 9 m, Percepção Passiva 6",
+        "languages": "Compreende os idiomas que você conhece",
+        "challenge": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
+        "acoes": [
+          {
+            "nome": "Pancada",
+            "tipo_ataque": "corpo a corpo",
+            "bonus_acerto": "modificador de ataque mágico",
+            "alcance_m": 1.5,
+            "dano": {
+              "formula": "1d4 + 3 (Médio ou menor), 2d6 + 3 + modificador de atributo de conjuração (Grande) ou 2d12 + 3 + modificador de atributo de conjuração (Enorme)",
+              "tipo": "energético"
+            }
+          }
+        ]
+      },
+      {
+        "id": "esqueleto",
+        "name": "Esqueleto",
+        "description": "Morto-Vivo Médio, Ordeiro e Mau.",
+        "subtitle": "Morto-Vivo Médio, Ordeiro e Mau",
+        "armorClass": "14",
+        "hitPoints": "13 (2d8 + 4)",
+        "speed": "9 m",
+        "stats": [
+          { "label": "FOR", "score": 10, "mod": "+0", "save": "+0" },
+          { "label": "DES", "score": 16, "mod": "+3", "save": "+3" },
+          { "label": "CON", "score": 15, "mod": "+2", "save": "+2" },
+          { "label": "INT", "score": 6, "mod": "–2", "save": "–2" },
+          { "label": "SAB", "score": 8, "mod": "–1", "save": "–1" },
+          { "label": "CAR", "score": 5, "mod": "–3", "save": "–3" }
+        ],
+        "immunities": "Venenoso; Envenenado, Exaustão",
+        "senses": "Visão no Escuro 18 m, Percepção Passiva 9",
+        "languages": "Compreende os idiomas que conhecia em vida, mas não consegue falar",
+        "challenge": "1/4 (XP 50; BP +2)",
+        "traits": "Vulnerabilidades: Contundente. Equipamento: Arco Curto, Espada Curta.",
+        "acoes": [
+          {
+            "nome": "Arco Curto",
+            "tipo_ataque": "distancia",
+            "bonus_acerto": 5,
+            "alcance": {
+              "normal_m": 24,
+              "maximo_m": 96
+            },
+            "dano": {
+              "medio": 6,
+              "formula": "1d6 + 3",
+              "tipo": "perfurante"
+            }
+          },
+          {
+            "nome": "Espada Curta",
+            "tipo_ataque": "corpo a corpo",
+            "bonus_acerto": 5,
+            "alcance_m": 1.5,
+            "dano": {
+              "medio": 6,
+              "formula": "1d6 + 3",
+              "tipo": "perfurante"
+            }
+          }
+        ]
+      },
+      {
+        "id": "zumbi",
+        "name": "Zumbi",
+        "description": "Morto-vivo Médio, Neutro e Mau.",
+        "subtitle": "Morto-vivo Médio, Neutro e Mau",
+        "armorClass": "8",
+        "hitPoints": "15 (2d8 + 6)",
+        "speed": "6 m",
+        "stats": [
+          { "label": "FOR", "score": 13, "mod": "+1", "save": "+1" },
+          { "label": "DES", "score": 6, "mod": "–2", "save": "–2" },
+          { "label": "CON", "score": 16, "mod": "+3", "save": "+3" },
+          { "label": "INT", "score": 3, "mod": "–4", "save": "–4" },
+          { "label": "SAB", "score": 6, "mod": "–2", "save": "+0" },
+          { "label": "CAR", "score": 5, "mod": "–3", "save": "–3" }
+        ],
+        "immunities": "Venenoso; Envenenado, Exaustão",
+        "senses": "Visão no Escuro 18 m, Percepção Passiva 8",
+        "languages": "Compreende os idiomas que conhecia em vida, mas não consegue falar",
+        "challenge": "1/4 (XP 50; BP +2)",
+        "traits": "Fortitude de Morto-Vivo. Se o dano reduzir o zumbi a 0 Pontos de Vida, ele deve realizar uma salvaguarda de Constituição CD 5 mais o dano sofrido, a menos que o dano seja Radiante ou de um Acerto Crítico. Em caso de sucesso, o zumbi tem 1 Ponto de Vida.",
+        "acoes": [
+          {
+            "nome": "Pancada",
+            "tipo_ataque": "corpo a corpo",
+            "bonus_acerto": 3,
+            "alcance_m": 1.5,
+            "dano": {
+              "medio": 4,
+              "formula": "1d6 + 1",
+              "tipo": "contundente"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "descanso",
     "title": "Descanso",
     "items": [
