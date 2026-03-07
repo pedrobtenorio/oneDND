@@ -11,6 +11,10 @@ body {
   color: #2c2012;
 }
 
+.cdk-overlay-container {
+  z-index: 1000;
+}
+
 input,
 select,
 button {

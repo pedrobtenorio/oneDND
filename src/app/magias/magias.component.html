@@ -1,0 +1,97 @@
+<section class="page">
+  <h1>Magias</h1>
+
+  <section class="filters">
+    <mat-form-field appearance="outline" class="filter-field search-field">
+      <mat-label>Buscar magia</mat-label>
+      <input matInput [formControl]="searchControl" placeholder="Ex: cura, contido">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Classe</mat-label>
+      <mat-select [formControl]="classControl" multiple>
+        <mat-option *ngFor="let classe of (classes$ | async)" [value]="classe">
+          {{ classe }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Tempo de conjuração</mat-label>
+      <mat-select [formControl]="castingTimeControl" multiple>
+        <mat-option *ngFor="let time of (castingTimes$ | async)" [value]="time">
+          {{ time }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Nível</mat-label>
+      <mat-select [formControl]="levelControl" multiple>
+        <mat-option *ngFor="let level of (levels$ | async)" [value]="level">
+          {{ level === 0 ? 'Truque' : level + 'º' }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="filter-actions">
+      <button mat-stroked-button type="button" (click)="clearFilters()">
+        Limpar filtros
+      </button>
+    </div>
+  </section>
+
+  <ng-container *ngIf="spells$ | async as spells">
+    <div class="grid">
+      <article class="spell-card" *ngFor="let spell of spells">
+        <header class="spell-header">
+          <div>
+            <h2>{{ spell.name }}</h2>
+            <p class="spell-meta">
+              {{ spell.level }}º Círculo, {{ spell.school }} ({{ spell.classes.join(', ') }})
+            </p>
+          </div>
+        </header>
+
+        <div class="spell-stats">
+          <div class="stat">
+            <span class="icon" aria-hidden="true">schedule</span>
+            <span class="value">{{ spell.castingTime }}</span>
+          </div>
+          <div class="stat">
+            <span class="icon" aria-hidden="true">straighten</span>
+            <span class="value">{{ spell.range }}</span>
+          </div>
+          <div class="stat">
+            <span class="icon" aria-hidden="true">auto_awesome</span>
+            <span class="value">{{ spell.components.join(', ') }}</span>
+          </div>
+          <div class="stat">
+            <span class="icon" aria-hidden="true">hourglass_top</span>
+            <span class="value">{{ spell.duration }}</span>
+          </div>
+        </div>
+
+        <p class="spell-description">
+          <ng-container *ngFor="let part of spell.descriptionParts">
+            <ng-container *ngIf="part.linkItem; else plainText">
+              <a
+                class="condition-link"
+                [routerLink]="['/guia']"
+                [fragment]="part.linkItem.id"
+                [matTooltip]="formatTooltip(part.linkItem.description)"
+                matTooltipClass="condition-tooltip"
+              >
+                <strong>{{ part.text }}</strong>
+              </a>
+            </ng-container>
+            <ng-template #plainText>{{ part.text }}</ng-template>
+          </ng-container>
+        </p>
+      </article>
+    </div>
+    <div class="empty" *ngIf="spells.length === 0">
+      Nenhuma magia encontrada.
+    </div>
+  </ng-container>
+</section>

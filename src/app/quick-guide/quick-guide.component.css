@@ -1,16 +1,3 @@
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  background: linear-gradient(120deg, #5f4a3f, #8a6d5b);
-  color: #fff3e3;
-}
-
-.title {
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
 .page {
   padding: 24px clamp(16px, 4vw, 40px) 56px;
   max-width: 980px;
@@ -38,12 +25,17 @@
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
+.items.single-column {
+  grid-template-columns: 1fr;
+}
+
 .rule-card {
   padding: 16px 16px 18px;
   border-radius: 16px;
   background: linear-gradient(160deg, #fff7ea, #f5e8d6);
   border: 1px solid #e2cdb3;
   box-shadow: 0 10px 18px rgba(47, 34, 20, 0.12);
+  scroll-margin-top: 24px;
 }
 
 .effects {
@@ -63,6 +55,119 @@
   font-weight: 600;
 }
 
+.summon-card {
+  display: grid;
+  gap: 10px;
+  background: linear-gradient(160deg, #fff3dc, #f2dcc0);
+}
+
+.summon-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.summon-subtitle {
+  margin: 4px 0 0;
+  color: #6b5140;
+  font-size: 0.9rem;
+}
+
+.summon-ac {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(90, 70, 50, 0.12);
+  font-weight: 600;
+  color: #3b2c1b;
+}
+
+.summon-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: #3b2c1b;
+}
+
+.summon-row .label {
+  font-weight: 600;
+  color: #5a4632;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: 60px 60px 60px 60px;
+  gap: 4px 10px;
+  padding: 10px 0 2px;
+  border-top: 1px solid rgba(90, 70, 50, 0.2);
+  border-bottom: 1px solid rgba(90, 70, 50, 0.2);
+}
+
+.stat-head {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #7a5d48;
+  font-weight: 600;
+}
+
+.stat-name {
+  font-weight: 600;
+  color: #3b2c1b;
+}
+
+.stat-score {
+  color: #3b2c1b;
+}
+
+.stat-mod,
+.stat-save {
+  color: #5a4632;
+}
+
+.summon-actions .label {
+  font-weight: 600;
+  color: #5a4632;
+  margin-bottom: 4px;
+}
+
+.summon-actions p {
+  margin: 0;
+  color: #3b2c1b;
+  line-height: 1.5;
+}
+
+.action-list {
+  display: grid;
+  gap: 12px;
+}
+
+.action {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(90, 70, 50, 0.08);
+}
+
+.action-name {
+  font-weight: 600;
+  color: #3b2c1b;
+  margin-bottom: 6px;
+}
+
+.action-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 8px;
+  font-size: 0.92rem;
+  color: #3b2c1b;
+}
+
+.action-row .label {
+  font-weight: 600;
+  color: #5a4632;
+}
+
 .empty {
   margin-top: 28px;
   font-weight: 600;
@@ -70,18 +175,6 @@
   color: #5a4632;
 }
 
-.donation {
-  margin-top: 24px;
-  padding: 10px 6px;
-  text-align: center;
-  color: #6b5140;
-  font-size: 0.9rem;
-}
-
-.pix-key {
-  font-weight: 600;
-  color: #4b3626;
-}
 
 .category-panel {
   background: rgba(255, 248, 235, 0.8);
