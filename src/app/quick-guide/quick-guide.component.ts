@@ -48,18 +48,20 @@ export class QuickGuideComponent {
   );
 
   private filterCategories(categories: GuideCategory[], search: string): GuideCategoryView[] {
-    const query = search.trim().toLowerCase();
+    const query = this.normalizeSearchValue(search);
     const filtered = categories
       .map((category) => {
-        const categoryMatches = category.title.toLowerCase().includes(query);
+        const categoryMatches = this.normalizeSearchValue(category.title).includes(query);
         if (categoryMatches) {
           return category;
         }
 
         const filteredItems = category.items.filter((item) => {
+          const name = this.normalizeSearchValue(item.name);
+          const description = this.normalizeSearchValue(item.description);
           return (
-            item.name.toLowerCase().includes(query) ||
-            item.description.toLowerCase().includes(query)
+            name.includes(query) ||
+            description.includes(query)
           );
         });
 
@@ -84,6 +86,14 @@ export class QuickGuideComponent {
       .split(/\. +/g)
       .map((sentence) => sentence.replace(/\.$/, '').trim())
       .filter(Boolean);
+  }
+
+  private normalizeSearchValue(value: string): string {
+    return value
+      .trim()
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
   }
 
   trackCategory(index: number, category: GuideCategory): string {
