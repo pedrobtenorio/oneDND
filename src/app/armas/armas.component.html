@@ -35,7 +35,8 @@
                 <ng-container *ngIf="token.key; else plainProperty">
                   <a
                     class="guide-link"
-                    [attr.href]="'#' + propertyId(lookupProperty(weapons.propertyMap, token)?.name || token.text)"
+                    [routerLink]="['/guia']"
+                    [fragment]="propertyId(lookupProperty(weapons.propertyMap, token)?.name || token.text)"
                     [matTooltip]="formatTooltip(lookupProperty(weapons.propertyMap, token)?.description || '')"
                     matTooltipClass="guide-tooltip"
                   >
@@ -51,7 +52,8 @@
                 <ng-container *ngIf="token.key; else plainMastery">
                   <a
                     class="guide-link"
-                    [attr.href]="'#' + masteryId(lookupProperty(weapons.masteryMap, token)?.name || token.text)"
+                    [routerLink]="['/guia']"
+                    [fragment]="masteryId(lookupProperty(weapons.masteryMap, token)?.name || token.text)"
                     [matTooltip]="formatTooltip(lookupProperty(weapons.masteryMap, token)?.description || '')"
                     matTooltipClass="guide-tooltip"
                   >
@@ -72,56 +74,5 @@
         Nenhuma arma encontrada.
       </div>
     </section>
-    <mat-accordion class="accordion" multi>
-      <mat-expansion-panel class="category-panel" expanded>
-        <mat-expansion-panel-header>
-          <mat-panel-title>Propriedades</mat-panel-title>
-          <mat-panel-description>{{ weapons.properties.length }} itens</mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <p class="panel-intro">
-          Aqui estão as definições das propriedades na coluna Propriedades da tabela Armas.
-        </p>
-
-        <div class="items">
-          <article
-            class="rule-card"
-            *ngFor="let property of weapons.properties"
-            [attr.id]="propertyId(property.name)"
-          >
-            <h4>{{ property.name }}</h4>
-            <ul class="effects">
-              <li>{{ property.description }}</li>
-            </ul>
-          </article>
-        </div>
-      </mat-expansion-panel>
-
-      <mat-expansion-panel class="category-panel">
-        <mat-expansion-panel-header>
-          <mat-panel-title>Propriedades de Maestria</mat-panel-title>
-          <mat-panel-description>{{ weapons.masteryProperties.length }} itens</mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <p class="panel-intro">
-          Cada arma possui uma propriedade de maestria, que só pode ser utilizada por um personagem que
-          tenha uma característica, como Maestria em Armas, que desbloqueie a propriedade para o personagem.
-          As propriedades estão definidas abaixo.
-        </p>
-
-        <div class="items">
-          <article
-            class="rule-card"
-            *ngFor="let property of weapons.masteryProperties"
-            [attr.id]="masteryId(property.name)"
-          >
-            <h4>{{ property.name }}</h4>
-            <ul class="effects">
-              <li>{{ property.description }}</li>
-            </ul>
-          </article>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
   </ng-container>
 </section>

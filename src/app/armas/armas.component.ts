@@ -1,15 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { combineLatest, map, startWith } from 'rxjs';
+import { RouterModule } from '@angular/router';
 
 import { WeaponsService } from '../services/weapons.service';
 import { WeaponEntry, WeaponProperty, WeaponsData } from '../models/weapons.models';
+import { normalizeKey } from '../utils/linkify';
 
 type WeaponToken = {
   text: string;
@@ -40,11 +41,11 @@ type WeaponsView = {
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatExpansionModule,
     MatTooltipModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    RouterModule,
   ],
   templateUrl: './armas.component.html',
   styleUrl: './armas.component.css',
@@ -99,7 +100,7 @@ export class ArmasComponent {
   }
 
   private filterWeapons(data: WeaponsView, search: string): WeaponsView {
-    const query = this.normalizeKey(search);
+    const query = normalizeKey(search);
     if (!query) {
       return data;
     }
@@ -107,7 +108,7 @@ export class ArmasComponent {
     const categories: WeaponCategoryView[] = data.categories
       .map((category) => {
         const weapons = category.weapons.filter((weapon) => {
-          const haystack = this.normalizeKey(
+          const haystack = normalizeKey(
             [
               weapon.name,
               weapon.damage,
@@ -127,7 +128,7 @@ export class ArmasComponent {
   }
 
   private buildPropertyMap(items: WeaponProperty[]): Map<string, WeaponProperty> {
-    return new Map(items.map((item) => [this.normalizeKey(item.name), item]));
+    return new Map(items.map((item) => [normalizeKey(item.name), item]));
   }
 
   private tokenize(value: string, map: Map<string, WeaponProperty>): WeaponToken[] {
@@ -141,20 +142,12 @@ export class ArmasComponent {
       .filter(Boolean)
       .map((chunk) => {
         const base = chunk.split('(')[0].trim();
-        const key = this.normalizeKey(base);
+        const key = normalizeKey(base);
         return map.has(key) ? { text: chunk, key } : { text: chunk };
       });
   }
 
   private slugify(value: string): string {
-    return this.normalizeKey(value).replace(/\s+/g, '-');
-  }
-
-  private normalizeKey(value: string): string {
-    return value
-      .trim()
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '');
+    return normalizeKey(value).replace(/\s+/g, '-');
   }
 }
