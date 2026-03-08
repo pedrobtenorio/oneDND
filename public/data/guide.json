@@ -1,26 +1,5 @@
 [
   {
-    "id": "testes-d20",
-    "title": "Testes d20",
-    "items": [
-      {
-        "id": "vantagem-desvantagem",
-        "name": "Vantagem e Desvantagem",
-        "description": "Rola dois d20 e fica com o maior (vantagem) ou o menor (desvantagem). Vantagens nao acumulam."
-      },
-      {
-        "id": "teste-pericia",
-        "name": "Teste de Pericia",
-        "description": "d20 + modificador de atributo + bonus de proficiencia (se aplicavel) contra uma CD."
-      },
-      {
-        "id": "teste-salvaguarda",
-        "name": "Teste de Salvaguarda",
-        "description": "d20 + modificador de atributo + bonus de proficiencia (se aplicavel) contra uma CD."
-      }
-    ]
-  },
-  {
     "id": "pericias",
     "title": "Perícias",
     "items": [
@@ -499,6 +478,97 @@
             }
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "glossario",
+    "title": "Glossário",
+    "items": [
+      {
+        "id": "pv",
+        "name": "PV",
+        "description": "Pontos de Vida. Chegando a 0 PV, a criatura cai inconsciente ou morre conforme a regra aplicada."
+      },
+      {
+        "id": "ca",
+        "name": "CA",
+        "description": "Classe de Armadura. Número-alvo para acertar ataques. Normalmente é 10 + modificador de Destreza + armadura, escudo e outros bônus."
+      },
+      {
+        "id": "cd",
+        "name": "CD",
+        "description": "Classe de Dificuldade. Número-alvo para testes e salvaguardas."
+      },
+      {
+        "id": "bp",
+        "name": "BP",
+        "description": "Bônus de Proficiência. Soma aplicada a ataques, testes e salvaguardas quando a criatura é proficiente."
+      },
+      {
+        "id": "nd",
+        "name": "ND",
+        "description": "Nível de Desafio. Indica a dificuldade geral de um monstro."
+      },
+      {
+        "id": "acao",
+        "name": "Ação",
+        "description": "Principal ação do turno. Normalmente usada para atacar, conjurar magia ou usar um objeto."
+      },
+      {
+        "id": "acao-bonus",
+        "name": "Ação Bônus",
+        "description": "Ação menor no turno, só quando algo a concede."
+      },
+      {
+        "id": "reacao",
+        "name": "Reação",
+        "description": "Resposta instantânea a um gatilho específico, geralmente fora do seu turno."
+      },
+      {
+        "id": "deslocamento",
+        "name": "Deslocamento",
+        "description": "Distância que a criatura pode se mover no turno."
+      },
+      {
+        "id": "salvaguarda",
+        "name": "Salvaguarda",
+        "description": "Teste para resistir a efeitos; usa um atributo e, se proficiente, soma o BP."
+      },
+      {
+        "id": "ataque",
+        "name": "Ataque",
+        "description": "Rolagem para atingir um alvo. Resultado deve ser igual ou maior que a CA."
+      },
+      {
+        "id": "dano",
+        "name": "Dano",
+        "description": "Quantidade de perda de PV causada por um ataque ou efeito."
+      },
+      {
+        "id": "concentracao",
+        "name": "Concentração",
+        "description": "Mantém efeitos ativos. Normalmente, apenas uma magia com Concentração por vez."
+      },
+      {
+        "id": "espaco-de-magia",
+        "name": "Espaço de Magia",
+        "description": "Recurso gasto para conjurar magias, com níveis chamados de círculos."
+      },
+      {
+        "id": "circulo-de-magia",
+        "name": "Círculo de Magia",
+        "description": "Nível da magia. Magias mais poderosas exigem círculos maiores."
+      },
+      {
+        "id": "vantagem",
+        "name": "Vantagem",
+        "description": "Rola dois d20 e fica com o maior."
+      },
+      {
+        "id": "desvantagem",
+        "name": "Desvantagem",
+        "description": "Rola dois d20 e fica com o menor."
       }
     ]
   },

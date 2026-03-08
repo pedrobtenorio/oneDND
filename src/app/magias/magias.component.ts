@@ -82,7 +82,7 @@ export class MagiasComponent {
   );
 
   private getLinkableItems(guide: GuideCategory[]): GuideItem[] {
-    const linkableCategories = new Set(['condicoes', 'invocacoes-familiares']);
+    const linkableCategories = new Set(['condicoes', 'invocacoes-familiares', 'glossario']);
     return guide
       .filter((category) => linkableCategories.has(category.id))
       .flatMap((category) => category.items);

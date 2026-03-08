@@ -224,5 +224,213 @@
     ],
     "duration": "Concentração, até 1 minuto",
     "description": "Objetos são animados ao seu comando. Escolha uma série de objetos não mágicos no alcance da magia que não estejam sendo usados ou carregados, não estejam fixados a uma superfície e não sejam Colossais. O número máximo de objetos é igual ao seu modificador de atributo de conjuração. Para este número, um tamanho Médio ou menor conta como um objeto, um alvo Grande conta como dois e um alvo Enorme conta como três. Cada alvo se anima, faz brotar pernas e se torna um Constructo que usa o bloco de estatísticas do Objeto Animado; esta criatura está sob seu controle até que a magia termine ou até que ela seja reduzida a 0 Pontos de Vida. Cada criatura que você anima com esta magia é uma aliada sua e de seus aliados. Em combate, ela compartilha a contagem de Iniciativa com você e tem o turno dela imediatamente após o seu. Até que a magia encerre, você pode executar uma Ação Bônus para comandar mentalmente qualquer criatura que tenha animado com essa magia se a criatura estiver a até 150 metros de você (se você controlar várias criaturas, pode comandar quaisquer delas ao mesmo tempo, emitindo o mesmo comando para cada uma). Se você não der nenhum comando, a criatura executa a ação Esquivar e se move apenas para evitar danos. Quando a criatura é reduzida a 0 Pontos de Vida, ela reverte para sua forma de objeto, e qualquer dano restante é transferido para essa forma. Usando um Espaço de Magia de Círculo Superior. O dano de Pancada da criatura aumenta em 1d4 (Médio ou menor), 1d6 (Grande) ou 1d12 (Enorme) para cada círculo de espaço de magia acima de 5."
+  },
+  {
+    "id": "antipatia-simpatia",
+    "name": "Antipatia/Simpatia",
+    "level": 8,
+    "school": "Encantamento",
+    "classes": [
+      "Bardo",
+      "Druida",
+      "Mago"
+    ],
+    "castingTime": "1 hora",
+    "range": "18 metros",
+    "components": [
+      "V",
+      "S",
+      "M (uma mistura de vinagre e mel)"
+    ],
+    "duration": "10 dias",
+    "description": "Ao conjurar a magia, decida se ela cria antipatia ou simpatia, e escolha como alvo uma criatura ou objeto que seja Enorme ou menor. Em seguida, especifique um tipo de criatura, como dragões vermelhos, goblins ou vampiros. Uma criatura do tipo escolhido realiza uma salvaguarda de Sabedoria quando estiver a até 36 metros do alvo. Sua escolha entre antipatia ou simpatia determina o que acontece com uma criatura ao falhar nessa salvaguarda: Antipatia: A criatura tem a condição Amedrontado. A criatura Amedrontada deve usar o movimento nos turnos dela para se afastar o máximo possível do alvo, movendo-se pela rota mais segura. Simpatia: A criatura tem a condição Enfeitiçado. A criatura Enfeitiçada deve usar o movimento nos turnos dela para chegar o mais próximo possível do alvo, movendo-se pela rota mais segura. Se a criatura estiver a até 1,5 metro do alvo, a criatura não pode se afastar voluntariamente. Se o alvo causar dano à criatura Enfeitiçada, essa criatura deve realizar uma salvaguarda de Sabedoria para encerrar o efeito, conforme descrito abaixo. Encerrando o Efeito. Se a criatura Amedrontada ou Enfeitiçada terminar o turno a mais de 36 metros de distância do alvo, a criatura realiza uma salvaguarda de Sabedoria. Em caso de sucesso, a criatura não é mais afetada pelo alvo e fica imune a ele por 1 minuto, após o qual pode ser afetada novamente."
+  },
+  {
+    "id": "aprimorar-atributo",
+    "name": "Aprimorar Atributo",
+    "level": 2,
+    "school": "Transmutação",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": [
+      "V",
+      "S",
+      "M (pelo ou uma pena)"
+    ],
+    "duration": "Concentração, até 1 hora",
+    "description": "Você toca uma criatura e escolhe Força, Destreza, Inteligência, Sabedoria ou Carisma. Pela duração da magia, o alvo tem Vantagem nos testes de atributo usando o atributo escolhido. Usando um Espaço de Magia de Círculo Superior. Você pode escolher uma criatura adicional para cada círculo de espaço de magia acima de 2. Você pode escolher um atributo diferente para cada alvo."
+  },
+  {
+    "id": "aprisionamento",
+    "name": "Aprisionamento",
+    "level": 9,
+    "school": "Abjuração",
+    "classes": [
+      "Bruxo",
+      "Mago"
+    ],
+    "castingTime": "1 minuto",
+    "range": "9 metros",
+    "components": [
+      "V",
+      "S",
+      "M (uma estatueta do alvo no valor de 5.000 ou mais PO)"
+    ],
+    "duration": "Até ser dissipada",
+    "description": "Você cria uma restrição mágica para conter uma criatura à sua vista e no alcance da magia. O alvo deve realizar uma salvaguarda de Sabedoria. Em caso de sucesso, o alvo não é afetado e fica imune a esta magia pelas próximas 24 horas. Se falhar, o alvo é aprisionado. Enquanto estiver aprisionado, o alvo não precisa respirar, comer ou beber e não envelhece. Magias de Adivinhação não podem localizar ou perceber o alvo, e ele não pode se teleportar. Até que a magia termine, o alvo também é afetado por um dos seguintes efeitos à sua escolha: Acorrentar. Correntes firmemente enraizadas ao chão prendem o alvo no lugar. O alvo tem a condição Contido e não pode ser movido de forma alguma. Contenção Reduzida. O alvo encolhe para 2,5 cm de altura e fica preso dentro de uma pedra preciosa indestrutível ou um objeto semelhante. A luz pode passar pela pedra preciosa (permitindo que o alvo veja o que há fora e outras criaturas de fora possam vê-lo), mas nada mais pode passar por qualquer meio. Enterrar. O alvo é enterrado sob a terra em um globo oco de força mágica que é grande o suficiente para contê-lo. Nada pode passar para dentro ou para fora do globo. Prisão Cercada. O alvo está preso em um semiplano e está protegido contra teleporte e viagens planares. O semiplano pode ser um labirinto, uma gaiola, uma torre ou algo semelhante à sua escolha. Torpor. O alvo está Inconsciente e não pode ser despertado. Encerrando a Magia. Ao conjurar a magia, você define uma situação que a encerrará. Essa situação pode ser tão simples ou elaborada quanto você desejar, mas o Mestre deve concordar que existe uma grande probabilidade de isso ocorrer na próxima década. A situação deve ser uma ação observável, como alguém fazendo uma oferenda específica no templo do seu deus, salvando seu verdadeiro amor ou derrotando um monstro específico. Dissipar Magia só pode encerrar a magia se for conjurada com um espaço de magia de 9º círculo, tendo como alvo a prisão ou o componente usado para criá-la."
+  },
+  {
+    "id": "arca-secreta-de-leomund",
+    "name": "Arca Secreta de Leomund",
+    "level": 4,
+    "school": "Invocação",
+    "classes": [
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": [
+      "V",
+      "S",
+      "M (um baú de 1 m por 60 cm por 60 cm, construído com materiais raros no valor de 5.000 ou mais PO, e uma réplica minúscula do baú fabricada com os mesmos materiais no valor de 50 ou mais PO)"
+    ],
+    "duration": "Até ser dissipada",
+    "description": "Você esconde um baú e todo o seu conteúdo no Plano Etéreo. Você deve tocar no baú e na réplica em miniatura que servem como componentes Materiais para a magia. O baú pode armazenar até 340 litros de material não vivo (1 m por 60 cm por 60 cm). Enquanto o baú permanecer no Plano Etéreo, você pode executar uma ação Usar Magia e tocar na réplica para recuperar o baú. Ele aparece em um espaço desocupado no chão a até 1,5 metro de você. Você pode enviar o baú de volta ao Plano Etéreo como uma ação Usar Magia para tocar o baú e a réplica. Após 60 dias, há uma chance cumulativa de 5% no final de cada dia de que a magia encerre. A magia também se encerra se você conjurá-la novamente ou se a réplica Minúscula for destruída. Se a magia encerrar e o baú maior estiver no Plano Etéreo, o baú permanece lá para você ou outra pessoa encontrar."
+  },
+  {
+    "id": "arma-elemental",
+    "name": "Arma Elemental",
+    "level": 3,
+    "school": "Transmutação",
+    "classes": [
+      "Druida",
+      "Guardião",
+      "Paladino"
+    ],
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": [
+      "V",
+      "S"
+    ],
+    "duration": "Concentração, até 1 hora",
+    "description": "Uma arma não-mágica que você toca se torna uma arma mágica. Escolha um dos seguintes tipos de dano: Ácido, Elétrico, Gélido, Ígneo ou Trovejante. Pela duração da magia, a arma tem um bônus de +1 para jogadas de ataque e causa 1d4 pontos de dano adicional do tipo escolhido quando atinge. Usando um Espaço de Magia de Círculo Superior. Se você usar um espaço de magia de 5º ou 6º círculo, o bônus nas jogadas de ataque aumenta para +2, e o dano adicional aumenta para 2d4. Se você usar um espaço de magia de 7º círculo ou superior, o bônus aumenta para +3 e o dano adicional aumenta para 3d4."
+  },
+  {
+    "id": "arma-espiritual",
+    "name": "Arma Espiritual",
+    "level": 2,
+    "school": "Evocação",
+    "classes": [
+      "Clérigo"
+    ],
+    "castingTime": "Ação Bônus",
+    "range": "18 metros",
+    "components": [
+      "V",
+      "S"
+    ],
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você cria uma energia espectral flutuante que se assemelha a uma arma à sua escolha e permanece pela duração da magia. A energia aparece no alcance da magia em um espaço à sua escolha, e você pode realizar imediatamente um ataque mágico corpo a corpo contra uma criatura a até 1,5 metro dela. Em caso de acerto, o alvo sofre 1d8 pontos de dano Energético mais o seu modificador de atributo de conjuração. Como uma Ação Bônus em seus turnos posteriores, você pode mover a energia até 6 metros e repetir o ataque contra uma criatura a até 1,5 metro dela. Usando um Espaço de Magia de Círculo Superior. O dano aumenta em 1d8 para cada círculo de espaço de magia acima de 2."
+  },
+  {
+    "id": "arma-magica",
+    "name": "Arma Mágica",
+    "level": 2,
+    "school": "Transmutação",
+    "classes": [
+      "Feiticeiro",
+      "Guardião",
+      "Mago",
+      "Paladino"
+    ],
+    "castingTime": "Ação Bônus",
+    "range": "Toque",
+    "components": [
+      "V",
+      "S"
+    ],
+    "duration": "1 hora",
+    "description": "Você toca uma arma não-mágica. Até que a magia encerre, essa arma se torna uma arma mágica com bônus de +1 para jogadas de ataque e dano. A magia encerra se você a conjurar novamente. Usando um Espaço de Magia de Círculo Superior. O bônus aumenta para +2 com um espaço de magia de 3º–5º círculo. O bônus aumenta para +3 com um espaço de magia de 6º círculo ou superior."
+  },
+  {
+    "id": "armadura-arcana",
+    "name": "Armadura Arcana",
+    "level": 1,
+    "school": "Abjuração",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": [
+      "V",
+      "S",
+      "M (um pedaço de couro curtido)"
+    ],
+    "duration": "8 horas",
+    "description": "Você toca uma criatura voluntária que não está usando armadura. Até que a magia termine, a CA base do alvo se torna 13 mais o modificador de Destreza dele. A magia se encerra se o alvo vestir uma armadura."
+  },
+  {
+    "id": "armadura-de-agathys",
+    "name": "Armadura de Agathys",
+    "level": 1,
+    "school": "Abjuração",
+    "classes": [
+      "Bruxo"
+    ],
+    "castingTime": "Ação Bônus",
+    "range": "Pessoal",
+    "components": [
+      "V",
+      "S",
+      "M (um caco de vidro azul)"
+    ],
+    "duration": "1 hora",
+    "description": "Um frio mágico protetor envolve você. Você recebe 5 Pontos de Vida Temporários. Se uma criatura acertar você com uma jogada de ataque corpo a corpo antes que a magia termine, a criatura sofre 5 pontos de dano Gélido. A magia encerra se você não tiver Pontos de Vida Temporários. Usando um Espaço de Magia de Círculo Superior. Os Pontos de Vida Temporários e o dano Gélido aumentam em 5 para cada círculo de espaço de magia acima de 1."
+  },
+  {
+    "id": "arrombar",
+    "name": "Arrombar",
+    "level": 2,
+    "school": "Transmutação",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": [
+      "V"
+    ],
+    "duration": "Instantânea",
+    "description": "Escolha um objeto à sua vista e no alcance da magia. O objeto pode ser uma porta, uma caixa, um baú, um conjunto de grilhões, um cadeado ou outro objeto que contenha um meio mundano ou mágico que impeça o acesso. Um alvo mantido fechado por uma fechadura mundana ou que está preso ou barrado fica destrancado, desemperrado ou desobstruído. Se o objeto tiver várias fechaduras, apenas uma delas é destrancada. Se o alvo for mantido fechado por Tranca Arcana, essa magia é suprimida por 10 minutos, durante os quais o alvo pode ser aberto e fechado. Ao conjurar a magia, um estrondo, audível a até 90 metros de distância, emana do alvo."
+  },
+  {
+    "id": "arte-druidica",
+    "name": "Arte Druídica",
+    "level": 0,
+    "school": "Transmutação",
+    "classes": [
+      "Druida"
+    ],
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": [
+      "V",
+      "S"
+    ],
+    "duration": "Instantânea",
+    "description": "Sussurrando para os espíritos da natureza, você cria um dos seguintes efeitos no alcance da magia. Brincar com Fogo. Você acende ou apaga uma vela, uma tocha ou uma fogueira. Efeito Sensorial. Você cria um efeito sensorial inofensivo, como folhas caindo, fadas dançantes espectrais, uma brisa suave, o som de um animal ou o leve odor de gambá. O efeito deve caber em um Cubo de 1,5 metro de lados. Florescimento. Você instantaneamente faz uma flor desabrochar, uma vagem se abrir ou um botão de folha se abrir. Sensor Climático. Você cria um efeito sensorial minúsculo e inofensivo que prevê qual será o clima no local onde você está pelas próximas 24 horas. O efeito pode se manifestar como uma esfera dourada para céu claro, uma nuvem para chuva, flocos de neve caindo para neve e assim por diante. Esse efeito persiste por 1 rodada."
   }
 ]
