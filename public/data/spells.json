@@ -432,5 +432,547 @@
     ],
     "duration": "Instantânea",
     "description": "Sussurrando para os espíritos da natureza, você cria um dos seguintes efeitos no alcance da magia. Brincar com Fogo. Você acende ou apaga uma vela, uma tocha ou uma fogueira. Efeito Sensorial. Você cria um efeito sensorial inofensivo, como folhas caindo, fadas dançantes espectrais, uma brisa suave, o som de um animal ou o leve odor de gambá. O efeito deve caber em um Cubo de 1,5 metro de lados. Florescimento. Você instantaneamente faz uma flor desabrochar, uma vagem se abrir ou um botão de folha se abrir. Sensor Climático. Você cria um efeito sensorial minúsculo e inofensivo que prevê qual será o clima no local onde você está pelas próximas 24 horas. O efeito pode se manifestar como uma esfera dourada para céu claro, uma nuvem para chuva, flocos de neve caindo para neve e assim por diante. Esse efeito persiste por 1 rodada."
+  },
+  {
+    "id": "assassino-fantasmagorico",
+    "name": "Assassino Fantasmagórico",
+    "level": 4,
+    "school": "Ilusão",
+    "classes": [
+      "Bardo",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": [
+      "V",
+      "S"
+    ],
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você entra nos pesadelos de uma criatura à sua vista e no alcance da magia e cria uma ilusão dos medos mais profundos dela, visíveis apenas para essa criatura. O alvo realiza uma salvaguarda de Sabedoria. Se falhar, o alvo sofre 4d10 pontos de dano Psíquico e tem Desvantagem em testes de atributo e jogadas de ataque pela duração da magia. Em caso de sucesso, o alvo sofre metade do dano e a magia encerra. Pela duração da magia, o alvo realiza uma salvaguarda de Sabedoria no final de cada um dos turnos dele. Se falhar, sofre dano Psíquico novamente. Em caso de sucesso, a magia encerra. Usando um Espaço de Magia de Círculo Superior. O dano aumenta em 1d10 para cada círculo de espaço de magia acima de 4."
+  },
+  {
+    "id": "augurio",
+    "name": "Augúrio",
+    "level": 2,
+    "school": "Adivinhação",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Mago"
+    ],
+    "castingTime": "1 minuto ou Ritual",
+    "range": "Pessoal",
+    "components": [
+      "V",
+      "S",
+      "M (varetas, ossos, cartas ou símbolos semelhantes especialmente marcados no valor de 25 ou mais PO)"
+    ],
+    "duration": "Instantânea",
+    "description": "Você recebe um presságio de uma entidade sobrenatural a respeito dos resultados de um curso de ação que você planeja realizar nos próximos 30 minutos. O Mestre escolhe o presságio da tabela Presságios. Presságios. Presságios Para Resultados Que Serão… Prosperidade: Bons. Infortúnio: Maus. Prosperidade e Infortúnio: Bons e ruins. Nada: Nem bons, nem ruins. A magia não leva em conta circunstâncias, como outras magias, que podem alterar os resultados. Se você conjurar a magia mais de uma vez antes de terminar um Descanso Longo, há uma chance cumulativa de 25% para cada conjuração após a primeira de que você não receba resposta."
+  },
+  {
+    "id": "aumentar-reduzir",
+    "name": "Aumentar/Reduzir",
+    "level": 2,
+    "school": "Transmutação",
+    "classes": [
+      "Bardo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": [
+      "V",
+      "S",
+      "M (uma pitada de ferro em pó)"
+    ],
+    "duration": "Concentração, até 1 minuto",
+    "description": "Pela duração da magia, você amplia ou reduz uma criatura, ou objeto, à sua vista e no alcance da magia (veja o efeito escolhido abaixo). Um objeto à vista não deve ser usado nem transportado. Se o alvo for uma criatura involuntária, ele pode realizar uma salvaguarda de Constituição. Em caso de sucesso, a magia não surte efeito. Tudo o que uma criatura estiver usando e carregando muda de tamanho com ela. Qualquer item que cair retorna ao tamanho normal de uma só vez. Uma arma ou munição arremessada retorna ao tamanho normal imediatamente após atingir ou errar um alvo. Aumentar. O tamanho do alvo aumenta em uma categoria — de Médio para Grande, por exemplo. O alvo também tem Vantagem em testes de Força e salvaguardas de Força. Os ataques do alvo com suas armas ampliadas ou Ataques Desarmados causam 1d4 pontos de dano adicionais em caso de acerto. Reduzir. O tamanho do alvo diminui em uma categoria — de Médio para Pequeno, por exemplo. O alvo também tem Desvantagem em testes de Força e salvaguardas de Força. Os ataques do alvo com suas armas reduzidas ou Ataques Desarmados causam 1d4 pontos de dano a menos em caso de acerto (isso não pode reduzir o dano abaixo de 1)."
+  },
+  {
+    "id": "aura-de-pureza",
+    "name": "Aura de Pureza",
+    "level": 4,
+    "school": "Abjuração",
+    "classes": [
+      "Clérigo",
+      "Paladino"
+    ],
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": [
+      "V"
+    ],
+    "duration": "Concentração, até 10 minutos",
+    "description": "Uma aura irradia de você em uma Emanação de 9 metros pela duração da magia. Enquanto estiver na aura, você e seus aliados têm Resistência a dano Venenoso e Vantagem nas salvaguardas para evitar ou encerrar efeitos que incluem a condição Amedrontado, Atordoado, Cego, Enfeitiçado, Envenenado, Paralisado ou Surdo."
+  },
+  {
+    "id": "aura-de-vida",
+    "name": "Aura de Vida",
+    "level": 4,
+    "school": "Abjuração",
+    "classes": [
+      "Clérigo",
+      "Paladino"
+    ],
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": [
+      "V"
+    ],
+    "duration": "Concentração, até 10 minutos",
+    "description": "Uma aura irradia de você em uma Emanação de 9 metros pela duração da magia. Enquanto estiver na aura, você e seus aliados têm Resistência a Dano Necrótico, e seus Pontos de Vida máximos não podem ser reduzidos. Se um aliado com 0 Pontos de Vida começar o turno na aura, esse aliado recupera 1 Ponto de Vida."
+  },
+  {
+    "id": "aura-de-vitalidade",
+    "name": "Aura de Vitalidade",
+    "level": 3,
+    "school": "Abjuração",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Paladino"
+    ],
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": [
+      "V"
+    ],
+    "duration": "Concentração, até 1 minuto",
+    "description": "Uma aura irradia de você em uma Emanação de 9 metros pela duração da magia. Quando você cria a aura e no início de cada um dos seus turnos enquanto ela persiste, você pode restaurar 2d6 Pontos de Vida em uma criatura dentro dela."
+  },
+  {
+    "id": "aura-magica-de-nystul",
+    "name": "Aura Mágica de Nystul",
+    "level": 2,
+    "school": "Ilusão",
+    "classes": [
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": [
+      "V",
+      "S",
+      "M (um pequeno quadrado de seda)"
+    ],
+    "duration": "24 horas",
+    "description": "Com um toque, você coloca uma ilusão em uma criatura voluntária ou em um objeto que não esteja sendo usado ou carregado. Uma criatura adquire o efeito Máscara descrito abaixo, e um objeto adquire o efeito Falsa Aura descrito abaixo. O efeito permanece pela duração da magia. Se você conjurar a magia na mesma criatura ou objeto todos os dias por 30 dias, a ilusão dura até ser dissipada. Falsa Aura (Objeto). Você muda a forma como o alvo aparece para magias e efeitos mágicos que detectam auras mágicas, como Detectar Magia. Você pode realizar um objeto não mágico parecer mágico, realizar um item mágico parecer não mágico ou alterar a aura do objeto para parecer pertencer a uma escola de magia que você escolher. Máscara (Criatura). Escolha um tipo de criatura diferente do tipo real do alvo. Magias e outros efeitos mágicos tratam o alvo como se fosse uma criatura do tipo escolhido."
+  },
+  {
+    "id": "aura-sagrada",
+    "name": "Aura Sagrada",
+    "level": 8,
+    "school": "Abjuração",
+    "classes": [
+      "Clérigo"
+    ],
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": [
+      "V",
+      "S",
+      "M (um relicário no valor de 1.000 ou mais PO)"
+    ],
+    "duration": "Concentração, até 1 minuto",
+    "description": "Pela duração, você emite uma aura em uma Emanação de 9 metros. Enquanto estão dentro da aura, criaturas à sua escolha têm Vantagem em todas as salvaguardas, enquanto as outras têm Desvantagem nas jogadas de ataque contra elas. Além disso, se um Ínfero ou um Morto-Vivo atinge uma criatura afetada em uma jogada de ataque corpo a corpo, o atacante deve ser bem-sucedido em uma salvaguarda de Constituição ou fica Cego até o final do próximo turno dele."
+  },
+  {
+    "id": "auxilio",
+    "name": "Auxílio",
+    "level": 2,
+    "school": "Abjuração",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Druida",
+      "Guardião",
+      "Paladino"
+    ],
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": [
+      "V",
+      "S",
+      "M (uma tira de pano branco)"
+    ],
+    "duration": "8 horas",
+    "description": "Escolha até três criaturas no alcance da magia. Os Pontos de Vida máximos e os Pontos de Vida atuais de cada alvo aumentam em 5 pela duração da magia. Usando um Espaço de Magia de Círculo Superior. Os Pontos de Vida de cada alvo aumentam em 5 para cada círculo de espaço de magia acima de 2."
+  },
+  {
+    "id": "badalar-funebre",
+    "name": "Badalar Fúnebre",
+    "level": 0,
+    "school": "Necromancia",
+    "classes": [
+      "Bruxo",
+      "Clérigo",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": [
+      "V",
+      "S"
+    ],
+    "duration": "Instantânea",
+    "description": "Você aponta para uma criatura à sua vista e no alcance da magia, então um único toque de um badalar doloroso é audível a até 3 metros do alvo. O alvo deve ser bem-sucedido em uma salvaguarda de Sabedoria ou sofre 1d8 pontos de dano Necrótico. Caso o alvo tenha perdido algum de seus Pontos de Vida, em vez de 1d8, ele sofre 1d12 pontos de dano Necrótico. Aprimoramento de Truque. O dano aumenta em um dado quando você atinge os níveis 5 (2d8 ou 2d12), 11 (3d8 ou 3d12) e 17 (4d8 ou 4d12)."
+  },
+  {
+    "id": "bolha-acida",
+    "name": "Bolha Ácida",
+    "level": 0,
+    "school": "Evocação",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": [
+      "V",
+      "S"
+    ],
+    "duration": "Instantânea",
+    "description": "Você cria uma bolha ácida em um ponto no alcance da magia, onde ela explode em uma Esfera de 1,5 metro de raio. Cada criatura nessa Esfera deve ser bem-sucedida em uma salvaguarda de Destreza ou sofre 1d6 pontos de dano Ácido. Aprimoramento de Truque. O dano aumenta em 1d6 quando você atinge os níveis 5 (2d6), 11 (3d6) e 17 (4d6)."
+  },
+  {
+    "id": "bom-fruto",
+    "name": "Bom Fruto",
+    "level": 1,
+    "school": "Invocação",
+    "classes": [
+      "Druida",
+      "Guardião"
+    ],
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": [
+      "V",
+      "S",
+      "M (um ramo de visco)"
+    ],
+    "duration": "24 horas",
+    "description": "Dez frutos aparecem em sua mão e são infundidos magicamente pela duração da magia. Uma criatura pode executar uma Ação Bônus para comer um fruto. Comer um fruto restaura 1 Ponto de Vida e fornece alimento suficiente para sustentar uma criatura por um dia. Frutos não comidos desaparecem quando a magia termina."
+  },
+  {
+    "id": "bordao-mistico",
+    "name": "Bordão Místico",
+    "level": 0,
+    "school": "Transmutação",
+    "classes": [
+      "Druida"
+    ],
+    "castingTime": "Ação Bônus",
+    "range": "Pessoal",
+    "components": [
+      "V",
+      "S",
+      "M (um ramo de visco)"
+    ],
+    "duration": "1 minuto",
+    "description": "Um Cajado ou Clava que você está segurando é imbuído com o poder da natureza. Pela duração da magia, você pode usar seu atributo de conjuração em vez de Força para as jogadas de ataque e dano de ataques corpo a corpo com essa arma, e o dado de dano da arma se torna um d8. Se o ataque causar dano, ele pode ser de dano Energético ou do tipo de dano normal da arma (à sua escolha). A magia encerra se você a conjurar novamente ou se soltar a arma. Aprimoramento de Truque. O dado de dano muda quando você atinge os níveis 5 (1d10), 11 (1d12) e 17 (2d6)."
+  },
+  {
+    "id": "bracos-de-hadar",
+    "name": "Braços de Hadar",
+    "level": 1,
+    "school": "Invocação",
+    "classes": [
+      "Bruxo"
+    ],
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": [
+      "V",
+      "S"
+    ],
+    "duration": "Instantânea",
+    "description": "Clamando por Hadar, você faz com que tentáculos irrompam em você. Cada criatura em uma Emanação de 3 metros originada em você realiza uma salvaguarda de Força. Se falhar, um alvo sofre 2d6 pontos de dano Necrótico e não pode executar Reações até o início do próximo turno dele. Em caso de sucesso, um alvo sofre apenas metade do dano. Usando um Espaço de Magia de Círculo Superior. O dano aumenta em 1d6 pontos para cada círculo de espaço de magia acima de 1."
+  },
+  {
+    "id": "caldeirao-borbulhante-de-tasha",
+    "name": "Caldeirão Borbulhante de Tasha",
+    "level": 6,
+    "school": "Invocação",
+    "classes": [
+      "Bruxo",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "1,5 metro",
+    "components": [
+      "V",
+      "S",
+      "M (uma colher de mexer caldeirão dourada no valor de 500 ou mais PO)"
+    ],
+    "duration": "10 minutos",
+    "description": "Você conjura um caldeirão com pés de garra cheio de líquido borbulhante. O caldeirão aparece em um espaço desocupado no chão a até 1,5 metro de você e permanece pela duração da magia. O caldeirão não pode ser movido e desaparece quando a magia termina, junto com o líquido borbulhante dentro dele. O líquido no caldeirão copia as propriedades de uma poção Comum ou Incomum à sua escolha (como uma Poção de Cura). Como uma Ação Bônus, você ou um aliado pode alcançar o caldeirão e retirar dele uma poção desse tipo. A poção está contida em um frasco que desaparece quando a poção é consumida. O caldeirão pode produzir um número dessas poções igual ao seu modificador de atributo de conjuração (mínimo 1). Quando a última dessas poções é retirada do caldeirão, o caldeirão desaparece e a magia termina. Poções obtidas do caldeirão que não são consumidas desaparecem quando você conjura esta magia novamente."
+  },
+  {
+    "id": "caminhar-no-vento",
+    "name": "Caminhar no Vento",
+    "level": 6,
+    "school": "Transmutação",
+    "classes": [
+      "Druida"
+    ],
+    "castingTime": "1 minuto",
+    "range": "9 metros",
+    "components": [
+      "V",
+      "S",
+      "M (uma vela)"
+    ],
+    "duration": "8 horas",
+    "description": "Você e até dez criaturas voluntárias à sua escolha no alcance da magia assumem formas gasosas pela duração da magia, aparecendo como fiapos de nuvem. Enquanto estiver nesta forma de nuvem, um alvo tem um Deslocamento de Voo de 90 metros e pode pairar; tem Imunidade à condição Caído; e tem Resistência a dano Contundente, Cortante e Perfurante. As únicas ações que um alvo pode executar nesta forma são a ação Correr ou Usar Magia para começar a reverter à sua forma normal. Reverter leva 1 minuto, durante o qual o alvo tem a condição Atordoado. Até que a magia termine, o alvo pode voltar à forma de nuvem, o que também requer uma ação Usar Magia seguida de uma transformação de 1 minuto. Se um alvo estiver em forma de nuvem e voando quando o efeito terminar, ele desce 18 metros por rodada por 1 minuto até pousar, o que faz com segurança. Se não conseguir pousar após 1 minuto, ele cai pela distância restante."
+  },
+  {
+    "id": "caminhar-sobre-as-aguas",
+    "name": "Caminhar Sobre as Águas",
+    "level": 3,
+    "school": "Transmutação",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Guardião"
+    ],
+    "castingTime": "Ação ou Ritual",
+    "range": "9 metros",
+    "components": [
+      "V",
+      "S",
+      "M (um pedaço de cortiça)"
+    ],
+    "duration": "1 hora",
+    "description": "Esta magia concede a capacidade de se mover através de qualquer superfície líquida — como ácido, água, areia movediça, lama, lava ou neve — como se fosse um solo sólido inofensivo (criaturas que cruzam a lava derretida ainda podem sofrer dano devido ao calor). Até dez criaturas voluntárias à sua escolha no alcance da magia recebem essa habilidade pela duração da magia. Um alvo afetado deve executar uma Ação Bônus para passar da superfície do líquido para dentro dele e vice-versa, mas, se o alvo cair no líquido, ele atravessa a superfície e entra no líquido abaixo."
+  },
+  {
+    "id": "campo-antimagia",
+    "name": "Campo Antimagia",
+    "level": 8,
+    "school": "Abjuração",
+    "classes": [
+      "Clérigo",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": [
+      "V",
+      "S",
+      "M (raspas de ferro)"
+    ],
+    "duration": "Concentração, até 1 hora",
+    "description": "Uma aura de antimagia envolve você em uma Emanação de 3 metros. Ninguém pode conjurar magias, executar a ação Usar Magia ou criar outros efeitos mágicos dentro da aura, e esses efeitos não podem ter como alvo ou afetar qualquer coisa dentro dela. As propriedades mágicas dos itens mágicos não funcionam dentro da aura ou em qualquer coisa dentro dela. Áreas de efeito criadas por magias ou outros efeitos mágicos não podem se estender para dentro da aura, e ninguém pode se teleportar para dentro ou para fora dela ou usar viagens planares para lá. Os portais se fecham temporariamente enquanto estão na aura. Magias em andamento, exceto aquelas conjuradas por um Artefato ou por uma divindade, são suprimidas na área. Enquanto um efeito é suprimido, ele não funciona, mas o tempo que ele gasta suprimido conta para sua duração. Dissipar Magia não tem efeito sobre a aura, e as auras criadas por diferentes magias de Campo Antimagia não se anulam."
+  },
+  {
+    "id": "cao-fiel-de-mordenkainen",
+    "name": "Cão Fiel de Mordenkainen",
+    "level": 4,
+    "school": "Invocação",
+    "classes": [
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": [
+      "V",
+      "S",
+      "M (um apito de prata)"
+    ],
+    "duration": "8 horas",
+    "description": "Você conjura um cão de guarda fantasmagórico em um espaço desocupado à sua vista e no alcance da magia. O cão permanece pela duração magia ou até que vocês dois estejam separados por mais de 90 metros. Ninguém além de você pode ver o cão, e ele é intangível e invulnerável. Quando uma criatura de tamanho Pequeno ou maior se aproxima a 9 metros dele sem antes falar a senha que você especificou ao conjurar essa magia, o cão começa a latir alto. O cão possui Visão Verdadeira com alcance de 9 metros. No início de cada um dos seus turnos, o cão tenta morder um inimigo a até 1,5 metro dele. Esse inimigo deve ser bem-sucedido em uma salvaguarda de Destreza ou sofre 4d8 pontos de dano Energético. Nos seus turnos subsequentes, você pode executar uma ação Usar Magia para mover o cão até 9 metros."
+  },
+  {
+    "id": "carcere-de-energia",
+    "name": "Cárcere de Energia",
+    "level": 7,
+    "school": "Evocação",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "30 metros",
+    "components": [
+      "V",
+      "S",
+      "M (rubi em pó no valor de 1.500 ou mais PO, que a magia consome)"
+    ],
+    "duration": "Concentração, até 1 hora",
+    "description": "Uma prisão imóvel, invisível e em forma de Cubo composta de força energética surge em torno de uma área à sua escolha no alcance da magia. A prisão pode ser uma jaula ou uma caixa sólida, à sua escolha. Uma prisão na forma de uma jaula pode ter até 6 metros de lado e é formada com barras de 1,5 centímetro de diâmetro com espaços de 1,5 centímetro entre elas. Uma prisão na forma de caixa pode ter até 3 metros de lado, criando uma barreira sólida que impede que qualquer matéria passe por ela e bloqueia quaisquer magias conjuradas para dentro ou para fora da área. Ao conjurar a magia, qualquer criatura que esteja completamente na área da jaula fica presa. Criaturas apenas parcialmente dentro da área, ou aquelas grandes demais para caber dentro dela, são empurradas para longe do centro da área até que estejam completamente fora dela. Uma criatura na jaula não pode deixá-la por meios não mágicos. Se a criatura tentar usar teleporte ou viagem interplanar para sair, ela deve primeiro realizar uma salvaguarda de Carisma. Em caso de sucesso, a criatura pode usar essa magia para sair da jaula. Se falhar, a criatura não sai da jaula e desperdiça a magia ou o efeito. A jaula também se estende para o Plano Etéreo, bloqueando viagens etéreas. Esta magia não pode ser dissipada por Dissipar Magia."
+  },
+  {
+    "id": "cativar",
+    "name": "Cativar",
+    "level": 2,
+    "school": "Encantamento",
+    "classes": [
+      "Bardo",
+      "Bruxo"
+    ],
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": [
+      "V",
+      "S"
+    ],
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você tece uma sequência de palavras perturbadoras, fazendo com que criaturas à sua escolha à sua vista e no alcance da magia realizem uma salvaguarda de Sabedoria. Qualquer criatura contra a qual você ou seus companheiros estejam lutando é automaticamente bem-sucedida nesta salvaguarda. Se falhar, um alvo tem uma penalidade de −10 nos testes de Sabedoria (Percepção) e Percepção Passiva até que a magia termine."
+  },
+  {
+    "id": "cegueira-surdez",
+    "name": "Cegueira/Surdez",
+    "level": 2,
+    "school": "Transmutação",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Feiticeiro",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": [
+      "V"
+    ],
+    "duration": "1 minuto",
+    "description": "Uma criatura à sua vista e no alcance da magia deve ser bem-sucedida em uma salvaguarda de Constituição, ou ela tem a condição Cego ou Surdo (à sua escolha) pela duração da magia. O alvo repete a salvaguarda no final de cada um dos turnos dele, encerrando a magia em caso de sucesso. Usando um Espaço de Magia de Círculo Superior. Você pode escolher uma criatura adicional para cada círculo de espaço de magia acima de 2."
+  },
+  {
+    "id": "celeridade",
+    "name": "Celeridade",
+    "level": 3,
+    "school": "Transmutação",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": [
+      "V",
+      "S",
+      "M (uma lasca de raiz de alcaçuz)"
+    ],
+    "duration": "Concentração, até 1 minuto",
+    "description": "Escolha uma criatura voluntária à sua vista e no alcance da magia. Até que a magia termine, o deslocamento do alvo é dobrado, e ele recebe um bônus de +2 na Classe de Armadura, tem Vantagem em salvaguardas de Destreza e recebe uma ação adicional em cada um de seus turnos. Essa ação pode ser utilizada apenas para executar a ação Atacar (apenas um ataque), Correr, Desengajar, Esconder ou Usar Objeto. Quando a magia termina, o alvo fica Incapacitado e tem Deslocamento 0 até o final do próximo turno dele, quando uma onda de letargia passa por ele."
+  },
+  {
+    "id": "chama-continua",
+    "name": "Chama Contínua",
+    "level": 2,
+    "school": "Evocação",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": [
+      "V",
+      "S",
+      "M (rubi em pó no valor de 50 ou mais PO, que a magia consome)"
+    ],
+    "duration": "Até ser dissipada",
+    "description": "Uma chama brota de um objeto que você toca. O efeito conjura Luz Plena em um raio de 6 metros e Meia-luz por mais 6 metros. Ela se parece uma chama comum, mas não cria calor e não consome combustível. A chama pode ser coberta ou escondida, mas não abafada ou extinta."
+  },
+  {
+    "id": "chama-sagrada",
+    "name": "Chama Sagrada",
+    "level": 0,
+    "school": "Evocação",
+    "classes": [
+      "Clérigo"
+    ],
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": [
+      "V",
+      "S"
+    ],
+    "duration": "Instantânea",
+    "description": "Um brilho semelhante a uma chama desce sobre uma criatura à sua vista e no alcance da magia. O alvo deve ser bem-sucedido em uma salvaguarda de Destreza ou sofre 1d8 pontos de dano Radiante. O alvo não recebe nenhum benefício de Cobertura Parcial ou Cobertura de Três Quartos para esta salvaguarda. Aprimoramento de Truque. O dano aumenta em 1d8 quando você atinge os níveis 5 (2d8), 11 (3d8) e 17 (4d8)."
+  },
+  {
+    "id": "chicote-de-espinhos",
+    "name": "Chicote de Espinhos",
+    "level": 0,
+    "school": "Transmutação",
+    "classes": [
+      "Druida"
+    ],
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": [
+      "V",
+      "S",
+      "M (o caule de uma planta espinhosa)"
+    ],
+    "duration": "Instantânea",
+    "description": "Você cria um chicote semelhante a uma videira coberto de espinhos que ataca ao seu comando em direção a uma criatura no alcance da magia. Realize um ataque mágico corpo a corpo contra o alvo. Em caso de acerto, o alvo sofre 1d6 pontos de dano Perfurante e, se for Grande ou menor, você pode puxá-lo até 3 metros mais perto de você. Aprimoramento de Truque. O dano aumenta em 1d6 quando você atinge os níveis 5 (2d6), 11 (3d6) e 17 (4d6)."
+  },
+  {
+    "id": "chuva-de-meteoros",
+    "name": "Chuva de Meteoros",
+    "level": 9,
+    "school": "Evocação",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "1,5 km",
+    "components": [
+      "V",
+      "S"
+    ],
+    "duration": "Instantânea",
+    "description": "Orbes flamejantes caem do céu em quatro pontos distintos à sua vista e no alcance da magia. Cada criatura em uma Esfera de 12 metros de raio centrada em cada um desses pontos realiza uma salvaguarda de Destreza. Uma criatura sofre 20d6 pontos de dano Ígneo e 20d6 pontos de dano Contundente se falhar, ou metade desse dano em caso de sucesso. Uma criatura na área de mais de uma esfera de fogo é afetada apenas uma vez. Um objeto não mágico que não esteja sendo usado ou carregado também sofre o dano se estiver na área da magia, e começa a queimar se for inflamável."
+  },
+  {
+    "id": "circulo-da-morte",
+    "name": "Círculo da Morte",
+    "level": 6,
+    "school": "Necromancia",
+    "classes": [
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "45 metros",
+    "components": [
+      "V",
+      "S",
+      "M (o pó de uma pérola negra esmagada no valor de 500 ou mais PO)"
+    ],
+    "duration": "Instantânea",
+    "description": "Uma Esfera de 18 metros de raio de energia negativa parte de um ponto à sua escolha no alcance da magia. Cada criatura nessa área realiza uma salvaguarda de Constituição, sofrendo 8d8 pontos de dano Necrótico se falhar ou metade desse dano em caso de sucesso. Usando um Espaço de Magia de Círculo Superior. O dano aumenta em 2d8 para cada círculo de espaço de magia acima de 6."
+  },
+  {
+    "id": "circulo-de-poder",
+    "name": "Círculo de Poder",
+    "level": 5,
+    "school": "Abjuração",
+    "classes": [
+      "Clérigo",
+      "Mago",
+      "Paladino"
+    ],
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": [
+      "V"
+    ],
+    "duration": "Concentração, até 10 minutos",
+    "description": "Uma aura irradia de você em uma Emanação de 9 metros pela duração da magia. Enquanto estiver na aura, você e seus aliados têm Vantagem em salvaguardas contra magias e outros efeitos mágicos. Quando uma criatura afetada realiza uma salvaguarda contra uma magia ou efeito mágico que permite que sofra apenas metade do dano, ela não sofre dano em caso de sucesso."
   }
 ]
