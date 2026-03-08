@@ -31,7 +31,22 @@
             >
               <h4>{{ item.name }}</h4>
               <ul class="effects">
-                <li *ngFor="let effect of item.effects">{{ effect }}</li>
+                <li *ngFor="let effect of item.effectParts">
+                  <ng-container *ngFor="let part of effect">
+                    <ng-container *ngIf="part.linkItem; else plainText">
+                      <a
+                        class="guide-link"
+                        [routerLink]="['/guia']"
+                        [fragment]="part.linkItem.id"
+                        [matTooltip]="formatTooltip(part.linkItem.description)"
+                        matTooltipClass="guide-tooltip"
+                      >
+                        {{ part.text }}
+                      </a>
+                    </ng-container>
+                    <ng-template #plainText>{{ part.text }}</ng-template>
+                  </ng-container>
+                </li>
               </ul>
             </article>
 

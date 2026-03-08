@@ -55,6 +55,17 @@
   font-weight: 600;
 }
 
+.guide-link {
+  font-weight: 700;
+  color: #5a3d1c;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.guide-tooltip {
+  white-space: pre-line;
+}
+
 .summon-card {
   display: grid;
   gap: 10px;
