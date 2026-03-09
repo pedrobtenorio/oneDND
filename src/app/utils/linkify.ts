@@ -7,6 +7,8 @@ export type LinkItem = {
 export type LinkPart<T> = {
   text: string;
   linkItem?: T;
+  bold?: boolean;
+  italic?: boolean;
 };
 
 export type LinkIndex<T extends LinkItem> = {
@@ -83,36 +85,63 @@ export const buildLinkIndex = <T extends LinkItem>(items: T[]): LinkIndex<T> => 
   return { itemsByKey, sortedNames };
 };
 
+type MarkdownSegment = { text: string; bold: boolean; italic: boolean };
+
+const parseMarkdownSegments = (text: string): MarkdownSegment[] => {
+  const segments: MarkdownSegment[] = [];
+  const mdPattern = /\*\*(.+?)\*\*|\*(.+?)\*/gs;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  while ((match = mdPattern.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      segments.push({ text: text.slice(lastIndex, match.index), bold: false, italic: false });
+    }
+    if (match[1] !== undefined) {
+      segments.push({ text: match[1], bold: true, italic: false });
+    } else {
+      segments.push({ text: match[2], bold: false, italic: true });
+    }
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < text.length) {
+    segments.push({ text: text.slice(lastIndex), bold: false, italic: false });
+  }
+  return segments;
+};
+
+const buildPartsForSegment = <T extends LinkItem>(
+  segment: MarkdownSegment,
+  itemsByKey: Map<string, T>,
+  pattern: RegExp
+): LinkPart<T>[] => {
+  const { text, bold, italic } = segment;
+  const parts: LinkPart<T>[] = [];
+  let lastIndex = 0;
+  pattern.lastIndex = 0;
+  let match: RegExpExecArray | null;
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push({ text: text.slice(lastIndex, match.index), bold, italic });
+    }
+    const normalized = normalizeKey(match[0]);
+    parts.push({ text: match[0], linkItem: itemsByKey.get(normalized), bold, italic });
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < text.length) {
+    parts.push({ text: text.slice(lastIndex), bold, italic });
+  }
+  return parts;
+};
+
 export const buildDescriptionParts = <T extends LinkItem>(
   description: string,
   items: T[]
 ): LinkPart<T>[] => {
+  const segments = parseMarkdownSegments(description);
   if (!items.length) {
-    return [{ text: description }];
+    return segments.map(({ text, bold, italic }) => ({ text, bold, italic }));
   }
-
   const { itemsByKey, sortedNames } = buildLinkIndex(items);
   const pattern = new RegExp(`\\b(${sortedNames.map(escapeRegex).join('|')})\\b`, 'gi');
-  const parts: LinkPart<T>[] = [];
-  let lastIndex = 0;
-  let match = pattern.exec(description);
-
-  while (match) {
-    if (match.index > lastIndex) {
-      parts.push({ text: description.slice(lastIndex, match.index) });
-    }
-
-    const matchedText = match[0];
-    const normalized = normalizeKey(matchedText);
-    parts.push({ text: matchedText, linkItem: itemsByKey.get(normalized) });
-
-    lastIndex = match.index + matchedText.length;
-    match = pattern.exec(description);
-  }
-
-  if (lastIndex < description.length) {
-    parts.push({ text: description.slice(lastIndex) });
-  }
-
-  return parts;
+  return segments.flatMap((seg) => buildPartsForSegment(seg, itemsByKey, pattern));
 };

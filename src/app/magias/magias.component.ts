@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { SpellService } from '../services/spell.service';
 import { GuideService } from '../services/guide.service';
 import { GuideCategory, GuideItem } from '../models/guide.models';
-import { Spell } from '../models/spell.models';
+import { Spell, SpellTable } from '../models/spell.models';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -16,9 +16,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { buildDescriptionParts, LinkPart, normalizeKey } from '../utils/linkify';
 
 type DescriptionPart = LinkPart<GuideItem>;
+type TextContentPart = { type: 'text'; parts: DescriptionPart[] };
+type TableContentPart = { type: 'table'; table: SpellTable };
+type ContentPart = TextContentPart | TableContentPart;
 
 type SpellView = Spell & {
-  descriptionParts: DescriptionPart[];
+  contentParts: ContentPart[];
 };
 
 @Component({
@@ -54,7 +57,7 @@ export class MagiasComponent {
       const linkItems = this.getLinkableItems(guide);
       return spells.map((spell): SpellView => ({
         ...spell,
-        descriptionParts: buildDescriptionParts(spell.description, linkItems),
+        contentParts: this.buildContentParts(spell, linkItems),
       }));
     })
   );
@@ -84,6 +87,53 @@ export class MagiasComponent {
     return guide
       .filter((category) => linkableCategories.has(category.id))
       .flatMap((category) => category.items);
+  }
+
+  private buildContentParts(spell: Spell, linkItems: GuideItem[]): ContentPart[] {
+    const tableMarkerRegex = /\[\[TABLE_(\d+)\]\]/g;
+    const parts: ContentPart[] = [];
+    let lastIndex = 0;
+    let match: RegExpExecArray | null;
+
+    while ((match = tableMarkerRegex.exec(spell.description)) !== null) {
+      if (match.index > lastIndex) {
+        const textSegment = spell.description.slice(lastIndex, match.index).trim();
+        if (textSegment) {
+          this.pushTextParagraphs(textSegment, linkItems, parts);
+        }
+      }
+      const tableIndex = parseInt(match[1], 10);
+      if (spell.tables?.[tableIndex]) {
+        parts.push({ type: 'table', table: spell.tables[tableIndex] });
+      }
+      lastIndex = match.index + match[0].length;
+    }
+
+    if (lastIndex < spell.description.length) {
+      const textSegment = spell.description.slice(lastIndex).trim();
+      if (textSegment) {
+        this.pushTextParagraphs(textSegment, linkItems, parts);
+      }
+    }
+
+    return parts;
+  }
+
+  private pushTextParagraphs(text: string, linkItems: GuideItem[], parts: ContentPart[]): void {
+    text.split('\n').forEach(line => {
+      const trimmed = line.trim();
+      if (trimmed) {
+        parts.push({ type: 'text', parts: buildDescriptionParts(trimmed, linkItems) });
+      }
+    });
+  }
+
+  asTextPart(part: ContentPart): TextContentPart | null {
+    return part.type === 'text' ? part : null;
+  }
+
+  asTablePart(part: ContentPart): TableContentPart | null {
+    return part.type === 'table' ? part : null;
   }
 
   formatTooltip(description: string): string {
