@@ -19,138 +19,44 @@
       >
         <mat-expansion-panel-header>
           <mat-panel-title>{{ category.title }}</mat-panel-title>
-          <mat-panel-description>{{ category.items.length }} itens</mat-panel-description>
+          <mat-panel-description>{{ category.items.length + category.summons.length }} itens</mat-panel-description>
         </mat-expansion-panel-header>
 
         <div class="items" [class.single-column]="isInvocationCategory(category.id)">
-          <ng-container *ngFor="let item of category.items; trackBy: trackItem">
-            <article
-              class="rule-card"
-              *ngIf="!isInvocationCategory(category.id); else invocationCard"
-              [attr.id]="item.id"
-            >
-              <h4>{{ item.name }}</h4>
-              <ul class="effects">
-                <li *ngFor="let effect of item.effectParts">
-                  <ng-container *ngFor="let part of effect">
-                    <ng-container *ngIf="part.linkItem; else plainText">
-                      <a
-                        class="guide-link"
-                        [routerLink]="['/guia']"
-                        [fragment]="part.linkItem.id"
-                        [matTooltip]="formatTooltip(part.linkItem.description)"
-                        matTooltipClass="guide-tooltip"
-                      >{{ part.text }}</a>
-                    </ng-container>
-                    <ng-template #plainText>
-                      <strong *ngIf="part.bold; else italicText">{{ part.text }}</strong>
-                      <ng-template #italicText>
-                        <em *ngIf="part.italic; else normalText">{{ part.text }}</em>
-                        <ng-template #normalText>{{ part.text }}</ng-template>
-                      </ng-template>
+          <article
+            class="rule-card"
+            *ngFor="let item of category.items; trackBy: trackItem"
+            [attr.id]="item.id"
+          >
+            <h4>{{ item.name }}</h4>
+            <ul class="effects">
+              <li *ngFor="let effect of item.effectParts">
+                <ng-container *ngFor="let part of effect">
+                  <ng-container *ngIf="part.linkItem; else plainText">
+                    <a
+                      class="guide-link"
+                      [routerLink]="['/guia']"
+                      [fragment]="part.linkItem.id"
+                      [matTooltip]="formatTooltip(part.linkItem.description)"
+                      matTooltipClass="guide-tooltip"
+                    >{{ part.text }}</a>
+                  </ng-container>
+                  <ng-template #plainText>
+                    <strong *ngIf="part.bold; else italicText">{{ part.text }}</strong>
+                    <ng-template #italicText>
+                      <em *ngIf="part.italic; else normalText">{{ part.text }}</em>
+                      <ng-template #normalText>{{ part.text }}</ng-template>
                     </ng-template>
-                  </ng-container>
-                </li>
-              </ul>
-            </article>
-
-            <ng-template #invocationCard>
-              <article class="rule-card summon-card" [attr.id]="item.id">
-                <header class="summon-header">
-                  <div>
-                    <h4>{{ item.name }}</h4>
-                    <p class="summon-subtitle" *ngIf="item.subtitle">{{ item.subtitle }}</p>
-                  </div>
-                  <span class="summon-ac" *ngIf="item.armorClass">CA {{ item.armorClass }}</span>
-                </header>
-
-                <div class="summon-row">
-                  <span class="label">PV</span>
-                  <span>{{ item.hitPoints }}</span>
-                </div>
-                <div class="summon-row">
-                  <span class="label">Deslocamento</span>
-                  <span>{{ item.speed }}</span>
-                </div>
-
-                <div class="stat-grid" *ngIf="item.stats?.length">
-                  <div class="stat-head"></div>
-                  <div class="stat-head"></div>
-                  <div class="stat-head">MOD</div>
-                  <div class="stat-head">SG</div>
-                  <ng-container *ngFor="let stat of item.stats">
-                    <div class="stat-name">{{ stat.label }}</div>
-                    <div class="stat-score">{{ stat.score }}</div>
-                    <div class="stat-mod">{{ stat.mod }}</div>
-                    <div class="stat-save">{{ stat.save }}</div>
-                  </ng-container>
-                </div>
-
-                <div class="summon-row" *ngIf="item.immunities">
-                  <span class="label">Imunidades</span>
-                  <span>{{ item.immunities }}</span>
-                </div>
-                <div class="summon-row" *ngIf="item.senses">
-                  <span class="label">Sentidos</span>
-                  <span>{{ item.senses }}</span>
-                </div>
-                <div class="summon-row" *ngIf="item.languages">
-                  <span class="label">Idiomas</span>
-                  <span>{{ item.languages }}</span>
-                </div>
-                <div class="summon-row" *ngIf="item.challenge">
-                  <span class="label">ND</span>
-                  <span>{{ item.challenge }}</span>
-                </div>
-
-                <div class="summon-actions" *ngIf="item.traits">
-                  <div class="label">Traços</div>
-                  <p>{{ item.traits }}</p>
-                </div>
-
-                <div class="summon-actions" *ngIf="item.acoes?.length; else plainActions">
-                  <div class="label">Ações</div>
-                  <div class="action-list">
-                    <div class="action" *ngFor="let acao of item.acoes">
-                      <div class="action-name">{{ acao.nome }}</div>
-                      <div class="action-row" *ngIf="acao.tipo_ataque">
-                        <span class="label">Tipo</span>
-                        <span>{{ acao.tipo_ataque }}</span>
-                      </div>
-                      <div class="action-row" *ngIf="acao.bonus_acerto !== undefined && acao.bonus_acerto !== null">
-                        <span class="label">Bônus para acertar</span>
-                        <span>{{ acao.bonus_acerto }}</span>
-                      </div>
-                      <div class="action-row" *ngIf="acao.alcance || acao.alcance_m">
-                        <span class="label">Alcance</span>
-                        <span *ngIf="acao.alcance">
-                          {{ acao.alcance.normal_m }} / {{ acao.alcance.maximo_m }} m
-                        </span>
-                        <span *ngIf="acao.alcance_m !== undefined">{{ acao.alcance_m }} m</span>
-                      </div>
-                      <div class="action-row" *ngIf="acao.dano?.formula || acao.dano?.medio || acao.dano?.tipo">
-                        <span class="label">Dano</span>
-                        <span>
-                          <ng-container *ngIf="acao.dano?.medio !== undefined && acao.dano?.medio !== null; else damageFormula">
-                            Médio {{ acao.dano?.medio }} ou {{ acao.dano?.formula }}
-                          </ng-container>
-                          <ng-template #damageFormula>{{ acao.dano?.formula }}</ng-template>
-                          {{ acao.dano?.tipo ? '(' + acao.dano?.tipo + ')' : '' }}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <ng-template #plainActions>
-                  <div class="summon-actions" *ngIf="item.actions">
-                    <div class="label">Ações</div>
-                    <p>{{ item.actions }}</p>
-                  </div>
-                </ng-template>
-              </article>
-            </ng-template>
-          </ng-container>
+                  </ng-template>
+                </ng-container>
+              </li>
+            </ul>
+          </article>
+          <app-summon-card
+            *ngFor="let summon of category.summons"
+            [summon]="summon"
+            [attr.id]="summon.id"
+          ></app-summon-card>
         </div>
       </mat-expansion-panel>
     </mat-accordion>

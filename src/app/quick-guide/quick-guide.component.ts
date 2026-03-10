@@ -12,7 +12,10 @@ import { MatExpansionModule, MatExpansionPanel } from '@angular/material/expansi
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { GuideService } from '../services/guide.service';
+import { SummonService } from '../services/summon.service';
 import { GuideCategory, GuideItem } from '../models/guide.models';
+import { Summon } from '../models/summon.models';
+import { SummonCardComponent } from '../summon-card/summon-card.component';
 import { buildDescriptionParts, LinkPart } from '../utils/linkify';
 
 type GuideItemView = GuideItem & {
@@ -22,6 +25,7 @@ type GuideItemView = GuideItem & {
 
 type GuideCategoryView = Omit<GuideCategory, 'items'> & {
   items: GuideItemView[];
+  summons: Summon[];
 };
 
 @Component({
@@ -36,6 +40,7 @@ type GuideCategoryView = Omit<GuideCategory, 'items'> & {
     MatExpansionModule,
     MatTooltipModule,
     RouterModule,
+    SummonCardComponent,
   ],
   templateUrl: './quick-guide.component.html',
   styleUrl: './quick-guide.component.css',
@@ -44,16 +49,19 @@ export class QuickGuideComponent implements AfterViewInit {
   @ViewChildren(MatExpansionPanel) private readonly panels!: QueryList<MatExpansionPanel>;
 
   private readonly guideService = inject(GuideService);
+  private readonly summonService = inject(SummonService);
   private readonly route = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly summons$ = this.summonService.getSummons();
   readonly searchControl = new FormControl('', { nonNullable: true });
   readonly categories$ = this.guideService.getGuide();
 
   readonly filteredCategories$ = combineLatest([
     this.categories$,
+    this.summons$,
     this.searchControl.valueChanges.pipe(startWith('')),
   ]).pipe(
-    map(([categories, search]) => this.filterCategories(categories, search))
+    map(([categories, summons, search]) => this.filterCategories(categories, summons, search))
   );
 
   ngAfterViewInit(): void {
@@ -69,7 +77,8 @@ export class QuickGuideComponent implements AfterViewInit {
         }
 
         const categoryIndex = categories.findIndex((category) =>
-          category.items.some((item) => item.id === fragment)
+          category.items.some((item) => item.id === fragment) ||
+          category.summons.some((s) => s.id === fragment)
         );
 
         if (categoryIndex < 0) {
@@ -90,35 +99,30 @@ export class QuickGuideComponent implements AfterViewInit {
       });
   }
 
-  private filterCategories(categories: GuideCategory[], search: string): GuideCategoryView[] {
+  private filterCategories(categories: GuideCategory[], allSummons: Summon[], search: string): GuideCategoryView[] {
     const query = this.normalizeSearchValue(search);
     const linkableItems = this.getLinkableItems(categories);
-    const filtered = categories
-      .map((category) => {
-        const categoryMatches = this.normalizeSearchValue(category.title).includes(query);
-        if (categoryMatches) {
-          return category;
-        }
 
-        const filteredItems = category.items.filter((item) => {
-          const searchable = this.normalizeSearchValue(this.getSearchText(item));
-          return searchable.includes(query);
-        });
+    const toItemView = (category: GuideCategory) => (item: GuideItem): GuideItemView => {
+      const effects = this.buildEffects(category.id, item.description);
+      return { ...item, effects, effectParts: effects.map((e) => buildDescriptionParts(e, linkableItems)) };
+    };
 
-        return { ...category, items: filteredItems };
-      })
-      .filter((category) => category.items.length > 0);
+    return categories.flatMap((category): GuideCategoryView[] => {
+      if (category.id === 'invocacoes-familiares') {
+        const filteredSummons = query
+          ? allSummons.filter((s) => this.normalizeSearchValue(s.name + ' ' + s.type).includes(query))
+          : allSummons;
+        return filteredSummons.length > 0 ? [{ ...category, items: [], summons: filteredSummons }] : [];
+      }
 
-    const toView = (category: GuideCategory): GuideCategoryView => ({
-      ...category,
-      items: category.items.map((item) => {
-        const effects = this.buildEffects(category.id, item.description);
-        const effectParts = effects.map((effect) => buildDescriptionParts(effect, linkableItems));
-        return { ...item, effects, effectParts };
-      }),
+      const categoryMatches = !query || this.normalizeSearchValue(category.title).includes(query);
+      const items = categoryMatches
+        ? category.items
+        : category.items.filter((item) => this.normalizeSearchValue(this.getSearchText(item)).includes(query));
+
+      return items.length > 0 ? [{ ...category, items: items.map(toItemView(category)), summons: [] }] : [];
     });
-
-    return query ? filtered.map(toView) : categories.map(toView);
   }
 
   private splitEffects(description: string): string[] {
