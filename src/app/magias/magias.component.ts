@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { combineLatest, map, startWith } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, startWith } from 'rxjs';
 import { RouterModule } from '@angular/router';
 
 import { SpellService } from '../services/spell.service';
@@ -49,11 +49,14 @@ export class MagiasComponent {
   private readonly spellService = inject(SpellService);
   private readonly guideService = inject(GuideService);
   private readonly summonService = inject(SummonService);
+  private readonly favoritesStorageKey = 'favorite-spells';
+  private readonly favoriteIdsSubject = new BehaviorSubject<Set<string>>(this.loadFavoriteIds());
 
   readonly searchControl = new FormControl('', { nonNullable: true });
   readonly classControl = new FormControl<string[]>([], { nonNullable: true });
   readonly castingTimeControl = new FormControl<string[]>([], { nonNullable: true });
   readonly levelControl = new FormControl<number[]>([], { nonNullable: true });
+  readonly favoritesOnlyControl = new FormControl(false, { nonNullable: true });
 
   private readonly spellViews$ = combineLatest([
     this.spellService.getSpells(),
@@ -84,9 +87,11 @@ export class MagiasComponent {
     this.classControl.valueChanges.pipe(startWith(this.classControl.value)),
     this.castingTimeControl.valueChanges.pipe(startWith(this.castingTimeControl.value)),
     this.levelControl.valueChanges.pipe(startWith(this.levelControl.value)),
+    this.favoritesOnlyControl.valueChanges.pipe(startWith(this.favoritesOnlyControl.value)),
+    this.favoriteIdsSubject.asObservable(),
   ]).pipe(
-    map(([spells, search, classes, castingTimes, levels]) =>
-      this.filterSpells(spells, search, classes, castingTimes, levels)
+    map(([spells, search, classes, castingTimes, levels, favoritesOnly, favoriteIds]) =>
+      this.filterSpells(spells, search, classes, castingTimes, levels, favoritesOnly, favoriteIds)
     )
   );
 
@@ -165,12 +170,33 @@ export class MagiasComponent {
     this.levelControl.setValue([]);
   }
 
+  toggleFavoritesOnly(): void {
+    this.favoritesOnlyControl.setValue(!this.favoritesOnlyControl.value);
+  }
+
+  isFavorite(spellId: string): boolean {
+    return this.favoriteIdsSubject.value.has(spellId);
+  }
+
+  toggleFavorite(spellId: string): void {
+    const next = new Set(this.favoriteIdsSubject.value);
+    if (next.has(spellId)) {
+      next.delete(spellId);
+    } else {
+      next.add(spellId);
+    }
+    this.favoriteIdsSubject.next(next);
+    this.persistFavoriteIds(next);
+  }
+
   private filterSpells(
     spells: SpellView[],
     search: string,
     classes: string[],
     castingTimes: string[],
-    levels: number[]
+    levels: number[],
+    favoritesOnly: boolean,
+    favoriteIds: Set<string>
   ): SpellView[] {
     const query = this.normalizeSearchValue(search);
     const hasSearch = query.length > 0;
@@ -179,6 +205,10 @@ export class MagiasComponent {
     const hasLevelFilter = levels.length > 0;
 
     return spells.filter((spell) => {
+      if (favoritesOnly && !favoriteIds.has(spell.id)) {
+        return false;
+      }
+
       if (hasSearch) {
         const haystack = this.normalizeSearchValue(spell.name);
         if (!haystack.includes(query)) {
@@ -210,5 +240,30 @@ export class MagiasComponent {
       .toLowerCase()
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '');
+  }
+
+  private loadFavoriteIds(): Set<string> {
+    try {
+      const raw = localStorage.getItem(this.favoritesStorageKey);
+      if (!raw) {
+        return new Set();
+      }
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) {
+        return new Set(parsed.filter((item) => typeof item === 'string'));
+      }
+    } catch {
+      return new Set();
+    }
+    return new Set();
+  }
+
+  private persistFavoriteIds(favoriteIds: Set<string>): void {
+    try {
+      const payload = JSON.stringify(Array.from(favoriteIds));
+      localStorage.setItem(this.favoritesStorageKey, payload);
+    } catch {
+      return;
+    }
   }
 }

@@ -22,9 +22,6 @@ import { MatButtonModule } from '@angular/material/button';
     <main class="content">
       <router-outlet />
     </main>
-    <footer class="donation">
-      Curtiu o guia? Apoie o dev via Pix: <span class="pix-key">01e1e222-c9ce-46af-89b3-92754ecc9187</span>
-    </footer>
   `,
   styles: `
     .topbar {
@@ -63,20 +60,6 @@ import { MatButtonModule } from '@angular/material/button';
 
     .content {
       display: block;
-    }
-
-    .donation {
-      margin: 24px auto 0;
-      padding: 10px 16px 28px;
-      text-align: center;
-      color: #6b5140;
-      font-size: 0.9rem;
-      max-width: 980px;
-    }
-
-    .pix-key {
-      font-weight: 600;
-      color: #4b3626;
     }
   `,
 })
