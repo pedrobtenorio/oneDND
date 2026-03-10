@@ -16,7 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import { buildDescriptionParts, LinkPart, normalizeKey } from '../utils/linkify';
+import { buildDescriptionParts, LinkPart } from '../utils/linkify';
 
 type DescriptionPart = LinkPart<GuideItem>;
 type TextContentPart = { type: 'text'; parts: DescriptionPart[] };
@@ -98,7 +98,7 @@ export class MagiasComponent {
   }
 
   private buildContentParts(spell: Spell, linkItems: GuideItem[], summonsMap: Map<string, Summon>): ContentPart[] {
-    const markerRegex = /\[\[(TABLE|SUMMON)_(\d+)\]\]/g;
+    const markerRegex = /\[\[(TABLE|SUMMON)_(\d+)]]/g;
     const parts: ContentPart[] = [];
     let lastIndex = 0;
     let match: RegExpExecArray | null;
@@ -180,9 +180,7 @@ export class MagiasComponent {
 
     return spells.filter((spell) => {
       if (hasSearch) {
-        const haystack = this.normalizeSearchValue(
-          [spell.name, spell.description, spell.school, spell.classes.join(' ')].join(' ')
-        );
+        const haystack = this.normalizeSearchValue(spell.name);
         if (!haystack.includes(query)) {
           return false;
         }
