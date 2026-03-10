@@ -72,22 +72,47 @@
           </div>
         </div>
 
-        <p class="spell-description">
-          <ng-container *ngFor="let part of spell.descriptionParts">
-            <ng-container *ngIf="part.linkItem; else plainText">
-              <a
-                class="condition-link"
-                [routerLink]="['/guia']"
-                [fragment]="part.linkItem.id"
-                [matTooltip]="formatTooltip(part.linkItem.description)"
-                matTooltipClass="condition-tooltip"
-              >
-                <strong>{{ part.text }}</strong>
-              </a>
+        <div class="spell-description">
+          <ng-container *ngFor="let content of spell.contentParts">
+            <ng-container *ngIf="asTextPart(content) as textPart">
+              <p class="spell-paragraph">
+                <ng-container *ngFor="let part of textPart.parts">
+                  <ng-container *ngIf="part.linkItem; else plainText">
+                    <a
+                      class="condition-link"
+                      [routerLink]="['/guia']"
+                      [fragment]="part.linkItem.id"
+                      [matTooltip]="formatTooltip(part.linkItem.description)"
+                      matTooltipClass="condition-tooltip"
+                    >{{ part.text }}</a>
+                  </ng-container>
+                  <ng-template #plainText>
+                    <strong *ngIf="part.bold; else italicText">{{ part.text }}</strong>
+                    <ng-template #italicText>
+                      <em *ngIf="part.italic; else normalText">{{ part.text }}</em>
+                      <ng-template #normalText>{{ part.text }}</ng-template>
+                    </ng-template>
+                  </ng-template>
+                </ng-container>
+              </p>
             </ng-container>
-            <ng-template #plainText>{{ part.text }}</ng-template>
+            <ng-container *ngIf="asTablePart(content) as tablePart">
+              <table class="spell-table">
+                <caption *ngIf="tablePart.table.title">{{ tablePart.table.title }}</caption>
+                <thead>
+                  <tr>
+                    <th *ngFor="let header of tablePart.table.headers">{{ header }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of tablePart.table.rows">
+                    <td *ngFor="let cell of row">{{ cell }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </ng-container>
           </ng-container>
-        </p>
+        </div>
       </article>
     </div>
     <div class="empty" *ngIf="spells.length === 0">

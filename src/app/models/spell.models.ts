@@ -1,3 +1,9 @@
+export interface SpellTable {
+  title?: string;
+  headers: string[];
+  rows: string[][];
+}
+
 export interface Spell {
   id: string;
   name: string;
@@ -9,4 +15,5 @@ export interface Spell {
   components: string[];
   duration: string;
   description: string;
+  tables?: SpellTable[];
 }
