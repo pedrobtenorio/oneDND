@@ -6,8 +6,11 @@ import { RouterModule } from '@angular/router';
 
 import { SpellService } from '../services/spell.service';
 import { GuideService } from '../services/guide.service';
+import { SummonService } from '../services/summon.service';
 import { GuideCategory, GuideItem } from '../models/guide.models';
 import { Spell, SpellTable } from '../models/spell.models';
+import { Summon } from '../models/summon.models';
+import { SummonCardComponent } from '../summon-card/summon-card.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -18,7 +21,8 @@ import { buildDescriptionParts, LinkPart, normalizeKey } from '../utils/linkify'
 type DescriptionPart = LinkPart<GuideItem>;
 type TextContentPart = { type: 'text'; parts: DescriptionPart[] };
 type TableContentPart = { type: 'table'; table: SpellTable };
-type ContentPart = TextContentPart | TableContentPart;
+type SummonContentPart = { type: 'summon'; summon: Summon };
+type ContentPart = TextContentPart | TableContentPart | SummonContentPart;
 
 type SpellView = Spell & {
   contentParts: ContentPart[];
@@ -36,6 +40,7 @@ type SpellView = Spell & {
     MatSelectModule,
     MatButtonModule,
     RouterModule,
+    SummonCardComponent,
   ],
   templateUrl: './magias.component.html',
   styleUrl: './magias.component.css',
@@ -43,6 +48,7 @@ type SpellView = Spell & {
 export class MagiasComponent {
   private readonly spellService = inject(SpellService);
   private readonly guideService = inject(GuideService);
+  private readonly summonService = inject(SummonService);
 
   readonly searchControl = new FormControl('', { nonNullable: true });
   readonly classControl = new FormControl<string[]>([], { nonNullable: true });
@@ -52,12 +58,14 @@ export class MagiasComponent {
   private readonly spellViews$ = combineLatest([
     this.spellService.getSpells(),
     this.guideService.getGuide(),
+    this.summonService.getSummons(),
   ]).pipe(
-    map(([spells, guide]) => {
+    map(([spells, guide, summons]) => {
       const linkItems = this.getLinkableItems(guide);
+      const summonsMap = new Map(summons.map(s => [s.id, s]));
       return spells.map((spell): SpellView => ({
         ...spell,
-        contentParts: this.buildContentParts(spell, linkItems),
+        contentParts: this.buildContentParts(spell, linkItems, summonsMap),
       }));
     })
   );
@@ -89,22 +97,28 @@ export class MagiasComponent {
       .flatMap((category) => category.items);
   }
 
-  private buildContentParts(spell: Spell, linkItems: GuideItem[]): ContentPart[] {
-    const tableMarkerRegex = /\[\[TABLE_(\d+)\]\]/g;
+  private buildContentParts(spell: Spell, linkItems: GuideItem[], summonsMap: Map<string, Summon>): ContentPart[] {
+    const markerRegex = /\[\[(TABLE|SUMMON)_(\d+)\]\]/g;
     const parts: ContentPart[] = [];
     let lastIndex = 0;
     let match: RegExpExecArray | null;
 
-    while ((match = tableMarkerRegex.exec(spell.description)) !== null) {
+    while ((match = markerRegex.exec(spell.description)) !== null) {
       if (match.index > lastIndex) {
         const textSegment = spell.description.slice(lastIndex, match.index).trim();
         if (textSegment) {
           this.pushTextParagraphs(textSegment, linkItems, parts);
         }
       }
-      const tableIndex = parseInt(match[1], 10);
-      if (spell.tables?.[tableIndex]) {
-        parts.push({ type: 'table', table: spell.tables[tableIndex] });
+      const markerType = match[1];
+      const markerIndex = parseInt(match[2], 10);
+      if (markerType === 'TABLE' && spell.tables?.[markerIndex]) {
+        parts.push({ type: 'table', table: spell.tables[markerIndex] });
+      } else if (markerType === 'SUMMON' && spell.summonIds?.[markerIndex]) {
+        const summon = summonsMap.get(spell.summonIds[markerIndex]);
+        if (summon) {
+          parts.push({ type: 'summon', summon });
+        }
       }
       lastIndex = match.index + match[0].length;
     }
@@ -134,6 +148,10 @@ export class MagiasComponent {
 
   asTablePart(part: ContentPart): TableContentPart | null {
     return part.type === 'table' ? part : null;
+  }
+
+  asSummonPart(part: ContentPart): SummonContentPart | null {
+    return part.type === 'summon' ? part : null;
   }
 
   formatTooltip(description: string): string {

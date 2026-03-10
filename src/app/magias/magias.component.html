@@ -111,6 +111,9 @@
                 </tbody>
               </table>
             </ng-container>
+            <ng-container *ngIf="asSummonPart(content) as summonPart">
+              <app-summon-card [summon]="summonPart.summon"></app-summon-card>
+            </ng-container>
           </ng-container>
         </div>
       </article>

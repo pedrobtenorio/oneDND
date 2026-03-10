@@ -1,0 +1,703 @@
+[
+  {
+    "id": "objetos-animados",
+    "name": "Objetos Animados",
+    "type": "Construto Grande ou Menor, Sem Alinhamento",
+    "ac": "15",
+    "hp": "10 (Médio ou menor), 20 (Grande), 40 (Enorme)",
+    "speed": "9 m",
+    "str": {
+      "value": 16,
+      "mod": "+3"
+    },
+    "dex": {
+      "value": 10,
+      "mod": "+0"
+    },
+    "con": {
+      "value": 10,
+      "mod": "+0"
+    },
+    "int": {
+      "value": 3,
+      "mod": "–4"
+    },
+    "wis": {
+      "value": 3,
+      "mod": "–4"
+    },
+    "cha": {
+      "value": 1,
+      "mod": "–5"
+    },
+    "immunities": ["Psíquico", "Venenoso"],
+    "conditionImmunities": ["Amedrontado", "Enfeiçado", "Envenenado", "Exaustão", "Paralisado"],
+    "senses": "Visão às Cegas 9 m, Percepção Passiva 6",
+    "languages": "Compreende os idiomas que você conhece",
+    "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
+    "actions": [
+      {
+        "name": "Pancada",
+        "description": "Jogada de Ataque Corpo a Corpo: Bônus é igual ao seu modificador de ataque mágico, alcance 1,5 m. Dano: 1d4 + 3 (Médio ou menor), 2d6 + 3 + modificador de atributo de conjuração (Grande) ou 2d12 + 3 + modificador de atributo de conjuração (Enorme) pontos de dano Energético."
+      }
+    ]
+  },
+  {
+    "id": "esqueleto",
+    "name": "Esqueleto",
+    "type": "Morto-Vivo Médio, Ordério e Mau",
+    "ac": "14",
+    "hp": "13 (2d8 + 4)",
+    "speed": "9 m",
+    "str": {
+      "value": 10,
+      "mod": "+0"
+    },
+    "dex": {
+      "value": 16,
+      "mod": "+3"
+    },
+    "con": {
+      "value": 15,
+      "mod": "+2"
+    },
+    "int": {
+      "value": 6,
+      "mod": "–2"
+    },
+    "wis": {
+      "value": 8,
+      "mod": "–1"
+    },
+    "cha": {
+      "value": 5,
+      "mod": "–3"
+    },
+    "immunities": ["Venenoso"],
+    "conditionImmunities": ["Envenenado", "Exaustão"],
+    "senses": "Visão no Escuro 18 m, Percepção Passiva 9",
+    "languages": "Compreende os idiomas que conhecia em vida, mas não consegue falar",
+    "cr": "1/4 (XP 50; BP +2)",
+    "traits": [
+      {
+        "name": "Vulnerabilidades",
+        "description": "Contundente."
+      },
+      {
+        "name": "Equipamento",
+        "description": "Arco Curto, Espada Curta."
+      }
+    ],
+    "actions": [
+      {
+        "name": "Arco Curto",
+        "description": "Jogada de Ataque à Distância: +5 para acertar, alcance 24/96 m. Dano: Médio 6 (1d6 + 3) pontos de dano Perfurante."
+      },
+      {
+        "name": "Espada Curta",
+        "description": "Jogada de Ataque Corpo a Corpo: +5 para acertar, alcance 1,5 m. Dano: Médio 6 (1d6 + 3) pontos de dano Perfurante."
+      }
+    ]
+  },
+  {
+    "id": "zumbi",
+    "name": "Zumbi",
+    "type": "Morto-Vivo Médio, Neutro e Mau",
+    "ac": "8",
+    "hp": "15 (2d8 + 6)",
+    "speed": "6 m",
+    "str": {
+      "value": 13,
+      "mod": "+1"
+    },
+    "dex": {
+      "value": 6,
+      "mod": "–2"
+    },
+    "con": {
+      "value": 16,
+      "mod": "+3"
+    },
+    "int": {
+      "value": 3,
+      "mod": "–4"
+    },
+    "wis": {
+      "value": 6,
+      "mod": "–2",
+      "save": "+0"
+    },
+    "cha": {
+      "value": 5,
+      "mod": "–3"
+    },
+    "immunities": ["Venenoso"],
+    "conditionImmunities": ["Envenenado", "Exaustão"],
+    "senses": "Visão no Escuro 18 m, Percepção Passiva 8",
+    "languages": "Compreende os idiomas que conhecia em vida, mas não consegue falar",
+    "cr": "1/4 (XP 50; BP +2)",
+    "traits": [
+      {
+        "name": "Fortitude de Morto-Vivo",
+        "description": "Se o dano reduzir o zumbi a 0 Pontos de Vida, ele deve realizar uma salvaguarda de Constituição CD 5 mais o dano sofrido, a menos que o dano seja Radiante ou de um Acerto Crítico. Em caso de sucesso, o zumbi tem 1 Ponto de Vida."
+      }
+    ],
+    "actions": [
+      {
+        "name": "Pancada",
+        "description": "Jogada de Ataque Corpo a Corpo: +3 para acertar, alcance 1,5 m. Dano: Médio 4 (1d6 + 1) pontos de dano Contundente."
+      }
+    ]
+  },
+  {
+    "id": "espirito-celestial",
+    "name": "Espírito Celestial",
+    "type": "Celestial Grande, Neutro",
+    "ac": "11 + o círculo da magia + 2 (apenas Defensor)",
+    "hp": "40 + 10 para cada círculo de magia acima de 5",
+    "speed": "9 m, Voo 12 m",
+    "str": {
+      "value": 16,
+      "mod": "+3"
+    },
+    "dex": {
+      "value": 14,
+      "mod": "+2"
+    },
+    "con": {
+      "value": 16,
+      "mod": "+3"
+    },
+    "int": {
+      "value": 10,
+      "mod": "+0"
+    },
+    "wis": {
+      "value": 14,
+      "mod": "+2"
+    },
+    "cha": {
+      "value": 16,
+      "mod": "+3"
+    },
+    "resistances": ["Radiante"],
+    "conditionImmunities": ["Amedrontado", "Enfeiçado"],
+    "senses": "Visão no Escuro 18 m, Percepção Passiva 12",
+    "languages": "Celestial, compreende os idiomas que você fala",
+    "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
+    "actions": [
+      {
+        "name": "Ataques Múltiplos",
+        "description": "O espírito realiza um número de ataques igual à metade do círculo da magia (arredondado para baixo)."
+      },
+      {
+        "name": "Arco Radiante (Vingador)",
+        "description": "Jogada de Ataque à Distância: Bônus é igual ao seu modificador de ataque mágico, alcance 180 m. Dano: 2d6 + 2 + o círculo da magia pontos de dano Radiante."
+      },
+      {
+        "name": "Maça Radiante (Defensor)",
+        "description": "Jogada de Ataque Corpo a Corpo: Bônus é igual ao seu modificador de ataque mágico, alcance 1,5 m. Dano: 1d10 + 3 + o círculo da magia pontos de dano Radiante."
+      },
+      {
+        "name": "Toque Curativo",
+        "description": "Alcance 1,5 m. Recupera 2d8 + o círculo da magia Pontos de Vida."
+      }
+    ]
+  },
+  {
+    "id": "espirito-elemental",
+    "name": "Espírito Elemental",
+    "type": "Elemental Médio, Neutro",
+    "ac": "11 + o círculo da magia",
+    "hp": "50 + 10 para cada círculo de magia acima de 4",
+    "speed": "12 m; Escavação 12 m (apenas Terra); Natação 12 m (apenas Água); Voo 12 m (pairar; apenas Ar)",
+    "str": {
+      "value": 18,
+      "mod": "+4"
+    },
+    "dex": {
+      "value": 15,
+      "mod": "+2"
+    },
+    "con": {
+      "value": 17,
+      "mod": "+3"
+    },
+    "int": {
+      "value": 4,
+      "mod": "–3"
+    },
+    "wis": {
+      "value": 10,
+      "mod": "+0"
+    },
+    "cha": {
+      "value": 16,
+      "mod": "+3"
+    },
+    "resistances": [
+      "Ácido (apenas Água)",
+      "Cortante e Perfurante (apenas Terra)",
+      "Elétrico e Trovejante (apenas Ar)"
+    ],
+    "immunities": ["Ígneo (somente Fogo)", "Venenoso"],
+    "conditionImmunities": ["Envenenado", "Exaustão", "Paralisado", "Petrificado"],
+    "senses": "Visão no Escuro 18 m, Percepção Passiva 10",
+    "languages": "Primordial, compreende os idiomas que você fala",
+    "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
+    "traits": [
+      {
+        "name": "Estado Amorfo (Água, Ar, Fogo)",
+        "description": "Move-se por espaços de 2,5 cm sem contar como Terreno Difícil."
+      }
+    ],
+    "actions": [
+      {
+        "name": "Ataques Múltiplos",
+        "description": "Realiza um número de Pancadas igual à metade do círculo da magia (arredondado para baixo)."
+      },
+      {
+        "name": "Pancada",
+        "description": "Jogada de Ataque Corpo a Corpo: Bônus é igual ao seu modificador de ataque mágico, alcance 1,5 m. Dano: 1d10 + 4 + o círculo da magia pontos de dano Contundente/Elétrico/Gélido/Ígneo."
+      }
+    ]
+  },
+  {
+    "id": "espirito-do-constructo",
+    "name": "Espírito do Constructo",
+    "type": "Constructo Médio, Neutro",
+    "ac": "13 + o círculo da magia (Argila ou Metal) ou 14 + o círculo da magia (Pedra)",
+    "hp": "40 + 10 para cada círculo de magia acima de 4",
+    "speed": "9 m",
+    "str": {
+      "value": 18,
+      "mod": "+4"
+    },
+    "dex": {
+      "value": 10,
+      "mod": "+0"
+    },
+    "con": {
+      "value": 15,
+      "mod": "+2"
+    },
+    "int": {
+      "value": 8,
+      "mod": "–1"
+    },
+    "wis": {
+      "value": 10,
+      "mod": "+0"
+    },
+    "cha": {
+      "value": 5,
+      "mod": "–3"
+    },
+    "immunities": ["Venenoso"],
+    "conditionImmunities": ["Envenenado", "Petrificado"],
+    "senses": "Visão no Escuro 18 m, Percepção Passiva 10",
+    "languages": "Compreende os idiomas que você fala",
+    "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
+    "traits": [
+      {
+        "name": "Coração de Metal (Apenas Metal)",
+        "description": "Se o espírito sofrer dano Ígneo, ataques dele causam 1d6 pontos de dano Ígneo adicional até o final do próximo turno dele."
+      },
+      {
+        "name": "Letargia de Pedra (Apenas Pedra)",
+        "description": "Qualquer criatura à vista do espírito que inicie o seu turno a até 3 metros do espírito tem o Deslocamento reduzido em 3 metros até o final daquele turno."
+      }
+    ],
+    "actions": [
+      {
+        "name": "Ataques Múltiplos",
+        "description": "O espírito realiza um número de ataques de Pancada igual à metade do círculo da magia (arredondado para baixo)."
+      },
+      {
+        "name": "Pancada",
+        "description": "Jogada de Ataque Corpo a Corpo: Bônus é igual ao seu modificador de ataque mágico, alcance 1,5 m. Dano: 1d8 + 4 + o círculo da magia pontos de dano Contundente. Se o espírito for de Argila, se um alvo for atingido com este ataque, ele não tem chance de usar Reação até o início do próximo turno do espírito."
+      }
+    ]
+  },
+  {
+    "id": "montaria-sobrenatural",
+    "name": "Montaria Sobrenatural",
+    "type": "Celestial Grande, Féérico ou Ínfero (À Sua Escolha), Neutro",
+    "ac": "10 + 1 por círculo de magia",
+    "hp": "5 + 10 por círculo de magia (dados de vida d10 igual ao círculo da magia)",
+    "speed": "18 m, Voo 18 m (requer magia de 4º círculo ou superior)",
+    "str": {
+      "value": 18,
+      "mod": "+4"
+    },
+    "dex": {
+      "value": 12,
+      "mod": "+1"
+    },
+    "con": {
+      "value": 14,
+      "mod": "+2"
+    },
+    "int": {
+      "value": 6,
+      "mod": "–2"
+    },
+    "wis": {
+      "value": 12,
+      "mod": "+1"
+    },
+    "cha": {
+      "value": 8,
+      "mod": "–1"
+    },
+    "senses": "Percepção Passiva 11",
+    "languages": "Telepatia 1,5 km (funciona apenas com você)",
+    "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
+    "traits": [
+      {
+        "name": "Vínculo Vital",
+        "description": "Ao recuperar Pontos de Vida de uma magia de 1º círculo ou superior, a montaria recupera o mesmo número de Pontos de Vida se você estiver a até 1,5 metro dela."
+      }
+    ],
+    "actions": [
+      {
+        "name": "Pancada Sobrenatural",
+        "description": "Jogada de Ataque Corpo a Corpo: Bônus é igual ao seu modificador de ataque mágico, alcance 1,5 m. Dano: 1d8 + o círculo da magia pontos de dano Radiante (Celestial), Psíquico (Féérico) ou Necrótico (Ínfero)."
+      }
+    ],
+    "bonusActions": [
+      {
+        "name": "Derrubar Brilho",
+        "description": "(Apenas Ínfero; recarrega após um Descanso Longo). Salvaguarda de Sabedoria CD igual ao da magia contra criatura a até 18 m. Falha: condição Amedrontado até o final do próximo turno."
+      },
+      {
+        "name": "Passo Féérico",
+        "description": "(Apenas Féérico; recarrega após um Descanso Longo). A montaria e o cavaleiro teleportam para um espaço desocupado à escolha a até 18 m."
+      },
+      {
+        "name": "Toque Curativo",
+        "description": "(Apenas Celestial; recarrega após um Descanso Longo). Uma criatura a até 1,5 m recupera 2d8 + o círculo da magia Pontos de Vida."
+      }
+    ]
+  },
+  {
+    "id": "espirito-feerico",
+    "name": "Espírito Féérico",
+    "type": "Féérico Pequeno, Neutro",
+    "ac": "12 + o círculo da magia",
+    "hp": "30 + 10 para cada círculo de magia acima de 3",
+    "speed": "9 m, Voo 9 m",
+    "str": {
+      "value": 13,
+      "mod": "+1"
+    },
+    "dex": {
+      "value": 16,
+      "mod": "+3"
+    },
+    "con": {
+      "value": 14,
+      "mod": "+2"
+    },
+    "int": {
+      "value": 14,
+      "mod": "+2"
+    },
+    "wis": {
+      "value": 11,
+      "mod": "+0"
+    },
+    "cha": {
+      "value": 16,
+      "mod": "+3"
+    },
+    "conditionImmunities": ["Enfeiçado"],
+    "senses": "Visão no Escuro 18 m, Percepção Passiva 10",
+    "languages": "Silvestre, compreende os idiomas que você fala",
+    "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
+    "actions": [
+      {
+        "name": "Ataques Múltiplos",
+        "description": "Realiza um número de ataques com Lâmina Féérica igual à metade do círculo da magia (arredondado para baixo)."
+      },
+      {
+        "name": "Lâmina Féérica",
+        "description": "Jogada de Ataque Corpo a Corpo: Bônus é igual ao seu modificador de ataque mágico, alcance 1,5 m. Dano: 2d6 + 3 + o círculo da magia pontos de dano Energético."
+      }
+    ],
+    "bonusActions": [
+      {
+        "name": "Passo Féérico",
+        "description": "O espírito se teleporta até 9 m para espaço desocupado. Alegre: CD de Sabedoria igual ao da magia contra criatura à vista até 3 m; falha causa Enfeiçado por 1 min. Enfurecido: vantagem na próxima jogada de ataque antes do final do turno. Malandro: cria Escuridão mágica em Cubo 3 m a até 1,5 m por 1 turno."
+      }
+    ]
+  },
+  {
+    "id": "inseto-gigante",
+    "name": "Inseto Gigante",
+    "type": "Fera Grande, Sem Alinhamento",
+    "ac": "11 + o círculo da magia",
+    "hp": "30 + 10 para cada círculo de magia acima do 4",
+    "speed": "12 m, Escalada 12 m, Voo 12 m (apenas Vespa)",
+    "str": { "value": 17, "mod": "+3", "save": "+3" },
+    "dex": { "value": 13, "mod": "+1", "save": "+1" },
+    "con": { "value": 15, "mod": "+2", "save": "+2" },
+    "int": { "value": 4, "mod": "–3", "save": "–3" },
+    "wis": { "value": 3, "mod": "–3", "save": "–3" },
+    "cha": { "value": 14, "mod": "+2", "save": "+2" },
+    "senses": "Visão no Escuro 18 m, Percepção Passiva 12",
+    "languages": "Compreende os idiomas que você conhece",
+    "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
+    "traits": [
+      {
+        "name": "Escalada de Aranha",
+        "description": "O inseto pode escalar superfícies difíceis, inclusive ao longo de tetos, sem precisar realizar um teste de atributo."
+      }
+    ],
+    "actions": [
+      {
+        "name": "Ataques Múltiplos",
+        "description": "O inseto realiza um número de ataques igual à metade do círculo da magia (arredondado para baixo)."
+      },
+      {
+        "name": "Punição Venenosa",
+        "description": "Jogada de Ataque Corpo a Corpo: Bônus é igual ao seu modificador de ataque mágico, alcance 3 m. Dano: 1d6 + 3 mais o círculo da magia em pontos de dano Perfurante mais 1d4 pontos de dano Venenoso."
+      },
+      {
+        "name": "Raio de Teia (Apenas Aranha)",
+        "description": "Jogada de Ataque à Distância: Bônus é igual ao seu modificador de ataque mágico, alcance 18 m. Dano: 1d10 + 3 mais o círculo da magia em pontos de dano Contundente, e o Deslocamento do alvo é reduzido a 0 até o início do próximo turno do inseto."
+      }
+    ],
+    "bonusActions": [
+      {
+        "name": "Cuspe Venenoso (Apenas Centopeia)",
+        "description": "Salvaguarda de Constituição com sua CD para evitar magia, uma criatura à vista do inseto a até 3 metros. Falha: O alvo tem a condição Envenenado até o início do próximo turno do inseto."
+      }
+    ]
+  },
+  {
+    "id": "espirito-aberrante",
+    "name": "Espírito Aberrante",
+    "type": "Aberração Média, Neutra",
+    "ac": "11 + o círculo da magia",
+    "hp": "40 + 10 para cada círculo de magia acima de 4",
+    "speed": "9 m, Voo 9 m (pairar; apenas Pseudoobservador)",
+    "str": { "value": 16, "mod": "+3", "save": "+3" },
+    "dex": { "value": 10, "mod": "+0", "save": "+0" },
+    "con": { "value": 15, "mod": "+2", "save": "+2" },
+    "int": { "value": 16, "mod": "+3", "save": "+3" },
+    "wis": { "value": 10, "mod": "+0", "save": "+0" },
+    "cha": { "value": 6, "mod": "–2", "save": "–2" },
+    "immunities": ["Psíquico"],
+    "senses": "Visão no Escuro 18 m, Percepção Passiva 10",
+    "languages": "Dialeto Obscuro, entende os idiomas que você fala",
+    "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
+    "traits": [
+      {
+        "name": "Aura Sussurrante (Apenas Devorador de Mentes)",
+        "description": "No início de cada turno do espírito, ele emite energia psiônica se não tem a condição Incapacitado. Salvaguarda de Sabedoria com CD igual a CD para evitar sua magia, cada criatura (exceto você) a até 1,5 metro do espírito. Falha: 2d6 pontos de dano Psíquico."
+      },
+      {
+        "name": "Regeneração (Apenas Slaad)",
+        "description": "O espírito recupera 5 Pontos de Vida no início do turno dele se tiver pelo menos 1 Ponto de Vida."
+      }
+    ],
+    "actions": [
+      {
+        "name": "Ataques Múltiplos",
+        "description": "O espírito realiza um número de ataques igual à metade do círculo da magia (arredondado para baixo)."
+      },
+      {
+        "name": "Garras (Apenas Slaad)",
+        "description": "Jogada de Ataque Corpo a Corpo: Bônus é igual ao seu modificador de ataque mágico, alcance 1,5 m. Dano: 1d10 + 3 mais o círculo da magia em pontos de dano Cortante, e o alvo não pode recuperar Pontos de Vida até o início do próximo turno do espírito."
+      },
+      {
+        "name": "Pancada Psíquica (Apenas Devorador de Mentes)",
+        "description": "Jogada de Ataque Corpo a Corpo: Bônus é igual ao seu modificador de ataque mágico, alcance 1,5 m. Dano: 1d8 + 3 mais o círculo da magia em pontos de dano Psíquico."
+      },
+      {
+        "name": "Raio Ocular (Apenas Pseudoobservador)",
+        "description": "Jogada de Ataque à Distância: Bônus é igual ao seu modificador de ataque mágico, alcance 45 m. Dano: 1d8 + 3 mais o círculo da magia em pontos de dano Psíquico."
+      }
+    ]
+  },
+  {
+    "id": "espirito-draconico",
+    "name": "Espírito Dracônico",
+    "type": "Dragão Grande, Neutro",
+    "ac": "14 + o círculo da magia",
+    "hp": "50 + 10 para cada círculo de magia acima de 5",
+    "speed": "9 m, Natação 9 m, Voo 18 m",
+    "str": { "value": 19, "mod": "+4", "save": "+4" },
+    "dex": { "value": 14, "mod": "+2", "save": "+2" },
+    "con": { "value": 17, "mod": "+3", "save": "+3" },
+    "int": { "value": 10, "mod": "+0", "save": "+0" },
+    "wis": { "value": 14, "mod": "+2", "save": "+2" },
+    "cha": { "value": 14, "mod": "+2", "save": "+2" },
+    "resistances": ["Ácido", "Elétrico", "Gélido", "Ígneo", "Venenoso"],
+    "conditionImmunities": ["Amedrontado", "Enfeitiçado", "Envenenado"],
+    "senses": "Visão às Cegas 9 m, Visão no Escuro 18 m, Percepção Passiva 12",
+    "languages": "Dracônico, compreende os idiomas que você fala",
+    "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
+    "traits": [
+      {
+        "name": "Resistências Compartilhadas",
+        "description": "Ao invocar o espírito, escolha uma das resistências dele. Você tem Resistência ao tipo de dano escolhido até que a magia termine."
+      }
+    ],
+    "actions": [
+      {
+        "name": "Ataques Múltiplos",
+        "description": "O espírito realiza um número de ataques de Dilacerar igual à metade do círculo da magia (arredondado para baixo) e usa o Ataque de Sopro."
+      },
+      {
+        "name": "Ataque de Sopro",
+        "description": "Salvaguarda de Destreza com CD igual a CD para evitar sua magia, cada criatura em um Cone de 9 metros. Falha: 2d6 pontos de dano de um tipo ao qual o espírito tem Resistência (à sua escolha quando você conjura a magia). Sucesso: Metade do dano."
+      },
+      {
+        "name": "Dilacerar",
+        "description": "Jogada de Ataque Corpo a Corpo: Bônus é igual ao seu modificador de ataque mágico, alcance 3 m. Dano: 1d6 + 4 + o círculo da magia pontos de dano Perfurante."
+      }
+    ]
+  },
+  {
+    "id": "espirito-bestial",
+    "name": "Espírito Bestial",
+    "type": "Fera Pequena, Neutra",
+    "ac": "11 + o círculo da magia",
+    "hp": "20 (apenas Ar) ou 30 (apenas Água e Terra) + 5 para cada círculo de magia acima de 2",
+    "speed": "9 m; Escalada 9 m (apenas Terra); Natação 9 m (apenas Água); Voo 18 m (apenas Ar)",
+    "str": { "value": 13, "mod": "+1", "save": "+1" },
+    "dex": { "value": 16, "mod": "+3", "save": "+3" },
+    "con": { "value": 15, "mod": "+2", "save": "+2" },
+    "int": { "value": 10, "mod": "+0", "save": "+0" },
+    "wis": { "value": 10, "mod": "+0", "save": "+0" },
+    "cha": { "value": 16, "mod": "+3", "save": "+3" },
+    "senses": "Visão no Escuro 18 m, Percepção Passiva 12",
+    "languages": "Compreende os idiomas que você fala",
+    "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
+    "traits": [
+      {
+        "name": "Respirar na Água (Apenas Água)",
+        "description": "O espírito só pode respirar debaixo d'água."
+      },
+      {
+        "name": "Sobrevoo (Apenas Ar)",
+        "description": "O espírito não provoca Ataques de Oportunidade quando voa para fora do alcance de um inimigo."
+      },
+      {
+        "name": "Táticas de Grupo (Apenas Água e Terra)",
+        "description": "O espírito tem Vantagem em uma jogada de ataque contra uma criatura se pelo menos um dos aliados do espírito estiver a até 1,5 metro da criatura e o aliado não tem a condição Incapacitado."
+      }
+    ],
+    "actions": [
+      {
+        "name": "Ataques Múltiplos",
+        "description": "O espírito realiza um número de ataques de Dilacerar igual à metade do círculo da magia (arredondado para baixo)."
+      },
+      {
+        "name": "Dilacerar",
+        "description": "Jogada de Ataque Corpo a Corpo: Bônus é igual ao seu modificador de ataque mágico, alcance 1,5 m. Dano: 1d8 + 4 mais o círculo da magia em pontos de dano Perfurante."
+      }
+    ]
+  },
+  {
+    "id": "espirito-infero",
+    "name": "Espírito Ínfero",
+    "type": "Ínfero Grande, Neutro",
+    "ac": "12 + o círculo da magia",
+    "hp": "50 (apenas Demônio) ou 40 (apenas Diabo) ou 60 (apenas Yugoloth) + 15 para cada círculo de magia acima de 6",
+    "speed": "12 m; Escalada 12 m (apenas Demônio); Voo 18 m (apenas Diabo)",
+    "str": { "value": 13, "mod": "+1", "save": "+1" },
+    "dex": { "value": 16, "mod": "+3", "save": "+3" },
+    "con": { "value": 16, "mod": "+2", "save": "+2" },
+    "int": { "value": 10, "mod": "+0", "save": "+0" },
+    "wis": { "value": 10, "mod": "+0", "save": "+0" },
+    "cha": { "value": 16, "mod": "+3", "save": "+3" },
+    "resistances": ["Ígneo"],
+    "immunities": ["Venenoso"],
+    "conditionImmunities": ["Envenenado"],
+    "senses": "Visão no Escuro 18 m, Percepção Passiva 10",
+    "languages": "Abissal, Infernal, Telepatia 18 m",
+    "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
+    "traits": [
+      {
+        "name": "Espasmos da Morte (Apenas Demônio)",
+        "description": "Quando o espírito é reduzido a 0 Pontos de Vida ou a magia terminar, o espírito explode. Salvaguarda de Destreza com CD igual a CD para evitar sua magia, cada criatura em uma Emanação de 3 metros originada a partir do espírito. Falha: 2d10 mais o círculo da magia em pontos de dano Ígneo. Sucesso: Metade do dano."
+      },
+      {
+        "name": "Resistência à Magia",
+        "description": "O espírito tem Vantagem em salvaguardas contra magias e outros efeitos mágicos."
+      },
+      {
+        "name": "Visão Diabólica (Apenas Diabo)",
+        "description": "Escuridão Mágica não impede a Visão no Escuro do espírito."
+      }
+    ],
+    "actions": [
+      {
+        "name": "Ataques Múltiplos",
+        "description": "O espírito realiza um número de ataques igual à metade do círculo da magia (arredondado para baixo)."
+      },
+      {
+        "name": "Arremesso de Chamas (Apenas Diabo)",
+        "description": "Jogada de Ataque à Distância: Bônus é igual ao seu modificador de ataque mágico, alcance 1,5 m ou alcance 45 m. Dano: 2d6 + 3 mais o círculo da magia em pontos de dano Ígneo."
+      },
+      {
+        "name": "Garras (Apenas Yugoloth)",
+        "description": "Jogada de Ataque Corpo a Corpo: Bônus é igual ao seu modificador de ataque mágico, alcance 1,5 m. Dano: 1d8 + 3 mais o círculo da magia em pontos de dano Cortante. Imediatamente após o ataque acertar ou errar, o espírito pode se teleportar até 9 metros para um espaço desocupado à vista dele."
+      },
+      {
+        "name": "Mordida (Apenas Demônio)",
+        "description": "Jogada de Ataque Corpo a Corpo: Bônus é igual ao seu modificador de ataque mágico, alcance 1,5 m. Dano: 1d12 + 3 mais o círculo da magia em pontos de dano Necrótico."
+      }
+    ]
+  },
+  {
+    "id": "espirito-morto-vivo",
+    "name": "Espírito Morto-Vivo",
+    "type": "Morto-Vivo Médio, Neutro",
+    "ac": "11 + o círculo da magia",
+    "hp": "30 (apenas Fantasmagórico e Pútrido) ou 20 (apenas Esquelético) + 10 para cada círculo de magia acima de 3",
+    "speed": "9 m; Voo 12 m (pairar; apenas Fantasmagórico)",
+    "str": { "value": 12, "mod": "+1", "save": "+1" },
+    "dex": { "value": 16, "mod": "+3", "save": "+3" },
+    "con": { "value": 15, "mod": "+2", "save": "+2" },
+    "int": { "value": 4, "mod": "–3", "save": "–3" },
+    "wis": { "value": 10, "mod": "+0", "save": "+0" },
+    "cha": { "value": 9, "mod": "–1", "save": "–1" },
+    "immunities": ["Necrótico", "Venenoso"],
+    "conditionImmunities": ["Amedrontado", "Envenenado", "Exaustão", "Paralisado"],
+    "senses": "Visão no Escuro 18 m, Percepção Passiva 10",
+    "languages": "Compreende os idiomas que você fala",
+    "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
+    "traits": [
+      {
+        "name": "Aura Purulenta (Apenas Pútrido)",
+        "description": "Salvaguarda de Constituição com CD igual a CD para evitar sua magia, qualquer criatura (exceto você) que inicie o turno dentro de uma Emanação de 1,5 metro originada a partir do espírito. Falha: A criatura tem a condição Envenenado até o início de seu próximo turno."
+      },
+      {
+        "name": "Passagem Incorpórea (Apenas Fantasmagórico)",
+        "description": "O espírito pode se mover através de outras criaturas e objetos como se fossem Terreno Difícil. Se ele terminar o turno dentro de um objeto, ele é desviado para o espaço desocupado mais próximo e sofre 1d10 pontos de dano Energético por cada 1,5 metro percorrido."
+      }
+    ],
+    "actions": [
+      {
+        "name": "Ataques Múltiplos",
+        "description": "O espírito realiza um número de ataques igual à metade do círculo da magia (arredondado para baixo)."
+      },
+      {
+        "name": "Garra Podre (Apenas Pútrido)",
+        "description": "Jogada de Ataque Corpo a Corpo: Bônus é igual ao seu modificador de ataque mágico, alcance 1,5 m. Dano: 1d6 + 3 mais o círculo da magia em pontos de dano Cortante. Se o alvo tem a condição Envenenado, ele tem a condição Paralisado até o final do próximo turno dele."
+      },
+      {
+        "name": "Raio da Cova (Apenas Esquelético)",
+        "description": "Jogada de Ataque à Distância: Bônus é igual ao seu modificador de ataque mágico, alcance 45 m. Dano: 2d4 + 3 mais o círculo da magia em pontos de dano Necrótico."
+      },
+      {
+        "name": "Toque Mortal (Apenas Fantasmagórico)",
+        "description": "Jogada de Ataque Corpo a Corpo: Bônus é igual ao seu modificador de ataque mágico, alcance 1,5 m. Dano: 1d8 + 3 mais o círculo da magia em pontos de dano Necrótico, e o alvo tem a condição Amedrontado até o final do próximo turno dele."
+      }
+    ]
+  }
+]

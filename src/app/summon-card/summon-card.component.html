@@ -1,0 +1,121 @@
+<div class="stat-block">
+  <!-- Header -->
+  <div class="stat-header">
+    <h3 class="creature-name">{{ summon.name }}</h3>
+    <p class="creature-type">{{ summon.type }}</p>
+  </div>
+
+  <div class="block-body">
+    <!-- CA / PV / Deslocamento -->
+    <div class="top-stats stat-section">
+      <span><strong>CA</strong> {{ summon.ac }}</span>
+      <span><strong>PV</strong> {{ summon.hp }}</span>
+      <span><strong>Deslocamento</strong> {{ summon.speed }}</span>
+    </div>
+
+    <!-- Attribute table -->
+    <table class="attr-table">
+      <thead>
+        <tr>
+          <th colspan="2"></th>
+          <th>MOD</th>
+          <th *ngIf="hasSaves">SG</th>
+          <th colspan="2"></th>
+          <th>MOD</th>
+          <th *ngIf="hasSaves">SG</th>
+          <th colspan="2"></th>
+          <th>MOD</th>
+          <th *ngIf="hasSaves">SG</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="attr-name">For</td><td class="attr-val">{{ summon.str.value }}</td>
+          <td class="attr-mod">{{ summon.str.mod }}</td>
+          <td *ngIf="hasSaves" class="attr-mod">{{ summon.str.save ?? summon.str.mod }}</td>
+          <td class="attr-name">Des</td><td class="attr-val">{{ summon.dex.value }}</td>
+          <td class="attr-mod">{{ summon.dex.mod }}</td>
+          <td *ngIf="hasSaves" class="attr-mod">{{ summon.dex.save ?? summon.dex.mod }}</td>
+          <td class="attr-name">Con</td><td class="attr-val">{{ summon.con.value }}</td>
+          <td class="attr-mod">{{ summon.con.mod }}</td>
+          <td *ngIf="hasSaves" class="attr-mod">{{ summon.con.save ?? summon.con.mod }}</td>
+        </tr>
+        <tr>
+          <td class="attr-name">Int</td><td class="attr-val">{{ summon.int.value }}</td>
+          <td class="attr-mod">{{ summon.int.mod }}</td>
+          <td *ngIf="hasSaves" class="attr-mod">{{ summon.int.save ?? summon.int.mod }}</td>
+          <td class="attr-name">Sab</td><td class="attr-val">{{ summon.wis.value }}</td>
+          <td class="attr-mod">{{ summon.wis.mod }}</td>
+          <td *ngIf="hasSaves" class="attr-mod">{{ summon.wis.save ?? summon.wis.mod }}</td>
+          <td class="attr-name">Car</td><td class="attr-val">{{ summon.cha.value }}</td>
+          <td class="attr-mod">{{ summon.cha.mod }}</td>
+          <td *ngIf="hasSaves" class="attr-mod">{{ summon.cha.save ?? summon.cha.mod }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Details -->
+    <div class="details stat-section">
+      <div *ngIf="summon.resistances?.length">
+        <strong>Resistências</strong> {{ summon.resistances!.join(', ') }}
+      </div>
+      <div *ngIf="summon.immunities?.length">
+        <strong>Imunidades</strong> {{ summon.immunities!.join(', ') }}
+      </div>
+      <div *ngIf="summon.conditionImmunities?.length">
+        <strong>Imunidades a Condições</strong> {{ summon.conditionImmunities!.join(', ') }}
+      </div>
+      <div><strong>Sentidos</strong> {{ summon.senses }}</div>
+      <div><strong>Idiomas</strong> {{ summon.languages }}</div>
+      <div><strong>ND</strong> {{ summon.cr }}</div>
+    </div>
+
+    <!-- Traits -->
+    <ng-container *ngIf="summon.traits?.length">
+      <div class="section-header">
+        <div class="section-line"></div>
+        <span class="section-title">Traços</span>
+        <div class="section-line"></div>
+      </div>
+      <p class="entry" *ngFor="let trait of summon.traits">
+        <strong>{{ trait.name }}.</strong> {{ trait.description }}
+      </p>
+    </ng-container>
+
+    <!-- Actions -->
+    <ng-container *ngIf="summon.actions?.length">
+      <div class="section-header">
+        <div class="section-line"></div>
+        <span class="section-title">Ações</span>
+        <div class="section-line"></div>
+      </div>
+      <p class="entry" *ngFor="let action of summon.actions">
+        <strong>{{ action.name }}.</strong> {{ action.description }}
+      </p>
+    </ng-container>
+
+    <!-- Bonus Actions -->
+    <ng-container *ngIf="summon.bonusActions?.length">
+      <div class="section-header">
+        <div class="section-line"></div>
+        <span class="section-title">Ações Bônus</span>
+        <div class="section-line"></div>
+      </div>
+      <p class="entry" *ngFor="let action of summon.bonusActions">
+        <strong>{{ action.name }}.</strong> {{ action.description }}
+      </p>
+    </ng-container>
+
+    <!-- Reactions -->
+    <ng-container *ngIf="summon.reactions?.length">
+      <div class="section-header">
+        <div class="section-line"></div>
+        <span class="section-title">Reações</span>
+        <div class="section-line"></div>
+      </div>
+      <p class="entry" *ngFor="let reaction of summon.reactions">
+        <strong>{{ reaction.name }}.</strong> {{ reaction.description }}
+      </p>
+    </ng-container>
+  </div>
+</div>

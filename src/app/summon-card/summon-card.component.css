@@ -1,0 +1,125 @@
+.stat-block {
+  border: 2px solid #6b2a0a;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 16px;
+  font-size: 0.82rem;
+  color: #1a0d00;
+  box-shadow: 3px 3px 8px rgba(47, 20, 5, 0.25);
+}
+
+.stat-header {
+  background: linear-gradient(135deg, #7a1c0c, #5a1208);
+  padding: 8px 14px 10px;
+  color: #fdf6ec;
+}
+
+.creature-name {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+}
+
+.creature-type {
+  margin: 2px 0 0;
+  font-style: italic;
+  font-size: 0.78rem;
+  opacity: 0.88;
+}
+
+.block-body {
+  background: #fdf3e3;
+  padding: 10px 14px 12px;
+}
+
+.stat-section {
+  border-bottom: 1px solid #c8a86a;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+
+.top-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  font-size: 0.83rem;
+}
+
+/* Attribute table */
+.attr-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #c8a86a;
+  padding-bottom: 4px;
+}
+
+.attr-table thead th {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #5a3d1c;
+  text-align: center;
+  padding: 2px 6px;
+  border-bottom: 1px solid #c8a86a;
+}
+
+.attr-table tbody td {
+  padding: 3px 6px;
+  text-align: center;
+}
+
+.attr-name {
+  font-weight: 700;
+  text-align: left !important;
+  padding-right: 4px !important;
+  white-space: nowrap;
+  color: #5a3d1c;
+}
+
+.attr-val {
+  min-width: 20px;
+}
+
+.attr-mod {
+  color: #3b2c1b;
+}
+
+/* Details */
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.82rem;
+}
+
+/* Section headers (Traços / Ações) */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0 6px;
+}
+
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: #7a1c0c;
+}
+
+.section-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+  font-variant: small-caps;
+  color: #7a1c0c;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+
+/* Traits / Actions */
+.entry {
+  margin: 4px 0;
+  line-height: 1.55;
+  font-size: 0.82rem;
+}

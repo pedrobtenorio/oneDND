@@ -16,4 +16,5 @@ export interface Spell {
   duration: string;
   description: string;
   tables?: SpellTable[];
+  summonIds?: string[];
 }
