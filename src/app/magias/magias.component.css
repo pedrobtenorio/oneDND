@@ -29,6 +29,18 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.favorite-filter .icon {
+  margin-right: 6px;
+}
+
+.favorite-filter[aria-pressed='true'] {
+  background: #f4d19f;
+  border-color: #d2a35f;
+  color: #7a4d1a;
 }
 
 .spell-card {
@@ -37,6 +49,13 @@
   border: 1px solid #e2cdb3;
   box-shadow: 0 12px 22px rgba(47, 34, 20, 0.12);
   padding: 18px 20px 20px;
+}
+
+.spell-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .spell-header h2 {
@@ -70,6 +89,29 @@
   font-size: 1rem;
   line-height: 1;
   color: #8a6d5b;
+}
+
+.favorite-button {
+  border: 1px solid #d4b896;
+  background: #fff3e3;
+  border-radius: 999px;
+  padding: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #8a6d5b;
+}
+
+.favorite-button:hover {
+  border-color: #c7a780;
+  color: #6a4a2b;
+}
+
+.favorite-button[aria-pressed='true'] {
+  background: #f4d19f;
+  border-color: #d2a35f;
+  color: #7a4d1a;
 }
 
 .value {

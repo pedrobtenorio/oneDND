@@ -35,6 +35,18 @@
     </mat-form-field>
 
     <div class="filter-actions">
+      <button
+        mat-stroked-button
+        type="button"
+        class="favorite-filter"
+        (click)="toggleFavoritesOnly()"
+        [attr.aria-pressed]="favoritesOnlyControl.value"
+      >
+        <span class="icon" aria-hidden="true">
+          {{ favoritesOnlyControl.value ? 'star' : 'star_border' }}
+        </span>
+        Mostrar favoritos
+      </button>
       <button mat-stroked-button type="button" (click)="clearFilters()">
         Limpar filtros
       </button>
@@ -51,6 +63,15 @@
               {{ spell.level }}º Círculo, {{ spell.school }} ({{ spell.classes.join(', ') }})
             </p>
           </div>
+          <button
+            type="button"
+            class="favorite-button"
+            (click)="toggleFavorite(spell.id)"
+            [attr.aria-pressed]="isFavorite(spell.id)"
+            [attr.aria-label]="isFavorite(spell.id) ? 'Remover dos favoritos' : 'Favoritar'"
+          >
+            <span class="icon" aria-hidden="true">{{ isFavorite(spell.id) ? 'star' : 'star_border' }}</span>
+          </button>
         </header>
 
         <div class="spell-stats">
@@ -123,3 +144,4 @@
     </div>
   </ng-container>
 </section>
+
