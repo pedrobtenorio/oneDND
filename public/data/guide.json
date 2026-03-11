@@ -473,6 +473,11 @@
         "description": "Pontos de Vida. Chegando a 0 PV, a criatura cai inconsciente ou morre conforme a regra aplicada."
       },
       {
+        "id": "pontos-de-vida-temporarios",
+        "name": "Pontos de Vida Temporários",
+        "description": "PV temporários absorvem dano antes dos PV normais. Duram até acabarem ou após um Descanso Longo. Não acumulam: ao ganhar novos, escolha manter os atuais ou trocar pelos novos."
+      },
+      {
         "id": "ca",
         "name": "CA",
         "description": "Classe de Armadura. Número-alvo para acertar ataques. Normalmente é 10 + modificador de Destreza + armadura, escudo e outros bônus."
