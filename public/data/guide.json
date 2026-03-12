@@ -266,7 +266,7 @@
       {
         "id": "concentracao",
         "name": "Concentracao",
-        "description": "Apenas uma magia por vez. Falha se sofrer dano e nao passar em teste de CON."
+        "description": "Apenas uma magia por vez. Falha se sofrer dano e nao passar em teste de CON.\n\nManter concentração — Dano\nSe você sofrer dano, deve ser bem-sucedido em uma salvaguarda de Constituição para manter a Concentração. A CD é 10 ou metade do dano sofrido (arredondado para baixo), o que for maior, até uma CD máxima de 30."
       },
       {
         "id": "rituais",
