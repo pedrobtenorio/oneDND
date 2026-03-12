@@ -7,6 +7,16 @@
       <input matInput [formControl]="searchControl" placeholder="Ex: espada, leve, 1d8">
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
+    <button
+      mat-stroked-button
+      type="button"
+      class="favorite-filter"
+      (click)="toggleFavoritesOnly()"
+      [attr.aria-pressed]="favoritesOnlyControl.value"
+    >
+      <mat-icon aria-hidden="true">{{ favoritesOnlyControl.value ? 'star' : 'star_border' }}</mat-icon>
+      Mostrar favoritos
+    </button>
   </div>
 
   <ng-container *ngIf="weapons$ | async as weapons">
@@ -25,6 +35,7 @@
             <span>Maestria</span>
             <span>Peso</span>
             <span>Custo</span>
+            <span class="favorite-header">Fav</span>
           </div>
 
           <div class="weapon-row" *ngFor="let weapon of category.weapons">
@@ -66,6 +77,15 @@
             </span>
             <span>{{ weapon.weight }}</span>
             <span>{{ weapon.cost }}</span>
+            <button
+              type="button"
+              class="favorite-button"
+              (click)="toggleFavorite(weapon.favoriteId)"
+              [attr.aria-pressed]="isFavorite(weapon.favoriteId)"
+              [attr.aria-label]="isFavorite(weapon.favoriteId) ? 'Remover dos favoritos' : 'Favoritar'"
+            >
+              <mat-icon aria-hidden="true">{{ isFavorite(weapon.favoriteId) ? 'star' : 'star_border' }}</mat-icon>
+            </button>
           </div>
         </div>
       </section>
