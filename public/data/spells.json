@@ -457,6 +457,22 @@
     "description": "Clamando por Hadar, você faz com que tentáculos irrompam em você. Cada criatura em uma Emanação de 3 metros originada em você realiza uma salvaguarda de Força. Se falhar, um alvo sofre 2d6 pontos de dano Necrótico e não pode executar Reações até o início do próximo turno dele. Em caso de sucesso, um alvo sofre apenas metade do dano.\n**Usando um Espaço de Magia de Círculo Superior.** O dano aumenta em 1d6 pontos para cada círculo de espaço de magia acima de 1."
   },
   {
+    "id": "bencao",
+    "name": "Bênção",
+    "level": 1,
+    "school": "Encantamento",
+    "classes": ["Clérigo", "Paladino"],
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": [
+      "V",
+      "S",
+      "M (um Símbolo Sagrado no valor de 5 ou mais PO)"
+    ],
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você abençoa até três criaturas no alcance da magia. Sempre que um alvo realiza uma jogada de ataque ou uma salvaguarda antes que a magia termine, o alvo adiciona 1d4 à jogada de ataque ou salvaguarda.\n**Usando um Espaço de Magia de Círculo Superior.** Você pode escolher uma criatura adicional para cada círculo de espaço de magia acima de 1."
+  },
+  {
     "id": "caldeirao-borbulhante-de-tasha",
     "name": "Caldeirão Borbulhante de Tasha",
     "level": 6,
