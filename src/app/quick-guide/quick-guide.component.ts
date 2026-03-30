@@ -23,8 +23,15 @@ type GuideItemView = GuideItem & {
   effectParts: LinkPart<GuideItem>[][];
 };
 
+type GuideItemGroupView = {
+  id: string;
+  title: string;
+  items: GuideItemView[];
+};
+
 type GuideCategoryView = Omit<GuideCategory, 'items'> & {
   items: GuideItemView[];
+  itemGroups: GuideItemGroupView[];
   summons: Summon[];
 };
 
@@ -113,16 +120,92 @@ export class QuickGuideComponent implements AfterViewInit {
         const filteredSummons = query
           ? allSummons.filter((s) => this.normalizeSearchValue(s.name + ' ' + s.type).includes(query))
           : allSummons;
-        return filteredSummons.length > 0 ? [{ ...category, items: [], summons: filteredSummons }] : [];
+        return filteredSummons.length > 0
+          ? [{ ...category, items: [], itemGroups: [], summons: filteredSummons }]
+          : [];
       }
 
       const categoryMatches = !query || this.normalizeSearchValue(category.title).includes(query);
       const items = categoryMatches
         ? category.items
         : category.items.filter((item) => this.normalizeSearchValue(this.getSearchText(item)).includes(query));
+      const sortedItems = this.sortCategoryItems(category.id, items);
 
-      return items.length > 0 ? [{ ...category, items: items.map(toItemView(category)), summons: [] }] : [];
+      return sortedItems.length > 0
+        ? [{
+            ...category,
+            items: sortedItems.map(toItemView(category)),
+            itemGroups: this.buildItemGroups(category.id, sortedItems, toItemView(category)),
+            summons: [],
+          }]
+        : [];
     });
+  }
+
+  private buildItemGroups(
+    categoryId: string,
+    items: GuideItem[],
+    toItemView: (item: GuideItem) => GuideItemView
+  ): GuideItemGroupView[] {
+    if (categoryId !== 'pericias') {
+      return [];
+    }
+
+    const labels = new Map([
+      ['DES', 'Destreza'],
+      ['SAB', 'Sabedoria'],
+      ['FOR', 'Forca'],
+      ['INT', 'Inteligencia'],
+      ['CAR', 'Carisma'],
+      ['CON', 'Constituicao'],
+    ]);
+
+    const groups = new Map<string, GuideItem[]>();
+    for (const item of items) {
+      const ability = this.getSkillAbility(item.name);
+      const key = ability || 'OUTROS';
+      groups.set(key, [...(groups.get(key) ?? []), item]);
+    }
+
+    return [...groups.entries()].map(([ability, groupedItems]) => ({
+      id: ability.toLowerCase(),
+      title: labels.get(ability) ?? ability,
+      items: groupedItems.map(toItemView),
+    }));
+  }
+
+  private sortCategoryItems(categoryId: string, items: GuideItem[]): GuideItem[] {
+    if (categoryId !== 'pericias') {
+      return items;
+    }
+
+    const abilityOrder = new Map([
+      ['DES', 0],
+      ['SAB', 1],
+      ['FOR', 2],
+    ]);
+
+    return [...items].sort((left, right) => {
+      const leftAbility = this.getSkillAbility(left.name);
+      const rightAbility = this.getSkillAbility(right.name);
+      const leftRank = abilityOrder.get(leftAbility) ?? Number.MAX_SAFE_INTEGER;
+      const rightRank = abilityOrder.get(rightAbility) ?? Number.MAX_SAFE_INTEGER;
+
+      if (leftRank !== rightRank) {
+        return leftRank - rightRank;
+      }
+
+      if (leftAbility !== rightAbility) {
+        return leftAbility.localeCompare(rightAbility);
+      }
+
+      return left.name.localeCompare(right.name);
+    });
+  }
+
+  private getSkillAbility(name: string): string {
+    const match = name.match(/\(([^)]+)\)\s*$/);
+    return match?.[1]?.toUpperCase() ?? '';
   }
 
   private splitEffects(description: string): string[] {

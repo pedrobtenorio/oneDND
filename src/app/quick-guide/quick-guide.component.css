@@ -29,6 +29,28 @@
   grid-template-columns: 1fr;
 }
 
+.item-group {
+  display: grid;
+  gap: 14px;
+  grid-column: 1 / -1;
+}
+
+.item-group-title {
+  margin: 0;
+  padding: 0 4px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #6a4b28;
+}
+
+.item-group-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
 .rule-card {
   padding: 16px 16px 18px;
   border-radius: 16px;

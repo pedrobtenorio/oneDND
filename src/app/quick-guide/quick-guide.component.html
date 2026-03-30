@@ -23,35 +23,73 @@
         </mat-expansion-panel-header>
 
         <div class="items" [class.single-column]="isInvocationCategory(category.id)">
-          <article
-            class="rule-card"
-            *ngFor="let item of category.items; trackBy: trackItem"
-            [attr.id]="item.id"
-          >
-            <h4>{{ item.name }}</h4>
-            <ul class="effects">
-              <li *ngFor="let effect of item.effectParts">
-                <ng-container *ngFor="let part of effect">
-                  <ng-container *ngIf="part.linkItem; else plainText">
-                    <a
-                      class="guide-link"
-                      [routerLink]="['/guia']"
-                      [fragment]="part.linkItem.id"
-                      [matTooltip]="formatTooltip(part.linkItem.description)"
-                      matTooltipClass="guide-tooltip"
-                    >{{ part.text }}</a>
-                  </ng-container>
-                  <ng-template #plainText>
-                    <strong *ngIf="part.bold; else italicText">{{ part.text }}</strong>
-                    <ng-template #italicText>
-                      <em *ngIf="part.italic; else normalText">{{ part.text }}</em>
-                      <ng-template #normalText>{{ part.text }}</ng-template>
+          <ng-container *ngIf="category.itemGroups.length > 0; else defaultItems">
+            <section class="item-group" *ngFor="let group of category.itemGroups">
+              <h3 class="item-group-title">{{ group.title }}</h3>
+              <div class="item-group-grid">
+                <article
+                  class="rule-card"
+                  *ngFor="let item of group.items; trackBy: trackItem"
+                  [attr.id]="item.id"
+                >
+                  <h4>{{ item.name }}</h4>
+                  <ul class="effects">
+                    <li *ngFor="let effect of item.effectParts">
+                      <ng-container *ngFor="let part of effect">
+                        <ng-container *ngIf="part.linkItem; else plainText">
+                          <a
+                            class="guide-link"
+                            [routerLink]="['/guia']"
+                            [fragment]="part.linkItem.id"
+                            [matTooltip]="formatTooltip(part.linkItem.description)"
+                            matTooltipClass="guide-tooltip"
+                          >{{ part.text }}</a>
+                        </ng-container>
+                        <ng-template #plainText>
+                          <strong *ngIf="part.bold; else italicText">{{ part.text }}</strong>
+                          <ng-template #italicText>
+                            <em *ngIf="part.italic; else normalText">{{ part.text }}</em>
+                            <ng-template #normalText>{{ part.text }}</ng-template>
+                          </ng-template>
+                        </ng-template>
+                      </ng-container>
+                    </li>
+                  </ul>
+                </article>
+              </div>
+            </section>
+          </ng-container>
+          <ng-template #defaultItems>
+            <article
+              class="rule-card"
+              *ngFor="let item of category.items; trackBy: trackItem"
+              [attr.id]="item.id"
+            >
+              <h4>{{ item.name }}</h4>
+              <ul class="effects">
+                <li *ngFor="let effect of item.effectParts">
+                  <ng-container *ngFor="let part of effect">
+                    <ng-container *ngIf="part.linkItem; else plainText">
+                      <a
+                        class="guide-link"
+                        [routerLink]="['/guia']"
+                        [fragment]="part.linkItem.id"
+                        [matTooltip]="formatTooltip(part.linkItem.description)"
+                        matTooltipClass="guide-tooltip"
+                      >{{ part.text }}</a>
+                    </ng-container>
+                    <ng-template #plainText>
+                      <strong *ngIf="part.bold; else italicText">{{ part.text }}</strong>
+                      <ng-template #italicText>
+                        <em *ngIf="part.italic; else normalText">{{ part.text }}</em>
+                        <ng-template #normalText>{{ part.text }}</ng-template>
+                      </ng-template>
                     </ng-template>
-                  </ng-template>
-                </ng-container>
-              </li>
-            </ul>
-          </article>
+                  </ng-container>
+                </li>
+              </ul>
+            </article>
+          </ng-template>
           <app-summon-card
             *ngFor="let summon of category.summons"
             [summon]="summon"
