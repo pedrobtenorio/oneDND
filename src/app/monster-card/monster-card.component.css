@@ -1,16 +1,14 @@
 .stat-block {
   overflow: hidden;
-  margin-top: 16px;
   color: #1a0d00;
-  font-size: 0.82rem;
   border: 2px solid #6b2a0a;
   border-radius: 8px;
   background: #f7e8c8;
-  box-shadow: 4px 6px 18px rgba(47, 20, 5, 0.24);
+  box-shadow: 4px 6px 18px rgba(47, 20, 5, 0.28);
 }
 
 .stat-header {
-  padding: 9px 14px 11px;
+  padding: 12px 16px 14px;
   background:
     linear-gradient(180deg, rgba(255, 224, 160, 0.12), transparent),
     linear-gradient(135deg, #7a1c0c, #3f0d08);
@@ -21,68 +19,65 @@
 .creature-name {
   margin: 0;
   font-family: 'Cinzel', Georgia, serif;
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 800;
   font-variant: small-caps;
   letter-spacing: 0.05em;
 }
 
 .creature-type {
-  margin: 2px 0 0;
+  margin: 4px 0 0;
   font-style: italic;
-  font-size: 0.78rem;
+  font-size: 0.84rem;
   opacity: 0.9;
 }
 
 .block-body {
-  padding: 10px 14px 12px;
-  background: linear-gradient(180deg, #fff4da, #ead0a2);
+  padding: 13px 16px 15px;
+  background:
+    linear-gradient(90deg, rgba(111, 23, 19, 0.06), transparent 28%),
+    linear-gradient(180deg, #fff4da, #ead0a2);
 }
 
 .stat-section {
   border-bottom: 1px solid #b88636;
-  padding-bottom: 8px;
-  margin-bottom: 8px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .top-stats {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 20px;
-  font-size: 0.83rem;
+  gap: 6px 18px;
+  font-size: 0.84rem;
 }
 
 .attr-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   border-bottom: 1px solid #b88636;
 }
 
 .attr-table thead th {
-  color: #6b2a0a;
   font-size: 0.7rem;
   font-weight: 800;
+  color: #6b2a0a;
   text-align: center;
-  padding: 2px 6px;
+  padding: 3px 6px;
   border-bottom: 1px solid #b88636;
 }
 
 .attr-table tbody td {
-  padding: 3px 6px;
+  padding: 4px 6px;
   text-align: center;
 }
 
 .attr-name {
   font-weight: 800;
   text-align: left !important;
-  padding-right: 4px !important;
   white-space: nowrap;
   color: #6b2a0a;
-}
-
-.attr-val {
-  min-width: 20px;
 }
 
 .attr-mod {
@@ -92,15 +87,15 @@
 .details {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  font-size: 0.82rem;
+  gap: 3px;
+  font-size: 0.84rem;
 }
 
 .section-header {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 10px 0 6px;
+  margin: 12px 0 8px;
 }
 
 .section-line {
@@ -118,8 +113,30 @@
   white-space: nowrap;
 }
 
+.entry-block {
+  margin-bottom: 8px;
+}
+
 .entry {
   margin: 4px 0;
-  line-height: 1.55;
-  font-size: 0.82rem;
+  line-height: 1.6;
+  font-size: 0.84rem;
+}
+
+.guide-link,
+.spell-link {
+  color: #6f1713;
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-color: rgba(111, 23, 19, 0.34);
+  text-underline-offset: 2px;
+}
+
+.guide-link:hover,
+.spell-link:hover {
+  color: #3f0d08;
+}
+
+.spell-group {
+  padding-left: 12px;
 }

@@ -6,10 +6,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { BehaviorSubject, combineLatest, map, startWith } from 'rxjs';
+import { combineLatest, map, startWith } from 'rxjs';
 import { RouterModule } from '@angular/router';
 
 import { WeaponsService } from '../services/weapons.service';
+import { FavoritesService } from '../services/favorites.service';
 import { WeaponEntry, WeaponProperty, WeaponsData } from '../models/weapons.models';
 import { normalizeKey } from '../utils/linkify';
 
@@ -55,8 +56,8 @@ type WeaponsView = {
 })
 export class ArmasComponent {
   private readonly weaponsService = inject(WeaponsService);
+  private readonly favoritesService = inject(FavoritesService);
   private readonly favoritesStorageKey = 'favorite-weapons';
-  private readonly favoriteIdsSubject = new BehaviorSubject<Set<string>>(this.loadFavoriteIds());
   readonly searchControl = new FormControl('', { nonNullable: true });
   readonly favoritesOnlyControl = new FormControl(false, { nonNullable: true });
 
@@ -68,7 +69,7 @@ export class ArmasComponent {
     this.weaponsSource$,
     this.searchControl.valueChanges.pipe(startWith(this.searchControl.value)),
     this.favoritesOnlyControl.valueChanges.pipe(startWith(this.favoritesOnlyControl.value)),
-    this.favoriteIdsSubject.asObservable(),
+    this.favoritesService.getFavorites(this.favoritesStorageKey),
   ]).pipe(
     map(([data, search, favoritesOnly, favoriteIds]) => this.filterWeapons(data, search, favoritesOnly, favoriteIds))
   );
@@ -113,18 +114,11 @@ export class ArmasComponent {
   }
 
   isFavorite(favoriteId: string): boolean {
-    return this.favoriteIdsSubject.value.has(favoriteId);
+    return this.favoritesService.has(this.favoritesStorageKey, favoriteId);
   }
 
   toggleFavorite(favoriteId: string): void {
-    const next = new Set(this.favoriteIdsSubject.value);
-    if (next.has(favoriteId)) {
-      next.delete(favoriteId);
-    } else {
-      next.add(favoriteId);
-    }
-    this.favoriteIdsSubject.next(next);
-    this.persistFavoriteIds(next);
+    this.favoritesService.toggle(this.favoritesStorageKey, favoriteId);
   }
 
   private filterWeapons(
@@ -190,30 +184,5 @@ export class ArmasComponent {
 
   private slugify(value: string): string {
     return normalizeKey(value).replace(/\s+/g, '-');
-  }
-
-  private loadFavoriteIds(): Set<string> {
-    try {
-      const raw = localStorage.getItem(this.favoritesStorageKey);
-      if (!raw) {
-        return new Set();
-      }
-      const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed)) {
-        return new Set(parsed.filter((item) => typeof item === 'string'));
-      }
-    } catch {
-      return new Set();
-    }
-    return new Set();
-  }
-
-  private persistFavoriteIds(favoriteIds: Set<string>): void {
-    try {
-      const payload = JSON.stringify(Array.from(favoriteIds));
-      localStorage.setItem(this.favoritesStorageKey, payload);
-    } catch {
-      return;
-    }
   }
 }

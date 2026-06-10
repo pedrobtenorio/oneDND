@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { BehaviorSubject, combineLatest, map, startWith } from 'rxjs';
+import { combineLatest, map, of, startWith, take } from 'rxjs';
 import { RouterModule } from '@angular/router';
 
 import { SpellService } from '../services/spell.service';
@@ -10,13 +10,20 @@ import { SummonService } from '../services/summon.service';
 import { GuideCategory, GuideItem } from '../models/guide.models';
 import { Spell, SpellTable } from '../models/spell.models';
 import { Summon } from '../models/summon.models';
+import { FavoritesService } from '../services/favorites.service';
 import { SummonCardComponent } from '../summon-card/summon-card.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { buildDescriptionParts, LinkPart } from '../utils/linkify';
+import {
+  filterSpells,
+  normalizeCastingTimeFilter,
+  SPELL_COMPONENT_FILTER_OPTIONS,
+} from '../utils/spell-filters';
 
 type DescriptionPart = LinkPart<GuideItem>;
 type TextContentPart = { type: 'text'; parts: DescriptionPart[] };
@@ -39,6 +46,7 @@ type SpellView = Spell & {
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
+    MatCheckboxModule,
     RouterModule,
     SummonCardComponent,
   ],
@@ -49,13 +57,19 @@ export class MagiasComponent {
   private readonly spellService = inject(SpellService);
   private readonly guideService = inject(GuideService);
   private readonly summonService = inject(SummonService);
+  private readonly favoritesService = inject(FavoritesService);
   private readonly favoritesStorageKey = 'favorite-spells';
-  private readonly favoriteIdsSubject = new BehaviorSubject<Set<string>>(this.loadFavoriteIds());
 
   readonly searchControl = new FormControl('', { nonNullable: true });
   readonly classControl = new FormControl<string[]>([], { nonNullable: true });
   readonly castingTimeControl = new FormControl<string[]>([], { nonNullable: true });
   readonly levelControl = new FormControl<number[]>([], { nonNullable: true });
+  readonly schoolControl = new FormControl<string[]>([], { nonNullable: true });
+  readonly componentControl = new FormControl<string[]>([], { nonNullable: true });
+  readonly durationControl = new FormControl<string[]>([], { nonNullable: true });
+  readonly rangeControl = new FormControl('', { nonNullable: true });
+  readonly effectControl = new FormControl('', { nonNullable: true });
+  readonly concentrationOnlyControl = new FormControl(false, { nonNullable: true });
   readonly favoritesOnlyControl = new FormControl(false, { nonNullable: true });
 
   private readonly spellViews$ = combineLatest([
@@ -75,11 +89,21 @@ export class MagiasComponent {
 
   readonly classes$ = this.spellViews$.pipe(map((spells) => this.uniqueSorted(spells.flatMap((spell) => spell.classes))));
   readonly castingTimes$ = this.spellViews$.pipe(
-    map((spells) => this.uniqueSorted(spells.map((spell) => spell.castingTime)))
+    map((spells) => this.uniqueSorted(spells.map((spell) => normalizeCastingTimeFilter(spell.castingTime))))
   );
   readonly levels$ = this.spellViews$.pipe(
     map((spells) => this.uniqueSorted(spells.map((spell) => spell.level)))
   );
+  readonly schools$ = this.spellViews$.pipe(
+    map((spells) => this.uniqueSorted(spells.map((spell) => spell.school)))
+  );
+  readonly components$ = of(SPELL_COMPONENT_FILTER_OPTIONS);
+  readonly durations$ = this.spellViews$.pipe(
+    map((spells) => this.uniqueSorted(spells.map((spell) => spell.duration)))
+  );
+  readonly favoriteCount$ = this.favoritesService
+    .getFavorites(this.favoritesStorageKey)
+    .pipe(map((favorites) => favorites.size));
 
   readonly spells$ = combineLatest([
     this.spellViews$,
@@ -87,11 +111,44 @@ export class MagiasComponent {
     this.classControl.valueChanges.pipe(startWith(this.classControl.value)),
     this.castingTimeControl.valueChanges.pipe(startWith(this.castingTimeControl.value)),
     this.levelControl.valueChanges.pipe(startWith(this.levelControl.value)),
+    this.schoolControl.valueChanges.pipe(startWith(this.schoolControl.value)),
+    this.componentControl.valueChanges.pipe(startWith(this.componentControl.value)),
+    this.durationControl.valueChanges.pipe(startWith(this.durationControl.value)),
+    this.rangeControl.valueChanges.pipe(startWith(this.rangeControl.value)),
+    this.effectControl.valueChanges.pipe(startWith(this.effectControl.value)),
+    this.concentrationOnlyControl.valueChanges.pipe(startWith(this.concentrationOnlyControl.value)),
     this.favoritesOnlyControl.valueChanges.pipe(startWith(this.favoritesOnlyControl.value)),
-    this.favoriteIdsSubject.asObservable(),
+    this.favoritesService.getFavorites(this.favoritesStorageKey),
   ]).pipe(
-    map(([spells, search, classes, castingTimes, levels, favoritesOnly, favoriteIds]) =>
-      this.filterSpells(spells, search, classes, castingTimes, levels, favoritesOnly, favoriteIds)
+    map(([
+      spells,
+      search,
+      classes,
+      castingTimes,
+      levels,
+      schools,
+      components,
+      durations,
+      range,
+      effect,
+      concentrationOnly,
+      favoritesOnly,
+      favoriteIds,
+    ]) =>
+      filterSpells(spells, {
+        search,
+        classes,
+        castingTimes,
+        levels,
+        schools,
+        components,
+        durations,
+        range,
+        effect,
+        concentrationOnly,
+        favoritesOnly,
+        favoriteIds,
+      })
     )
   );
 
@@ -168,6 +225,12 @@ export class MagiasComponent {
     this.classControl.setValue([]);
     this.castingTimeControl.setValue([]);
     this.levelControl.setValue([]);
+    this.schoolControl.setValue([]);
+    this.componentControl.setValue([]);
+    this.durationControl.setValue([]);
+    this.rangeControl.setValue('');
+    this.effectControl.setValue('');
+    this.concentrationOnlyControl.setValue(false);
   }
 
   toggleFavoritesOnly(): void {
@@ -175,95 +238,71 @@ export class MagiasComponent {
   }
 
   isFavorite(spellId: string): boolean {
-    return this.favoriteIdsSubject.value.has(spellId);
+    return this.favoritesService.has(this.favoritesStorageKey, spellId);
   }
 
   toggleFavorite(spellId: string): void {
-    const next = new Set(this.favoriteIdsSubject.value);
-    if (next.has(spellId)) {
-      next.delete(spellId);
-    } else {
-      next.add(spellId);
-    }
-    this.favoriteIdsSubject.next(next);
-    this.persistFavoriteIds(next);
+    this.favoritesService.toggle(this.favoritesStorageKey, spellId);
   }
 
-  private filterSpells(
-    spells: SpellView[],
-    search: string,
-    classes: string[],
-    castingTimes: string[],
-    levels: number[],
-    favoritesOnly: boolean,
-    favoriteIds: Set<string>
-  ): SpellView[] {
-    const query = this.normalizeSearchValue(search);
-    const hasSearch = query.length > 0;
-    const hasClassFilter = classes.length > 0;
-    const hasCastingTimeFilter = castingTimes.length > 0;
-    const hasLevelFilter = levels.length > 0;
+  exportFavoriteSpells(): void {
+    const favoriteIds = this.favoritesService.getSnapshot(this.favoritesStorageKey);
+    if (!favoriteIds.size) {
+      return;
+    }
 
-    return spells.filter((spell) => {
-      if (favoritesOnly && !favoriteIds.has(spell.id)) {
-        return false;
-      }
-
-      if (hasSearch) {
-        const haystack = this.normalizeSearchValue(spell.name);
-        if (!haystack.includes(query)) {
-          return false;
+    this.spellViews$
+      .pipe(
+        map((spells) =>
+          spells
+            .filter((spell) => favoriteIds.has(spell.id))
+            .sort((a, b) => a.level - b.level || a.name.localeCompare(b.name))
+        ),
+        take(1)
+      )
+      .subscribe((spells) => {
+        if (!spells.length) {
+          return;
         }
-      }
 
-      if (hasClassFilter && !classes.some((item) => spell.classes.includes(item))) {
-        return false;
-      }
-
-      if (hasCastingTimeFilter && !castingTimes.includes(spell.castingTime)) {
-        return false;
-      }
-
-      return !(hasLevelFilter && !levels.includes(spell.level));
-
-
-    });
+        const markdown = this.buildFavoriteSpellsMarkdown(spells);
+        this.downloadTextFile('magias-preparadas.md', markdown, 'text/markdown;charset=utf-8');
+      });
   }
 
   private uniqueSorted<T extends string | number>(values: T[]): T[] {
     return Array.from(new Set(values)).sort((a, b) => (a > b ? 1 : -1));
   }
 
-  private normalizeSearchValue(value: string): string {
-    return value
-      .trim()
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '');
+  private buildFavoriteSpellsMarkdown(spells: Spell[]): string {
+    const lines = ['# Magias preparadas', ''];
+
+    spells.forEach((spell) => {
+      const level = spell.level === 0 ? 'Truque' : `${spell.level}º círculo`;
+      lines.push(`## ${spell.name}`);
+      lines.push('');
+      lines.push(`- **Nível:** ${level}`);
+      lines.push(`- **Escola:** ${spell.school}`);
+      lines.push(`- **Classes:** ${spell.classes.join(', ')}`);
+      lines.push(`- **Tempo de conjuração:** ${spell.castingTime}`);
+      lines.push(`- **Alcance:** ${spell.range}`);
+      lines.push(`- **Componentes:** ${spell.components.join(', ')}`);
+      lines.push(`- **Duração:** ${spell.duration}`);
+      lines.push('');
+      lines.push(spell.description.replace(/\[\[(TABLE|SUMMON)_\d+]]/g, '').trim());
+      lines.push('');
+    });
+
+    return `${lines.join('\n').trim()}\n`;
   }
 
-  private loadFavoriteIds(): Set<string> {
-    try {
-      const raw = localStorage.getItem(this.favoritesStorageKey);
-      if (!raw) {
-        return new Set();
-      }
-      const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed)) {
-        return new Set(parsed.filter((item) => typeof item === 'string'));
-      }
-    } catch {
-      return new Set();
-    }
-    return new Set();
-  }
-
-  private persistFavoriteIds(favoriteIds: Set<string>): void {
-    try {
-      const payload = JSON.stringify(Array.from(favoriteIds));
-      localStorage.setItem(this.favoritesStorageKey, payload);
-    } catch {
-      return;
-    }
+  private downloadTextFile(filename: string, content: string, type: string): void {
+    const blob = new Blob([content], { type });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.click();
+    URL.revokeObjectURL(url);
   }
 }

@@ -30,8 +30,17 @@
       "value": 1,
       "mod": "–5"
     },
-    "immunities": ["Psíquico", "Venenoso"],
-    "conditionImmunities": ["Amedrontado", "Enfeiçado", "Envenenado", "Exaustão", "Paralisado"],
+    "immunities": [
+      "Psíquico",
+      "Venenoso"
+    ],
+    "conditionImmunities": [
+      "Amedrontado",
+      "Enfeiçado",
+      "Envenenado",
+      "Exaustão",
+      "Paralisado"
+    ],
     "senses": "Visão às Cegas 9 m, Percepção Passiva 6",
     "languages": "Compreende os idiomas que você conhece",
     "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
@@ -73,8 +82,13 @@
       "value": 5,
       "mod": "–3"
     },
-    "immunities": ["Venenoso"],
-    "conditionImmunities": ["Envenenado", "Exaustão"],
+    "immunities": [
+      "Venenoso"
+    ],
+    "conditionImmunities": [
+      "Envenenado",
+      "Exaustão"
+    ],
     "senses": "Visão no Escuro 18 m, Percepção Passiva 9",
     "languages": "Compreende os idiomas que conhecia em vida, mas não consegue falar",
     "cr": "1/4 (XP 50; BP +2)",
@@ -131,8 +145,13 @@
       "value": 5,
       "mod": "–3"
     },
-    "immunities": ["Venenoso"],
-    "conditionImmunities": ["Envenenado", "Exaustão"],
+    "immunities": [
+      "Venenoso"
+    ],
+    "conditionImmunities": [
+      "Envenenado",
+      "Exaustão"
+    ],
     "senses": "Visão no Escuro 18 m, Percepção Passiva 8",
     "languages": "Compreende os idiomas que conhecia em vida, mas não consegue falar",
     "cr": "1/4 (XP 50; BP +2)",
@@ -180,8 +199,13 @@
       "value": 16,
       "mod": "+3"
     },
-    "resistances": ["Radiante"],
-    "conditionImmunities": ["Amedrontado", "Enfeiçado"],
+    "resistances": [
+      "Radiante"
+    ],
+    "conditionImmunities": [
+      "Amedrontado",
+      "Enfeiçado"
+    ],
     "senses": "Visão no Escuro 18 m, Percepção Passiva 12",
     "languages": "Celestial, compreende os idiomas que você fala",
     "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
@@ -240,8 +264,16 @@
       "Cortante e Perfurante (apenas Terra)",
       "Elétrico e Trovejante (apenas Ar)"
     ],
-    "immunities": ["Ígneo (somente Fogo)", "Venenoso"],
-    "conditionImmunities": ["Envenenado", "Exaustão", "Paralisado", "Petrificado"],
+    "immunities": [
+      "Ígneo (somente Fogo)",
+      "Venenoso"
+    ],
+    "conditionImmunities": [
+      "Envenenado",
+      "Exaustão",
+      "Paralisado",
+      "Petrificado"
+    ],
     "senses": "Visão no Escuro 18 m, Percepção Passiva 10",
     "languages": "Primordial, compreende os idiomas que você fala",
     "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
@@ -293,8 +325,13 @@
       "value": 5,
       "mod": "–3"
     },
-    "immunities": ["Venenoso"],
-    "conditionImmunities": ["Envenenado", "Petrificado"],
+    "immunities": [
+      "Venenoso"
+    ],
+    "conditionImmunities": [
+      "Envenenado",
+      "Petrificado"
+    ],
     "senses": "Visão no Escuro 18 m, Percepção Passiva 10",
     "languages": "Compreende os idiomas que você fala",
     "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
@@ -411,7 +448,9 @@
       "value": 16,
       "mod": "+3"
     },
-    "conditionImmunities": ["Enfeiçado"],
+    "conditionImmunities": [
+      "Enfeiçado"
+    ],
     "senses": "Visão no Escuro 18 m, Percepção Passiva 10",
     "languages": "Silvestre, compreende os idiomas que você fala",
     "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
@@ -439,12 +478,36 @@
     "ac": "11 + o círculo da magia",
     "hp": "30 + 10 para cada círculo de magia acima do 4",
     "speed": "12 m, Escalada 12 m, Voo 12 m (apenas Vespa)",
-    "str": { "value": 17, "mod": "+3", "save": "+3" },
-    "dex": { "value": 13, "mod": "+1", "save": "+1" },
-    "con": { "value": 15, "mod": "+2", "save": "+2" },
-    "int": { "value": 4, "mod": "–3", "save": "–3" },
-    "wis": { "value": 3, "mod": "–3", "save": "–3" },
-    "cha": { "value": 14, "mod": "+2", "save": "+2" },
+    "str": {
+      "value": 17,
+      "mod": "+3",
+      "save": "+3"
+    },
+    "dex": {
+      "value": 13,
+      "mod": "+1",
+      "save": "+1"
+    },
+    "con": {
+      "value": 15,
+      "mod": "+2",
+      "save": "+2"
+    },
+    "int": {
+      "value": 4,
+      "mod": "–3",
+      "save": "–3"
+    },
+    "wis": {
+      "value": 3,
+      "mod": "–3",
+      "save": "–3"
+    },
+    "cha": {
+      "value": 14,
+      "mod": "+2",
+      "save": "+2"
+    },
     "senses": "Visão no Escuro 18 m, Percepção Passiva 12",
     "languages": "Compreende os idiomas que você conhece",
     "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
@@ -482,13 +545,39 @@
     "ac": "11 + o círculo da magia",
     "hp": "40 + 10 para cada círculo de magia acima de 4",
     "speed": "9 m, Voo 9 m (pairar; apenas Pseudoobservador)",
-    "str": { "value": 16, "mod": "+3", "save": "+3" },
-    "dex": { "value": 10, "mod": "+0", "save": "+0" },
-    "con": { "value": 15, "mod": "+2", "save": "+2" },
-    "int": { "value": 16, "mod": "+3", "save": "+3" },
-    "wis": { "value": 10, "mod": "+0", "save": "+0" },
-    "cha": { "value": 6, "mod": "–2", "save": "–2" },
-    "immunities": ["Psíquico"],
+    "str": {
+      "value": 16,
+      "mod": "+3",
+      "save": "+3"
+    },
+    "dex": {
+      "value": 10,
+      "mod": "+0",
+      "save": "+0"
+    },
+    "con": {
+      "value": 15,
+      "mod": "+2",
+      "save": "+2"
+    },
+    "int": {
+      "value": 16,
+      "mod": "+3",
+      "save": "+3"
+    },
+    "wis": {
+      "value": 10,
+      "mod": "+0",
+      "save": "+0"
+    },
+    "cha": {
+      "value": 6,
+      "mod": "–2",
+      "save": "–2"
+    },
+    "immunities": [
+      "Psíquico"
+    ],
     "senses": "Visão no Escuro 18 m, Percepção Passiva 10",
     "languages": "Dialeto Obscuro, entende os idiomas que você fala",
     "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
@@ -528,14 +617,48 @@
     "ac": "14 + o círculo da magia",
     "hp": "50 + 10 para cada círculo de magia acima de 5",
     "speed": "9 m, Natação 9 m, Voo 18 m",
-    "str": { "value": 19, "mod": "+4", "save": "+4" },
-    "dex": { "value": 14, "mod": "+2", "save": "+2" },
-    "con": { "value": 17, "mod": "+3", "save": "+3" },
-    "int": { "value": 10, "mod": "+0", "save": "+0" },
-    "wis": { "value": 14, "mod": "+2", "save": "+2" },
-    "cha": { "value": 14, "mod": "+2", "save": "+2" },
-    "resistances": ["Ácido", "Elétrico", "Gélido", "Ígneo", "Venenoso"],
-    "conditionImmunities": ["Amedrontado", "Enfeitiçado", "Envenenado"],
+    "str": {
+      "value": 19,
+      "mod": "+4",
+      "save": "+4"
+    },
+    "dex": {
+      "value": 14,
+      "mod": "+2",
+      "save": "+2"
+    },
+    "con": {
+      "value": 17,
+      "mod": "+3",
+      "save": "+3"
+    },
+    "int": {
+      "value": 10,
+      "mod": "+0",
+      "save": "+0"
+    },
+    "wis": {
+      "value": 14,
+      "mod": "+2",
+      "save": "+2"
+    },
+    "cha": {
+      "value": 14,
+      "mod": "+2",
+      "save": "+2"
+    },
+    "resistances": [
+      "Ácido",
+      "Elétrico",
+      "Gélido",
+      "Ígneo",
+      "Venenoso"
+    ],
+    "conditionImmunities": [
+      "Amedrontado",
+      "Enfeitiçado",
+      "Envenenado"
+    ],
     "senses": "Visão às Cegas 9 m, Visão no Escuro 18 m, Percepção Passiva 12",
     "languages": "Dracônico, compreende os idiomas que você fala",
     "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
@@ -567,12 +690,36 @@
     "ac": "11 + o círculo da magia",
     "hp": "20 (apenas Ar) ou 30 (apenas Água e Terra) + 5 para cada círculo de magia acima de 2",
     "speed": "9 m; Escalada 9 m (apenas Terra); Natação 9 m (apenas Água); Voo 18 m (apenas Ar)",
-    "str": { "value": 13, "mod": "+1", "save": "+1" },
-    "dex": { "value": 16, "mod": "+3", "save": "+3" },
-    "con": { "value": 15, "mod": "+2", "save": "+2" },
-    "int": { "value": 10, "mod": "+0", "save": "+0" },
-    "wis": { "value": 10, "mod": "+0", "save": "+0" },
-    "cha": { "value": 16, "mod": "+3", "save": "+3" },
+    "str": {
+      "value": 13,
+      "mod": "+1",
+      "save": "+1"
+    },
+    "dex": {
+      "value": 16,
+      "mod": "+3",
+      "save": "+3"
+    },
+    "con": {
+      "value": 15,
+      "mod": "+2",
+      "save": "+2"
+    },
+    "int": {
+      "value": 10,
+      "mod": "+0",
+      "save": "+0"
+    },
+    "wis": {
+      "value": 10,
+      "mod": "+0",
+      "save": "+0"
+    },
+    "cha": {
+      "value": 16,
+      "mod": "+3",
+      "save": "+3"
+    },
     "senses": "Visão no Escuro 18 m, Percepção Passiva 12",
     "languages": "Compreende os idiomas que você fala",
     "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
@@ -608,15 +755,45 @@
     "ac": "12 + o círculo da magia",
     "hp": "50 (apenas Demônio) ou 40 (apenas Diabo) ou 60 (apenas Yugoloth) + 15 para cada círculo de magia acima de 6",
     "speed": "12 m; Escalada 12 m (apenas Demônio); Voo 18 m (apenas Diabo)",
-    "str": { "value": 13, "mod": "+1", "save": "+1" },
-    "dex": { "value": 16, "mod": "+3", "save": "+3" },
-    "con": { "value": 16, "mod": "+2", "save": "+2" },
-    "int": { "value": 10, "mod": "+0", "save": "+0" },
-    "wis": { "value": 10, "mod": "+0", "save": "+0" },
-    "cha": { "value": 16, "mod": "+3", "save": "+3" },
-    "resistances": ["Ígneo"],
-    "immunities": ["Venenoso"],
-    "conditionImmunities": ["Envenenado"],
+    "str": {
+      "value": 13,
+      "mod": "+1",
+      "save": "+1"
+    },
+    "dex": {
+      "value": 16,
+      "mod": "+3",
+      "save": "+3"
+    },
+    "con": {
+      "value": 16,
+      "mod": "+2",
+      "save": "+2"
+    },
+    "int": {
+      "value": 10,
+      "mod": "+0",
+      "save": "+0"
+    },
+    "wis": {
+      "value": 10,
+      "mod": "+0",
+      "save": "+0"
+    },
+    "cha": {
+      "value": 16,
+      "mod": "+3",
+      "save": "+3"
+    },
+    "resistances": [
+      "Ígneo"
+    ],
+    "immunities": [
+      "Venenoso"
+    ],
+    "conditionImmunities": [
+      "Envenenado"
+    ],
     "senses": "Visão no Escuro 18 m, Percepção Passiva 10",
     "languages": "Abissal, Infernal, Telepatia 18 m",
     "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",
@@ -660,14 +837,46 @@
     "ac": "11 + o círculo da magia",
     "hp": "30 (apenas Fantasmagórico e Pútrido) ou 20 (apenas Esquelético) + 10 para cada círculo de magia acima de 3",
     "speed": "9 m; Voo 12 m (pairar; apenas Fantasmagórico)",
-    "str": { "value": 12, "mod": "+1", "save": "+1" },
-    "dex": { "value": 16, "mod": "+3", "save": "+3" },
-    "con": { "value": 15, "mod": "+2", "save": "+2" },
-    "int": { "value": 4, "mod": "–3", "save": "–3" },
-    "wis": { "value": 10, "mod": "+0", "save": "+0" },
-    "cha": { "value": 9, "mod": "–1", "save": "–1" },
-    "immunities": ["Necrótico", "Venenoso"],
-    "conditionImmunities": ["Amedrontado", "Envenenado", "Exaustão", "Paralisado"],
+    "str": {
+      "value": 12,
+      "mod": "+1",
+      "save": "+1"
+    },
+    "dex": {
+      "value": 16,
+      "mod": "+3",
+      "save": "+3"
+    },
+    "con": {
+      "value": 15,
+      "mod": "+2",
+      "save": "+2"
+    },
+    "int": {
+      "value": 4,
+      "mod": "–3",
+      "save": "–3"
+    },
+    "wis": {
+      "value": 10,
+      "mod": "+0",
+      "save": "+0"
+    },
+    "cha": {
+      "value": 9,
+      "mod": "–1",
+      "save": "–1"
+    },
+    "immunities": [
+      "Necrótico",
+      "Venenoso"
+    ],
+    "conditionImmunities": [
+      "Amedrontado",
+      "Envenenado",
+      "Exaustão",
+      "Paralisado"
+    ],
     "senses": "Visão no Escuro 18 m, Percepção Passiva 10",
     "languages": "Compreende os idiomas que você fala",
     "cr": "Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)",

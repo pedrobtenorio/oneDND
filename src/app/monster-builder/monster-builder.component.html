@@ -1,0 +1,523 @@
+<section class="page" *ngIf="spells$ | async as availableSpells">
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Editor de Monstros</p>
+      <h1>Criador de Monstros</h1>
+      <p class="hero-copy">
+        Monte inimigos com blocos prontos de ações, conjuração e links para regras já existentes.
+      </p>
+    </div>
+    <div class="hero-actions">
+      <button mat-stroked-button type="button" (click)="newMonster()">Novo</button>
+      <button mat-stroked-button type="button" (click)="duplicateMonster()">Duplicar</button>
+      <button mat-flat-button type="button" color="primary" (click)="saveMonster()">Salvar</button>
+      <button mat-stroked-button type="button" (click)="exportCurrentMarkdown()">Exportar MD</button>
+    </div>
+  </header>
+
+  <div class="builder-layout">
+    <div class="editor-column">
+      <section class="panel library-panel" *ngIf="savedMonsters$ | async as savedMonsters">
+        <div class="panel-header">
+          <div>
+            <h2>Biblioteca local</h2>
+            <p>{{ savedMonsters.length }} fichas salvas no navegador.</p>
+          </div>
+          <div class="panel-actions">
+            <button mat-stroked-button type="button" (click)="exportLibrary()">Exportar JSON</button>
+            <label class="file-button">
+              Importar JSON
+              <input type="file" accept="application/json,.json" (change)="importLibraryFromFile($event)">
+            </label>
+          </div>
+        </div>
+        <p class="import-status" *ngIf="importStatus">{{ importStatus }}</p>
+
+        <div class="library-list" *ngIf="savedMonsters.length > 0; else emptyLibrary">
+          <article
+            class="library-item"
+            *ngFor="let monster of savedMonsters"
+            [class.active]="isCurrentMonster(monster.id)"
+          >
+            <div>
+              <strong>{{ monster.name }}</strong>
+              <p>{{ monster.size }} {{ monster.creatureType }} | ND {{ monster.cr || '-' }}</p>
+            </div>
+            <div class="library-actions">
+              <button mat-stroked-button type="button" (click)="loadSavedMonster(monster)">Abrir</button>
+              <button mat-stroked-button type="button" color="warn" (click)="deleteMonster(monster.id)">
+                Excluir
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <ng-template #emptyLibrary>
+          <p class="empty-state">Nenhuma ficha salva ainda.</p>
+        </ng-template>
+      </section>
+
+      <form class="panel editor-panel" [formGroup]="monsterForm">
+        <div class="panel-header">
+          <div>
+            <h2>Estrutura da ficha</h2>
+            <p>Use blocos prontos para ganhar velocidade e deixe o texto livre para detalhes especiais.</p>
+          </div>
+        </div>
+
+        <section class="form-section">
+          <h3>Cabeçalho</h3>
+          <div class="field-grid two-up">
+            <mat-form-field appearance="outline">
+              <mat-label>Nome</mat-label>
+              <input matInput formControlName="name" placeholder="Cultista Aberrante">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Iniciativa</mat-label>
+              <input matInput formControlName="initiative" placeholder="+7 (17)">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Tamanho</mat-label>
+              <input matInput formControlName="size" placeholder="Médio">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Tipo de criatura</mat-label>
+              <mat-select formControlName="creatureType">
+                <mat-option *ngFor="let type of creatureTypeOptions" [value]="type.value">
+                  {{ type.label }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Alinhamento</mat-label>
+              <input matInput formControlName="alignment" placeholder="Neutro e Mau">
+            </mat-form-field>
+          </div>
+        </section>
+
+        <section class="form-section">
+          <h3>Estatísticas principais</h3>
+          <div class="field-grid three-up">
+            <mat-form-field appearance="outline">
+              <mat-label>CA</mat-label>
+              <input matInput formControlName="ac" placeholder="14">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>PV</mat-label>
+              <input matInput formControlName="hp" placeholder="137 (25d8 + 25)">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Deslocamento</mat-label>
+              <input matInput formControlName="speed" placeholder="9 m">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>ND</mat-label>
+              <input matInput formControlName="cr" placeholder="8">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>XP</mat-label>
+              <input matInput formControlName="xp" placeholder="3900">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>PB</mat-label>
+              <input matInput formControlName="proficiencyBonus" placeholder="+3">
+            </mat-form-field>
+          </div>
+        </section>
+
+        <section class="form-section" formGroupName="abilities">
+          <div class="section-headline">
+            <div>
+              <h3>Atributos</h3>
+              <p>Se a salvaguarda ficar vazia, a prévia usa o modificador normal do atributo.</p>
+            </div>
+          </div>
+
+          <div class="ability-grid">
+            <article class="ability-card" *ngFor="let ability of abilityKeys" [formGroupName]="ability">
+              <header>
+                <h4>{{ abilityLabels[ability] }}</h4>
+                <span>{{ abilityNames[ability] }}</span>
+              </header>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Valor</mat-label>
+                <input matInput type="number" formControlName="score">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Salvaguarda</mat-label>
+                <input matInput formControlName="save" placeholder="+3">
+              </mat-form-field>
+            </article>
+          </div>
+        </section>
+
+        <section class="form-section">
+          <h3>Detalhes</h3>
+          <div class="field-grid two-up">
+            <mat-form-field appearance="outline">
+              <mat-label>Perícias</mat-label>
+              <input matInput formControlName="skills" placeholder="Arcanismo +6, Percepção +7, Religião +6">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Sentidos</mat-label>
+              <input matInput formControlName="senses" placeholder="Visão no Escuro 27 m, Percepção Passiva 17">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Idiomas</mat-label>
+              <mat-select formControlName="selectedLanguages" multiple>
+                <mat-optgroup label="Comuns">
+                  <mat-option *ngFor="let language of commonLanguageOptions" [value]="language.value">
+                    {{ language.label }}
+                  </mat-option>
+                </mat-optgroup>
+                <mat-optgroup label="Raros">
+                  <mat-option *ngFor="let language of rareLanguageOptions" [value]="language.value">
+                    {{ language.label }}
+                  </mat-option>
+                </mat-optgroup>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Complemento de idiomas</mat-label>
+              <input matInput formControlName="extraLanguages" placeholder="telepatia 9 m">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Resistências</mat-label>
+              <input matInput formControlName="resistances" placeholder="frio, elétrico">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Imunidades</mat-label>
+              <input matInput formControlName="immunities" placeholder="veneno">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Imunidades a Condições</mat-label>
+              <input matInput formControlName="conditionImmunities" placeholder="Agarrado, Envenenado">
+            </mat-form-field>
+          </div>
+
+          <p class="hint">
+            Dica: use os mesmos nomes de condições e regras do guia para o sistema gerar links automáticos na prévia.
+          </p>
+        </section>
+
+        <section class="form-section" *ngFor="let section of sectionKeys">
+          <div class="section-headline">
+            <div>
+              <h3>{{ sectionLabels[section] }}</h3>
+              <p>Combine blocos prontos e texto livre para montar o bloco final.</p>
+            </div>
+            <div class="preset-actions">
+              <button mat-stroked-button type="button" (click)="addEntry(section, 'text')">Texto</button>
+              <button mat-stroked-button type="button" (click)="addEntry(section, 'multiattack')">
+                Multiataque
+              </button>
+              <button mat-stroked-button type="button" (click)="addEntry(section, 'attack')">Ataque</button>
+              <button mat-stroked-button type="button" (click)="addEntry(section, 'save')">
+                Ação de salvaguarda
+              </button>
+              <button mat-stroked-button type="button" (click)="addEntry(section, 'spellcasting')">
+                Conjuração
+              </button>
+            </div>
+          </div>
+
+          <div class="entry-list" *ngIf="sectionArray(section).controls.length > 0; else emptySection">
+            <article
+              class="entry-editor"
+              *ngFor="let entry of sectionArray(section).controls; let i = index"
+              [formGroup]="asFormGroup(entry)"
+            >
+              <header class="entry-header">
+                <div>
+                  <p class="entry-kind">{{ entryTypeLabel(entry) }}</p>
+                  <h4>{{ asFormGroup(entry).get('name')?.value || 'Nova entrada' }}</h4>
+                </div>
+                <div class="entry-toolbar">
+                  <button
+                    mat-icon-button
+                    type="button"
+                    aria-label="Mover para cima"
+                    (click)="moveEntry(section, i, -1)"
+                  >
+                    <mat-icon>keyboard_arrow_up</mat-icon>
+                  </button>
+                  <button
+                    mat-icon-button
+                    type="button"
+                    aria-label="Mover para baixo"
+                    (click)="moveEntry(section, i, 1)"
+                  >
+                    <mat-icon>keyboard_arrow_down</mat-icon>
+                  </button>
+                  <button
+                    mat-icon-button
+                    type="button"
+                    aria-label="Remover entrada"
+                    (click)="removeEntry(section, i)"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </header>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Nome da entrada</mat-label>
+                <input matInput formControlName="name">
+              </mat-form-field>
+
+              <ng-container [ngSwitch]="asFormGroup(entry).get('type')?.value">
+                <ng-container *ngSwitchCase="'text'">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Descrição</mat-label>
+                    <textarea
+                      matInput
+                      formControlName="description"
+                      rows="4"
+                      placeholder="Texto livre com regras, condições e observações."
+                    ></textarea>
+                  </mat-form-field>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'multiattack'">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Rotina</mat-label>
+                    <textarea
+                      matInput
+                      formControlName="routine"
+                      rows="3"
+                      placeholder="A criatura faz dois ataques. Ela pode substituir um deles por..."
+                    ></textarea>
+                  </mat-form-field>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'attack'">
+                  <div class="field-grid two-up">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Tipo de ataque</mat-label>
+                      <input matInput formControlName="attackType" placeholder="Rolagem de Ataque Corpo a Corpo">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                      <mat-label>Bônus de acerto</mat-label>
+                      <input matInput formControlName="attackBonus" placeholder="+7">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                      <mat-label>Alcance</mat-label>
+                      <input matInput formControlName="reach" placeholder="alcance 3 m">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                      <mat-label>Alvo</mat-label>
+                      <input matInput formControlName="target" placeholder="um alvo">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                      <mat-label>Dano médio</mat-label>
+                      <input matInput formControlName="hitAverage" placeholder="7">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                      <mat-label>Fórmula</mat-label>
+                      <input matInput formControlName="hitFormula" placeholder="1d6 + 4">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                      <mat-label>Tipo de dano</mat-label>
+                      <input matInput formControlName="damageType" placeholder="cortante">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                      <mat-label>Dano extra</mat-label>
+                      <input
+                        matInput
+                        formControlName="extraDamage"
+                        placeholder="mais 14 (4d6) de dano psíquico"
+                      >
+                    </mat-form-field>
+                  </div>
+
+                  <mat-form-field appearance="outline">
+                    <mat-label>Efeito adicional</mat-label>
+                    <textarea
+                      matInput
+                      formControlName="effect"
+                      rows="3"
+                      placeholder="Se o alvo for Grande ou menor, ele fica com a condição Agarrado..."
+                    ></textarea>
+                  </mat-form-field>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'save'">
+                  <div class="field-grid two-up">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Salvaguarda</mat-label>
+                      <mat-select formControlName="saveAbility">
+                        <mat-option *ngFor="let option of abilityOptions" [value]="option.label">
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                      <mat-label>CD</mat-label>
+                      <input matInput formControlName="dc" placeholder="15">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                      <mat-label>Alvo</mat-label>
+                      <input matInput formControlName="target" placeholder="uma criatura que o monstro possa ver">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                      <mat-label>Alcance</mat-label>
+                      <input matInput formControlName="range" placeholder="até 27 m">
+                    </mat-form-field>
+                  </div>
+
+                  <mat-form-field appearance="outline">
+                    <mat-label>Falha</mat-label>
+                    <textarea
+                      matInput
+                      formControlName="failure"
+                      rows="3"
+                      placeholder="27 (6d8) de dano psíquico, e o alvo fica com a condição Envenenado..."
+                    ></textarea>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline">
+                    <mat-label>Sucesso</mat-label>
+                    <textarea
+                      matInput
+                      formControlName="success"
+                      rows="2"
+                      placeholder="Metade do dano apenas."
+                    ></textarea>
+                  </mat-form-field>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'spellcasting'">
+                  <div class="field-grid three-up">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Atributo</mat-label>
+                      <mat-select formControlName="ability">
+                        <mat-option *ngFor="let option of abilityOptions" [value]="option.label">
+                          {{ option.label }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                      <mat-label>CD da magia</mat-label>
+                      <input matInput formControlName="saveDc" placeholder="15">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                      <mat-label>Ataque mágico</mat-label>
+                      <input matInput formControlName="spellAttackBonus" placeholder="+7">
+                    </mat-form-field>
+                  </div>
+
+                  <mat-form-field appearance="outline">
+                    <mat-label>Introdução customizada</mat-label>
+                    <textarea
+                      matInput
+                      formControlName="intro"
+                      rows="3"
+                      placeholder="Se vazio, o sistema gera a frase-base automaticamente."
+                    ></textarea>
+                  </mat-form-field>
+
+                  <div class="spell-groups">
+                    <div class="spell-group-header">
+                      <h5>Grupos de magia</h5>
+                      <button mat-stroked-button type="button" (click)="addSpellGroup(entry)">
+                        Adicionar grupo
+                      </button>
+                    </div>
+
+                    <div class="spell-group-card" *ngFor="let group of spellGroupArray(entry).controls; let groupIndex = index" [formGroup]="asFormGroup(group)">
+                      <div class="spell-group-toolbar">
+                        <strong>Grupo {{ groupIndex + 1 }}</strong>
+                        <button
+                          mat-icon-button
+                          type="button"
+                          aria-label="Remover grupo"
+                          (click)="removeSpellGroup(entry, groupIndex)"
+                        >
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </div>
+
+                      <mat-form-field appearance="outline">
+                        <mat-label>Recarga</mat-label>
+                        <mat-select formControlName="rechargeType">
+                          <mat-option *ngFor="let option of spellRechargeTypeOptions" [value]="option.value">
+                            {{ option.label }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                      <mat-form-field
+                        appearance="outline"
+                        *ngIf="asFormGroup(group).get('rechargeType')?.value !== 'at-will'"
+                      >
+                        <mat-label>Usos</mat-label>
+                        <input matInput formControlName="uses" placeholder="3">
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline">
+                        <mat-label>Magias</mat-label>
+                        <mat-select formControlName="spellIds" multiple>
+                          <mat-option *ngFor="let spell of availableSpells" [value]="spell.id">
+                            {{ spell.name }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </article>
+          </div>
+
+          <ng-template #emptySection>
+            <p class="empty-state">Nenhuma entrada nesta seção ainda.</p>
+          </ng-template>
+        </section>
+      </form>
+    </div>
+
+    <aside class="panel preview-panel" *ngIf="preview$ | async as preview">
+      <div class="panel-header">
+        <div>
+          <h2>Prévia</h2>
+          <p>Os links para regras do guia e magias aparecem diretamente na prévia da ficha.</p>
+        </div>
+      </div>
+
+      <app-monster-card
+        [monster]="preview.monster"
+        [guideItems]="preview.guideItems"
+        [spells]="preview.spells"
+      ></app-monster-card>
+    </aside>
+  </div>
+</section>

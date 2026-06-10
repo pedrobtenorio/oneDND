@@ -1,19 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map, shareReplay } from 'rxjs';
 
 import { GuideCategory } from '../models/guide.models';
+import { validateGuideData } from '../utils/data-validation';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GuideService {
+  private readonly http = inject(HttpClient);
   private readonly guideUrl = '/data/guide.json';
-
-  constructor(private readonly http: HttpClient) {}
+  private readonly guide$ = this.http
+    .get<unknown>(this.guideUrl)
+    .pipe(map(validateGuideData))
+    .pipe(shareReplay({ bufferSize: 1, refCount: false }));
 
   // Data-driven load to keep the UI decoupled from rule content.
   getGuide(): Observable<GuideCategory[]> {
-    return this.http.get<GuideCategory[]>(this.guideUrl);
+    return this.guide$;
   }
 }

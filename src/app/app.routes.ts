@@ -1,12 +1,28 @@
 import { Routes } from '@angular/router';
 
-import { QuickGuideComponent } from './quick-guide/quick-guide.component';
-import { MagiasComponent } from './magias/magias.component';
-import { ArmasComponent } from './armas/armas.component';
-
 export const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'guia' },
-  { path: 'guia', component: QuickGuideComponent },
-  { path: 'magias', component: MagiasComponent },
-  { path: 'armas', component: ArmasComponent },
+  {
+    path: 'guia',
+    loadComponent: () =>
+      import('./quick-guide/quick-guide.component').then((m) => m.QuickGuideComponent),
+  },
+  {
+    path: 'magias',
+    loadComponent: () => import('./magias/magias.component').then((m) => m.MagiasComponent),
+  },
+  {
+    path: 'armas',
+    loadComponent: () => import('./armas/armas.component').then((m) => m.ArmasComponent),
+  },
+  {
+    path: 'busca',
+    loadComponent: () =>
+      import('./global-search/global-search.component').then((m) => m.GlobalSearchComponent),
+  },
+  {
+    path: 'monstros',
+    loadComponent: () =>
+      import('./monster-builder/monster-builder.component').then((m) => m.MonsterBuilderComponent),
+  },
 ];

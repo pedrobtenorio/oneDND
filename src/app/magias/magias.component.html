@@ -2,6 +2,13 @@
   <h1>Magias</h1>
 
   <section class="filters">
+    <div class="filter-toolbar">
+      <span>Grimório</span>
+      <button mat-stroked-button type="button" class="clear-filter" (click)="clearFilters()">
+        Limpar filtros
+      </button>
+    </div>
+
     <mat-form-field appearance="outline" class="filter-field search-field">
       <mat-label>Buscar magia</mat-label>
       <input matInput [formControl]="searchControl" placeholder="Ex: cura, contido">
@@ -34,6 +41,47 @@
       </mat-select>
     </mat-form-field>
 
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Escola</mat-label>
+      <mat-select [formControl]="schoolControl" multiple>
+        <mat-option *ngFor="let school of (schools$ | async)" [value]="school">
+          {{ school }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Componentes</mat-label>
+      <mat-select [formControl]="componentControl" multiple>
+        <mat-option *ngFor="let component of (components$ | async)" [value]="component">
+          {{ component }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Duração</mat-label>
+      <mat-select [formControl]="durationControl" multiple>
+        <mat-option *ngFor="let duration of (durations$ | async)" [value]="duration">
+          {{ duration }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Alcance</mat-label>
+      <input matInput [formControl]="rangeControl" placeholder="Ex: toque, 18 m">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="filter-field effect-field">
+      <mat-label>Efeito, dano ou condição</mat-label>
+      <input matInput [formControl]="effectControl" placeholder="Ex: fogo, contido, cura">
+    </mat-form-field>
+
+    <mat-checkbox class="concentration-filter" [formControl]="concentrationOnlyControl">
+      Concentração
+    </mat-checkbox>
+
     <div class="filter-actions">
       <button
         mat-stroked-button
@@ -47,15 +95,21 @@
         </span>
         Mostrar favoritos
       </button>
-      <button mat-stroked-button type="button" (click)="clearFilters()">
-        Limpar filtros
+      <button
+        mat-stroked-button
+        type="button"
+        class="export-favorites"
+        (click)="exportFavoriteSpells()"
+        [disabled]="(favoriteCount$ | async) === 0"
+      >
+        Exportar preparadas
       </button>
     </div>
   </section>
 
   <ng-container *ngIf="spells$ | async as spells">
     <div class="grid">
-      <article class="spell-card" *ngFor="let spell of spells">
+      <article class="spell-card" *ngFor="let spell of spells" [attr.id]="spell.id">
         <header class="spell-header">
           <div>
             <h2>{{ spell.name }}</h2>
