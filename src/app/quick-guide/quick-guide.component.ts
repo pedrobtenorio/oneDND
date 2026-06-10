@@ -154,10 +154,10 @@ export class QuickGuideComponent implements AfterViewInit {
     const labels = new Map([
       ['DES', 'Destreza'],
       ['SAB', 'Sabedoria'],
-      ['FOR', 'Forca'],
-      ['INT', 'Inteligencia'],
+      ['FOR', 'Força'],
+      ['INT', 'Inteligência'],
       ['CAR', 'Carisma'],
-      ['CON', 'Constituicao'],
+      ['CON', 'Constituição'],
     ]);
 
     const groups = new Map<string, GuideItem[]>();

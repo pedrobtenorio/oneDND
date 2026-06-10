@@ -1,0 +1,138 @@
+<div class="stat-block">
+  <div class="stat-header">
+    <h3 class="creature-name">{{ monster.name || 'Monstro sem nome' }}</h3>
+    <p class="creature-type">{{ subtitle }}</p>
+  </div>
+
+  <div class="block-body">
+    <div class="top-stats stat-section">
+      <span><strong>Iniciativa</strong> {{ initiativeText }}</span>
+      <span><strong>CA</strong> {{ monster.ac || '-' }}</span>
+      <span><strong>PV</strong> {{ monster.hp || '-' }}</span>
+      <span><strong>Deslocamento</strong> {{ monster.speed || '-' }}</span>
+    </div>
+
+    <table class="attr-table">
+      <thead>
+        <tr>
+          <th colspan="2"></th>
+          <th>MOD</th>
+          <th>SALV</th>
+          <th colspan="2"></th>
+          <th>MOD</th>
+          <th>SALV</th>
+          <th colspan="2"></th>
+          <th>MOD</th>
+          <th>SALV</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of abilityRows">
+          <ng-container *ngFor="let ability of row">
+            <td class="attr-name">{{ abilityLabel(ability) }}</td>
+            <td class="attr-val">{{ monster.abilities[ability].score }}</td>
+            <td class="attr-mod">{{ abilityModifier(ability) }}</td>
+            <td class="attr-mod">{{ abilitySave(ability) }}</td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="details stat-section">
+      <div *ngIf="monster.skills.trim()">
+        <strong>Pericias</strong> {{ monster.skills }}
+      </div>
+      <div *ngIf="monster.resistances.trim()">
+        <strong>Resistencias</strong> {{ monster.resistances }}
+      </div>
+      <div *ngIf="monster.immunities.trim()">
+        <strong>Imunidades</strong> {{ monster.immunities }}
+      </div>
+      <div *ngIf="monster.conditionImmunities.trim()">
+        <strong>Imunidades a Condicoes</strong> {{ monster.conditionImmunities }}
+      </div>
+      <div><strong>Sentidos</strong> {{ monster.senses || '-' }}</div>
+      <div><strong>Idiomas</strong> {{ monster.languages || '-' }}</div>
+      <div><strong>ND</strong> {{ challengeText }}</div>
+    </div>
+
+    <ng-container *ngFor="let section of sectionOrder">
+      <ng-container *ngIf="getSectionEntries(section) as entries">
+        <ng-container *ngIf="entries.length > 0">
+          <div class="section-header">
+            <div class="section-line"></div>
+            <span class="section-title">{{ sectionLabels[section] }}</span>
+            <div class="section-line"></div>
+          </div>
+
+          <ng-container *ngFor="let entry of entries">
+            <ng-container *ngIf="entry.kind === 'text'">
+              <div class="entry-block">
+                <p class="entry" *ngFor="let line of entry.lines; let first = first">
+                  <strong *ngIf="first">{{ entry.name }}.</strong>
+                  <ng-container *ngIf="first">&nbsp;</ng-container>
+                  <ng-container *ngFor="let part of line">
+                    <ng-container *ngIf="part.linkItem; else plainText">
+                      <a
+                        class="guide-link"
+                        [routerLink]="['/guia']"
+                        [fragment]="part.linkItem.id"
+                        [matTooltip]="formatTooltip(part.linkItem.description)"
+                        matTooltipClass="guide-tooltip"
+                      >{{ part.text }}</a>
+                    </ng-container>
+                    <ng-template #plainText>
+                      <strong *ngIf="part.bold; else italicText">{{ part.text }}</strong>
+                      <ng-template #italicText>
+                        <em *ngIf="part.italic; else normalText">{{ part.text }}</em>
+                        <ng-template #normalText>{{ part.text }}</ng-template>
+                      </ng-template>
+                    </ng-template>
+                  </ng-container>
+                </p>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="entry.kind === 'spellcasting'">
+              <div class="entry-block">
+                <p class="entry" *ngFor="let line of entry.intro; let first = first">
+                  <strong *ngIf="first">{{ entry.name }}.</strong>
+                  <ng-container *ngIf="first">&nbsp;</ng-container>
+                  <ng-container *ngFor="let part of line">
+                    <ng-container *ngIf="part.linkItem; else plainSpellText">
+                      <a
+                        class="guide-link"
+                        [routerLink]="['/guia']"
+                        [fragment]="part.linkItem.id"
+                        [matTooltip]="formatTooltip(part.linkItem.description)"
+                        matTooltipClass="guide-tooltip"
+                      >{{ part.text }}</a>
+                    </ng-container>
+                    <ng-template #plainSpellText>
+                      <strong *ngIf="part.bold; else spellItalicText">{{ part.text }}</strong>
+                      <ng-template #spellItalicText>
+                        <em *ngIf="part.italic; else spellNormalText">{{ part.text }}</em>
+                        <ng-template #spellNormalText>{{ part.text }}</ng-template>
+                      </ng-template>
+                    </ng-template>
+                  </ng-container>
+                </p>
+
+                <p class="entry spell-group" *ngFor="let group of entry.groups">
+                  <strong>{{ group.label }}:</strong>
+                  <ng-container *ngIf="group.spells.length > 0; else emptyGroup">
+                    <ng-container *ngFor="let spell of group.spells; let last = last">
+                      <a class="spell-link" [routerLink]="['/magias']" [fragment]="spell.id">{{ spell.name }}</a>
+                      <span *ngIf="!last">, </span>
+                    </ng-container>
+                  </ng-container>
+                  <ng-template #emptyGroup>-</ng-template>
+                </p>
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

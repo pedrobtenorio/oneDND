@@ -1,0 +1,36 @@
+<section class="page">
+  <header class="header">
+    <p class="eyebrow">Busca Global</p>
+    <h1>Encontrar regras, magias e equipamentos</h1>
+  </header>
+
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Buscar em todo o guia</mat-label>
+    <input matInput [formControl]="searchControl" placeholder="Ex: contido, cura, espada, familiar">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <ng-container *ngIf="results$ | async as search">
+    <p class="result-count">
+      {{ search.results.length }} resultado(s){{ search.query ? ' para "' + search.query + '"' : ' recentes' }}
+    </p>
+
+    <div class="results" *ngIf="search.results.length > 0; else emptyResults">
+      <a
+        class="result-card"
+        *ngFor="let result of search.results; trackBy: trackResult"
+        [routerLink]="result.route"
+        [fragment]="result.fragment"
+      >
+        <span class="kind">{{ kindLabel(result.kind) }}</span>
+        <h2>{{ result.title }}</h2>
+        <p class="subtitle">{{ result.subtitle }}</p>
+        <p class="description">{{ result.description }}</p>
+      </a>
+    </div>
+
+    <ng-template #emptyResults>
+      <p class="empty">Nenhum resultado encontrado.</p>
+    </ng-template>
+  </ng-container>
+</section>
