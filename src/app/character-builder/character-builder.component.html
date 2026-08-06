@@ -1,0 +1,168 @@
+<div class="turn-page character-page">
+  <header class="hero">
+    <div>
+      <span class="kicker">Biblioteca de personagens</span>
+      <h1>Personagens</h1>
+      <p>Crie e revise cada personagem por etapas. As escolhas e seus limites são calculados a partir da progressão configurada.</p>
+    </div>
+    <button class="hero-button" type="button" (click)="newProfile()">Novo personagem</button>
+  </header>
+
+  @if (loadError) { <p class="alert error" role="alert">{{ loadError }}</p> }
+  @if (notice) { <p class="alert" role="status">{{ notice }}</p> }
+
+  <section class="library-panel" aria-labelledby="library-title">
+    <div class="section-heading">
+      <div><span>Biblioteca</span><h2 id="library-title">Personagens salvos</h2></div>
+      <div class="library-actions">
+        <button class="text-button" type="button" (click)="exportLibrary()">Exportar</button>
+        <label class="file-button">Importar<input type="file" accept="application/json" (change)="importLibrary($event)" /></label>
+      </div>
+    </div>
+    <div class="profile-grid">
+      @for (profile of profiles; track profile.id) {
+        <article class="profile-card" [class.active]="profile.id === profileForm.controls.id.value">
+          <div><strong>{{ profile.name }}</strong><small>Nível {{ profileLevel(profile) }}{{ profile.classes.length > 1 ? ' · multiclasse' : '' }}</small></div>
+          <div class="profile-card-actions">
+            <button class="secondary-button" type="button" (click)="loadProfile(profile)">Editar</button>
+            <button class="text-button danger" type="button" (click)="deleteProfile(profile)">Excluir</button>
+          </div>
+        </article>
+      }
+      @if (!profiles.length) { <p class="empty-library">Nenhum personagem salvo. Use o assistente abaixo para criar o primeiro.</p> }
+    </div>
+  </section>
+
+  <form class="wizard" [formGroup]="profileForm" (ngSubmit)="submitWizard()">
+    <nav class="stepper" aria-label="Etapas da criação">
+      @for (step of steps; track step.title; let index = $index) {
+        <button
+          type="button"
+          [class.active]="currentStep === index"
+          [class.completed]="index < currentStep || index <= furthestStep"
+          [disabled]="index > furthestStep"
+          [attr.aria-current]="currentStep === index ? 'step' : null"
+          (click)="openStep(index)"
+        >
+          <span>{{ index + 1 }}</span>
+          <strong>{{ step.short }}</strong>
+        </button>
+      }
+    </nav>
+
+    <section class="wizard-card">
+      <header class="wizard-heading">
+        <span>Etapa {{ currentStep + 1 }} de {{ steps.length }}</span>
+        <h2 id="character-step-title" tabindex="-1">{{ steps[currentStep].title }}</h2>
+      </header>
+
+      @if (currentStep === 0) {
+        <div class="form-grid">
+          <label class="field"><span>Nome</span><input formControlName="name" /></label>
+          <label class="field"><span>Espécie</span><select formControlName="speciesId" (change)="speciesChanged()">@for (option of species; track option.id) { <option [value]="option.id">{{ option.name }}</option> }</select></label>
+          @if (speciesChoices.length) {
+            <label class="field"><span>Escolha da espécie</span><select formControlName="speciesChoiceId"><option value="">Selecione</option>@for (option of speciesChoices; track option.id) { <option [value]="option.id">{{ option.name }}</option> }</select></label>
+          }
+        </div>
+        <div class="progression-heading"><strong>Níveis de classe</strong><span>{{ totalConfiguredLevel }}/6</span></div>
+        <div class="class-grid">
+          @for (entry of classes; track entry.id) {
+            <label class="level-card"><span>{{ entry.name }}</span><input type="number" min="0" max="5" [formControlName]="entry.id" (input)="classLevelChanged(entry.id)" /></label>
+          }
+        </div>
+        @if (totalConfiguredLevel >= 3) {
+          <div class="form-grid subclass-grid">
+            @for (entry of classes; track entry.id) {
+              @if (profileForm.controls[entry.id].value >= 3) {
+                <label class="field">
+                  <span>Subclasse de {{ entry.name }}</span>
+                  <select [formControlName]="subclassControlName(entry.id)">
+                    <option value="">Selecione</option>
+                    @for (option of subclassesFor(entry.id); track option.id) { <option [value]="option.id">{{ option.name }}</option> }
+                  </select>
+                </label>
+              }
+            }
+          </div>
+        }
+        <p class="helper">O nível total continua limitado a 6 para permitir multiclasse, mas cada classe está modelada até o nível 5. No nível 3, escolha uma das quatro subclasses do livro.</p>
+      }
+
+      @if (currentStep === 1) {
+        <p class="step-intro">Informe os valores finais, depois de espécie, antecedentes, talentos e demais ajustes.</p>
+        <div class="ability-grid">
+          <label class="ability-card"><span>Força</span><input type="number" min="1" max="20" formControlName="strength" /></label>
+          <label class="ability-card"><span>Destreza</span><input type="number" min="1" max="20" formControlName="dexterity" /></label>
+          <label class="ability-card"><span>Constituição</span><input type="number" min="1" max="20" formControlName="constitution" /></label>
+          <label class="ability-card"><span>Inteligência</span><input type="number" min="1" max="20" formControlName="intelligence" /></label>
+          <label class="ability-card"><span>Sabedoria</span><input type="number" min="1" max="20" formControlName="wisdom" /></label>
+          <label class="ability-card"><span>Carisma</span><input type="number" min="1" max="20" formControlName="charisma" /></label>
+        </div>
+        @if (selectedSubclass('guardiao') === 'cacador') {
+          <label class="field compact"><span>Presa do Caçador</span><select formControlName="hunterPreyId">@for (option of hunterPreyOptions; track option.id) { <option [value]="option.id">{{ option.name }}</option> }</select></label>
+        }
+      }
+
+      @if (currentStep === 2) {
+        <div class="choice-sections">
+          <app-checkbox-choice-group title="Talentos de Origem" [items]="originFeatItems" [selected]="originSelected" [limit]="originFeatLimit" hint="Humanos selecionam um talento de Origem adicional." (selectionChange)="setFeatGroup('origin', $event)" />
+          @if (generalFeatLimit > 0) {
+            <app-checkbox-choice-group title="Talentos Gerais" [items]="generalFeatItems" [selected]="generalSelected" [limit]="generalFeatLimit" (selectionChange)="setFeatGroup('general', $event)" />
+          }
+          @if (fightingStyleLimit > 0) {
+            <app-checkbox-choice-group title="Estilos de Luta" [items]="fightingStyleItems" [selected]="profileForm.controls.fightingStyleIds.value" [limit]="fightingStyleLimit" (selectionChange)="setArraySelection('fightingStyleIds', $event)" />
+          }
+          @if (maneuverLimit > 0) {
+            <app-checkbox-choice-group title="Manobras" [items]="maneuverItems" [selected]="profileForm.controls.maneuverIds.value" [limit]="maneuverLimit" hint="Mestre da Batalha conhece três manobras no nível 3." (selectionChange)="setArraySelection('maneuverIds', $event)" />
+          }
+          @if (classSpellLimit > 0) {
+            <app-checkbox-choice-group title="Magias de classe" [items]="classSpellItems" [selected]="profileForm.controls.preparedSpellIds.value" [limit]="classSpellLimit" hint="As listas e o círculo máximo são calculados pelas classes. Magias sempre preparadas não ocupam este limite." (selectionChange)="setArraySelection('preparedSpellIds', $event)" />
+          }
+          @if (cantripLimit > 0) {
+            <app-checkbox-choice-group title="Truques" [items]="cantripItems" [selected]="profileForm.controls.cantripIds.value" [limit]="cantripLimit" hint="O limite reúne os truques conhecidos pelas classes e os concedidos por talentos ou estilos." (selectionChange)="setArraySelection('cantripIds', $event)" />
+          }
+          @if (magicInitiateSpellLimit > 0) {
+            <app-checkbox-choice-group title="Magias de Iniciado em Magia" [items]="magicInitiateSpellItems" [selected]="profileForm.controls.magicInitiateSpellIds.value" [limit]="magicInitiateSpellLimit" hint="Escolha uma magia de 1º círculo da mesma lista. Ela pode ser conjurada gratuitamente uma vez por Descanso Longo." (selectionChange)="setArraySelection('magicInitiateSpellIds', $event)" />
+          }
+          @if (freeSpellLimit > 0) {
+            <app-checkbox-choice-group title="Outras magias de talentos" [items]="freeSpellItems" [selected]="profileForm.controls.freeSpellIds.value" [limit]="freeSpellLimit" (selectionChange)="setArraySelection('freeSpellIds', $event)" />
+          }
+        </div>
+      }
+
+      @if (currentStep === 3) {
+        <div class="equipment-grid">
+          <label class="field"><span>Armadura</span><select formControlName="armor"><option value="none">Sem armadura</option><option value="light">Leve</option><option value="medium">Média</option><option value="heavy">Pesada</option></select></label>
+          <label class="field"><span>Deslocamento (m)</span><input type="number" min="1.5" max="30" step="1.5" formControlName="speed" /></label>
+          <label class="check-field"><input type="checkbox" formControlName="hasShield" /> Empunha escudo</label>
+        </div>
+        <div class="choice-sections">
+          <app-checkbox-choice-group title="Armas carregadas" [items]="weaponItems" [selected]="profileForm.controls.weaponIds.value" [limit]="allWeapons.length" hint="O contador mostra quantas armas do catálogo foram adicionadas ao perfil." (selectionChange)="setArraySelection('weaponIds', $event)" />
+          <app-checkbox-choice-group title="Maestrias em Arma" [items]="weaponItems" [selected]="profileForm.controls.masteryWeaponIds.value" [limit]="masteryLimit" (selectionChange)="setArraySelection('masteryWeaponIds', $event)" />
+        </div>
+        <aside class="review-card">
+          <span>Resumo</span>
+          <strong>{{ profileForm.controls.name.value }}</strong>
+          <p>Nível {{ totalConfiguredLevel }} · {{ profileForm.controls.speciesId.value }} · {{ profileForm.controls.weaponIds.value.length }} arma(s)</p>
+        </aside>
+      }
+
+      @if (errors.length) {
+        <div class="validation" role="alert"><strong>Revise esta etapa:</strong><ul>@for (error of errors; track error) { <li>{{ error }}</li> }</ul></div>
+      }
+
+      <footer class="wizard-actions">
+        <button class="secondary-button" type="button" (click)="previousStep()" [disabled]="currentStep === 0">Voltar</button>
+        <span>Etapa {{ currentStep + 1 }}/{{ steps.length }}</span>
+        @if (currentStep < steps.length - 1) {
+          <button class="primary-button" type="button" (click)="nextStep()">Avançar</button>
+        } @else {
+          <div class="finish-actions">
+            <button class="secondary-button" type="submit">Salvar personagem</button>
+            <button class="primary-button" type="button" (click)="saveProfile(true)">Salvar e abrir turnos</button>
+          </div>
+        }
+      </footer>
+    </section>
+  </form>
+</div>

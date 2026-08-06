@@ -7594,43 +7594,6 @@
     "description": "Você usa sua energia vital para se curar. Jogue um ou dois de seus Dados de Pontos de Vida não gastos e recupera um número de Pontos de Vida igual ao total do teste mais seu modificador de atributo de conjuração. Esses dados são, então, gastos.\n**Usando um Espaço de Magia de Círculo Superior.** O número de Dados de Vida não gastos que você pode jogar aumenta em um para cada círculo de espaço de magia acima de 2."
   },
   {
-    "id": "vigor-arcano",
-    "name": "Vigor Arcano",
-    "level": 2,
-    "school": "Abjuração",
-    "classes": [
-      "Feiticeiro",
-      "Mago"
-    ],
-    "castingTime": "Ação Bônus",
-    "range": "Pessoal",
-    "components": [
-      "V",
-      "S"
-    ],
-    "duration": "Instantânea",
-    "description": "Você usa sua energia vital para se curar. Jogue um ou dois de seus Dados de Pontos de Vida não gastos e recupera um número de Pontos de Vida igual ao total do teste mais seu modificador de atributo de conjuração. Esses dados são, então, gastos.\n**Usando um Espaço de Magia de Círculo Superior.** O número de Dados de Vida não gastos que você pode jogar aumenta em um para cada círculo de espaço de magia acima de 2."
-  },
-  {
-    "id": "vinculo-de-protecao",
-    "name": "Vínculo de Proteção",
-    "level": 2,
-    "school": "Abjuração",
-    "classes": [
-      "Clérigo",
-      "Paladino"
-    ],
-    "castingTime": "Ação",
-    "range": "Toque",
-    "components": [
-      "V",
-      "S",
-      "M (um par de anéis de platina no valor de 50 ou mais PO cada, que você e o alvo devem usar pela duração da magia)"
-    ],
-    "duration": "1 hora",
-    "description": "Você toca outra criatura voluntária e cria uma conexão mística entre você e o alvo até que a magia termine. Enquanto o alvo estiver a até 18 metros de você, ele obtém um bônus de +1 na CA e nas salvaguardas e tem Resistência a todos os tipos de dano. Além disso, cada vez que ele sofrer dano, você sofre a mesma quantidade de dano.\nA magia se encerra se você for reduzido a 0 Pontos de Vida, se você e o alvo ficarem a mais de 18 metros de distância ou se for conjurada novamente em qualquer uma das criaturas conectadas."
-  },
-  {
     "id": "vinculo-de-protecao",
     "name": "Vínculo de Proteção",
     "level": 2,

@@ -82,13 +82,14 @@ describe('GlobalSearchService', () => {
           useValue: {
             getWeapons: () =>
               of({
-                properties: [{ name: 'Acuidade', description: 'Use Força ou Destreza.' }],
-                masteryProperties: [{ name: 'Ágil', description: 'Ataque adicional.' }],
+                properties: [{ id: 'property-acuidade', name: 'Acuidade', description: 'Use Força ou Destreza.' }],
+                masteryProperties: [{ id: 'mastery-agil', name: 'Ágil', description: 'Ataque adicional.' }],
                 categories: [
                   {
                     name: 'Armas Simples',
                     weapons: [
                       {
+                        id: 'weapon-adaga',
                         name: 'Adaga',
                         damage: '1d4 Perfurante',
                         properties: 'Acuidade, Leve',

@@ -1,0 +1,84 @@
+<div class="turn-page">
+  <header class="hero">
+    <div>
+      <span class="kicker">D&amp;D 2024 · níveis 1–6</span>
+      <h1>Auxiliar de Turnos</h1>
+      <p>Escolha um personagem salvo e acompanhe custos, gatilhos e bloqueios durante o turno.</p>
+    </div>
+    <label class="density-toggle"><input type="checkbox" [checked]="didactic" (change)="didactic = !didactic" /> Modo didático</label>
+  </header>
+
+  @if (loadError) { <p class="alert error" role="alert">{{ loadError }}</p> }
+  @if (notice) { <p class="alert" role="status">{{ notice }}</p> }
+
+  <section class="character-picker" aria-labelledby="character-picker-title">
+    <div class="picker-heading">
+      <div><span>Antes de começar</span><h2 id="character-picker-title">Escolha o personagem</h2></div>
+      <a class="secondary-button link-button" routerLink="/personagens">Gerenciar personagens</a>
+    </div>
+    @if (profiles.length) {
+      <div class="picker-grid" role="radiogroup" aria-label="Personagens salvos">
+        @for (profile of profiles; track profile.id) {
+          <label class="profile-option" [class.selected]="selectedProfileId === profile.id">
+            <input type="radio" name="turn-profile" [checked]="selectedProfileId === profile.id" (change)="selectProfile(profile.id)" />
+            <span><strong>{{ profile.name }}</strong><small>Nível {{ profileLevel(profile) }}{{ profile.classes.length > 1 ? ' · multiclasse' : '' }}</small></span>
+          </label>
+        }
+      </div>
+      <button class="primary-button start-button" type="button" (click)="startSession()" [disabled]="!catalog || !selectedProfileId">
+        {{ sessionStarted ? 'Trocar ou reiniciar com este personagem' : 'Iniciar auxiliar de turnos' }}
+      </button>
+    } @else {
+      <div class="empty-picker"><p>Você ainda não possui personagens salvos.</p><a class="primary-button link-button" routerLink="/personagens">Criar personagem</a></div>
+    }
+  </section>
+
+  @if (sessionStarted && state && activeProfile) {
+    <section class="active-character" aria-live="polite"><span>Personagem ativo</span><strong>{{ activeProfile.name }}</strong></section>
+    <section class="session" [class.reaction-phase]="state.phase === 'reaction-window'">
+      <app-turn-resource-bar [state]="state" (resourceChange)="store.setResource($event.id, $event.current)" />
+      <div class="context-card"><app-combat-context [context]="context" (factChange)="factChanged($event)" /></div>
+
+      @if (state.awaitingAttackOutcome) {
+        <section class="outcome" aria-live="assertive"><strong>Qual foi o resultado do ataque?</strong><button class="primary-button" type="button" (click)="store.attackResult('hit')">Acertou</button><button class="secondary-button" type="button" (click)="store.attackResult('miss')">Errou</button></section>
+      }
+      @if (state.currentTrigger) {
+        <section class="trigger-banner"><span>Gatilho ativo: <strong>{{ state.currentTrigger }}</strong></span><button class="text-button" type="button" (click)="store.clearTrigger()">Concluir gatilhos</button></section>
+      }
+      @if (canPerformNextAttack) {
+        <section class="next-attack-banner">
+          <span><strong>{{ state.attacksRemaining }}</strong> ataque(s) restante(s) nesta ação.</span>
+          <button class="primary-button" type="button" (click)="performNextAttack()">Realizar próximo ataque</button>
+        </section>
+      }
+
+      <div class="session-grid">
+        <div class="board-column">
+          @if (state.phase === 'own-turn') {
+            <div class="movement-actions" aria-label="Registrar movimento"><span>Registrar movimento:</span><button class="secondary-button" type="button" (click)="store.move(1.5)" [disabled]="state.movementRemaining < 1.5">1,5 m</button><button class="secondary-button" type="button" (click)="store.move(3)" [disabled]="state.movementRemaining < 3">3 m</button></div>
+            <app-turn-action-board [evaluations]="ownTurnEvaluations" [didactic]="didactic" (inspect)="inspect($event)" />
+          } @else {
+            <section class="reaction-heading"><span>Turno encerrado</span><h2>Janela de Reação</h2><p>A Reação e os efeitos relevantes continuam acompanhados até o início do próximo turno.</p></section>
+            <app-turn-action-board [evaluations]="reactionEvaluations" [didactic]="didactic" (inspect)="inspect($event)" />
+          }
+        </div>
+        <div class="side-column"><app-rule-details [evaluation]="selectedEvaluation" (confirm)="confirmSelected()" (factAnswer)="factChanged($event)" /><app-turn-timeline [state]="state" [canUndo]="store.canUndo" [canRedo]="store.canRedo" (undo)="store.undo()" (redo)="store.redo()" /></div>
+      </div>
+      <footer class="turn-controls">@if (state.phase === 'own-turn') { <button id="end-turn-button" class="primary-button" type="button" (click)="requestEndTurn()">Encerrar turno</button> } @else { <button class="primary-button" type="button" (click)="store.startNextTurn()">Iniciar próximo turno</button> }</footer>
+    </section>
+  }
+
+  @if (endConfirmationOpen) {
+    <div class="confirmation-backdrop" (keydown.escape)="cancelEndTurn()">
+      <section class="end-confirmation" role="alertdialog" aria-modal="true" aria-labelledby="end-turn-confirmation-title">
+        <span class="confirmation-kicker">Ainda há opções neste turno</span>
+        <h2 id="end-turn-confirmation-title" tabindex="-1">Tem certeza de que deseja encerrar?</h2>
+        <ul>@for (reason of remainingEconomy; track reason) { <li>{{ reason }}</li> }</ul>
+        <div class="confirmation-actions">
+          <button class="secondary-button" type="button" (click)="cancelEndTurn()">Continuar turno</button>
+          <button class="primary-button" type="button" (click)="confirmEndTurn()">Encerrar mesmo assim</button>
+        </div>
+      </section>
+    </div>
+  }
+</div>

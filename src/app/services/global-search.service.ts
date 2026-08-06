@@ -90,7 +90,7 @@ export class GlobalSearchService {
       ...summons.map((summon) => this.summonResult(summon)),
       ...weapons.categories.flatMap((category) =>
         category.weapons.map((weapon) => ({
-          id: `weapon-${normalizeKey(weapon.name)}`,
+          id: weapon.id,
           kind: 'weapon' as const,
           title: weapon.name,
           subtitle: category.name,
@@ -110,7 +110,7 @@ export class GlobalSearchService {
         }))
       ),
       ...weapons.properties.map((property) => ({
-        id: `weapon-property-${normalizeKey(property.name)}`,
+        id: property.id,
         kind: 'weapon-property' as const,
         title: property.name,
         subtitle: 'Propriedade de arma',
@@ -119,7 +119,7 @@ export class GlobalSearchService {
         searchText: this.searchText([property.name, property.description, 'propriedade arma']),
       })),
       ...weapons.masteryProperties.map((property) => ({
-        id: `weapon-mastery-${normalizeKey(property.name)}`,
+        id: property.id,
         kind: 'weapon-mastery' as const,
         title: property.name,
         subtitle: 'Maestria de arma',

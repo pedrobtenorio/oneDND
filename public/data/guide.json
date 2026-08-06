@@ -127,7 +127,7 @@
       },
       {
         "id": "acao-dash",
-        "name": "Disparada",
+        "name": "Correr",
         "description": "Voce ganha movimento adicional igual ao seu Deslocamento neste turno."
       },
       {
@@ -157,7 +157,7 @@
       },
       {
         "id": "acao-magic",
-        "name": "Conjurar Magia",
+        "name": "Usar Magia",
         "description": "Conjurar uma magia ou usar um item magico."
       },
       {
@@ -172,12 +172,12 @@
       },
       {
         "id": "acao-study",
-        "name": "Estudar",
+        "name": "Analisar",
         "description": "Teste de conhecimento para analisar ou recordar informacao."
       },
       {
         "id": "acao-utilize",
-        "name": "Utilizar",
+        "name": "Usar Objeto",
         "description": "Usar um objeto nao magico."
       }
     ]

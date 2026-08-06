@@ -1,21 +1,23 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet],
   template: `
     <header class="topbar">
       <span class="title">One D&amp;D Guide</span>
       <nav class="nav">
-        <a routerLink="/guia" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a href="/guia" [class.active]="router.url === '/guia'" (click)="navigate('/guia', $event)">
           Guia
         </a>
-        <a routerLink="/magias" routerLinkActive="active">Magias</a>
-        <a routerLink="/armas" routerLinkActive="active">Armas</a>
-        <a routerLink="/busca" routerLinkActive="active">Busca</a>
-        <a routerLink="/monstros" routerLinkActive="active">Monstros</a>
+        <a href="/magias" [class.active]="router.url.startsWith('/magias')" (click)="navigate('/magias', $event)">Magias</a>
+        <a href="/armas" [class.active]="router.url.startsWith('/armas')" (click)="navigate('/armas', $event)">Armas</a>
+        <a href="/personagens" [class.active]="router.url.startsWith('/personagens')" (click)="navigate('/personagens', $event)">Personagens</a>
+        <a href="/turno" [class.active]="router.url.startsWith('/turno')" (click)="navigate('/turno', $event)">Auxiliar de turnos</a>
+        <a href="/busca" [class.active]="router.url.startsWith('/busca')" (click)="navigate('/busca', $event)">Busca</a>
+        <a href="/monstros" [class.active]="router.url.startsWith('/monstros')" (click)="navigate('/monstros', $event)">Monstros</a>
       </nav>
       <span class="spacer"></span>
     </header>
@@ -128,4 +130,13 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
     }
   `,
 })
-export class App {}
+export class App {
+  readonly router = inject(Router);
+
+  navigate(path: string, event: MouseEvent): void {
+    if (event.button === 0 && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
+      event.preventDefault();
+      void this.router.navigateByUrl(path);
+    }
+  }
+}
