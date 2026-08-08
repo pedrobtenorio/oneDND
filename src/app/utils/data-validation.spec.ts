@@ -2,6 +2,7 @@ import {
   validateGuideData,
   validateSpellData,
   validateSummonData,
+  validateTurnRuleFile,
   validateWeaponsData,
 } from './data-validation';
 
@@ -60,5 +61,28 @@ describe('data validation utilities', () => {
   it('rejects malformed weapons data', () => {
     expect(() => validateWeaponsData({ properties: [], masteryProperties: [], categories: [{}] }))
       .toThrowError('weapon categories has an invalid item at index 0.');
+  });
+
+  it('rejects unknown turn-rule operators', () => {
+    expect(() =>
+      validateTurnRuleFile({
+        rules: [
+          {
+            id: 'bad-rule',
+            name: 'Inválida',
+            summary: 'Operador desconhecido.',
+            origin: 'core',
+            originId: 'test',
+            activation: 'free',
+            category: 'modifier',
+            conditions: [{ type: 'eval-javascript' }],
+            costs: [],
+            effects: [],
+            support: 'structured',
+            source: { book: 'Livro do Jogador', revision: '2024', page: 1 },
+          },
+        ],
+      })
+    ).toThrowError('turn rule file has invalid options or rules.');
   });
 });

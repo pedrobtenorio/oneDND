@@ -1,0 +1,6 @@
+{
+  "schemaVersion": 1,
+  "edition": "D&D 2024",
+  "revision": "Livro do Jogador - Erratas de Agosto",
+  "files": ["core.json", "classes.json", "class-actions.json", "subclasses.json", "species.json", "feats.json", "weapons.json"]
+}

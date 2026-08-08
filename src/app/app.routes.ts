@@ -16,6 +16,16 @@ export const appRoutes: Routes = [
     loadComponent: () => import('./armas/armas.component').then((m) => m.ArmasComponent),
   },
   {
+    path: 'personagens',
+    loadComponent: () =>
+      import('./character-builder/character-builder.component').then((m) => m.CharacterBuilderComponent),
+  },
+  {
+    path: 'turno',
+    loadComponent: () =>
+      import('./turn-planner/turn-planner.component').then((m) => m.TurnPlannerComponent),
+  },
+  {
     path: 'busca',
     loadComponent: () =>
       import('./global-search/global-search.component').then((m) => m.GlobalSearchComponent),

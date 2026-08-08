@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "test:data": "node scripts/validate-turn-data.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

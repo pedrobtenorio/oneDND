@@ -1,76 +1,94 @@
 {
   "properties": [
     {
+      "id": "property-acuidade",
       "name": "Acuidade",
       "description": "Ao realizar um ataque com uma arma que possui Acuidade, utilize seu modificador de Força ou Destreza, à sua escolha, para as jogadas de ataque e dano. Você deve aplicar o mesmo modificador em ambas as jogadas."
     },
     {
+      "id": "property-alcance",
       "name": "Alcance",
       "description": "Uma arma com Alcance possui um alcance indicado entre parênteses após a propriedade Munição ou Arremesso. O alcance apresenta dois números: o primeiro representa o alcance normal da arma em metros, enquanto o segundo indica o alcance máximo. Ao atacar um alvo que esteja além do alcance normal, você tem Desvantagem na jogada de ataque. Não é possível atacar um alvo que esteja além do alcance máximo."
     },
     {
+      "id": "property-arremesso",
       "name": "Arremesso",
       "description": "Se uma arma possui a propriedade Arremesso, você pode arremessá-la para realizar um ataque à distância, e pode sacar essa arma como parte do ataque. Se a arma for corpo a corpo, utilize o mesmo modificador de atributo para as jogadas de ataque e dano que você emprega ao realizar um ataque corpo a corpo com essa arma."
     },
     {
+      "id": "property-duas-maos",
       "name": "Duas Mãos",
       "description": "Uma arma de Duas Mãos exige o uso de duas mãos quando você ataca com ela."
     },
     {
+      "id": "property-extensao",
       "name": "Extensão",
       "description": "Uma arma de Extensão adiciona 1,5 metro ao seu alcance quando você ataca com ela, bem como ao determinar seu alcance para realizar Ataques de Oportunidade com ela."
     },
     {
+      "id": "property-leve",
       "name": "Leve",
       "description": "Quando você executa a ação Atacar em seu turno e usa uma arma Leve, pode realizar um ataque adicional como uma Ação Bônus mais tarde no mesmo turno. Esse ataque adicional deve ser realizado com uma arma Leve diferente, e você não adiciona seu modificador de atributo ao dano do ataque adicional, a menos que esse modificador seja negativo. Por exemplo, você pode atacar com uma Espada Curta em uma mão e uma Adaga na outra executando a ação Atacar e uma Ação Bônus, mas não adiciona seu modificador de Força ou Destreza à jogada de dano da Ação Bônus, a menos que esse modificador seja negativo."
     },
     {
+      "id": "property-municao",
       "name": "Munição",
       "description": "Você só pode usar uma arma com a propriedade Munição para realizar um ataque à distância se tiver munição disponível. O tipo de munição necessária é especificado junto ao alcance da arma. Cada ataque gasta uma peça de munição. Sacar a munição é parte do ataque (você precisa de uma mão livre para carregar uma arma com uma mão). Após uma luta, você pode gastar 1 minuto para recuperar metade da munição (arredondado para baixo) que utilizou na luta; o restante é perdido."
     },
     {
+      "id": "property-pesada",
       "name": "Pesada",
       "description": "Você tem Desvantagem em jogadas de ataque com uma arma Pesada se for uma arma Corpo a Corpo e seu valor de Força for inferior a 13, ou se for uma arma à Distância e seu valor de Destreza for inferior a 13."
     },
     {
+      "id": "property-recarga",
       "name": "Recarga",
       "description": "Você pode disparar apenas uma única peça de munição de uma arma com Recarga ao executar uma ação, uma Ação Bônus ou uma Reação para dispará-la, independentemente do número de ataques que você normalmente pode realizar."
     },
     {
+      "id": "property-versatil",
       "name": "Versátil",
       "description": "Uma arma Versátil pode ser usada com uma ou duas mãos. Um valor de dano entre parênteses aparece com a propriedade. A arma causa esse dano quando usada com as duas mãos ao realizar um ataque corpo a corpo."
     }
   ],
   "masteryProperties": [
     {
+      "id": "mastery-afligir",
       "name": "Afligir",
       "description": "Se você atingir uma criatura com esta arma e causar dano a ela, você tem Vantagem em sua próxima jogada de ataque contra essa criatura antes do final do seu próximo turno."
     },
     {
+      "id": "mastery-agil",
       "name": "Ágil",
       "description": "Ao realizar o ataque adicional da propriedade Leve, você pode fazê-lo como parte da ação Atacar, em vez de uma Ação Bônus. Esse ataque adicional só pode ser realizado uma vez por turno."
     },
     {
+      "id": "mastery-derrubar",
       "name": "Derrubar",
       "description": "Se você atingir uma criatura com esta arma, você pode forçar a criatura a realizar uma salvaguarda de Constituição (CD 8 mais o modificador de atributo usado para realizar a jogada de ataque e seu Bônus de Proficiência). Se falhar, a criatura tem a condição Caído."
     },
     {
+      "id": "mastery-drenar",
       "name": "Drenar",
       "description": "Se você atingir uma criatura com esta arma, essa criatura tem Desvantagem na próxima jogada de ataque dela antes do início do seu próximo turno."
     },
     {
+      "id": "mastery-empurrar",
       "name": "Empurrar",
       "description": "Se atingir uma criatura com esta arma, você pode empurrá-la até 3 metros para longe de você se a criatura for Grande ou menor."
     },
     {
+      "id": "mastery-garantido",
       "name": "Garantido",
       "description": "Se sua jogada de ataque com esta arma errar uma criatura, você pode causar dano a essa criatura igual ao modificador de atributo que utilizou para realizar a jogada de ataque. Este dano é do mesmo tipo causado pela arma, e só pode ser aumentado se o modificador de atributo for incrementado."
     },
     {
+      "id": "mastery-lentidao",
       "name": "Lentidão",
       "description": "Se você atingir uma criatura com esta arma e causar dano a ela, você pode reduzir o Deslocamento da criatura atingida em 3 metros até o início do seu próximo turno. Se a criatura for atingida mais de uma vez por armas que tenham essa propriedade, a redução de Deslocamento não excede 3 metros."
     },
     {
+      "id": "mastery-trespassar",
       "name": "Trespassar",
       "description": "Se atingir uma criatura com uma jogada de ataque corpo a corpo usando esta arma, você pode realizar uma jogada de ataque corpo a corpo com a mesma arma contra uma segunda criatura a até 1,5 metro da primeira que também esteja ao seu alcance. Se acertar, a segunda criatura sofre o dano da arma, mas você não adiciona seu modificador de atributo a esse dano, a menos que esse modificador seja negativo. Você pode realizar esse ataque adicional apenas uma vez por turno."
     }
@@ -80,6 +98,7 @@
       "name": "Armas Simples Corpo a Corpo",
       "weapons": [
         {
+          "id": "weapon-adaga",
           "name": "Adaga",
           "damage": "1d4 Perfurante",
           "properties": "Acuidade, Arremesso (Alcance 6/18), Leve",
@@ -88,6 +107,7 @@
           "cost": "2 PO"
         },
         {
+          "id": "weapon-azagaia",
           "name": "Azagaia",
           "damage": "1d6 Perfurante",
           "properties": "Arremesso (Alcance 9/36)",
@@ -96,6 +116,7 @@
           "cost": "5 PP"
         },
         {
+          "id": "weapon-cajado",
           "name": "Cajado",
           "damage": "1d6 Contundente",
           "properties": "Versátil (1d8)",
@@ -104,6 +125,7 @@
           "cost": "2 PP"
         },
         {
+          "id": "weapon-clava",
           "name": "Clava",
           "damage": "1d4 Contundente",
           "properties": "Leve",
@@ -112,6 +134,7 @@
           "cost": "1 PP"
         },
         {
+          "id": "weapon-clava-grande",
           "name": "Clava Grande",
           "damage": "1d8 Contundente",
           "properties": "Duas Mãos",
@@ -120,6 +143,7 @@
           "cost": "2 PP"
         },
         {
+          "id": "weapon-foice",
           "name": "Foice",
           "damage": "1d4 Cortante",
           "properties": "Leve",
@@ -128,6 +152,7 @@
           "cost": "1 PO"
         },
         {
+          "id": "weapon-lanca",
           "name": "Lança",
           "damage": "1d6 Perfurante",
           "properties": "Arremesso (Alcance 6/18), Versátil (1d8)",
@@ -136,6 +161,7 @@
           "cost": "1 PO"
         },
         {
+          "id": "weapon-maca",
           "name": "Maça",
           "damage": "1d6 Contundente",
           "properties": "—",
@@ -144,6 +170,7 @@
           "cost": "5 PO"
         },
         {
+          "id": "weapon-machadinha",
           "name": "Machadinha",
           "damage": "1d6 Cortante",
           "properties": "Arremesso (Alcance 6/18), Leve",
@@ -152,6 +179,7 @@
           "cost": "5 PO"
         },
         {
+          "id": "weapon-martelo-leve",
           "name": "Martelo Leve",
           "damage": "1d4 Contundente",
           "properties": "Arremesso (Alcance 6/18), Leve",
@@ -165,6 +193,7 @@
       "name": "Armas Simples à Distância",
       "weapons": [
         {
+          "id": "weapon-arco-curto",
           "name": "Arco Curto",
           "damage": "1d6 Perfurante",
           "properties": "Duas Mãos, Munição (Alcance 24/96; Flecha)",
@@ -173,6 +202,7 @@
           "cost": "25 PO"
         },
         {
+          "id": "weapon-besta-leve",
           "name": "Besta Leve",
           "damage": "1d8 Perfurante",
           "properties": "Duas Mãos, Munição (Alcance 24/96; Virote), Recarga",
@@ -181,6 +211,7 @@
           "cost": "25 PO"
         },
         {
+          "id": "weapon-dardo",
           "name": "Dardo",
           "damage": "1d4 Perfurante",
           "properties": "Acuidade, Arremesso (Alcance 6/18)",
@@ -189,6 +220,7 @@
           "cost": "5 PC"
         },
         {
+          "id": "weapon-funda",
           "name": "Funda",
           "damage": "1d4 Contundente",
           "properties": "Munição (Alcance 9/36; Bala)",
@@ -202,6 +234,7 @@
       "name": "Armas Marciais Corpo a Corpo",
       "weapons": [
         {
+          "id": "weapon-alabarda",
           "name": "Alabarda",
           "damage": "1d10 Cortante",
           "properties": "Duas Mãos, Extensão, Pesada",
@@ -210,6 +243,7 @@
           "cost": "20 PO"
         },
         {
+          "id": "weapon-chicote",
           "name": "Chicote",
           "damage": "1d4 Cortante",
           "properties": "Acuidade, Extensão",
@@ -218,6 +252,7 @@
           "cost": "2 PO"
         },
         {
+          "id": "weapon-cimitarra",
           "name": "Cimitarra",
           "damage": "1d6 Cortante",
           "properties": "Acuidade, Leve",
@@ -226,6 +261,7 @@
           "cost": "25 PO"
         },
         {
+          "id": "weapon-espada-curta",
           "name": "Espada Curta",
           "damage": "1d6 Perfurante",
           "properties": "Acuidade, Leve",
@@ -234,6 +270,7 @@
           "cost": "10 PO"
         },
         {
+          "id": "weapon-espada-grande",
           "name": "Espada Grande",
           "damage": "2d6 Cortante",
           "properties": "Duas Mãos, Pesada",
@@ -242,6 +279,7 @@
           "cost": "50 PO"
         },
         {
+          "id": "weapon-espada-longa",
           "name": "Espada Longa",
           "damage": "1d8 Cortante",
           "properties": "Versátil (1d10)",
@@ -250,6 +288,7 @@
           "cost": "15 PO"
         },
         {
+          "id": "weapon-glaive",
           "name": "Glaive",
           "damage": "1d10 Cortante",
           "properties": "Duas Mãos, Extensão, Pesada",
@@ -258,6 +297,7 @@
           "cost": "20 PO"
         },
         {
+          "id": "weapon-lanca-de-montaria",
           "name": "Lança de Montaria",
           "damage": "1d10 Perfurante",
           "properties": "Duas Mãos (a menos que montado), Extensão, Pesada",
@@ -266,6 +306,7 @@
           "cost": "10 PO"
         },
         {
+          "id": "weapon-lanca-longa",
           "name": "Lança Longa",
           "damage": "1d10 Perfurante",
           "properties": "Duas Mãos, Extensão, Pesada",
@@ -274,6 +315,7 @@
           "cost": "5 PO"
         },
         {
+          "id": "weapon-maca-estrela",
           "name": "Maça Estrela",
           "damage": "1d8 Perfurante",
           "properties": "—",
@@ -282,6 +324,7 @@
           "cost": "15 PO"
         },
         {
+          "id": "weapon-machado-de-batalha",
           "name": "Machado de Batalha",
           "damage": "1d8 Cortante",
           "properties": "Versátil (1d10)",
@@ -290,6 +333,7 @@
           "cost": "10 PO"
         },
         {
+          "id": "weapon-machado-grande",
           "name": "Machado Grande",
           "damage": "1d12 Cortante",
           "properties": "Duas Mãos, Pesada",
@@ -298,6 +342,7 @@
           "cost": "30 PO"
         },
         {
+          "id": "weapon-malho",
           "name": "Malho",
           "damage": "2d6 Contundente",
           "properties": "Duas Mãos, Pesada",
@@ -306,6 +351,7 @@
           "cost": "10 PO"
         },
         {
+          "id": "weapon-mangual",
           "name": "Mangual",
           "damage": "1d8 Contundente",
           "properties": "—",
@@ -314,6 +360,7 @@
           "cost": "10 PO"
         },
         {
+          "id": "weapon-martelo-de-guerra",
           "name": "Martelo de Guerra",
           "damage": "1d8 Contundente",
           "properties": "Versátil (1d10)",
@@ -322,6 +369,7 @@
           "cost": "15 PO"
         },
         {
+          "id": "weapon-picareta-de-guerra",
           "name": "Picareta de Guerra",
           "damage": "1d8 Perfurante",
           "properties": "Versátil (1d10)",
@@ -330,6 +378,7 @@
           "cost": "5 PO"
         },
         {
+          "id": "weapon-rapieira",
           "name": "Rapieira",
           "damage": "1d8 Perfurante",
           "properties": "Acuidade",
@@ -338,6 +387,7 @@
           "cost": "25 PO"
         },
         {
+          "id": "weapon-tridente",
           "name": "Tridente",
           "damage": "1d8 Perfurante",
           "properties": "Arremesso (Alcance 6/18), Versátil (1d10)",
@@ -351,6 +401,7 @@
       "name": "Armas Marciais à Distância",
       "weapons": [
         {
+          "id": "weapon-arco-longo",
           "name": "Arco Longo",
           "damage": "1d8 Perfurante",
           "properties": "Duas Mãos, Munição (Alcance 45/180; Flecha), Pesada",
@@ -359,6 +410,7 @@
           "cost": "50 PO"
         },
         {
+          "id": "weapon-besta-de-mao",
           "name": "Besta de Mão",
           "damage": "1d6 Perfurante",
           "properties": "Leve, Munição (Alcance 9/36; Virote), Recarga",
@@ -367,6 +419,7 @@
           "cost": "75 PO"
         },
         {
+          "id": "weapon-besta-pesada",
           "name": "Besta Pesada",
           "damage": "1d10 Perfurante",
           "properties": "Duas Mãos, Munição (Alcance 30/120; Virote), Pesada, Recarga",
@@ -375,6 +428,7 @@
           "cost": "50 PO"
         },
         {
+          "id": "weapon-mosquete",
           "name": "Mosquete",
           "damage": "1d12 Perfurante",
           "properties": "Duas Mãos, Munição (Alcance 12/36; Bala), Recarga",
@@ -383,6 +437,7 @@
           "cost": "500 PO"
         },
         {
+          "id": "weapon-pistola",
           "name": "Pistola",
           "damage": "1d10 Perfurante",
           "properties": "Munição (Alcance 9/27; Bala), Recarga",
@@ -391,6 +446,7 @@
           "cost": "250 PO"
         },
         {
+          "id": "weapon-zarabatana",
           "name": "Zarabatana",
           "damage": "1 Perfurante",
           "properties": "Munição (Alcance 7,5/30; Agulha), Recarga",

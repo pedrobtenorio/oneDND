@@ -1,0 +1,170 @@
+{
+  "options": [
+    { "id": "cacador-assassino-de-colossos", "name": "Assassino de Colossos", "kind": "subclass-choice", "parentId": "cacador", "summary": "Causa dano adicional uma vez por turno contra uma criatura já ferida.", "requirements": [{ "classId": "guardiao", "minClassLevel": 3 }], "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 122 } },
+    { "id": "cacador-destruidor-de-hordas", "name": "Destruidor de Hordas", "kind": "subclass-choice", "parentId": "cacador", "summary": "Ataca outra criatura próxima do alvo original uma vez por turno.", "requirements": [{ "classId": "guardiao", "minClassLevel": 3 }], "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 122 } },
+
+    { "id": "aparar", "name": "Aparar", "kind": "maneuver", "parentId": "mestre-da-batalha", "summary": "Reduz dano de um ataque corpo a corpo que acertou você.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 } },
+    { "id": "ataque-ameacador", "name": "Ataque Ameaçador", "kind": "maneuver", "parentId": "mestre-da-batalha", "summary": "Após acertar, pode amedrontar o alvo.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 } },
+    { "id": "ataque-de-varredura", "name": "Ataque de Varredura", "kind": "maneuver", "parentId": "mestre-da-batalha", "summary": "Após acertar, alcança uma segunda criatura próxima.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 } },
+    { "id": "ataque-estendido", "name": "Ataque Estendido", "kind": "maneuver", "parentId": "mestre-da-batalha", "summary": "Aumenta o alcance de um ataque corpo a corpo.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 } },
+    { "id": "ataque-para-distrair", "name": "Ataque para Distrair", "kind": "maneuver", "parentId": "mestre-da-batalha", "summary": "Cria uma abertura para o próximo ataque de um aliado.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 } },
+    { "id": "ataque-preciso", "name": "Ataque Preciso", "kind": "maneuver", "parentId": "mestre-da-batalha", "summary": "Soma o Dado de Superioridade a uma jogada de ataque.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 } },
+    { "id": "ataque-provocante", "name": "Ataque Provocante", "kind": "maneuver", "parentId": "mestre-da-batalha", "summary": "Após acertar, induz o alvo a concentrar os ataques em você.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 } },
+    { "id": "avaliacao-tatica", "name": "Avaliação Tática", "kind": "maneuver", "parentId": "mestre-da-batalha", "summary": "Aprimora um teste tático ou investigativo.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 } },
+    { "id": "contra-ataque", "name": "Contra-ataque", "kind": "maneuver", "parentId": "mestre-da-batalha", "summary": "Ataca como Reação quando uma criatura erra você.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 } },
+    { "id": "desarme", "name": "Desarme", "kind": "maneuver", "parentId": "mestre-da-batalha", "summary": "Após acertar, tenta fazer o alvo soltar um objeto.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 } },
+    { "id": "emboscada", "name": "Emboscada", "kind": "maneuver", "parentId": "mestre-da-batalha", "summary": "Aprimora Furtividade ou Iniciativa.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 } },
+    { "id": "encontrao", "name": "Encontrão", "kind": "maneuver", "parentId": "mestre-da-batalha", "summary": "Após acertar, tenta empurrar o alvo.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 } },
+    { "id": "finta", "name": "Finta", "kind": "maneuver", "parentId": "mestre-da-batalha", "summary": "Usa Ação Bônus para obter Vantagem no próximo ataque contra um alvo próximo.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 } },
+    { "id": "gato-por-lebre", "name": "Gato por Lebre", "kind": "maneuver", "parentId": "mestre-da-batalha", "summary": "Troca de posição com um aliado e melhora a defesa dele.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 } },
+    { "id": "golpe-do-comandante", "name": "Golpe do Comandante", "kind": "maneuver", "parentId": "mestre-da-batalha", "summary": "Abre mão de um ataque e usa Ação Bônus para comandar um aliado.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 } },
+    { "id": "manobrar", "name": "Manobrar", "kind": "maneuver", "parentId": "mestre-da-batalha", "summary": "Após acertar, permite que um aliado se reposicione.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 } },
+    { "id": "movimentacao-evasiva", "name": "Movimentação Evasiva", "kind": "maneuver", "parentId": "mestre-da-batalha", "summary": "Gasta Ação Bônus para se mover com defesa ampliada.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 } },
+    { "id": "presenca-de-autoridade", "name": "Presença de Autoridade", "kind": "maneuver", "parentId": "mestre-da-batalha", "summary": "Aprimora um teste social.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 } },
+    { "id": "prostrar", "name": "Prostrar", "kind": "maneuver", "parentId": "mestre-da-batalha", "summary": "Após acertar, tenta deixar o alvo Caído.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 75 } },
+    { "id": "recuperar-energia", "name": "Recuperar Energia", "kind": "maneuver", "parentId": "mestre-da-batalha", "summary": "Usa Ação Bônus para recuperar Pontos de Vida.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 75 } }
+  ],
+  "rules": [
+    {
+      "id": "class.barbaro.rage", "name": "Fúria", "summary": "Entra em Fúria; ela impede conjuração e encerra concentração.", "origin": "class", "originId": "barbaro", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "class-level", "classId": "barbaro", "min": 1 }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }, { "type": "armor-not-heavy" }, { "type": "resource", "id": "rage", "atLeast": 1, "label": "Fúria" }],
+      "costs": [{ "type": "bonus-action" }, { "type": "resource", "id": "rage", "amount": 1 }], "effects": [{ "type": "marker", "id": "rage-active", "value": true }, { "type": "end-concentration" }], "support": "structured", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 54 }
+    },
+    {
+      "id": "class.barbaro.reckless", "name": "Ataque Imprudente", "summary": "Antes do primeiro ataque de Força, concede Vantagem aos seus ataques de Força e aos ataques contra você até o próximo turno.", "origin": "class", "originId": "barbaro", "activation": "free", "category": "modifier",
+      "conditions": [{ "type": "class-level", "classId": "barbaro", "min": 2 }, { "type": "phase", "value": "own-turn" }, { "type": "marker", "id": "first-attack-made", "equals": false, "label": "O primeiro ataque do turno já foi realizado." }, { "type": "fact", "id": "strength-attack", "equals": true, "label": "o ataque usa Força" }],
+      "costs": [], "effects": [{ "type": "marker", "id": "reckless-attack-declared", "value": true }, { "type": "marker", "id": "next-attack-advantage", "value": true }], "support": "structured", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 55 }
+    },
+    {
+      "id": "subclass.berserker.frenzy", "name": "Frenesi", "summary": "No primeiro acerto do turno usando Ataque Imprudente durante a Fúria, acrescente dano de Fúria.", "origin": "subclass", "originId": "berserker", "activation": "trigger", "trigger": "attack-hit", "category": "modifier",
+      "conditions": [{ "type": "subclass", "id": "berserker" }, { "type": "trigger", "value": "attack-hit" }, { "type": "marker", "id": "rage-active", "equals": true, "label": "Você não está em Fúria." }, { "type": "marker", "id": "reckless-attack-declared", "equals": true, "label": "Ataque Imprudente não foi declarado." }, { "type": "marker", "id": "frenzy-used", "equals": false, "label": "Frenesi já foi usado neste turno." }],
+      "costs": [], "effects": [{ "type": "marker", "id": "frenzy-used", "value": true }], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 58 }
+    },
+    {
+      "id": "class.guardiao.favored-enemy", "name": "Inimigo Favorito: Marca do Predador", "summary": "Conjure Marca do Predador sem gastar espaço de magia usando uma carga de Inimigo Favorito.", "origin": "class", "originId": "guardiao", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "class-level", "classId": "guardiao", "min": 1 }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }, { "type": "not-raging" }, { "type": "not-concentrating" }, { "type": "resource", "id": "favored-enemy", "atLeast": 1, "label": "Inimigo Favorito" }],
+      "costs": [{ "type": "bonus-action" }, { "type": "resource", "id": "favored-enemy", "amount": 1 }], "effects": [{ "type": "start-concentration", "spellId": "marca-do-predador" }], "support": "structured", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 117 }
+    },
+    {
+      "id": "class.guerreiro.second-wind", "name": "Recuperar Fôlego", "summary": "Recupere Pontos de Vida; informe o resultado da cura manualmente.", "origin": "class", "originId": "guerreiro", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "class-level", "classId": "guerreiro", "min": 1 }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }, { "type": "resource", "id": "second-wind", "atLeast": 1, "label": "Recuperar Fôlego" }],
+      "costs": [{ "type": "bonus-action" }, { "type": "resource", "id": "second-wind", "amount": 1 }], "effects": [{ "type": "marker", "id": "second-wind-used", "value": true }], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 69 }
+    },
+    {
+      "id": "class.guerreiro.action-surge", "name": "Surto de Ação", "summary": "Concede uma ação adicional que não pode ser usada para Usar Magia.", "origin": "class", "originId": "guerreiro", "activation": "free", "category": "modifier",
+      "conditions": [{ "type": "class-level", "classId": "guerreiro", "min": 2 }, { "type": "phase", "value": "own-turn" }, { "type": "resource", "id": "action-surge", "atLeast": 1, "label": "Surto de Ação" }],
+      "costs": [{ "type": "resource", "id": "action-surge", "amount": 1 }], "effects": [{ "type": "grant-action", "id": "action-surge", "allowsMagic": false, "label": "Ação de Surto" }], "support": "structured", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 69 }
+    },
+    {
+      "id": "class.guerreiro.tactical-mind", "name": "Mente Tática", "summary": "Após falhar em um teste de atributo, use Recuperar Fôlego; confirme o resultado antes de consumir o uso.", "origin": "class", "originId": "guerreiro", "activation": "trigger", "category": "modifier",
+      "conditions": [{ "type": "class-level", "classId": "guerreiro", "min": 2 }, { "type": "resource", "id": "second-wind", "atLeast": 1, "label": "Recuperar Fôlego" }, { "type": "fact", "id": "ability-check-failed", "equals": true, "label": "um teste de atributo falhou" }, { "type": "fact", "id": "tactical-mind-succeeded", "equals": true, "label": "o bônus de Mente Tática tornou o teste bem-sucedido" }],
+      "costs": [{ "type": "resource", "id": "second-wind", "amount": 1 }], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 69 }
+    },
+    {
+      "id": "class.guerreiro.tactical-shift", "name": "Mudança Tática", "summary": "Após Recuperar Fôlego, mova-se até metade do Deslocamento sem provocar Ataques de Oportunidade.", "origin": "class", "originId": "guerreiro", "activation": "free", "category": "movement",
+      "conditions": [{ "type": "class-level", "classId": "guerreiro", "min": 5 }, { "type": "phase", "value": "own-turn" }, { "type": "marker", "id": "second-wind-used", "equals": true, "label": "Recuperar Fôlego ainda não foi usado." }, { "type": "marker", "id": "tactical-shift-used", "equals": false, "label": "Mudança Tática já foi usada." }],
+      "costs": [], "effects": [{ "type": "movement-gain", "amount": "half-speed" }, { "type": "marker", "id": "tactical-shift-used", "value": true }], "support": "structured", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 70 }
+    },
+    {
+      "id": "class.guerreiro.tactical-master", "name": "Mestre Tático", "summary": "Ao atacar com arma dominada, substitua a propriedade por Empurrar, Drenar ou Lentidão.", "origin": "class", "originId": "guerreiro", "activation": "trigger", "trigger": "attack-hit", "category": "modifier",
+      "conditions": [{ "type": "class-level", "classId": "guerreiro", "min": 6 }, { "type": "trigger", "value": "attack-hit" }, { "type": "fact", "id": "used-mastery-weapon", "equals": true, "label": "o ataque usou uma arma dominada" }, { "type": "fact", "id": "tactical-mastery-chosen", "equals": true, "label": "você escolheu Empurrar, Drenar ou Lentidão no lugar da propriedade normal" }],
+      "costs": [], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 70 }
+    },
+    {
+      "id": "class.ladino.cunning-action-dash", "name": "Ação Ardilosa: Correr", "summary": "Usa Correr como Ação Bônus.", "origin": "class", "originId": "ladino", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "class-level", "classId": "ladino", "min": 2 }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }], "costs": [{ "type": "bonus-action" }], "effects": [{ "type": "movement-gain", "amount": "speed" }], "support": "structured", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 130 }
+    },
+    {
+      "id": "class.ladino.cunning-action-disengage", "name": "Ação Ardilosa: Desengajar", "summary": "Usa Desengajar como Ação Bônus.", "origin": "class", "originId": "ladino", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "class-level", "classId": "ladino", "min": 2 }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }], "costs": [{ "type": "bonus-action" }], "effects": [{ "type": "marker", "id": "disengaged", "value": true }], "support": "structured", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 130 }
+    },
+    {
+      "id": "class.ladino.cunning-action-hide", "name": "Ação Ardilosa: Esconder", "summary": "Usa Esconder como Ação Bônus e confirma o teste manualmente.", "origin": "class", "originId": "ladino", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "class-level", "classId": "ladino", "min": 2 }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }], "costs": [{ "type": "bonus-action" }], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 130 }
+    },
+    {
+      "id": "class.ladino.steady-aim", "name": "Mira Firme", "summary": "Zera o movimento e concede Vantagem à próxima jogada de ataque neste turno.", "origin": "class", "originId": "ladino", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "class-level", "classId": "ladino", "min": 3 }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }, { "type": "has-not-moved" }],
+      "costs": [{ "type": "bonus-action" }], "effects": [{ "type": "movement-zero" }, { "type": "marker", "id": "next-attack-advantage", "value": true }], "support": "structured", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 131 }
+    },
+    {
+      "id": "class.ladino.sneak-attack", "name": "Ataque Furtivo", "summary": "Após um acerto elegível, aplique o dano adicional uma vez por turno.", "origin": "class", "originId": "ladino", "activation": "trigger", "trigger": "attack-hit", "category": "modifier",
+      "conditions": [{ "type": "class-level", "classId": "ladino", "min": 1 }, { "type": "trigger", "value": "attack-hit" }, { "type": "marker", "id": "sneak-attack-used", "equals": false, "label": "Ataque Furtivo já foi usado neste turno." }, { "type": "fact", "id": "sneak-weapon-eligible", "equals": true, "label": "a arma tem Acuidade ou é uma arma à Distância" }, { "type": "fact", "id": "attack-disadvantage", "equals": false, "label": "a jogada não tem Desvantagem" }, { "type": "any-fact", "ids": ["attack-advantage", "ally-adjacent-target"], "equals": true, "label": "há Vantagem ou um aliado válido adjacente ao alvo" }],
+      "costs": [], "effects": [{ "type": "marker", "id": "sneak-attack-used", "value": true }], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 130 }
+    },
+    {
+      "id": "class.ladino.cunning-strike-poison", "name": "Golpe Astuto: Envenenar", "summary": "Reduza o Ataque Furtivo em 1d6; o alvo faz a salvaguarda contra Envenenado.", "origin": "class", "originId": "ladino", "activation": "trigger", "trigger": "attack-hit", "category": "modifier",
+      "conditions": [{ "type": "class-level", "classId": "ladino", "min": 5 }, { "type": "trigger", "value": "attack-hit" }, { "type": "marker", "id": "sneak-attack-used", "equals": true, "label": "Ataque Furtivo não foi aplicado." }, { "type": "marker", "id": "cunning-strike-used", "equals": false, "label": "Um efeito de Golpe Astuto já foi escolhido." }, { "type": "fact", "id": "poisoners-kit-held", "equals": true, "label": "você possui um Kit de Veneno" }],
+      "costs": [{ "type": "sneak-die", "amount": 1 }], "effects": [{ "type": "marker", "id": "cunning-strike-used", "value": true }], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 138 }
+    },
+    {
+      "id": "class.ladino.cunning-strike-withdraw", "name": "Golpe Astuto: Retirada", "summary": "Reduza o Ataque Furtivo em 1d6 e mova-se até metade do Deslocamento sem provocar Ataques de Oportunidade.", "origin": "class", "originId": "ladino", "activation": "trigger", "trigger": "attack-hit", "category": "modifier",
+      "conditions": [{ "type": "class-level", "classId": "ladino", "min": 5 }, { "type": "trigger", "value": "attack-hit" }, { "type": "marker", "id": "sneak-attack-used", "equals": true, "label": "Ataque Furtivo não foi aplicado." }, { "type": "marker", "id": "cunning-strike-used", "equals": false, "label": "Um efeito de Golpe Astuto já foi escolhido." }],
+      "costs": [{ "type": "sneak-die", "amount": 1 }], "effects": [{ "type": "marker", "id": "cunning-strike-used", "value": true }, { "type": "movement-gain", "amount": "half-speed" }], "support": "structured", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 138 }
+    },
+    {
+      "id": "class.ladino.cunning-strike-trip", "name": "Golpe Astuto: Tropeço", "summary": "Reduza o Ataque Furtivo em 1d6; uma criatura Grande ou menor faz a salvaguarda para não ficar Caída.", "origin": "class", "originId": "ladino", "activation": "trigger", "trigger": "attack-hit", "category": "modifier",
+      "conditions": [{ "type": "class-level", "classId": "ladino", "min": 5 }, { "type": "trigger", "value": "attack-hit" }, { "type": "marker", "id": "sneak-attack-used", "equals": true, "label": "Ataque Furtivo não foi aplicado." }, { "type": "marker", "id": "cunning-strike-used", "equals": false, "label": "Um efeito de Golpe Astuto já foi escolhido." }, { "type": "fact", "id": "target-large-or-smaller", "equals": true, "label": "o alvo é Grande ou menor" }],
+      "costs": [{ "type": "sneak-die", "amount": 1 }], "effects": [{ "type": "marker", "id": "cunning-strike-used", "value": true }], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 138 }
+    },
+    {
+      "id": "class.ladino.uncanny-dodge", "name": "Esquiva Sobrenatural", "summary": "Reduz pela metade o dano do ataque que acertou você.", "origin": "class", "originId": "ladino", "activation": "reaction", "trigger": "damage-received", "category": "reaction",
+      "conditions": [{ "type": "class-level", "classId": "ladino", "min": 5 }, { "type": "phase", "value": "reaction-window" }, { "type": "reaction-available" }, { "type": "fact", "id": "attacker-visible", "equals": true, "label": "você enxerga o atacante" }],
+      "costs": [{ "type": "reaction" }], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 131 }
+    },
+    {
+      "id": "subclass.cacador.colossus-slayer", "name": "Assassino de Colossos", "summary": "No primeiro acerto do turno contra criatura ferida, aplique o dano adicional.", "origin": "subclass", "originId": "cacador", "activation": "trigger", "trigger": "attack-hit", "category": "modifier",
+      "conditions": [{ "type": "subclass", "id": "cacador" }, { "type": "feat", "id": "cacador-assassino-de-colossos" }, { "type": "trigger", "value": "attack-hit" }, { "type": "fact", "id": "target-below-max-hp", "equals": true, "label": "o alvo está abaixo dos PV máximos" }, { "type": "marker", "id": "colossus-slayer-used", "equals": false, "label": "Assassino de Colossos já foi usado neste turno." }],
+      "costs": [], "effects": [{ "type": "marker", "id": "colossus-slayer-used", "value": true }], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 123 }
+    },
+    {
+      "id": "subclass.cacador.horde-breaker", "name": "Destruidor de Hordas", "summary": "Após atacar, faça um ataque adicional contra outra criatura próxima da primeira.", "origin": "subclass", "originId": "cacador", "activation": "trigger", "trigger": "attack-hit", "category": "modifier",
+      "conditions": [{ "type": "subclass", "id": "cacador" }, { "type": "feat", "id": "cacador-destruidor-de-hordas" }, { "type": "trigger", "value": "attack-hit" }, { "type": "fact", "id": "secondary-target-nearby", "equals": true, "label": "há outro alvo elegível próximo" }, { "type": "marker", "id": "horde-breaker-used", "equals": false, "label": "Destruidor de Hordas já foi usado neste turno." }],
+      "costs": [], "effects": [{ "type": "marker", "id": "horde-breaker-used", "value": true }, { "type": "grant-attack", "amount": 1 }], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 123 }
+    },
+    {
+      "id": "subclass.ladrao.fast-hands", "name": "Mãos Rápidas", "summary": "Usa Ação Bônus para Ladinagem, Usar Objeto ou ativar um item mágico elegível.", "origin": "subclass", "originId": "ladrao", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "subclass", "id": "ladrao" }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }], "costs": [{ "type": "bonus-action" }], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 134 }
+    },
+    {
+      "id": "subclass.ladrao.second-story-work", "name": "Trabalho em Altura", "summary": "Escalar não custa movimento adicional e seus saltos usam Destreza segundo a característica.", "origin": "subclass", "originId": "ladrao", "activation": "free", "category": "informational",
+      "conditions": [{ "type": "subclass", "id": "ladrao" }], "costs": [], "effects": [], "support": "informational", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 134 }
+    },
+    {
+      "id": "subclass.berserker.mindless-rage", "name": "Fúria Irracional", "summary": "Durante a Fúria, você não pode permanecer Enfeitiçado ou Amedrontado.", "origin": "subclass", "originId": "berserker", "activation": "free", "category": "informational",
+      "conditions": [{ "type": "subclass", "id": "berserker" }, { "type": "class-level", "classId": "barbaro", "min": 6 }, { "type": "marker", "id": "rage-active", "equals": true, "label": "Você não está em Fúria." }], "costs": [], "effects": [], "support": "informational", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 58 }
+    },
+    {
+      "id": "subclass.cacador.hunters-lore", "name": "Conhecimento do Caçador", "summary": "Enquanto o alvo está marcado, revele as Imunidades, Resistências e Vulnerabilidades dele.", "origin": "subclass", "originId": "cacador", "activation": "free", "category": "informational",
+      "conditions": [{ "type": "subclass", "id": "cacador" }, { "type": "fact", "id": "target-hunters-marked", "equals": true, "label": "o alvo está marcado por Marca do Predador" }], "costs": [], "effects": [], "support": "informational", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 122 }
+    },
+    {
+      "id": "maneuver.finta", "name": "Finta", "summary": "Gaste um Dado de Superioridade e a Ação Bônus para obter Vantagem no próximo ataque contra o alvo.", "origin": "subclass", "originId": "mestre-da-batalha", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "maneuver", "id": "finta" }, { "type": "bonus-action-available" }, { "type": "resource", "id": "superiority-die", "atLeast": 1, "label": "Dado de Superioridade" }], "costs": [{ "type": "bonus-action" }, { "type": "resource", "id": "superiority-die", "amount": 1 }], "effects": [{ "type": "marker", "id": "next-attack-advantage", "value": true }], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 }
+    },
+    {
+      "id": "maneuver.recuperar-energia", "name": "Recuperar Energia", "summary": "Gaste um Dado de Superioridade e a Ação Bônus para recuperar PV.", "origin": "subclass", "originId": "mestre-da-batalha", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "maneuver", "id": "recuperar-energia" }, { "type": "bonus-action-available" }, { "type": "resource", "id": "superiority-die", "atLeast": 1, "label": "Dado de Superioridade" }], "costs": [{ "type": "bonus-action" }, { "type": "resource", "id": "superiority-die", "amount": 1 }], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 75 }
+    },
+    {
+      "id": "maneuver.contra-ataque", "name": "Contra-ataque", "summary": "Quando uma criatura erra você, gaste Reação e Dado de Superioridade para atacá-la.", "origin": "subclass", "originId": "mestre-da-batalha", "activation": "reaction", "trigger": "attack-miss", "category": "reaction",
+      "conditions": [{ "type": "maneuver", "id": "contra-ataque" }, { "type": "phase", "value": "reaction-window" }, { "type": "reaction-available" }, { "type": "resource", "id": "superiority-die", "atLeast": 1, "label": "Dado de Superioridade" }, { "type": "fact", "id": "enemy-missed-melee", "equals": true, "label": "uma criatura errou você com ataque corpo a corpo e está ao alcance" }],
+      "costs": [{ "type": "reaction" }, { "type": "resource", "id": "superiority-die", "amount": 1 }], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 }
+    },
+    {
+      "id": "maneuver.aparar", "name": "Aparar", "summary": "Gaste sua Reação e um Dado de Superioridade para reduzir o dano recebido.", "origin": "subclass", "originId": "mestre-da-batalha", "activation": "reaction", "trigger": "damage-received", "category": "reaction",
+      "conditions": [{ "type": "maneuver", "id": "aparar" }, { "type": "phase", "value": "reaction-window" }, { "type": "reaction-available" }, { "type": "resource", "id": "superiority-die", "atLeast": 1, "label": "Dado de Superioridade" }, { "type": "fact", "id": "melee-attack-damaged", "equals": true, "label": "um ataque corpo a corpo causou dano" }],
+      "costs": [{ "type": "reaction" }, { "type": "resource", "id": "superiority-die", "amount": 1 }], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 }
+    },
+    {
+      "id": "maneuver.ataque-preciso", "name": "Ataque Preciso", "summary": "Após a jogada de ataque, gaste um Dado de Superioridade e acrescente-o à jogada.", "origin": "subclass", "originId": "mestre-da-batalha", "activation": "trigger", "trigger": "attack-miss", "category": "modifier",
+      "conditions": [{ "type": "maneuver", "id": "ataque-preciso" }, { "type": "trigger", "value": "attack-miss" }, { "type": "marker", "id": "maneuver-used-this-attack", "equals": false, "label": "Uma manobra já foi aplicada a este ataque." }, { "type": "resource", "id": "superiority-die", "atLeast": 1, "label": "Dado de Superioridade" }],
+      "costs": [{ "type": "resource", "id": "superiority-die", "amount": 1 }], "effects": [{ "type": "marker", "id": "maneuver-used-this-attack", "value": true }], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 74 }
+    },
+    {
+      "id": "maneuver.prostrar", "name": "Prostrar", "summary": "Após acertar, gaste um Dado de Superioridade; o alvo faz a salvaguarda para não ficar Caído.", "origin": "subclass", "originId": "mestre-da-batalha", "activation": "trigger", "trigger": "attack-hit", "category": "modifier",
+      "conditions": [{ "type": "maneuver", "id": "prostrar" }, { "type": "trigger", "value": "attack-hit" }, { "type": "marker", "id": "maneuver-used-this-attack", "equals": false, "label": "Uma manobra já foi aplicada a este ataque." }, { "type": "resource", "id": "superiority-die", "atLeast": 1, "label": "Dado de Superioridade" }],
+      "costs": [{ "type": "resource", "id": "superiority-die", "amount": 1 }], "effects": [{ "type": "marker", "id": "maneuver-used-this-attack", "value": true }], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 75 }
+    }
+  ]
+}

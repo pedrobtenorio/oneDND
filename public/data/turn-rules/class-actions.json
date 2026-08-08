@@ -1,0 +1,75 @@
+{
+  "options": [],
+  "rules": [
+    {
+      "id": "class.bardo.inspiration", "name": "Inspiração de Bardo", "summary": "Conceda um dado de Inspiração de Bardo a uma criatura a até 18 metros que possa ver ou ouvir você.", "origin": "class", "originId": "bardo", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "class-level", "classId": "bardo", "min": 1 }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }, { "type": "resource", "id": "bardic-inspiration", "atLeast": 1, "label": "Inspiração de Bardo" }],
+      "costs": [{ "type": "bonus-action" }, { "type": "resource", "id": "bardic-inspiration", "amount": 1 }], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 59 }
+    },
+    {
+      "id": "class.clerigo.centelha-divina", "name": "Canalizar Divindade: Centelha Divina", "summary": "Use uma ação para curar uma criatura ou forçar uma salvaguarda e causar dano Radiante ou Necrótico.", "origin": "class", "originId": "clerigo", "activation": "action", "category": "action",
+      "conditions": [{ "type": "class-level", "classId": "clerigo", "min": 2 }, { "type": "phase", "value": "own-turn" }, { "type": "action-available" }, { "type": "resource", "id": "channel-divinity", "atLeast": 1, "label": "Canalizar Divindade" }],
+      "costs": [{ "type": "action" }, { "type": "resource", "id": "channel-divinity", "amount": 1 }], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 82 }
+    },
+    {
+      "id": "class.druida.forma-selvagem", "name": "Forma Selvagem", "summary": "Assuma uma forma animal conhecida; confirme manualmente o bloco de estatísticas e os efeitos.", "origin": "class", "originId": "druida", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "class-level", "classId": "druida", "min": 2 }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }, { "type": "resource", "id": "wild-shape", "atLeast": 1, "label": "Forma Selvagem" }],
+      "costs": [{ "type": "bonus-action" }, { "type": "resource", "id": "wild-shape", "amount": 1 }], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 92 }
+    },
+    {
+      "id": "class.feiticeiro.feiticaria-inata", "name": "Feitiçaria Inata", "summary": "Por 1 minuto, aumente a CD de suas magias de Feiticeiro em 1 e tenha Vantagem nos ataques delas.", "origin": "class", "originId": "feiticeiro", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "class-level", "classId": "feiticeiro", "min": 1 }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }, { "type": "resource", "id": "innate-sorcery", "atLeast": 1, "label": "Feitiçaria Inata" }],
+      "costs": [{ "type": "bonus-action" }, { "type": "resource", "id": "innate-sorcery", "amount": 1 }], "effects": [{ "type": "marker", "id": "innate-sorcery-active", "value": true }], "support": "structured", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 104 }
+    },
+    {
+      "id": "class.monge.artes-marciais", "name": "Artes Marciais: Ataque Desarmado", "summary": "Depois de usar a ação Atacar com Ataque Desarmado ou arma de Monge, faça um Ataque Desarmado como Ação Bônus.", "origin": "class", "originId": "monge", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "class-level", "classId": "monge", "min": 1 }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }, { "type": "marker", "id": "first-attack-made", "equals": true, "label": "Você ainda não realizou um ataque elegível com a ação Atacar." }, { "type": "fact", "id": "monk-attack-eligible", "equals": true, "label": "o ataque usou Ataque Desarmado ou arma de Monge" }],
+      "costs": [{ "type": "bonus-action" }], "effects": [{ "type": "grant-attack", "amount": 1 }], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 159 }
+    },
+    {
+      "id": "class.monge.rajada-de-golpes", "name": "Rajada de Golpes", "summary": "Gaste 1 Ponto de Foco para realizar dois Ataques Desarmados como Ação Bônus.", "origin": "class", "originId": "monge", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "class-level", "classId": "monge", "min": 2 }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }, { "type": "resource", "id": "focus-point", "atLeast": 1, "label": "Ponto de Foco" }],
+      "costs": [{ "type": "bonus-action" }, { "type": "resource", "id": "focus-point", "amount": 1 }], "effects": [{ "type": "grant-attack", "amount": 2 }], "support": "structured", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 160 }
+    },
+    {
+      "id": "class.monge.defesa-paciente", "name": "Defesa Paciente", "summary": "Use Desengajar como Ação Bônus sem gastar Ponto de Foco.", "origin": "class", "originId": "monge", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "class-level", "classId": "monge", "min": 2 }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }],
+      "costs": [{ "type": "bonus-action" }], "effects": [{ "type": "marker", "id": "disengaged", "value": true }], "support": "structured", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 160 }
+    },
+    {
+      "id": "class.monge.defesa-paciente-focada", "name": "Defesa Paciente (com Foco)", "summary": "Gaste 1 Ponto de Foco para Desengajar e Esquivar como Ação Bônus.", "origin": "class", "originId": "monge", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "class-level", "classId": "monge", "min": 2 }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }, { "type": "resource", "id": "focus-point", "atLeast": 1, "label": "Ponto de Foco" }],
+      "costs": [{ "type": "bonus-action" }, { "type": "resource", "id": "focus-point", "amount": 1 }], "effects": [{ "type": "marker", "id": "disengaged", "value": true }], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 160 }
+    },
+    {
+      "id": "class.monge.passo-do-vento", "name": "Passo do Vento", "summary": "Use Correr como Ação Bônus sem gastar Ponto de Foco.", "origin": "class", "originId": "monge", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "class-level", "classId": "monge", "min": 2 }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }],
+      "costs": [{ "type": "bonus-action" }], "effects": [{ "type": "movement-gain", "amount": "speed" }], "support": "structured", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 160 }
+    },
+    {
+      "id": "class.monge.passo-do-vento-focado", "name": "Passo do Vento (com Foco)", "summary": "Gaste 1 Ponto de Foco para Correr e Desengajar como Ação Bônus e dobrar a distância de salto.", "origin": "class", "originId": "monge", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "class-level", "classId": "monge", "min": 2 }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }, { "type": "resource", "id": "focus-point", "atLeast": 1, "label": "Ponto de Foco" }],
+      "costs": [{ "type": "bonus-action" }, { "type": "resource", "id": "focus-point", "amount": 1 }], "effects": [{ "type": "movement-gain", "amount": "speed" }, { "type": "marker", "id": "disengaged", "value": true }], "support": "structured", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 160 }
+    },
+    {
+      "id": "class.monge.defletir-ataques", "name": "Defletir Ataques", "summary": "Use sua Reação para reduzir dano Contundente, Cortante ou Perfurante de um ataque que acertou você.", "origin": "class", "originId": "monge", "activation": "reaction", "trigger": "damage-received", "category": "reaction",
+      "conditions": [{ "type": "class-level", "classId": "monge", "min": 3 }, { "type": "phase", "value": "reaction-window" }, { "type": "reaction-available" }, { "type": "fact", "id": "deflectable-attack", "equals": true, "label": "o ataque causa dano Contundente, Cortante ou Perfurante" }],
+      "costs": [{ "type": "reaction" }], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 160 }
+    },
+    {
+      "id": "class.monge.golpe-atordoante", "name": "Golpe Atordoante", "summary": "Após acertar com arma de Monge ou Ataque Desarmado, gaste 1 Ponto de Foco e peça a salvaguarda de Constituição.", "origin": "class", "originId": "monge", "activation": "trigger", "trigger": "attack-hit", "category": "modifier",
+      "conditions": [{ "type": "class-level", "classId": "monge", "min": 5 }, { "type": "trigger", "value": "attack-hit" }, { "type": "resource", "id": "focus-point", "atLeast": 1, "label": "Ponto de Foco" }, { "type": "marker", "id": "stunning-strike-used", "equals": false, "label": "Golpe Atordoante já foi usado neste turno." }],
+      "costs": [{ "type": "resource", "id": "focus-point", "amount": 1 }], "effects": [{ "type": "marker", "id": "stunning-strike-used", "value": true }], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 161 }
+    },
+    {
+      "id": "class.paladino.maos-consagradas", "name": "Mãos Consagradas", "summary": "Como Ação Bônus, toque uma criatura e escolha quantos pontos da reserva gastar; ajuste o restante na barra após confirmar.", "origin": "class", "originId": "paladino", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "class-level", "classId": "paladino", "min": 1 }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }, { "type": "resource", "id": "lay-on-hands", "atLeast": 1, "label": "Mãos Consagradas" }],
+      "costs": [{ "type": "bonus-action" }, { "type": "resource", "id": "lay-on-hands", "amount": 1 }], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 168 }
+    },
+    {
+      "id": "class.paladino.sentido-divino", "name": "Canalizar Divindade: Sentido Divino", "summary": "Detecte Celestiais, Ínferos, Mortos-Vivos e locais consagrados ou profanados por 10 minutos.", "origin": "class", "originId": "paladino", "activation": "bonus-action", "category": "bonus",
+      "conditions": [{ "type": "class-level", "classId": "paladino", "min": 3 }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }, { "type": "resource", "id": "channel-divinity", "atLeast": 1, "label": "Canalizar Divindade" }],
+      "costs": [{ "type": "bonus-action" }, { "type": "resource", "id": "channel-divinity", "amount": 1 }], "effects": [], "support": "informational", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 169 }
+    }
+  ]
+}

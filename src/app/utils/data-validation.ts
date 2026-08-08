@@ -2,6 +2,7 @@ import { GuideCategory, GuideItem } from '../models/guide.models';
 import { Spell } from '../models/spell.models';
 import { Summon, SummonAttribute } from '../models/summon.models';
 import { WeaponEntry, WeaponProperty, WeaponsData } from '../models/weapons.models';
+import { TurnRuleFile, TurnRuleManifest } from '../models/turn-planner.models';
 
 type RecordValue = Record<string, unknown>;
 
@@ -65,10 +66,10 @@ const isSummon = (value: unknown): value is Summon =>
   isSummonAttribute(value['cha']);
 
 const isWeaponProperty = (value: unknown): value is WeaponProperty =>
-  isRecord(value) && hasStringFields(value, ['name', 'description']);
+  isRecord(value) && hasStringFields(value, ['id', 'name', 'description']);
 
 const isWeaponEntry = (value: unknown): value is WeaponEntry =>
-  isRecord(value) && hasStringFields(value, ['name', 'damage', 'properties', 'mastery', 'weight', 'cost']);
+  isRecord(value) && hasStringFields(value, ['id', 'name', 'damage', 'properties', 'mastery', 'weight', 'cost']);
 
 export const validateGuideData = (value: unknown): GuideCategory[] =>
   assertArray(value, 'guide data', isGuideCategory);
@@ -84,7 +85,7 @@ export const validateWeaponsData = (value: unknown): WeaponsData => {
     throw new Error('weapons data must be an object.');
   }
 
-  return {
+  const data = {
     properties: assertArray(value['properties'], 'weapon properties', isWeaponProperty),
     masteryProperties: assertArray(value['masteryProperties'], 'weapon mastery properties', isWeaponProperty),
     categories: assertArray(value['categories'], 'weapon categories', (category): category is WeaponsData['categories'][number] =>
@@ -94,4 +95,75 @@ export const validateWeaponsData = (value: unknown): WeaponsData => {
       category['weapons'].every(isWeaponEntry)
     ),
   };
+  const ids = [
+    ...data.properties.map((item) => item.id),
+    ...data.masteryProperties.map((item) => item.id),
+    ...data.categories.flatMap((category) => category.weapons.map((item) => item.id)),
+  ];
+  if (new Set(ids).size !== ids.length) throw new Error('weapon ids must be unique.');
+  return data;
+};
+
+const conditionTypes = new Set([
+  'class-level', 'subclass', 'species', 'species-choice', 'feat', 'maneuver', 'mastery',
+  'spell-prepared', 'fact', 'any-fact', 'phase', 'resource', 'marker',
+  'bonus-action-available', 'reaction-available', 'action-available', 'attacks-remaining',
+  'has-not-moved', 'trigger', 'not-concentrating', 'not-raging', 'spell-slot-unused',
+  'spell-slot-available', 'armor-not-heavy',
+]);
+const costTypes = new Set(['action', 'bonus-action', 'reaction', 'resource', 'spell-slot', 'sneak-die']);
+const effectTypes = new Set([
+  'marker', 'movement-zero', 'movement-gain', 'grant-action', 'begin-attack-action',
+  'grant-attack', 'consume-attack', 'perform-attack', 'start-concentration', 'end-concentration',
+  'set-phase', 'resource',
+]);
+const optionKinds = new Set([
+  'species', 'species-choice', 'subclass', 'subclass-choice', 'feat-origin', 'feat-general', 'fighting-style', 'maneuver',
+]);
+
+const isRuleSource = (value: unknown): boolean =>
+  isRecord(value) &&
+  hasStringFields(value, ['book', 'revision']) &&
+  isNumber(value['page']);
+
+const isTurnRule = (value: unknown): boolean =>
+  isRecord(value) &&
+  hasStringFields(value, ['id', 'name', 'summary', 'origin', 'originId', 'activation', 'category', 'support']) &&
+  ['core', 'class', 'subclass', 'species', 'feat', 'spell', 'weapon'].includes(value['origin'] as string) &&
+  ['action', 'bonus-action', 'reaction', 'free', 'trigger'].includes(value['activation'] as string) &&
+  ['action', 'bonus', 'reaction', 'movement', 'modifier', 'informational'].includes(value['category'] as string) &&
+  ['structured', 'prompt', 'informational'].includes(value['support'] as string) &&
+  Array.isArray(value['conditions']) && value['conditions'].every((item) => isRecord(item) && conditionTypes.has(item['type'] as string)) &&
+  Array.isArray(value['costs']) && value['costs'].every((item) => isRecord(item) && costTypes.has(item['type'] as string)) &&
+  Array.isArray(value['effects']) && value['effects'].every((item) => isRecord(item) && effectTypes.has(item['type'] as string)) &&
+  isRuleSource(value['source']);
+
+const isTurnOption = (value: unknown): boolean =>
+  isRecord(value) &&
+  hasStringFields(value, ['id', 'name', 'kind', 'summary']) &&
+  optionKinds.has(value['kind'] as string) &&
+  isRuleSource(value['source']);
+
+export const validateTurnRuleManifest = (value: unknown): TurnRuleManifest => {
+  if (
+    !isRecord(value) ||
+    value['schemaVersion'] !== 1 ||
+    !hasStringFields(value, ['edition', 'revision']) ||
+    !isStringArray(value['files'])
+  ) {
+    throw new Error('turn rule manifest is invalid.');
+  }
+  return value as unknown as TurnRuleManifest;
+};
+
+export const validateTurnRuleFile = (value: unknown): TurnRuleFile => {
+  if (!isRecord(value)) {
+    throw new Error('turn rule file must be an object.');
+  }
+  const options = value['options'] ?? [];
+  const rules = value['rules'] ?? [];
+  if (!Array.isArray(options) || !options.every(isTurnOption) || !Array.isArray(rules) || !rules.every(isTurnRule)) {
+    throw new Error('turn rule file has invalid options or rules.');
+  }
+  return { options, rules } as TurnRuleFile;
 };

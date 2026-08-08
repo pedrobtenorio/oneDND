@@ -1,4 +1,17 @@
-@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$red-palette,
+        tertiary: mat.$orange-palette,
+      ),
+      typography: 'Source Serif 4',
+      density: 0,
+    )
+  );
+}
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Source+Serif+4:wght@300;400;600&display=swap');
 
 * {
@@ -85,6 +98,72 @@ a {
 
 ::selection {
   background: rgba(111, 23, 19, 0.24);
+}
+
+.turn-page {
+  width: min(1480px, calc(100% - 28px));
+  margin: 22px auto;
+  color: #2b2119;
+}
+
+.turn-page .hero {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 28px;
+  padding: clamp(20px, 4vw, 42px);
+  border: 1px solid rgba(225, 185, 103, 0.45);
+  border-radius: 22px;
+  color: #fff1c9;
+  background: radial-gradient(circle at 80% 20%, rgba(219, 164, 78, 0.2), transparent 32%), linear-gradient(125deg, #35100d, #681d17 55%, #20130f);
+  box-shadow: 0 18px 40px rgba(40, 17, 10, 0.24);
+}
+
+.turn-page .hero h1 { margin: 5px 0 8px; font: 800 clamp(1.65rem, 4vw, 3.2rem) 'Cinzel', Georgia, serif; }
+.turn-page .hero p { max-width: 800px; margin: 0; color: #eeddbb; line-height: 1.55; }
+.turn-page .kicker { color: #e5b966; font-size: 0.75rem; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase; }
+.turn-page .density-toggle { display: flex; align-items: center; gap: 8px; min-width: fit-content; padding: 10px 13px; border: 1px solid rgba(255, 226, 167, 0.35); border-radius: 999px; background: rgba(0, 0, 0, 0.17); }
+.turn-page .alert { margin: 14px 0 0; padding: 10px 14px; border-left: 4px solid #9b6b18; border-radius: 7px; background: #fff2c9; }
+.turn-page .alert.error { border-color: #9d2822; background: #ffe0dc; }
+.turn-page .setup-panel { margin-top: 16px; border: 1px solid rgba(104, 67, 28, 0.28); border-radius: 16px; background: rgba(255, 250, 235, 0.84); box-shadow: 0 10px 24px rgba(52, 31, 15, 0.08); }
+.turn-page .setup-panel summary { display: flex; justify-content: space-between; gap: 12px; padding: 17px 20px; color: #511c18; font: 700 1.05rem 'Cinzel', Georgia, serif; cursor: pointer; }
+.turn-page .library-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 20px 16px; border-bottom: 1px solid rgba(110, 75, 38, 0.18); }
+.turn-page .profile-buttons, .turn-page .library-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.turn-page .file-button { display: inline-flex; align-items: center; }
+.turn-page .file-button input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.turn-page .primary-button, .turn-page .secondary-button, .turn-page .text-button, .turn-page .file-button { min-height: 38px; padding: 0 14px; border-radius: 7px; font: 700 .86rem inherit; cursor: pointer; }
+.turn-page .primary-button { border: 1px solid #6c1e19; background: #7b2921; color: #fff4d7; }
+.turn-page .secondary-button { border: 1px solid #8c5b32; background: transparent; color: #6a271e; }
+.turn-page .text-button, .turn-page .file-button { border: 0; background: transparent; color: #6a271e; }
+.turn-page .danger-button { min-height: 38px; padding: 0 14px; border: 1px solid #761b18; border-radius: 7px; color: #fff4e4; background: #9b2d27; font: 700 .86rem inherit; cursor: pointer; }
+.turn-page .danger-button:hover { background: #7c211d; }
+.turn-page .between-combats { padding: clamp(18px, 3vw, 28px); border: 1px solid rgba(105, 68, 30, .24); border-radius: 16px; background: rgba(255, 252, 241, .9); }
+.turn-page .between-combats h2 { margin: 5px 0 8px; color: #572018; font: 800 1.35rem 'Cinzel', Georgia, serif; }
+.turn-page .between-combats > p { max-width: 850px; color: #66584d; line-height: 1.5; }
+.turn-page .rest-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+.turn-page .rest-options article { display: grid; align-content: start; gap: 9px; padding: 18px; border: 1px solid #b79b70; border-radius: 13px; background: #fff9e9; }
+.turn-page .rest-options h3, .turn-page .rest-options p { margin: 0; }
+.turn-page .rest-options p { color: #66584d; line-height: 1.45; }
+.turn-page .rest-options button { justify-self: start; margin-top: 5px; }
+.turn-page .manual-rest-note { padding: 10px 12px; border-left: 3px solid #9b6422; background: #f4e4c5; }
+.turn-page .new-combat-button { display: block; margin: 18px 0 0 auto; }
+.turn-page button:disabled { opacity: .46; cursor: not-allowed; }
+.turn-page .field { display: grid; align-content: start; gap: 6px; color: #522019; font-size: .78rem; font-weight: 800; }
+.turn-page .field input, .turn-page .field select { width: 100%; min-height: 43px; box-sizing: border-box; padding: 8px 10px; border: 1px solid #a88c61; border-radius: 8px; background: #fffdf5; color: #2b2119; font: inherit; font-size: .9rem; font-weight: 500; }
+.character-page .library-panel, .character-page .wizard-card { border: 1px solid rgba(104, 67, 28, .28); border-radius: 16px; background: rgba(255, 250, 235, .9); box-shadow: 0 10px 24px rgba(52, 31, 15, .08); }
+.character-page .section-heading { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.character-page .section-heading span, .character-page .wizard-heading span, .character-page .review-card > span { color: #9b6422; font-size: .7rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+.character-page .section-heading h2, .character-page .wizard-heading h2 { margin: 3px 0 0; color: #572018; font: 800 1.15rem 'Cinzel', Georgia, serif; }
+.character-page .stepper { display: grid; gap: 8px; position: sticky; top: 88px; }
+.character-page .stepper button { display: grid; grid-template-columns: 32px 1fr; align-items: center; gap: 10px; min-height: 52px; padding: 8px 12px; border: 1px solid #ad936d; border-radius: 11px; color: #5d4838; background: rgba(255, 250, 235, .76); text-align: left; cursor: pointer; }
+.character-page .stepper button > span { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; color: #fff7df; background: #8e7659; }
+.character-page .stepper button.active { border-color: #7b2921; color: #5c1d18; background: #f5ddb0; }
+.character-page .stepper button.active > span, .character-page .stepper button.completed > span { background: #7b2921; }
+.character-page .stepper button:disabled { cursor: not-allowed; opacity: .55; }
+
+@media (max-width: 640px) {
+  .turn-page .new-combat-button, .turn-page .rest-options button { width: 100%; }
+  .turn-page .rest-options { grid-template-columns: 1fr; }
 }
 
 .mat-mdc-form-field {
