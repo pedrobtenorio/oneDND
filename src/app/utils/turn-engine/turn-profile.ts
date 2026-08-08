@@ -27,7 +27,11 @@ export const hasSpellcasting = (profile: CharacterProfile): boolean =>
 export const attackCount = (profile: CharacterProfile): number =>
   profile.classes.some((entry) => entry.level >= 5 && ['barbaro', 'guardiao', 'guerreiro', 'monge', 'paladino'].includes(entry.classId)) ? 2 : 1;
 
-const pool = (label: string, max: number): ResourcePool => ({ current: max, max, label });
+const pool = (
+  label: string,
+  max: number,
+  shortRest?: ResourcePool['shortRest']
+): ResourcePool => ({ current: max, max, label, ...(shortRest ? { shortRest } : {}) });
 
 export const buildInitialResources = (profile: CharacterProfile): Record<string, ResourcePool> => {
   const resources: Record<string, ResourcePool> = {};
@@ -44,28 +48,37 @@ export const buildInitialResources = (profile: CharacterProfile): Record<string,
 
   if (barbarian > 0) {
     const uses = barbarian >= 6 ? 4 : barbarian >= 3 ? 3 : 2;
-    resources['rage'] = pool('Fúria', uses);
+    resources['rage'] = pool('Fúria', uses, { amount: 1 });
   }
   if (fighter >= 1) {
-    resources['second-wind'] = pool('Recuperar Fôlego', fighter >= 4 ? 3 : 2);
+    resources['second-wind'] = pool('Recuperar Fôlego', fighter >= 4 ? 3 : 2, { amount: 1 });
   }
   if (fighter >= 2) {
-    resources['action-surge'] = pool('Surto de Ação', 1);
+    resources['action-surge'] = pool('Surto de Ação', 1, { amount: 'all' });
   }
   if (profile.subclassIds.includes('mestre-da-batalha')) {
-    resources['superiority-die'] = pool('Dados de Superioridade', 4);
+    resources['superiority-die'] = pool('Dados de Superioridade', 4, { amount: 'all' });
   }
   if (ranger >= 1) resources['favored-enemy'] = pool('Inimigo Favorito', ranger >= 5 ? 3 : 2);
-  if (bard >= 1) resources['bardic-inspiration'] = pool('Inspiração de Bardo', Math.max(1, Math.floor((profile.abilities.charisma - 10) / 2)));
+  if (bard >= 1) resources['bardic-inspiration'] = pool(
+    'Inspiração de Bardo',
+    Math.max(1, Math.floor((profile.abilities.charisma - 10) / 2)),
+    bard >= 5 ? { amount: 'all' } : undefined
+  );
   if (warlock >= 2) resources['magical-cunning'] = pool('Astúcia Mágica', 1);
-  if (cleric >= 2) resources['channel-divinity'] = pool('Canalizar Divindade', 2);
-  if (druid >= 2) resources['wild-shape'] = pool('Forma Selvagem', 2);
+  if (cleric >= 2) resources['channel-divinity'] = pool('Canalizar Divindade', 2, { amount: 1 });
+  if (druid >= 2) resources['wild-shape'] = pool('Forma Selvagem', 2, { amount: 1 });
   if (sorcerer >= 1) resources['innate-sorcery'] = pool('Feitiçaria Inata', 2);
-  if (sorcerer >= 2) resources['sorcery-point'] = pool('Pontos de Feitiçaria', sorcerer);
-  if (monk >= 2) resources['focus-point'] = pool('Pontos de Foco', monk);
+  if (sorcerer >= 2) resources['sorcery-point'] = pool(
+    'Pontos de Feitiçaria',
+    sorcerer,
+    sorcerer >= 5 ? { amount: Math.floor(sorcerer / 2), consumeResourceId: 'sorcerous-restoration' } : undefined
+  );
+  if (sorcerer >= 5) resources['sorcerous-restoration'] = pool('Restauração Feiticeira', 1);
+  if (monk >= 2) resources['focus-point'] = pool('Pontos de Foco', monk, { amount: 'all' });
   if (monk >= 2) resources['uncanny-metabolism'] = pool('Metabolismo Incomum', 1);
   if (paladin >= 1) resources['lay-on-hands'] = pool('Mãos Consagradas', paladin * 5);
-  if (paladin >= 3) resources['channel-divinity'] = pool('Canalizar Divindade', 2);
+  if (paladin >= 3) resources['channel-divinity'] = pool('Canalizar Divindade', 2, { amount: 1 });
 
   const fullCasterLevel = bard + cleric + druid + sorcerer + classLevel(profile, 'mago');
   const sharedCasterLevel = fullCasterLevel + Math.ceil(ranger / 2) + Math.ceil(paladin / 2) +
@@ -81,13 +94,11 @@ export const buildInitialResources = (profile: CharacterProfile): Record<string,
   if (warlock >= 1) {
     const circle = warlock >= 5 ? 3 : warlock >= 3 ? 2 : 1;
     const amount = warlock >= 2 ? 2 : 1;
-    const id = `spell-slot-${circle}`;
-    const existing = resources[id]?.max ?? 0;
-    resources[id] = pool(`Espaços de ${circle}º círculo`, existing + amount);
+    resources[`pact-slot-${circle}`] = pool(`Espaços de Pacto de ${circle}º círculo`, amount, { amount: 'all' });
   }
 
   if (profile.subclassIds.some((id) => ['guerreiro-psi', 'lamina-alma'].includes(id))) {
-    resources['psionic-energy-die'] = pool('Dados de Energia Psiônica', proficiencyBonus(profile) * 2);
+    resources['psionic-energy-die'] = pool('Dados de Energia Psiônica', proficiencyBonus(profile) * 2, { amount: 1 });
   }
   if (profile.subclassIds.includes('patrono-celestial')) resources['healing-light'] = pool('Luz Medicinal', warlock + 1);
 
@@ -96,7 +107,7 @@ export const buildInitialResources = (profile: CharacterProfile): Record<string,
     resources['healing-hands'] = pool('Mãos Curativas', 1);
     if (totalLevel(profile) >= 3) resources['celestial-revelation'] = pool('Revelação Celestial', 1);
   }
-  if (profile.speciesId === 'anao') resources['stonecunning'] = pool('Astúcia da Pedra', proficiency);
+  if (profile.speciesId === 'anao') resources['stonecunning'] = pool('Conhecimento de Pedras', proficiency);
   if (profile.speciesId === 'draconato') {
     resources['breath-weapon'] = pool('Sopro Dracônico', proficiency);
     if (totalLevel(profile) >= 5) resources['draconic-flight'] = pool('Voo Dracônico', 1);
@@ -106,7 +117,7 @@ export const buildInitialResources = (profile: CharacterProfile): Record<string,
     if (totalLevel(profile) >= 5) resources['large-form'] = pool('Forma Grande', 1);
   }
   if (profile.speciesId === 'orc') {
-    resources['adrenaline-rush'] = pool('Ímpeto de Adrenalina', proficiency);
+    resources['adrenaline-rush'] = pool('Pico de Adrenalina', proficiency, { amount: 'all' });
     resources['relentless-endurance'] = pool('Resistência Implacável', 1);
   }
   if (profile.featIds.includes('sortudo')) resources['luck-point'] = pool('Pontos de Sorte', proficiency);
@@ -115,6 +126,41 @@ export const buildInitialResources = (profile: CharacterProfile): Record<string,
   }
 
   return resources;
+};
+
+export const recoverResources = (
+  current: Record<string, ResourcePool>,
+  rest: 'short' | 'long'
+): { resources: Record<string, ResourcePool>; recovered: string[] } => {
+  const resources = Object.fromEntries(
+    Object.entries(current).map(([id, value]) => [
+      id,
+      { ...value, ...(value.shortRest ? { shortRest: { ...value.shortRest } } : {}) },
+    ])
+  );
+  const recovered: string[] = [];
+
+  for (const [id, resource] of Object.entries(resources)) {
+    const missing = resource.max - resource.current;
+    if (missing <= 0) continue;
+    if (rest === 'long') {
+      resource.current = resource.max;
+      recovered.push(resource.label);
+      continue;
+    }
+
+    const recovery = resource.shortRest;
+    if (!recovery) continue;
+    const limiter = recovery.consumeResourceId ? resources[recovery.consumeResourceId] : undefined;
+    if (recovery.consumeResourceId && (!limiter || limiter.current <= 0)) continue;
+    const amount = recovery.amount === 'all' ? missing : Math.min(missing, recovery.amount);
+    if (amount <= 0) continue;
+    resource.current += amount;
+    if (limiter) limiter.current = Math.max(0, limiter.current - 1);
+    recovered.push(resource.label);
+  }
+
+  return { resources, recovered };
 };
 
 export const createInitialTurnState = (profile: CharacterProfile): TurnState => ({

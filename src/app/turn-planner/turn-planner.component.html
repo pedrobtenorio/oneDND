@@ -37,34 +37,59 @@
     <section class="active-character" aria-live="polite"><span>Personagem ativo</span><strong>{{ activeProfile.name }}</strong></section>
     <section class="session" [class.reaction-phase]="state.phase === 'reaction-window'">
       <app-turn-resource-bar [state]="state" (resourceChange)="store.setResource($event.id, $event.current)" />
-      <div class="context-card"><app-combat-context [context]="context" (factChange)="factChanged($event)" /></div>
-
-      @if (state.awaitingAttackOutcome) {
-        <section class="outcome" aria-live="assertive"><strong>Qual foi o resultado do ataque?</strong><button class="primary-button" type="button" (click)="store.attackResult('hit')">Acertou</button><button class="secondary-button" type="button" (click)="store.attackResult('miss')">Errou</button></section>
-      }
-      @if (state.currentTrigger) {
-        <section class="trigger-banner"><span>Gatilho ativo: <strong>{{ state.currentTrigger }}</strong></span><button class="text-button" type="button" (click)="store.clearTrigger()">Concluir gatilhos</button></section>
-      }
-      @if (canPerformNextAttack) {
-        <section class="next-attack-banner">
-          <span><strong>{{ state.attacksRemaining }}</strong> ataque(s) restante(s) nesta ação.</span>
-          <button class="primary-button" type="button" (click)="performNextAttack()">Realizar próximo ataque</button>
+      @if (combatEnded) {
+        <section class="between-combats" aria-labelledby="between-combats-title">
+          <span class="confirmation-kicker">Fora de combate</span>
+          <h2 id="between-combats-title">Descansos e recuperação</h2>
+          <p>O histórico deste combate foi apagado. Os recursos gastos continuam registrados até que um descanso os recupere.</p>
+          <div class="rest-options">
+            <article>
+              <h3>Descanso Curto</h3>
+              <p>Leva 1 hora. Recupera somente os recursos indicados pela característica, incluindo espaços de Magia de Pacto.</p>
+              <button class="secondary-button" type="button" (click)="takeRest('short')">Fazer Descanso Curto</button>
+            </article>
+            <article>
+              <h3>Descanso Longo</h3>
+              <p>Leva pelo menos 8 horas. Restaura espaços de magia e os demais recursos modelados que voltam nesse descanso.</p>
+              <button class="primary-button" type="button" (click)="takeRest('long')">Fazer Descanso Longo</button>
+            </article>
+          </div>
+          <p class="manual-rest-note">Pontos de Vida, Dados de Vida, atributos reduzidos e Exaustão ainda não fazem parte deste perfil e devem ser ajustados manualmente.</p>
+          <button class="primary-button new-combat-button" type="button" (click)="startNewCombat()">Iniciar novo combate</button>
         </section>
-      }
+      } @else {
+        <div class="context-card"><app-combat-context [context]="context" (factChange)="factChanged($event)" /></div>
 
-      <div class="session-grid">
-        <div class="board-column">
-          @if (state.phase === 'own-turn') {
-            <div class="movement-actions" aria-label="Registrar movimento"><span>Registrar movimento:</span><button class="secondary-button" type="button" (click)="store.move(1.5)" [disabled]="state.movementRemaining < 1.5">1,5 m</button><button class="secondary-button" type="button" (click)="store.move(3)" [disabled]="state.movementRemaining < 3">3 m</button></div>
-            <app-turn-action-board [evaluations]="ownTurnEvaluations" [didactic]="didactic" (inspect)="inspect($event)" />
-          } @else {
-            <section class="reaction-heading"><span>Turno encerrado</span><h2>Janela de Reação</h2><p>A Reação e os efeitos relevantes continuam acompanhados até o início do próximo turno.</p></section>
-            <app-turn-action-board [evaluations]="reactionEvaluations" [didactic]="didactic" (inspect)="inspect($event)" />
-          }
+        @if (state.awaitingAttackOutcome) {
+          <section class="outcome" aria-live="assertive"><strong>Qual foi o resultado do ataque?</strong><button class="primary-button" type="button" (click)="store.attackResult('hit')">Acertou</button><button class="secondary-button" type="button" (click)="store.attackResult('miss')">Errou</button></section>
+        }
+        @if (state.currentTrigger) {
+          <section class="trigger-banner"><span>Gatilho ativo: <strong>{{ state.currentTrigger }}</strong></span><button class="text-button" type="button" (click)="store.clearTrigger()">Concluir gatilhos</button></section>
+        }
+        @if (canPerformNextAttack) {
+          <section class="next-attack-banner">
+            <span><strong>{{ state.attacksRemaining }}</strong> ataque(s) restante(s) nesta ação.</span>
+            <button class="primary-button" type="button" (click)="performNextAttack()">Realizar próximo ataque</button>
+          </section>
+        }
+
+        <div class="session-grid">
+          <div class="board-column">
+            @if (state.phase === 'own-turn') {
+              <div class="movement-actions" aria-label="Registrar movimento"><span>Registrar movimento:</span><button class="secondary-button" type="button" (click)="store.move(1.5)" [disabled]="state.movementRemaining < 1.5">1,5 m</button><button class="secondary-button" type="button" (click)="store.move(3)" [disabled]="state.movementRemaining < 3">3 m</button></div>
+              <app-turn-action-board [evaluations]="ownTurnEvaluations" [didactic]="didactic" (inspect)="inspect($event)" />
+            } @else {
+              <section class="reaction-heading"><span>Turno encerrado</span><h2>Janela de Reação</h2><p>A Reação e os efeitos relevantes continuam acompanhados até o início do próximo turno.</p></section>
+              <app-turn-action-board [evaluations]="reactionEvaluations" [didactic]="didactic" (inspect)="inspect($event)" />
+            }
+          </div>
+          <div class="side-column"><app-rule-details [evaluation]="selectedEvaluation" (confirm)="confirmSelected()" (factAnswer)="factChanged($event)" /><app-turn-timeline [state]="state" [canUndo]="store.canUndo" [canRedo]="store.canRedo" (undo)="store.undo()" (redo)="store.redo()" /></div>
         </div>
-        <div class="side-column"><app-rule-details [evaluation]="selectedEvaluation" (confirm)="confirmSelected()" (factAnswer)="factChanged($event)" /><app-turn-timeline [state]="state" [canUndo]="store.canUndo" [canRedo]="store.canRedo" (undo)="store.undo()" (redo)="store.redo()" /></div>
-      </div>
-      <footer class="turn-controls">@if (state.phase === 'own-turn') { <button id="end-turn-button" class="primary-button" type="button" (click)="requestEndTurn()">Encerrar turno</button> } @else { <button class="primary-button" type="button" (click)="store.startNextTurn()">Iniciar próximo turno</button> }</footer>
+        <footer class="turn-controls">
+          <button id="finish-combat-button" class="danger-button" type="button" (click)="requestFinishCombat()">Terminar combate e limpar histórico</button>
+          @if (state.phase === 'own-turn') { <button id="end-turn-button" class="primary-button" type="button" (click)="requestEndTurn()">Encerrar turno</button> } @else { <button class="primary-button" type="button" (click)="store.startNextTurn()">Iniciar próximo turno</button> }
+        </footer>
+      }
     </section>
   }
 
@@ -77,6 +102,20 @@
         <div class="confirmation-actions">
           <button class="secondary-button" type="button" (click)="cancelEndTurn()">Continuar turno</button>
           <button class="primary-button" type="button" (click)="confirmEndTurn()">Encerrar mesmo assim</button>
+        </div>
+      </section>
+    </div>
+  }
+
+  @if (finishCombatConfirmationOpen) {
+    <div class="confirmation-backdrop" (keydown.escape)="cancelFinishCombat()">
+      <section class="end-confirmation" role="alertdialog" aria-modal="true" aria-labelledby="finish-combat-confirmation-title">
+        <span class="confirmation-kicker">Encerrar encontro</span>
+        <h2 id="finish-combat-confirmation-title" tabindex="-1">Terminar este combate?</h2>
+        <p>O histórico de ações será apagado. Recursos gastos serão preservados para descansos e para o próximo combate.</p>
+        <div class="confirmation-actions">
+          <button class="secondary-button" type="button" (click)="cancelFinishCombat()">Cancelar</button>
+          <button class="danger-button" type="button" (click)="confirmFinishCombat()">Terminar e limpar histórico</button>
         </div>
       </section>
     </div>

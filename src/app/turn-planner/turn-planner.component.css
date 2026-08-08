@@ -26,7 +26,7 @@
 .reaction-heading { margin-bottom: 14px; padding: 14px; border-radius: 12px; color: #fbedc8; background: linear-gradient(120deg, #4e1713, #7b281f); }
 .reaction-heading span { color: #e7b75f; font-size: .72rem; font-weight: 900; text-transform: uppercase; }
 .reaction-heading h2, .reaction-heading p { margin: 4px 0 0; }
-.turn-controls { display: flex; justify-content: flex-end; }
+.turn-controls { display: flex; justify-content: space-between; gap: 10px; }
 .confirmation-backdrop { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 16px; background: rgba(25, 12, 8, .68); }
 .end-confirmation { width: min(100%, 470px); padding: 22px; border: 1px solid #d1aa60; border-radius: 16px; background: #fff9e8; box-shadow: 0 24px 70px rgba(0, 0, 0, .4); }
 .confirmation-kicker { color: #a2641f; font-size: .7rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
@@ -34,5 +34,5 @@
 .end-confirmation ul { margin: 0; padding-left: 20px; color: #514337; line-height: 1.6; }
 .confirmation-actions { display: flex; justify-content: flex-end; gap: 9px; margin-top: 18px; }
 @media (max-width: 980px) { .session-grid { grid-template-columns: 1fr; } }
-@media (max-width: 640px) { .turn-page { width: min(100% - 16px, 1480px); margin-top: 10px; } .hero { align-items: start; flex-direction: column; border-radius: 15px; } .picker-heading, .empty-picker, .next-attack-banner { align-items: stretch; flex-direction: column; } .outcome { align-items: stretch; flex-direction: column; } .start-button { width: 100%; } .confirmation-actions { display: grid; } }
+@media (max-width: 640px) { .turn-page { width: min(100% - 16px, 1480px); margin-top: 10px; } .hero { align-items: start; flex-direction: column; border-radius: 15px; } .picker-heading, .empty-picker, .next-attack-banner, .turn-controls { align-items: stretch; flex-direction: column; } .outcome { align-items: stretch; flex-direction: column; } .start-button { width: 100%; } .confirmation-actions { display: grid; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }

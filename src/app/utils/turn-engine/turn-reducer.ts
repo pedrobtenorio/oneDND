@@ -22,7 +22,10 @@ const timelineEntry = (
 const clone = (state: TurnState): TurnState => ({
   ...state,
   actionTokens: state.actionTokens.map((token) => ({ ...token })),
-  resources: Object.fromEntries(Object.entries(state.resources).map(([id, value]) => [id, { ...value }])),
+  resources: Object.fromEntries(Object.entries(state.resources).map(([id, value]) => [
+    id,
+    { ...value, ...(value.shortRest ? { shortRest: { ...value.shortRest } } : {}) },
+  ])),
   markers: { ...state.markers },
   timeline: [...state.timeline],
 });
@@ -46,7 +49,7 @@ export const applyRule = (
       if (resource) resource.current = Math.max(0, resource.current - cost.amount);
     } else if (cost.type === 'spell-slot') {
       const slotId = Object.keys(state.resources)
-        .map((id) => ({ id, level: Number(/^spell-slot-(\d+)$/.exec(id)?.[1] ?? 0) }))
+        .map((id) => ({ id, level: Number(/^(?:spell|pact)-slot-(\d+)$/.exec(id)?.[1] ?? 0) }))
         .filter((slot) => slot.level >= cost.level && state.resources[slot.id].current > 0)
         .sort((left, right) => left.level - right.level)[0]?.id;
       const resource = slotId ? state.resources[slotId] : undefined;

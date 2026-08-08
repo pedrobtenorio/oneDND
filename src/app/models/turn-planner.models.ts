@@ -214,6 +214,10 @@ export interface ResourcePool {
   current: number;
   max: number;
   label: string;
+  shortRest?: {
+    amount: number | 'all';
+    consumeResourceId?: string;
+  };
 }
 
 export interface TimelineEntry {
@@ -269,6 +273,7 @@ export interface TurnDraft {
   profileId: string;
   context: CombatContext;
   decisions: TurnDecision[];
+  combatEnded?: boolean;
   updatedAt: string;
 }
 

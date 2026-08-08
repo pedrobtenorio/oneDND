@@ -5,7 +5,7 @@ import {
 } from '../../models/turn-planner.models';
 import { evaluateRule } from './turn-evaluator';
 import { applyRule, reduceDecision, replayDecisions } from './turn-reducer';
-import { attackCount, buildInitialResources, createInitialTurnState, hasSpellcasting, validateProfile } from './turn-profile';
+import { attackCount, buildInitialResources, createInitialTurnState, hasSpellcasting, recoverResources, validateProfile } from './turn-profile';
 
 const source = { book: 'Livro do Jogador', revision: '2024 - Erratas de Agosto', page: 1 };
 
@@ -185,9 +185,63 @@ describe('turn engine', () => {
     });
     const initial = createInitialTurnState(warlock);
     expect(initial.resources['spell-slot-1']).toBeUndefined();
+    expect(initial.resources['pact-slot-3'].max).toBe(2);
     expect(evaluateRule(spell, warlock, context(), initial).status).toBe('available');
     const used = applyRule(initial, spell, warlock);
-    expect(used.resources['spell-slot-3'].current).toBe(1);
+    expect(used.resources['pact-slot-3'].current).toBe(1);
+  });
+
+  it('recovers only the resources allowed by a Short Rest', () => {
+    const character = profile({
+      classes: [{ classId: 'bruxo', level: 2, order: 0 }, { classId: 'mago', level: 3, order: 1 }],
+      subclassIds: ['patrono-infero', 'abjurador'],
+    });
+    const resources = buildInitialResources(character);
+    resources['pact-slot-1'].current = 0;
+    resources['spell-slot-2'].current = 0;
+    resources['magical-cunning'].current = 0;
+
+    const rested = recoverResources(resources, 'short');
+
+    expect(rested.resources['pact-slot-1'].current).toBe(2);
+    expect(rested.resources['spell-slot-2'].current).toBe(0);
+    expect(rested.resources['magical-cunning'].current).toBe(0);
+    expect(rested.recovered).toEqual(['Espaços de Pacto de 1º círculo']);
+  });
+
+  it('applies partial Short Rest recovery and restores everything on a Long Rest', () => {
+    const character = profile({
+      classes: [{ classId: 'barbaro', level: 3, order: 0 }, { classId: 'guerreiro', level: 2, order: 1 }],
+      subclassIds: ['berserker'],
+    });
+    const resources = buildInitialResources(character);
+    resources['rage'].current = 0;
+    resources['second-wind'].current = 0;
+    resources['action-surge'].current = 0;
+
+    const short = recoverResources(resources, 'short');
+    expect(short.resources['rage'].current).toBe(1);
+    expect(short.resources['second-wind'].current).toBe(1);
+    expect(short.resources['action-surge'].current).toBe(1);
+
+    const long = recoverResources(short.resources, 'long');
+    expect(long.resources['rage'].current).toBe(long.resources['rage'].max);
+    expect(long.resources['second-wind'].current).toBe(long.resources['second-wind'].max);
+  });
+
+  it('uses Sorcerous Restoration at most once between Long Rests', () => {
+    const sorcerer = profile({ classes: [{ classId: 'feiticeiro', level: 5, order: 0 }] });
+    const resources = buildInitialResources(sorcerer);
+    resources['sorcery-point'].current = 0;
+
+    const first = recoverResources(resources, 'short');
+    expect(first.resources['sorcery-point'].current).toBe(2);
+    expect(first.resources['sorcerous-restoration'].current).toBe(0);
+    const second = recoverResources(first.resources, 'short');
+    expect(second.resources['sorcery-point'].current).toBe(2);
+    const long = recoverResources(second.resources, 'long');
+    expect(long.resources['sorcery-point'].current).toBe(5);
+    expect(long.resources['sorcerous-restoration'].current).toBe(1);
   });
 
   it('replays deterministically and restores the Reaction only on the next turn', () => {

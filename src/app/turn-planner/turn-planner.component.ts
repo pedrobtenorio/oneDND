@@ -93,7 +93,9 @@ export class TurnPlannerComponent implements OnInit {
   notice = '';
   didactic = true;
   sessionStarted = false;
+  combatEnded = false;
   endConfirmationOpen = false;
+  finishCombatConfirmationOpen = false;
 
   ngOnInit(): void {
     this.catalogService.getCatalog()
@@ -137,6 +139,7 @@ export class TurnPlannerComponent implements OnInit {
           profileId: this.activeProfile.id,
           context: this.context,
           decisions,
+          combatEnded: this.combatEnded,
           updatedAt: new Date().toISOString(),
         });
       }
@@ -181,11 +184,17 @@ export class TurnPlannerComponent implements OnInit {
     this.activeProfile = profile;
     const draft = this.storage.getDraft(profile.id);
     this.context = draft?.context ?? { facts: unknownFacts(), conditions: [], targetName: 'Alvo principal' };
+    this.combatEnded = draft?.combatEnded ?? false;
     this.store.load(profile, this.catalog, this.context, draft?.decisions ?? []);
     this.sessionStarted = true;
     this.endConfirmationOpen = false;
+    this.finishCombatConfirmationOpen = false;
     this.selectedEvaluation = null;
-    this.notice = draft ? `Turno de “${profile.name}” restaurado.` : `Turno de “${profile.name}” iniciado.`;
+    this.notice = draft
+      ? this.combatEnded
+        ? `Recursos de “${profile.name}” restaurados entre combates.`
+        : `Turno de “${profile.name}” restaurado.`
+      : `Turno de “${profile.name}” iniciado.`;
   }
 
   inspect(evaluation: RuleEvaluation): void {
@@ -221,5 +230,41 @@ export class TurnPlannerComponent implements OnInit {
   confirmEndTurn(): void {
     this.endConfirmationOpen = false;
     this.store.endTurn();
+  }
+
+  requestFinishCombat(): void {
+    this.finishCombatConfirmationOpen = true;
+    setTimeout(() => document.querySelector<HTMLElement>('#finish-combat-confirmation-title')?.focus());
+  }
+
+  cancelFinishCombat(): void {
+    this.finishCombatConfirmationOpen = false;
+    setTimeout(() => document.querySelector<HTMLElement>('#finish-combat-button')?.focus());
+  }
+
+  confirmFinishCombat(): void {
+    this.finishCombatConfirmationOpen = false;
+    this.combatEnded = true;
+    this.selectedEvaluation = null;
+    this.context = { facts: unknownFacts(), conditions: [], targetName: 'Alvo principal' };
+    this.store.setContext(this.context);
+    this.store.clearHistoryPreservingResources();
+    this.notice = 'Combate terminado. O histórico de ações foi apagado e os recursos gastos foram preservados.';
+  }
+
+  takeRest(rest: 'short' | 'long'): void {
+    const recovered = this.store.takeRest(rest);
+    const name = rest === 'short' ? 'Descanso Curto' : 'Descanso Longo';
+    this.notice = recovered.length
+      ? `${name} concluído. Recuperado: ${recovered.join(', ')}.`
+      : `${name} concluído. Nenhum recurso automático precisava ser recuperado.`;
+  }
+
+  startNewCombat(): void {
+    this.combatEnded = false;
+    this.context = { facts: unknownFacts(), conditions: [], targetName: 'Alvo principal' };
+    this.store.setContext(this.context);
+    this.store.clearHistoryPreservingResources();
+    this.notice = `Novo combate iniciado para “${this.activeProfile?.name ?? 'personagem'}”.`;
   }
 }

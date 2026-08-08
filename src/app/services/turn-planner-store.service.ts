@@ -11,6 +11,7 @@ import {
 } from '../models/turn-planner.models';
 import { evaluateRules, isRuleRelevant } from '../utils/turn-engine/turn-evaluator';
 import { replayDecisions } from '../utils/turn-engine/turn-reducer';
+import { recoverResources } from '../utils/turn-engine/turn-profile';
 
 @Injectable()
 export class TurnPlannerStore {
@@ -113,6 +114,20 @@ export class TurnPlannerStore {
     if (this.currentState?.phase === 'reaction-window') this.append({ type: 'start-next-turn' });
   }
 
+  clearHistoryPreservingResources(): void {
+    const resources = this.currentState?.resources;
+    if (!resources) return;
+    this.replaceWithResourceBaseline(resources);
+  }
+
+  takeRest(rest: 'short' | 'long'): string[] {
+    const resources = this.currentState?.resources;
+    if (!resources) return [];
+    const result = recoverResources(resources, rest);
+    this.replaceWithResourceBaseline(result.resources);
+    return result.recovered;
+  }
+
   undo(): void {
     if (this.cursor > 0) {
       this.cursor -= 1;
@@ -129,6 +144,18 @@ export class TurnPlannerStore {
 
   private append(decision: TurnDecision): void {
     this.decisions = [...this.decisions.slice(0, this.cursor), decision];
+    this.cursor = this.decisions.length;
+    this.recompute();
+  }
+
+  private replaceWithResourceBaseline(resources: TurnState['resources']): void {
+    this.decisions = Object.entries(resources)
+      .filter(([, resource]) => resource.current !== resource.max)
+      .map(([resourceId, resource]) => ({
+        type: 'set-resource' as const,
+        resourceId,
+        current: resource.current,
+      }));
     this.cursor = this.decisions.length;
     this.recompute();
   }

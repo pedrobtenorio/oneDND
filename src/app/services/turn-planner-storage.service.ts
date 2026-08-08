@@ -199,6 +199,7 @@ export class TurnPlannerStorageService {
       !value['decisions'].every((decision) =>
         isRecord(decision) && typeof decision['type'] === 'string' && decisionTypes.has(decision['type'])
       ) ||
+      (value['combatEnded'] !== undefined && typeof value['combatEnded'] !== 'boolean') ||
       typeof value['updatedAt'] !== 'string'
     ) {
       throw new Error('Arquivo inválido: rascunho malformado.');

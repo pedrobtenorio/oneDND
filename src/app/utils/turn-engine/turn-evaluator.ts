@@ -132,7 +132,7 @@ const conditionResult = (
         : { status: 'fail', reason: { code: 'spell-slot-turn', message: 'Um espaço de magia já foi usado neste turno.' } };
     case 'spell-slot-available': {
       const available = Object.entries(state.resources).some(([id, resource]) => {
-        const match = /^spell-slot-(\d+)$/.exec(id);
+        const match = /^(?:spell|pact)-slot-(\d+)$/.exec(id);
         return !!match && Number(match[1]) >= condition.minLevel && resource.current > 0;
       });
       return available

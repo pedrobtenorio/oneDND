@@ -37,12 +37,14 @@ describe('TurnPlannerStorageService', () => {
       profileId: 'profile-1',
       context: { facts: {}, conditions: [], targetName: 'Alvo' },
       decisions: [{ type: 'move', distance: 3 }],
+      combatEnded: true,
       updatedAt: '2026-01-01T00:00:00.000Z',
     });
 
     const reloaded = new TurnPlannerStorageService();
     expect(reloaded.profiles[0].id).toBe('profile-1');
     expect(reloaded.getDraft('profile-1')?.decisions).toEqual([{ type: 'move', distance: 3 }]);
+    expect(reloaded.getDraft('profile-1')?.combatEnded).toBeTrue();
   });
 
   it('imports collisions as copies without overwriting local data', () => {
