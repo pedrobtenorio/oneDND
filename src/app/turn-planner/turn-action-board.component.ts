@@ -58,7 +58,7 @@ import { RuleEvaluation } from '../models/turn-planner.models';
     .status { width: fit-content; padding: 2px 7px; border-radius: 999px; background: rgba(30, 90, 52, .12); font-size: .68rem; font-weight: 800; text-transform: uppercase; }
     .conditional .status { background: rgba(181, 121, 8, .15); }
     .blocked .status { background: rgba(80, 75, 70, .12); }
-    small { line-height: 1.35; }
+    small { line-height: 1.5; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
   `,
 })
 export class TurnActionBoardComponent {

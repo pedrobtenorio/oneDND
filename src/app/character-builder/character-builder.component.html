@@ -22,6 +22,7 @@
     <div class="profile-grid">
       @for (profile of profiles; track profile.id) {
         <article class="profile-card" [class.active]="profile.id === profileForm.controls.id.value">
+          <img class="saved-portrait" [src]="profileArt(profile)" alt="" loading="lazy" width="60" height="72" />
           <div><strong>{{ profile.name }}</strong><small>Nível {{ profileLevel(profile) }}{{ profile.classes.length > 1 ? ' · multiclasse' : '' }}</small></div>
           <div class="profile-card-actions">
             <button class="secondary-button" type="button" (click)="loadProfile(profile)">Editar</button>
@@ -33,6 +34,30 @@
     </div>
   </section>
 
+  @if (examples.length) {
+    <section class="library-panel example-panel" aria-labelledby="examples-title">
+      <div class="section-heading">
+        <div><span>Prontos para jogar</span><h2 id="examples-title">Personagens de exemplo · nível 8</h2></div>
+        <div class="gallery-controls"><button type="button" aria-label="Ver personagens anteriores" (click)="exampleGallery.scrollBy({left: -278})">←</button><span>Explore o grupo</span><button type="button" aria-label="Ver próximos personagens" (click)="exampleGallery.scrollBy({left: 278})">→</button></div>
+      </div>
+      <div class="example-grid" #exampleGallery tabindex="0" aria-label="Galeria de personagens de exemplo">
+        @for (example of examples; track example.profile.id) {
+          <article class="example-card">
+            <img class="example-art" [src]="profileArt(example.profile)" alt="" loading="lazy" width="400" height="400" />
+            <div class="example-card-heading">
+              <span class="example-badge">Nível 8</span>
+              <h3>{{ example.profile.name }}</h3>
+              <strong>{{ profileClassSummary(example.profile) }}</strong>
+            </div>
+            <p class="example-role">{{ example.role }}</p>
+            <p>{{ example.description }}</p>
+            <div class="example-actions"><button class="primary-button" type="button" (click)="playExample(example)">Jogar</button><button class="secondary-button" type="button" (click)="useExample(example)">Usar como base</button></div>
+          </article>
+        }
+      </div>
+    </section>
+  }
+
   <form class="wizard" [formGroup]="profileForm" (ngSubmit)="submitWizard()">
     <nav class="stepper" aria-label="Etapas da criação">
       @for (step of steps; track step.title; let index = $index) {
@@ -42,6 +67,7 @@
           [class.completed]="index < currentStep || index <= furthestStep"
           [disabled]="index > furthestStep"
           [attr.aria-current]="currentStep === index ? 'step' : null"
+          [attr.aria-label]="'Etapa ' + (index + 1) + ': ' + step.title"
           (click)="openStep(index)"
         >
           <span>{{ index + 1 }}</span>
@@ -58,97 +84,159 @@
 
       @if (currentStep === 0) {
         <div class="form-grid">
-          <label class="field"><span>Nome</span><input formControlName="name" /></label>
-          <label class="field"><span>Espécie</span><select formControlName="speciesId" (change)="speciesChanged()">@for (option of species; track option.id) { <option [value]="option.id">{{ option.name }}</option> }</select></label>
+          <label class="field" [class.invalid]="inlineError('nome do personagem')"><span>Nome</span><input formControlName="name" [attr.aria-invalid]="inlineError('nome do personagem') ? 'true' : null" />@if (inlineError('nome do personagem'); as error) { <small class="field-error">{{ error }}</small> }</label>
+          <label class="field" [class.invalid]="inlineError('selecione uma espécie')"><span>Espécie</span><select formControlName="speciesId" (change)="speciesChanged()" [attr.aria-invalid]="inlineError('selecione uma espécie') ? 'true' : null">@for (option of species; track option.id) { <option [value]="option.id">{{ option.name }}</option> }</select>@if (inlineError('selecione uma espécie'); as error) { <small class="field-error">{{ error }}</small> }</label>
           @if (speciesChoices.length) {
-            <label class="field"><span>Escolha da espécie</span><select formControlName="speciesChoiceId"><option value="">Selecione</option>@for (option of speciesChoices; track option.id) { <option [value]="option.id">{{ option.name }}</option> }</select></label>
+            <label class="field" [class.invalid]="inlineError('escolha interna da espécie')"><span>Escolha da espécie</span><select formControlName="speciesChoiceId" [attr.aria-invalid]="inlineError('escolha interna da espécie') ? 'true' : null"><option value="">Selecione</option>@for (option of speciesChoices; track option.id) { <option [value]="option.id">{{ option.name }}</option> }</select>@if (inlineError('escolha interna da espécie'); as error) { <small class="field-error">{{ error }}</small> }</label>
           }
         </div>
-        <div class="progression-heading"><strong>Níveis de classe</strong><span>{{ totalConfiguredLevel }}/6</span></div>
-        <div class="class-grid">
+        @if (abilityMode === 'legacy-final') {
+          <p class="alert">Personagem legado: atributos finais preservados. Revise a origem para ativar o cálculo automático.</p>
+          <button type="button" class="secondary-button" (click)="reviewLegacy()">Revisar origem e atributos base</button>
+        } @else {
+          <label class="field" [class.invalid]="inlineError('selecione um antecedente')"><span>Antecedente</span><select [value]="backgroundId" (change)="changeBackground($event)" [attr.aria-invalid]="inlineError('selecione um antecedente') ? 'true' : null"><option value="">Selecione</option>@for (option of backgrounds; track option.id) { <option [value]="option.id">{{ option.name }}</option> }</select>@if (inlineError('selecione um antecedente'); as error) { <small class="field-error">{{ error }}</small> }</label>
+          @if (background) { <p class="helper">{{ background.summary }}</p> }
+        }
+        <app-portrait-picker [selectedId]="portraitId" (portraitChange)="portraitId = $event" />
+      }
+      @if (currentStep === 1) {
+        <div class="progression-heading"><div><strong>Níveis de classe</strong><small>A primeira classe é definida automaticamente pela primeira que receber um nível.</small></div><span>{{ totalConfiguredLevel }}/8</span></div>
+        <div class="class-grid" [class.invalid-group]="inlineError('nível total', 'níveis de classe')">
           @for (entry of classes; track entry.id) {
-            <label class="level-card"><span>{{ entry.name }}</span><input type="number" min="0" max="5" [formControlName]="entry.id" (input)="classLevelChanged(entry.id)" /></label>
+            <article class="class-choice" [class.chosen]="profileForm.controls[entry.id].value > 0" [style.--class-color]="classVisuals[entry.id].color">
+              <img [src]="classArt(entry.id)" alt="" loading="lazy" width="400" height="400" />
+              <div class="class-copy"><h3>{{ entry.name }}</h3><p>{{ classVisuals[entry.id].role }}</p></div>
+              <div class="class-level-controls">
+                <button type="button" [attr.aria-label]="'Remover nível de ' + entry.name" [disabled]="profileForm.controls[entry.id].value === 0" (click)="adjustClassLevel(entry.id, -1)">−</button>
+                <label [class.invalid]="inlineError('nível total', 'níveis de classe')"><span>Nível</span><input type="number" min="0" max="8" [formControlName]="entry.id" (input)="classLevelChanged(entry.id)" [attr.aria-label]="'Níveis de ' + entry.name" [attr.aria-invalid]="inlineError('nível total', 'níveis de classe') ? 'true' : null" /></label>
+                <button type="button" [attr.aria-label]="'Adicionar nível de ' + entry.name" [disabled]="totalConfiguredLevel >= 8" (click)="adjustClassLevel(entry.id, 1)">+</button>
+              </div>
+            </article>
           }
         </div>
-        @if (totalConfiguredLevel >= 3) {
+        @if (inlineError('nível total', 'níveis de classe'); as error) { <small class="field-error group-error">{{ error }}</small> }
+        @if (totalConfiguredLevel >= 0) {
           <div class="form-grid subclass-grid">
             @for (entry of classes; track entry.id) {
-              @if (profileForm.controls[entry.id].value >= 3) {
-                <label class="field">
+              @if (profileForm.controls[entry.id].value >= 3 || selectedSubclass(entry.id)) {
+                <label class="field" [class.invalid]="inlineError('subclasse de ' + entry.name)">
                   <span>Subclasse de {{ entry.name }}</span>
-                  <select [formControlName]="subclassControlName(entry.id)">
+                  <select [formControlName]="subclassControlName(entry.id)" [attr.aria-invalid]="inlineError('subclasse de ' + entry.name) ? 'true' : null">
                     <option value="">Selecione</option>
                     @for (option of subclassesFor(entry.id); track option.id) { <option [value]="option.id">{{ option.name }}</option> }
                   </select>
+                  @if (inlineError('subclasse de ' + entry.name); as error) { <small class="field-error">{{ error }}</small> }
                 </label>
               }
             }
           </div>
         }
-        <p class="helper">O nível total continua limitado a 6 para permitir multiclasse, mas cada classe está modelada até o nível 5. No nível 3, escolha uma das quatro subclasses do livro.</p>
+        <p class="helper">O nível total pode chegar a 8, somando todas as classes. No nível 3, escolha uma das quatro subclasses do livro.</p>
       }
 
-      @if (currentStep === 1) {
-        <p class="step-intro">Informe os valores finais, depois de espécie, antecedentes, talentos e demais ajustes.</p>
-        <div class="ability-grid">
-          <label class="ability-card"><span>Força</span><input type="number" min="1" max="20" formControlName="strength" /></label>
-          <label class="ability-card"><span>Destreza</span><input type="number" min="1" max="20" formControlName="dexterity" /></label>
-          <label class="ability-card"><span>Constituição</span><input type="number" min="1" max="20" formControlName="constitution" /></label>
-          <label class="ability-card"><span>Inteligência</span><input type="number" min="1" max="20" formControlName="intelligence" /></label>
-          <label class="ability-card"><span>Sabedoria</span><input type="number" min="1" max="20" formControlName="wisdom" /></label>
-          <label class="ability-card"><span>Carisma</span><input type="number" min="1" max="20" formControlName="charisma" /></label>
+      @if (currentStep === 2) {
+        <p class="step-intro">{{ abilityMode === 'base' ? 'Informe os atributos base. Os bônus de antecedente e talentos serão somados automaticamente.' : 'Valores finais preservados do personagem legado.' }}</p>
+        <div class="ability-grid" [class.invalid-group]="inlineError('atributos devem')">
+          <label class="ability-card" [class.invalid]="inlineError('atributos devem')"><span>Força</span><input type="number" min="1" max="20" formControlName="strength" [attr.aria-invalid]="inlineError('atributos devem') ? 'true' : null" /></label>
+          <label class="ability-card" [class.invalid]="inlineError('atributos devem')"><span>Destreza</span><input type="number" min="1" max="20" formControlName="dexterity" [attr.aria-invalid]="inlineError('atributos devem') ? 'true' : null" /></label>
+          <label class="ability-card" [class.invalid]="inlineError('atributos devem')"><span>Constituição</span><input type="number" min="1" max="20" formControlName="constitution" [attr.aria-invalid]="inlineError('atributos devem') ? 'true' : null" /></label>
+          <label class="ability-card" [class.invalid]="inlineError('atributos devem')"><span>Inteligência</span><input type="number" min="1" max="20" formControlName="intelligence" [attr.aria-invalid]="inlineError('atributos devem') ? 'true' : null" /></label>
+          <label class="ability-card" [class.invalid]="inlineError('atributos devem')"><span>Sabedoria</span><input type="number" min="1" max="20" formControlName="wisdom" [attr.aria-invalid]="inlineError('atributos devem') ? 'true' : null" /></label>
+          <label class="ability-card" [class.invalid]="inlineError('atributos devem')"><span>Carisma</span><input type="number" min="1" max="20" formControlName="charisma" [attr.aria-invalid]="inlineError('atributos devem') ? 'true' : null" /></label>
         </div>
+        @if (inlineError('atributos devem'); as error) { <small class="field-error group-error">{{ error }}</small> }
+        @if (abilityMode === 'base') {
+          <h3>Bônus de antecedente</h3><p class="helper">Distribua +2 e +1 em atributos diferentes, ou +1 nos três atributos permitidos.</p>
+          <div class="form-grid" [class.invalid-group]="inlineError('distribua 3 ponto')">@for (ability of background?.abilityOptions ?? []; track ability) {
+            <label class="field" [class.invalid]="inlineError('distribua 3 ponto')"><span>{{ abilityName(ability) }}</span><input type="number" min="0" max="2" [value]="backgroundBonuses[ability] ?? 0" (input)="setBonus(ability,$event)" [attr.aria-invalid]="inlineError('distribua 3 ponto') ? 'true' : null" /></label>
+          }</div>
+          @if (inlineError('distribua 3 ponto'); as error) { <small class="field-error group-error">{{ error }}</small> }
+          <h3>Talentos por origem e nível</h3>
+          @if (background) { <p class="helper">Talento do antecedente: {{ background.grantedFeatId }}</p> }
+          @for (slot of featSlots; track slot.id) {
+            <fieldset class="feat-slot"><legend>{{ slot.name }}</legend>
+              <label class="field" [class.invalid]="inlineError(slot.name, featOption(slot.id)?.name ?? '__sem-talento__')"><span>{{ slot.origin ? 'Talento de origem' : 'Talento geral' }}</span><select [value]="featFor(slot.id)?.optionId ?? ''" (change)="setFeat(slot.id,$event)" [attr.aria-invalid]="inlineError(slot.name, featOption(slot.id)?.name ?? '__sem-talento__') ? 'true' : null"><option value="">Selecione</option>@for (option of featOptions(slot.origin); track option.id) { <option [value]="option.id">{{ option.name }}</option> }</select>@if (inlineError(slot.name, featOption(slot.id)?.name ?? '__sem-talento__'); as error) { <small class="field-error">{{ error }}</small> }</label>
+              @if (featOption(slot.id); as option) {
+                <p class="helper">{{ option.summary }}</p>
+                @if (option.abilityPoints) {
+                  <p class="helper">Distribua {{ option.abilityPoints }} ponto(s). Máximo final: 20.</p>
+                  <div class="form-grid">@for (ability of option.abilityOptions ?? []; track ability) {
+                    <label class="field"><span>{{ abilityName(ability) }}</span><input type="number" min="0" [max]="option.abilityPoints" [value]="featFor(slot.id)?.bonuses?.[ability] ?? 0" (input)="setBonus(ability,$event,slot.id)" /></label>
+                  }</div>
+                }
+              }
+            </fieldset>
+          }
+          @for (feat of featSelections; track feat.source) {
+            @if (!featSlotExists(feat.source)) { <p class="alert error">Talento de uma origem removida: {{ feat.optionId }} <button type="button" (click)="removeOldFeat(feat.source)">Remover escolha</button></p> }
+          }
+          <div class="ability-summary">@for (ability of abilityIds; track ability) { <span>{{ abilityName(ability) }} <strong>{{ finalAbilityValues[ability] }}</strong></span> }</div>
+        }
         @if (selectedSubclass('guardiao') === 'cacador') {
           <label class="field compact"><span>Presa do Caçador</span><select formControlName="hunterPreyId">@for (option of hunterPreyOptions; track option.id) { <option [value]="option.id">{{ option.name }}</option> }</select></label>
         }
       }
 
-      @if (currentStep === 2) {
+      @if (currentStep === 3) {
         <div class="choice-sections">
-          <app-checkbox-choice-group title="Talentos de Origem" [items]="originFeatItems" [selected]="originSelected" [limit]="originFeatLimit" hint="Humanos selecionam um talento de Origem adicional." (selectionChange)="setFeatGroup('origin', $event)" />
+          @if (abilityMode === 'legacy-final') {
+          <app-checkbox-choice-group title="Talentos de Origem" [items]="originFeatItems" [selected]="originSelected" [limit]="originFeatLimit" [error]="inlineError('talento(s) de origem') || inlineOptionError(originSelected)" hint="Humanos selecionam um talento de Origem adicional." (selectionChange)="setFeatGroup('origin', $event)" />
           @if (generalFeatLimit > 0) {
-            <app-checkbox-choice-group title="Talentos Gerais" [items]="generalFeatItems" [selected]="generalSelected" [limit]="generalFeatLimit" (selectionChange)="setFeatGroup('general', $event)" />
+            <app-checkbox-choice-group title="Talentos Gerais" [items]="generalFeatItems" [selected]="generalSelected" [limit]="generalFeatLimit" [error]="inlineError('talentos gerais') || inlineOptionError(generalSelected)" (selectionChange)="setFeatGroup('general', $event)" />
           }
-          @if (fightingStyleLimit > 0) {
-            <app-checkbox-choice-group title="Estilos de Luta" [items]="fightingStyleItems" [selected]="profileForm.controls.fightingStyleIds.value" [limit]="fightingStyleLimit" (selectionChange)="setArraySelection('fightingStyleIds', $event)" />
           }
-          @if (maneuverLimit > 0) {
-            <app-checkbox-choice-group title="Manobras" [items]="maneuverItems" [selected]="profileForm.controls.maneuverIds.value" [limit]="maneuverLimit" hint="Mestre da Batalha conhece três manobras no nível 3." (selectionChange)="setArraySelection('maneuverIds', $event)" />
+          @if (fightingStyleLimit > 0 || profileForm.controls.fightingStyleIds.value.length) {
+            <app-checkbox-choice-group title="Estilos de Luta" [items]="fightingStyleItems" [selected]="profileForm.controls.fightingStyleIds.value" [limit]="fightingStyleLimit" [error]="inlineError('estilo(s) de luta', 'estilos de luta') || inlineOptionError(profileForm.controls.fightingStyleIds.value)" (selectionChange)="setArraySelection('fightingStyleIds', $event)" />
           }
+          @if (maneuverLimit > 0 || profileForm.controls.maneuverIds.value.length) {
+            <app-checkbox-choice-group title="Manobras" [items]="maneuverItems" [selected]="profileForm.controls.maneuverIds.value" [limit]="maneuverLimit" [error]="inlineError('manobra(s)', 'manobras:')" hint="Mestre da Batalha conhece três manobras no nível 3." (selectionChange)="setArraySelection('maneuverIds', $event)" />
+          }
+          @for (group of choiceGroups; track group.id) {
+            <app-checkbox-choice-group [title]="group.name" [items]="choiceItems(group)" [selected]="choicesFor(group.id)" [limit]="choiceLimit(group)" [error]="inlineError(group.name)" (selectionChange)="setChoice(group.id,$event)" />
+          }
+          @for (key of removedChoiceKeys; track key) { <p class="alert error">Escolha removida: {{ key }} <button type="button" (click)="setChoice(key,[])">Remover escolha</button></p> }
+          @if (abilityMode === 'base' || hasSpellSources) {
+            @for (grant of spellGrants; track grant.id) {
+              <app-checkbox-choice-group [title]="grant.name" [items]="spellGrantItems(grant)" [selected]="spellsFor(grant.id)" [limit]="grant.limit" [error]="inlineError(grant.name)" hint="Cada origem tem seu próprio limite. Magias concedidas automaticamente aparecem na revisão." (selectionChange)="setSpellGrant(grant.id,$event)" />
+            }
+            @for (key of removedSpellKeys; track key) { <p class="alert error">Origem de magia removida: {{ key }} <button type="button" (click)="setSpellGrant(key,[])">Remover escolhas</button></p> }
+          } @else {
           @if (classSpellLimit > 0) {
-            <app-checkbox-choice-group title="Magias de classe" [items]="classSpellItems" [selected]="profileForm.controls.preparedSpellIds.value" [limit]="classSpellLimit" hint="As listas e o círculo máximo são calculados pelas classes. Magias sempre preparadas não ocupam este limite." (selectionChange)="setArraySelection('preparedSpellIds', $event)" />
+            <app-checkbox-choice-group title="Magias de classe" [items]="classSpellItems" [selected]="profileForm.controls.preparedSpellIds.value" [limit]="classSpellLimit" [error]="inlineError('magias de classe', 'magia preparada')" hint="As listas e o círculo máximo são calculados pelas classes. Magias sempre preparadas não ocupam este limite." (selectionChange)="setArraySelection('preparedSpellIds', $event)" />
           }
           @if (cantripLimit > 0) {
-            <app-checkbox-choice-group title="Truques" [items]="cantripItems" [selected]="profileForm.controls.cantripIds.value" [limit]="cantripLimit" hint="O limite reúne os truques conhecidos pelas classes e os concedidos por talentos ou estilos." (selectionChange)="setArraySelection('cantripIds', $event)" />
+            <app-checkbox-choice-group title="Truques" [items]="cantripItems" [selected]="profileForm.controls.cantripIds.value" [limit]="cantripLimit" [error]="inlineError('truques concedidos', 'há um truque')" hint="O limite reúne os truques conhecidos pelas classes e os concedidos por talentos ou estilos." (selectionChange)="setArraySelection('cantripIds', $event)" />
           }
           @if (magicInitiateSpellLimit > 0) {
-            <app-checkbox-choice-group title="Magias de Iniciado em Magia" [items]="magicInitiateSpellItems" [selected]="profileForm.controls.magicInitiateSpellIds.value" [limit]="magicInitiateSpellLimit" hint="Escolha uma magia de 1º círculo da mesma lista. Ela pode ser conjurada gratuitamente uma vez por Descanso Longo." (selectionChange)="setArraySelection('magicInitiateSpellIds', $event)" />
+            <app-checkbox-choice-group title="Magias de Iniciado em Magia" [items]="magicInitiateSpellItems" [selected]="profileForm.controls.magicInitiateSpellIds.value" [limit]="magicInitiateSpellLimit" [error]="inlineError('magias de iniciado em magia', 'cada variante de iniciado')" hint="Escolha uma magia de 1º círculo da mesma lista. Ela pode ser conjurada gratuitamente uma vez por Descanso Longo." (selectionChange)="setArraySelection('magicInitiateSpellIds', $event)" />
           }
           @if (freeSpellLimit > 0) {
-            <app-checkbox-choice-group title="Outras magias de talentos" [items]="freeSpellItems" [selected]="profileForm.controls.freeSpellIds.value" [limit]="freeSpellLimit" (selectionChange)="setArraySelection('freeSpellIds', $event)" />
-          }
+            <app-checkbox-choice-group title="Outras magias de talentos" [items]="freeSpellItems" [selected]="profileForm.controls.freeSpellIds.value" [limit]="freeSpellLimit" [error]="inlineError('magias de talentos')" (selectionChange)="setArraySelection('freeSpellIds', $event)" />
+          }          }
+
         </div>
       }
 
-      @if (currentStep === 3) {
+      @if (currentStep === 4) {
         <div class="equipment-grid">
           <label class="field"><span>Armadura</span><select formControlName="armor"><option value="none">Sem armadura</option><option value="light">Leve</option><option value="medium">Média</option><option value="heavy">Pesada</option></select></label>
-          <label class="field"><span>Deslocamento (m)</span><input type="number" min="1.5" max="30" step="1.5" formControlName="speed" /></label>
+          <label class="field"><span>Deslocamento base (m)</span><input type="number" min="1.5" max="30" step="1.5" formControlName="speed" /></label>
           <label class="check-field"><input type="checkbox" formControlName="hasShield" /> Empunha escudo</label>
         </div>
         <div class="choice-sections">
           <app-checkbox-choice-group title="Armas carregadas" [items]="weaponItems" [selected]="profileForm.controls.weaponIds.value" [limit]="allWeapons.length" hint="O contador mostra quantas armas do catálogo foram adicionadas ao perfil." (selectionChange)="setArraySelection('weaponIds', $event)" />
-          <app-checkbox-choice-group title="Maestrias em Arma" [items]="weaponItems" [selected]="profileForm.controls.masteryWeaponIds.value" [limit]="masteryLimit" (selectionChange)="setArraySelection('masteryWeaponIds', $event)" />
+          <app-checkbox-choice-group title="Maestrias em Arma" [items]="weaponItems" [selected]="profileForm.controls.masteryWeaponIds.value" [limit]="masteryLimit" [error]="inlineError('maestria(s)', 'maestrias em arma')" (selectionChange)="setArraySelection('masteryWeaponIds', $event)" />
         </div>
+        <section class="feature-review"><h3>Características adquiridas</h3>
+          @for (feature of acquiredFeatures; track feature.id) {
+            <details [id]="feature.id"><summary>{{ feature.name }} <small>Nível {{ feature.minLevel }} · p. {{ feature.source.page }}</small></summary><p>{{ feature.description }}</p></details>
+          }
+        </section>
         <aside class="review-card">
           <span>Resumo</span>
           <strong>{{ profileForm.controls.name.value }}</strong>
           <p>Nível {{ totalConfiguredLevel }} · {{ profileForm.controls.speciesId.value }} · {{ profileForm.controls.weaponIds.value.length }} arma(s)</p>
         </aside>
-      }
-
-      @if (errors.length) {
-        <div class="validation" role="alert"><strong>Revise esta etapa:</strong><ul>@for (error of errors; track error) { <li>{{ error }}</li> }</ul></div>
       }
 
       <footer class="wizard-actions">

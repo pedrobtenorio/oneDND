@@ -36,17 +36,19 @@ import { RuleEvaluation } from '../models/turn-planner.models';
             }
           </div>
         }
-        @if (evaluation.rule.support !== 'structured') {
+        @if (evaluation.rule.support === 'prompt') {
           <p class="manual">O motor controla custo e gatilho; jogadas, dano e efeitos de mesa são confirmados manualmente.</p>
         }
+        @if (evaluation.rule.support !== 'informational') {
         <button class="primary-button" type="button" (click)="confirm.emit()" [disabled]="!canConfirm">
           Confirmar opção
         </button>
+        } @else { <p class="manual">Referência da característica. Aplique seus benefícios passivos e escolhas conforme a descrição.</p> }
       </aside>
     }
   `,
   styles: `
-    .details { position: sticky; top: 88px; display: grid; gap: 10px; padding: 18px; border: 1px solid rgba(111, 66, 28, .28); border-radius: 15px; background: linear-gradient(145deg, #fff9e8, #efe1bd); box-shadow: 0 12px 30px rgba(55, 30, 10, .12); }
+    .details { position: sticky; top: 88px; display: grid; gap: 10px; padding: 18px; border: 1px solid rgba(111, 66, 28, .28); border-radius: 15px; background: var(--surface); box-shadow: var(--shadow); }
     h2, h3, p, dl, ul { margin: 0; }
     h2 { color: #541d18; font-family: 'Cinzel', Georgia, serif; }
     h3 { font-size: .9rem; }

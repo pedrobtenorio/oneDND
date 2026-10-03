@@ -4,11 +4,11 @@ import { BehaviorSubject } from 'rxjs';
 import {
   CharacterProfile,
   TurnDraft,
-  TurnDraftExportV1,
+  TurnDraftExportV2,
 } from '../models/turn-planner.models';
 
-const PROFILE_KEY = 'dnd.turn-planner.profiles.v1';
-const DRAFT_KEY = 'dnd.turn-planner.drafts.v1';
+const PROFILE_KEY = 'dnd.turn-planner.profiles.v2';
+const DRAFT_KEY = 'dnd.turn-planner.drafts.v2';
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === 'object' && value !== null;
@@ -24,6 +24,7 @@ const classIds = new Set([
   'guardiao', 'guerreiro', 'ladino', 'mago', 'monge', 'paladino',
 ]);
 const armors = new Set(['none', 'light', 'medium', 'heavy']);
+const abilityIds = ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'] as const;
 const decisionTypes = new Set([
   'apply-rule',
   'move',
@@ -40,9 +41,10 @@ const newId = (): string =>
 
 @Injectable({ providedIn: 'root' })
 export class TurnPlannerStorageService {
+  private readonly storageWarningSubject = new BehaviorSubject<string | null>(null);
+  private readonly migration = this.migrateLibrary();
   private readonly profilesSubject = new BehaviorSubject<CharacterProfile[]>(this.read(PROFILE_KEY));
   private readonly draftsSubject = new BehaviorSubject<TurnDraft[]>(this.read(DRAFT_KEY));
-  private readonly storageWarningSubject = new BehaviorSubject<string | null>(null);
 
   readonly profiles$ = this.profilesSubject.asObservable();
   readonly drafts$ = this.draftsSubject.asObservable();
@@ -78,8 +80,8 @@ export class TurnPlannerStorageService {
   }
 
   exportLibrary(): string {
-    const value: TurnDraftExportV1 = {
-      schemaVersion: 1,
+    const value: TurnDraftExportV2 = {
+      schemaVersion: 2,
       exportedAt: new Date().toISOString(),
       profiles: this.profiles,
       drafts: this.drafts,
@@ -89,14 +91,14 @@ export class TurnPlannerStorageService {
 
   importLibrary(raw: string): { profiles: number; drafts: number } {
     const parsed: unknown = JSON.parse(raw);
-    if (!isRecord(parsed) || parsed['schemaVersion'] !== 1) {
-      throw new Error('Arquivo incompatível: schemaVersion 1 era esperado.');
+    if (!isRecord(parsed) || ![1, 2].includes(parsed['schemaVersion'] as number)) {
+      throw new Error('Arquivo incompatível: schemaVersion 1 ou 2 era esperado.');
     }
     if (!Array.isArray(parsed['profiles']) || !Array.isArray(parsed['drafts'])) {
       throw new Error('Arquivo inválido: perfis e rascunhos são obrigatórios.');
     }
 
-    const importedProfiles = parsed['profiles'].map((value) => this.assertProfile(value));
+    const importedProfiles = parsed['profiles'].map((value) => this.assertProfile(value, parsed['schemaVersion'] === 1));
     const importedDrafts = parsed['drafts'].map((value) => this.assertDraft(value));
     const usedIds = new Set(this.profiles.map((item) => item.id));
     const idMap = new Map<string, string>();
@@ -117,9 +119,28 @@ export class TurnPlannerStorageService {
     return { profiles: profiles.length, drafts: drafts.length };
   }
 
+  private migrateLibrary(): void {
+    try {
+      const store = globalThis.localStorage;
+      if (!store || store.getItem(PROFILE_KEY) !== null) return;
+      const profiles = store.getItem('dnd.turn-planner.profiles.v1');
+      const drafts = store.getItem('dnd.turn-planner.drafts.v1');
+      if (!profiles && !drafts) return;
+      const backupKey = 'dnd.turn-planner.backup.v1';
+      if (store.getItem(backupKey) === null) store.setItem(backupKey, JSON.stringify({ profiles, drafts }));
+      const oldProfiles: unknown = JSON.parse(profiles ?? '[]');
+      if (!Array.isArray(oldProfiles)) throw new Error('Biblioteca antiga inválida');
+      const migrated = oldProfiles.map(value => ({ ...value, abilityMode: 'legacy-final', needsReview: true }));
+      store.setItem(DRAFT_KEY, drafts ?? '[]');
+      store.setItem(PROFILE_KEY, JSON.stringify(migrated));
+    } catch {
+      this.storageWarningSubject.next('Não foi possível migrar a biblioteca. O original foi preservado; exporte um backup antes de continuar.');
+    }
+  }
+
   private read<T>(key: string): T[] {
     try {
-      const raw = globalThis.localStorage?.getItem(key);
+      const raw = globalThis.localStorage?.getItem(key) ?? globalThis.localStorage?.getItem(key.replace('.v2', '.v1'));
       const value: unknown = raw ? JSON.parse(raw) : [];
       return Array.isArray(value) ? (value as T[]) : [];
     } catch {
@@ -137,7 +158,7 @@ export class TurnPlannerStorageService {
     }
   }
 
-  private assertProfile(value: unknown): CharacterProfile {
+  private assertProfile(value: unknown, legacy = false): CharacterProfile {
     const abilities = isRecord(value) && isRecord(value['abilities']) ? value['abilities'] : null;
     const classes = isRecord(value) && Array.isArray(value['classes']) ? value['classes'] : null;
     if (
@@ -145,6 +166,7 @@ export class TurnPlannerStorageService {
       typeof value['id'] !== 'string' ||
       typeof value['name'] !== 'string' ||
       typeof value['speciesId'] !== 'string' ||
+      (value['portraitId'] !== undefined && (typeof value['portraitId'] !== 'string' || !/^[a-zA-Z0-9][a-zA-Z0-9+_-]{0,79}$/.test(value['portraitId']))) ||
       !classes ||
       !classes.every((entry) =>
         isRecord(entry) &&
@@ -153,13 +175,12 @@ export class TurnPlannerStorageService {
         isFiniteNumber(entry['level']) &&
         Number.isInteger(entry['level']) &&
         entry['level'] >= 1 &&
-        entry['level'] <= 6 &&
+        entry['level'] <= 8 &&
         isFiniteNumber(entry['order']) &&
         Number.isInteger(entry['order'])
       ) ||
       !abilities ||
-      !['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma']
-        .every((ability) => isFiniteNumber(abilities[ability])) ||
+      !abilityIds.every((ability) => isFiniteNumber(abilities[ability]) && Number.isInteger(abilities[ability]) && abilities[ability] >= 1 && abilities[ability] <= 20) ||
       !isStringArray(value['subclassIds']) ||
       !isStringArray(value['featIds']) ||
       !isStringArray(value['fightingStyleIds']) ||
@@ -179,7 +200,26 @@ export class TurnPlannerStorageService {
     ) {
       throw new Error('Arquivo inválido: perfil malformado.');
     }
-    return value as unknown as CharacterProfile;
+    const profile = value as unknown as CharacterProfile;
+    const total = profile.classes.reduce((n, c) => n + c.level, 0);
+    if (total < 1 || total > 8 || new Set(profile.classes.map(c => c.classId)).size !== profile.classes.length) throw new Error('Nível total inválido: esperado entre 1 e 8, sem classes repetidas.');
+    if (legacy || !profile.abilityMode) return { ...profile, abilityMode: 'legacy-final', needsReview: true };
+    if (!['base', 'legacy-final'].includes(profile.abilityMode)) throw new Error('Modo de atributos inválido.');
+    for (const choices of [profile.choices, profile.spellSelections]) {
+      if (choices !== undefined && (!isRecord(choices) || !Object.values(choices).every(isStringArray))) throw new Error('Escolhas malformadas.');
+    }
+    if (profile.baseAbilities && !abilityIds.every(id => Number.isInteger(profile.baseAbilities?.[id]) && profile.baseAbilities![id] >= 1 && profile.baseAbilities![id] <= 20)) throw new Error('Atributos base inválidos.');
+    if (profile.backgroundBonuses && !Object.values(profile.backgroundBonuses).every(n => Number.isInteger(n) && n >= 0 && n <= 2)) throw new Error('Bônus de antecedente inválidos.');
+    if (profile.featSelections && (!Array.isArray(profile.featSelections) || !profile.featSelections.every(f => isRecord(f) && typeof f['source'] === 'string' && typeof f['optionId'] === 'string' && isRecord(f['bonuses']) && Object.values(f['bonuses']).every(n => isFiniteNumber(n) && Number.isInteger(n) && n >= 0 && n <= 2)))) throw new Error('Talentos malformados.');
+    if (profile.abilityMode === 'base') {
+      if (!profile.baseAbilities || typeof profile.backgroundId !== 'string' || !profile.backgroundId || !profile.backgroundBonuses || !profile.featSelections) throw new Error('Perfil v2 incompleto: origem, atributos base e talentos são obrigatórios.');
+      if (Object.values(profile.backgroundBonuses).reduce((sum, value) => sum + (value ?? 0), 0) !== 3) throw new Error('Bônus de antecedente inválidos: três pontos eram esperados.');
+      for (const id of abilityIds) {
+        const featBonus = profile.featSelections.reduce((sum, feat) => sum + (feat.bonuses[id] ?? 0), 0);
+        if (profile.abilities[id] !== profile.baseAbilities[id] + (profile.backgroundBonuses[id] ?? 0) + featBonus) throw new Error('Atributos finais não correspondem às escolhas de origem e talentos.');
+      }
+    }
+    return profile;
   }
 
   private assertDraft(value: unknown): TurnDraft {

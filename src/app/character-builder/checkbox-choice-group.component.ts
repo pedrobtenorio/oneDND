@@ -18,7 +18,7 @@ export interface CheckboxChoiceItem {
   standalone: true,
   imports: [CommonModule, RouterModule, MatTooltipModule],
   template: `
-    <fieldset class="choice-group">
+    <fieldset class="choice-group" [class.invalid]="!!error" [attr.aria-invalid]="error ? 'true' : null">
       <legend>
         <span>{{ title }}</span>
         <strong class="choice-count" [attr.aria-label]="selected.length + ' de ' + limit + ' selecionados'">
@@ -56,11 +56,14 @@ export interface CheckboxChoiceItem {
           </label>
         }
       </div>
+      @for (id of unavailableSelections; track id) { <p class="disabled-reason">Escolha anterior indisponível: {{ id }} <button type="button" (click)="toggle(id)">Remover</button></p> }
       @if (!items.length) { <p class="empty">Nenhuma opção disponível para esta configuração.</p> }
+      @if (error) { <p class="field-error" role="alert">{{ error }}</p> }
     </fieldset>
   `,
   styles: `
     .choice-group { min-width: 0; margin: 0; padding: 0; border: 0; }
+    .choice-group.invalid { padding: 10px; border: 1px solid #a32620; border-radius: 11px; background: #fff8f6; box-shadow: 0 0 0 1px rgba(163, 38, 32, .08); }
     legend { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; color: #522019; font-size: .86rem; font-weight: 900; }
     .choice-count { min-width: 52px; padding: 4px 9px; border-radius: 999px; color: #fff6dc; background: #6f241e; text-align: center; font-size: .78rem; }
     .hint, .empty { margin: 0 0 9px; color: #6d6054; font-size: .78rem; line-height: 1.4; }
@@ -75,6 +78,7 @@ export interface CheckboxChoiceItem {
     .choice-copy strong { font-size: .82rem; line-height: 1.25; }
     .choice-copy small { color: #746658; font-size: .72rem; line-height: 1.35; }
     .choice-copy .disabled-reason { color: #8b201c; font-weight: 800; }
+    .field-error { margin: 8px 0 0; color: #8f1f1a; font-size: .76rem; font-weight: 800; line-height: 1.4; }
     .reference-link { display: inline-grid; place-items: center; flex: 0 0 auto; width: 20px; height: 20px; border: 1px solid #8a5b2d; border-radius: 50%; color: #6f241e; background: #fff9e8; font-size: .72rem; font-weight: 900; text-decoration: none; }
     .reference-link:hover, .reference-link:focus-visible { outline: 2px solid #8a481f; outline-offset: 1px; }
     @media (max-width: 520px) { .choice-grid { grid-template-columns: 1fr; max-height: none; } }
@@ -82,8 +86,10 @@ export interface CheckboxChoiceItem {
   `,
 })
 export class CheckboxChoiceGroupComponent {
+  get unavailableSelections(): string[] { return this.selected.filter(id => !this.items.some(item => item.id === id)); }
   @Input({ required: true }) title = '';
   @Input() hint = '';
+  @Input() error = '';
   @Input() items: CheckboxChoiceItem[] = [];
   @Input() selected: string[] = [];
   @Input() limit = 0;

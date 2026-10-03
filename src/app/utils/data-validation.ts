@@ -105,7 +105,7 @@ export const validateWeaponsData = (value: unknown): WeaponsData => {
 };
 
 const conditionTypes = new Set([
-  'class-level', 'subclass', 'species', 'species-choice', 'feat', 'maneuver', 'mastery',
+  'choice', 'class-level', 'subclass', 'species', 'species-choice', 'feat', 'maneuver', 'mastery',
   'spell-prepared', 'fact', 'any-fact', 'phase', 'resource', 'marker',
   'bonus-action-available', 'reaction-available', 'action-available', 'attacks-remaining',
   'has-not-moved', 'trigger', 'not-concentrating', 'not-raging', 'spell-slot-unused',
@@ -118,7 +118,7 @@ const effectTypes = new Set([
   'set-phase', 'resource',
 ]);
 const optionKinds = new Set([
-  'species', 'species-choice', 'subclass', 'subclass-choice', 'feat-origin', 'feat-general', 'fighting-style', 'maneuver',
+  'background', 'invocation', 'metamagic', 'class-choice', 'species', 'species-choice', 'subclass', 'subclass-choice', 'feat-origin', 'feat-general', 'fighting-style', 'maneuver',
 ]);
 
 const isRuleSource = (value: unknown): boolean =>
@@ -165,5 +165,11 @@ export const validateTurnRuleFile = (value: unknown): TurnRuleFile => {
   if (!Array.isArray(options) || !options.every(isTurnOption) || !Array.isArray(rules) || !rules.every(isTurnRule)) {
     throw new Error('turn rule file has invalid options or rules.');
   }
-  return { options, rules } as TurnRuleFile;
+  const features = value['features'] ?? [];
+  const choiceGroups = value['choiceGroups'] ?? [];
+  if (!Array.isArray(features) || !features.every(f => isRecord(f) && hasStringFields(f, ['id', 'name', 'description']) && Number.isInteger(f['minLevel']) && isRuleSource(f['source']))) throw new Error('invalid character features');
+  if (!Array.isArray(choiceGroups) || !choiceGroups.every(g => isRecord(g) && hasStringFields(g, ['id', 'name', 'classId']) && Array.isArray(g['limits']) && g['limits'].length === 9)) throw new Error('invalid choice groups');
+  const spellGrants = value['spellGrants'] ?? [];
+  if (!Array.isArray(spellGrants) || !spellGrants.every(g => isRecord(g) && isString(g['classId']) && Number.isInteger(g['minLevel']) && isStringArray(g['spellIds']))) throw new Error('invalid spell grants');
+  return { options, rules, features, choiceGroups, spellGrants } as TurnRuleFile;
 };
