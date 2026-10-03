@@ -21,6 +21,10 @@ export const appRoutes: Routes = [
       import('./character-builder/character-builder.component').then((m) => m.CharacterBuilderComponent),
   },
   {
+    path: 'personagens/:id',
+    loadComponent: () => import('./character-sheet/character-sheet.component').then(m => m.CharacterSheetComponent),
+  },
+  {
     path: 'turno',
     loadComponent: () =>
       import('./turn-planner/turn-planner.component').then((m) => m.TurnPlannerComponent),

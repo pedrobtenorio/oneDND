@@ -125,6 +125,16 @@ const DEFINITIONS: ExampleDefinition[] = [
   },
 ];
 
+const EXAMPLE_SKILLS: Record<string, Record<string,string[]>> = {
+  'example-rodrigo': {'class.guerreiro':['intimidacao','intuicao'],'species.humano':['persuasao']},
+  'example-lia': {'class.ladino':['furtividade','prestidigitacao','acrobacia','atletismo'],'feat.background':['intuicao','enganacao','historia'],'feat.class.ladino.8.proficiency':['persuasao'],'feat.class.ladino.8.expertise':['acrobacia']},
+  'example-ines': {'class.clerigo':['intuicao','persuasao']},
+  'example-nuno': {'class.mago':['arcanismo','historia'],'feat.background':['natureza','religiao','medicina'],'feat.class.mago.4':['natureza']},
+  'example-dinis': {'class.bardo':['atuacao','intuicao','percepcao'],'species.humano':['investigacao'],'feat.background':['furtividade','medicina','natureza']},
+  'example-raul': {'class.barbaro':['atletismo','intimidacao']},
+  'example-altair': {'class.guardiao':['furtividade','intuicao','sobrevivencia'],'species.humano':['persuasao']},
+};
+
 const MASTERY_BY_WEAPON: Record<string, string> = {
   'weapon-adaga': 'mastery-agil',
   'weapon-arco-curto': 'mastery-afligir',
@@ -153,6 +163,7 @@ export function buildCharacterExamples(catalog: TurnCatalog, spells: Spell[]): C
       backgroundBonuses: { ...definition.backgroundBonuses },
       featSelections: definition.featSelections.map(item => ({ ...item, bonuses: { ...item.bonuses } })),
       choices: structuredClone(definition.choices ?? {}),
+      skillSelections: structuredClone(EXAMPLE_SKILLS[definition.id] ?? {}),
       spellSelections: {},
       speciesId: definition.speciesId,
       speciesChoiceId: definition.speciesChoiceId,

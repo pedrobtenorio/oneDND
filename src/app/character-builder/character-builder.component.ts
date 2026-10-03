@@ -1,11 +1,15 @@
 import { ABILITIES, automaticSpells as grantedSpells, eligibleChoice, finalAbilities, spellFitsGrant, spellSelectionGrants, SpellSelectionGrant, validateBonuses } from '../utils/character-choices';
-import { AbilityId, AbilityScores, FeatSelection, CharacterChoiceGroup } from '../models/turn-planner.models';
+import { AbilityId, AbilityScores, AbilityGeneration, FeatSelection, CharacterChoiceGroup } from '../models/turn-planner.models';
+import { AbilityScorePickerComponent } from '../shared/ability-score-picker.component';
+import { validateGeneration } from '../utils/ability-generation';
 import { preparedLimit, cantripLimit, maxSpellCircle, featLevels, movementSpeed } from '../utils/character-progression';
 import { CommonModule } from '@angular/common';
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { SKILLS, SKILL_CHOICE_GROUPS, SkillGrant, grantSelections, skillGrants, skillUnavailable, validateSkills } from '../utils/character-skills';
+import { ChoiceExplanationComponent } from '../shared/choice-explanation.component';
 import { combineLatest, take } from 'rxjs';
 
 import {
@@ -27,6 +31,7 @@ import { CheckboxChoiceGroupComponent, CheckboxChoiceItem } from './checkbox-cho
 import { buildCharacterExamples, CharacterExample } from './character-examples';
 import { CLASS_VISUALS, classArt, profileArt } from '../utils/class-visuals';
 import { PortraitPickerComponent } from './portrait-picker.component';
+import { UiMotionDirective } from '../shared/ui-motion.directive';
 
 const createId = (): string =>
   globalThis.crypto?.randomUUID?.() ?? `profile-${Date.now()}-${Math.random().toString(36).slice(2)}`;
@@ -69,11 +74,47 @@ type ArrayControlName =
 @Component({
   selector: 'app-character-builder',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, CheckboxChoiceGroupComponent, PortraitPickerComponent],
+  imports: [CommonModule, ReactiveFormsModule, CheckboxChoiceGroupComponent, PortraitPickerComponent, UiMotionDirective, RouterLink, ChoiceExplanationComponent, AbilityScorePickerComponent],
   templateUrl: './character-builder.component.html',
   styleUrl: './character-builder.component.css',
 })
 export class CharacterBuilderComponent implements OnInit {
+  inspectedClass: TurnClassId = 'guerreiro';
+  inspectClass(classId: TurnClassId): void {
+    this.inspectedClass = classId;
+    globalThis.document?.getElementById('class-explanation')?.scrollIntoView({block: 'start'});
+  }
+  get configuredClassLevels(): Record<string, number> {
+    return Object.fromEntries(this.classes.map(c => [c.id, this.profileForm.controls[c.id].value]));
+  }
+  get classExplanations(): CharacterOption[] {
+    return this.classes.map(c => ({ id: c.id, name: c.name, kind: 'subclass' as const, summary: this.classVisuals[c.id].role, source: { book: 'Livro do Jogador', revision: '2024', page: 0 } }));
+  }
+  readonly explanationErrors = (option: CharacterOption): string[] => this.optionErrors(option, this.selectionProfile());
+  skillSelections: Record<string, string[]> = {};
+  readonly isSkillGroup = (id: string): boolean => SKILL_CHOICE_GROUPS.includes(id);
+  get skillGrants(): SkillGrant[] { return this.catalog ? skillGrants(this.selectionProfile(),this.catalog) : []; }
+  skillSelected(grant: SkillGrant): string[] { return grantSelections(this.selectionProfile(),grant).filter(id=>!id.startsWith('tool:')); }
+  skillTools(grant: SkillGrant): string[] { return grantSelections(this.selectionProfile(),grant).filter(id=>id.startsWith('tool:')); }
+  skillItems(grant: SkillGrant): CheckboxChoiceItem[] {
+    const p=this.selectionProfile();
+    return grant.items.map(item=>{
+      const skill=SKILLS.find(s=>s.id===item.skillId)!;
+      const reason=this.catalog ? skillUnavailable(p,this.catalog,grant,item.id) : '';
+      return {id:item.id,label:skill?.name??item.id,description:skill?this.abilityName(skill.ability):'',disabled:!!reason,disabledReason:reason||undefined};
+    });
+  }
+  setSkillGrant(grant: SkillGrant, values: string[]): void {
+    if(grant.storage==='choices')this.setChoice(grant.id,values);
+    else {this.skillSelections={...this.skillSelections,[grant.id]:[...values,...this.skillTools(grant)]};this.refreshErrors();}
+  }
+  setSkillTools(grant: SkillGrant,event:Event):void {
+    const names=(event.target as HTMLInputElement).value.split(';').map(s=>s.trim()).filter(Boolean);
+    this.skillSelections={...this.skillSelections,[grant.id]:[...this.skillSelected(grant),...names.map(n=>`tool:${n}`)]};this.refreshErrors();
+  }
+  get removedSkillKeys(): string[] { return Object.keys(this.skillSelections).filter(id=>this.skillSelections[id].length&&!this.skillGrants.some(g=>g.id===id)); }
+  removeSkillSource(id:string):void { const next={...this.skillSelections};delete next[id];this.skillSelections=next;this.refreshErrors(); }
+  skillGrantError(grant:SkillGrant):string { return this.catalog ? validateSkills(this.selectionProfile(),this.catalog).filter(e=>e.startsWith(grant.name+':')).join(' ') : ''; }
   portraitId = '';
   readonly classVisuals = CLASS_VISUALS;
   readonly classArt = classArt;
@@ -91,6 +132,7 @@ export class CharacterBuilderComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
   private readonly catalogService = inject(TurnRuleCatalogService);
   private readonly spellService = inject(SpellService);
   private readonly weaponsService = inject(WeaponsService);
@@ -131,6 +173,19 @@ export class CharacterBuilderComponent implements OnInit {
 
   readonly abilityIds = ABILITIES;
   abilityMode: 'base' | 'legacy-final' = 'base';
+  abilityGeneration: AbilityGeneration = {method:'free'};
+  get baseAbilityValues(): AbilityScores {
+    const raw=this.profileForm.getRawValue();
+    return Object.fromEntries(ABILITIES.map(id=>[id,raw[id]])) as unknown as AbilityScores;
+  }
+  setAbilityGeneration(selection:{scores:AbilityScores;generation:AbilityGeneration}):void {
+    this.abilityGeneration=structuredClone(selection.generation);
+    this.profileForm.patchValue(selection.scores);
+    this.refreshErrors();
+  }
+  private validateAbilityGeneration():string[] {
+    return this.abilityMode==='base'?validateGeneration(this.baseAbilityValues,this.abilityGeneration):[];
+  }
   backgroundId = '';
   backgroundBonuses: Partial<AbilityScores> = {};
   featSelections: FeatSelection[] = [];
@@ -199,10 +254,10 @@ export class CharacterBuilderComponent implements OnInit {
   private selectionProfile(): CharacterProfile {
     const v = this.profileForm.getRawValue();
     return { id:v.id, name:v.name, speciesId:v.speciesId, speciesChoiceId:v.speciesChoiceId,
-      classes:this.classes.filter(c => v[c.id] > 0).map((c, order) => ({classId:c.id,level:v[c.id],order})),
+      classes:this.classes.filter(c => v[c.id] > 0).map(c => ({classId:c.id,level:v[c.id],order:c.id===v.primaryClass?0:1+this.classes.findIndex(entry=>entry.id===c.id)})),
       subclassIds:this.classes.filter(c => v[c.id] >= 3).map(c => this.selectedSubclass(c.id)).filter(Boolean),
       abilities:this.finalAbilityValues, featIds:v.featIds, fightingStyleIds:v.fightingStyleIds,
-      choices:this.choices, maneuverIds:v.maneuverIds, preparedSpellIds:[], weaponIds:v.weaponIds,
+      choices:this.choices, skillSelections:this.skillSelections, backgroundId:this.backgroundId, featSelections:this.featSelections, maneuverIds:v.maneuverIds, preparedSpellIds:[], weaponIds:v.weaponIds,
       masteryIds:[], masteryWeaponIds:v.masteryWeaponIds, armor:v.armor, hasShield:v.hasShield, speed:v.speed, updatedAt:'' };
   }
   get choiceGroups(): CharacterChoiceGroup[] {
@@ -309,6 +364,9 @@ export class CharacterBuilderComponent implements OnInit {
           this.spells = spells;
           this.weapons = weapons;
           this.examples = buildCharacterExamples(catalog, spells);
+          const editId=this.route.snapshot.queryParamMap.get('editar');
+          const editProfile=this.storage.profiles.find(p=>p.id===editId)??this.examples.find(e=>e.profile.id===editId)?.profile;
+          if(editProfile){if(editId?.startsWith('example-'))this.useExample(this.examples.find(e=>e.profile.id===editId)!);else this.loadProfile(editProfile);this.currentStep=3;}
         },
         error: (error: unknown) => {
           this.loadError = error instanceof Error ? error.message : 'Não foi possível carregar os dados do personagem.';
@@ -619,8 +677,10 @@ export class CharacterBuilderComponent implements OnInit {
   }
 
   loadProfile(profile: CharacterProfile): void {
+    this.skillSelections=structuredClone(profile.skillSelections??{});
     this.portraitId = profile.portraitId ?? '';
     this.abilityMode = profile.abilityMode ?? 'legacy-final';
+    this.abilityGeneration = structuredClone(profile.abilityGeneration ?? {method:'free'});
     this.backgroundId = profile.backgroundId ?? '';
     this.backgroundBonuses = { ...(profile.backgroundBonuses ?? {}) };
     this.featSelections = (profile.featSelections ?? []).map(f => ({ ...f, bonuses: { ...f.bonuses } }));
@@ -703,7 +763,7 @@ export class CharacterBuilderComponent implements OnInit {
 
   newProfile(): void {
     this.portraitId = '';
-    this.abilityMode = 'base'; this.backgroundId = ''; this.backgroundBonuses = {}; this.featSelections = []; this.choices = {}; this.spellSelections = {};
+    this.abilityMode = 'base'; this.abilityGeneration={method:'free'}; this.backgroundId = ''; this.backgroundBonuses = {}; this.featSelections = []; this.choices = {}; this.spellSelections = {}; this.skillSelections = {};
     this.profileForm.reset({
       id: createId(), name: 'Novo personagem', speciesId: 'humano', speciesChoiceId: '',
       hunterPreyId: 'cacador-assassino-de-colossos', primaryClass: 'ladino',
@@ -817,11 +877,12 @@ export class CharacterBuilderComponent implements OnInit {
     if (subclassIds.includes('trapaceiro-arcano')) granted.push('maos-magicas');
     return {
       abilityMode: this.abilityMode,
+      ...(this.abilityMode==='base'?{abilityGeneration:structuredClone(this.abilityGeneration)}:{}),
       ...(this.abilityMode === 'base' ? { baseAbilities: Object.fromEntries(ABILITIES.map(a => [a, value[a]])) as unknown as AbilityScores } : {}),
       backgroundId: this.backgroundId || undefined,
       backgroundBonuses: { ...this.backgroundBonuses },
       featSelections: this.featSelections.map(f => ({ ...f, bonuses:{...f.bonuses} })),
-      choices: structuredClone(this.choices), spellSelections: structuredClone(this.spellSelections), needsReview: this.abilityMode === 'legacy-final',
+      choices: structuredClone(this.choices), skillSelections:structuredClone(this.skillSelections), spellSelections: structuredClone(this.spellSelections), needsReview: this.abilityMode === 'legacy-final',
       id: value.id,
       name: value.name.trim() || 'Personagem sem nome',
       speciesId: value.speciesId,
@@ -866,14 +927,14 @@ export class CharacterBuilderComponent implements OnInit {
       for (const entry of this.classes) if (this.profileForm.controls[entry.id].value < 3 && this.selectedSubclass(entry.id)) errors.push(`Remova a subclasse de ${entry.name}: exige nível 3.`);
       return errors;
     }
-    if (step === 2) return [...validateProfile(this.buildProfile()), ...this.validateOrigin()];
+    if (step === 2) return [...validateProfile(this.buildProfile()), ...this.validateAbilityGeneration(), ...this.validateOrigin()];
     if (step === 3) return this.validateChoices(false);
     if (step === 4) return this.validateChoices(true);
     return ['Etapa desconhecida.'];
   }
 
   private validateConfiguredProfile(profile: CharacterProfile): string[] {
-    return [...new Set([...validateProfile(profile), ...this.validateStep(0), ...this.validateStep(1), ...this.validateOrigin(), ...this.validateChoices(true)])];
+    return [...new Set([...validateProfile(profile), ...this.validateStep(0), ...this.validateStep(1), ...this.validateAbilityGeneration(), ...this.validateOrigin(), ...this.validateChoices(true)])];
   }
 
   inlineError(...fragments: string[]): string {
@@ -912,8 +973,8 @@ export class CharacterBuilderComponent implements OnInit {
   }
 
   private validateChoices(includeEquipment: boolean): string[] {
-    const errors: string[] = [];
     const p = this.selectionProfile();
+    const errors: string[] = this.catalog ? validateSkills(p,this.catalog) : [];
     if (this.abilityMode === 'base' || Object.keys(this.spellSelections).length) {
       for (const grant of this.spellGrants) {
         const selected = this.spellSelections[grant.id] ?? [];

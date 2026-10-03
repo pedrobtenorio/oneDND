@@ -2,23 +2,24 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { TurnState } from '../models/turn-planner.models';
+import { UiMotionDirective } from '../shared/ui-motion.directive';
 
 @Component({
   selector: 'app-turn-resource-bar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, UiMotionDirective],
   template: `
     @if (state) {
       <section class="resource-bar" aria-label="Economia do turno" aria-live="polite">
-        <div class="token"><strong>Ações</strong><span>{{ state.actionTokens.length }}</span></div>
-        <div class="token"><strong>Ação Bônus</strong><span>{{ state.bonusActionAvailable ? 'Livre' : 'Usada' }}</span></div>
-        <div class="token"><strong>Reação</strong><span>{{ state.reactionAvailable ? 'Livre' : 'Usada' }}</span></div>
-        <div class="token"><strong>Movimento</strong><span>{{ state.movementRemaining | number: '1.0-1' }} m</span></div>
-        <div class="token"><strong>Concentração</strong><span>{{ state.concentrationSpellId || 'Nenhuma' }}</span></div>
+        <div class="token"><strong>Ações</strong><span [appMotion]="state.actionTokens.length" motionKind="pulse">{{ state.actionTokens.length }}</span></div>
+        <div class="token"><strong>Ação Bônus</strong><span [appMotion]="state.bonusActionAvailable" motionKind="pulse">{{ state.bonusActionAvailable ? 'Livre' : 'Usada' }}</span></div>
+        <div class="token"><strong>Reação</strong><span [appMotion]="state.reactionAvailable" motionKind="pulse">{{ state.reactionAvailable ? 'Livre' : 'Usada' }}</span></div>
+        <div class="token"><strong>Movimento</strong><span [appMotion]="state.movementRemaining" motionKind="pulse">{{ state.movementRemaining | number: '1.0-1' }} m</span></div>
+        <div class="token"><strong>Concentração</strong><span [appMotion]="state.concentrationSpellId" motionKind="pulse">{{ state.concentrationSpellId || 'Nenhuma' }}</span></div>
         @for (resource of resources; track resource.id) {
           <div class="token resource">
             <strong>{{ resource.label }}</strong>
-            <span>{{ resource.current }}/{{ resource.max }}</span>
+            <span [appMotion]="resource.current" motionKind="pulse">{{ resource.current }}/{{ resource.max }}</span>
             <span class="resource-controls">
               <button type="button" (click)="change(resource.id, resource.current - 1)" [disabled]="resource.current <= 0" [attr.aria-label]="'Reduzir ' + resource.label">−</button>
               <button type="button" (click)="change(resource.id, resource.current + 1)" [disabled]="resource.current >= resource.max" [attr.aria-label]="'Aumentar ' + resource.label">+</button>
