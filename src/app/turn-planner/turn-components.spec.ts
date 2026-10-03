@@ -4,7 +4,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { By } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 
-import { CharacterProfile, RuleEvaluation, TurnCatalog, TurnState } from '../models/turn-planner.models';
+import { CharacterOption, CharacterProfile, RuleEvaluation, TurnCatalog, TurnState } from '../models/turn-planner.models';
 import { Spell } from '../models/spell.models';
 import { CharacterBuilderComponent } from '../character-builder/character-builder.component';
 import { CheckboxChoiceGroupComponent } from '../character-builder/checkbox-choice-group.component';
@@ -106,6 +106,31 @@ describe('turn planner components', () => {
 });
 
 describe('CharacterBuilderComponent profile resolution', () => {
+  it('preserves the chosen portrait when editing and resets it for a new character', () => {
+    TestBed.configureTestingModule({imports:[CharacterBuilderComponent], providers:[provideHttpClient(), provideHttpClientTesting(), provideRouter([])]});
+    const component = TestBed.createComponent(CharacterBuilderComponent).componentInstance;
+    component.portraitId = 'elves-ranger+female';
+    const profile = component.buildProfile();
+    expect(profile.portraitId).toBe('elves-ranger+female');
+    component.loadProfile(profile);
+    expect(component.portraitId).toBe('elves-ranger+female');
+    component.newProfile();
+    expect(component.buildProfile().portraitId).toBeUndefined();
+  });
+  it('blocks forward step navigation while the current step has pending fields', () => {
+    TestBed.configureTestingModule({
+      imports: [CharacterBuilderComponent],
+      providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([])],
+    });
+    const component = TestBed.createComponent(CharacterBuilderComponent).componentInstance;
+    component.furthestStep = 4;
+
+    component.openStep(4);
+
+    expect(component.currentStep).toBe(0);
+    expect(component.errors).toContain('Selecione um antecedente.');
+  });
+
   it('uses the first class whose level is increased as the primary class', () => {
     TestBed.configureTestingModule({
       imports: [CharacterBuilderComponent],
@@ -126,7 +151,70 @@ describe('CharacterBuilderComponent profile resolution', () => {
     expect(component.profileForm.controls.primaryClass.value).toBe('ladino');
   });
 
-  it('discards hidden maneuver selections when the profile has no Battle Master', () => {
+  it('applies feat-granted masteries, spells, cantrips and armor training', () => {
+    TestBed.configureTestingModule({
+      imports: [CharacterBuilderComponent],
+      providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([])],
+    });
+    const component = TestBed.createComponent(CharacterBuilderComponent).componentInstance;
+    component.profileForm.patchValue({
+      ladino: 4,
+      featIds: ['mestre-em-armas', 'telecinetico', 'telepata'],
+    });
+
+    expect(component.masteryLimit).toBe(3);
+    const profile = component.buildProfile();
+    expect(profile.cantripIds).toContain('maos-magicas');
+    expect(profile.preparedSpellIds).toContain('detectar-pensamentos');
+    expect(profile.freeSpellIds).toContain('detectar-pensamentos');
+
+    const mediumTraining = {
+      id: 'especialista-armaduras-medias', name: 'Especialista em Armaduras Médias', kind: 'feat-general', summary: '',
+      requirements: [{ feature: 'light-armor-training' }], source: { book: 'Livro do Jogador', revision: '2024', page: 204 },
+    } satisfies CharacterOption;
+    const heavyTraining = {
+      id: 'especialista-armaduras-pesadas', name: 'Especialista em Armaduras Pesadas', kind: 'feat-general', summary: '',
+      requirements: [{ feature: 'medium-armor-training' }], source: { book: 'Livro do Jogador', revision: '2024', page: 205 },
+    } satisfies CharacterOption;
+    const heavyArmorMaster = {
+      id: 'mestre-de-armadura-pesada', name: 'Mestre em Armaduras Pesadas', kind: 'feat-general', summary: '',
+      requirements: [{ feature: 'heavy-armor-training' }], source: { book: 'Livro do Jogador', revision: '2024', page: 206 },
+    } satisfies CharacterOption;
+
+    component.profileForm.controls.featIds.setValue(['especialista-armaduras-leves']);
+    expect(component.optionEligible(mediumTraining)).toBeTrue();
+    component.profileForm.controls.featIds.setValue(['especialista-armaduras-medias']);
+    expect(component.optionEligible(heavyTraining)).toBeTrue();
+    component.profileForm.patchValue({ featIds: [], armor: 'heavy' });
+    expect(component.optionEligible(heavyArmorMaster)).toBeFalse();
+  });
+
+  it('prevents a feat ability input from exceeding the feat point budget', () => {
+    TestBed.configureTestingModule({
+      imports: [CharacterBuilderComponent],
+      providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([])],
+    });
+    const component = TestBed.createComponent(CharacterBuilderComponent).componentInstance;
+    component.catalog = {
+      manifest: { schemaVersion: 1, edition: '2024', revision: 'teste', files: [] },
+      options: [{
+        id: 'matador-de-magos', name: 'Exterminador de Conjuradores', kind: 'feat-general', summary: '',
+        abilityOptions: ['strength', 'dexterity'], abilityPoints: 1,
+        source: { book: 'Livro do Jogador', revision: '2024', page: 205 },
+      }],
+      rules: [],
+    } satisfies TurnCatalog;
+    component.featSelections = [{ source: 'class.guardiao.4', optionId: 'matador-de-magos', bonuses: {} }];
+    const input = document.createElement('input');
+    input.value = '2';
+
+    component.setBonus('dexterity', { target: input } as unknown as Event, 'class.guardiao.4');
+
+    expect(component.featFor('class.guardiao.4')?.bonuses.dexterity).toBe(1);
+    expect(input.value).toBe('1');
+  });
+
+  it('preserves invalid maneuver selections until explicit review', () => {
     TestBed.configureTestingModule({
       imports: [CharacterBuilderComponent],
       providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([])],
@@ -139,7 +227,7 @@ describe('CharacterBuilderComponent profile resolution', () => {
     const profile: CharacterProfile = component.buildProfile();
 
     expect(component.profileForm.controls.maneuverIds.value.length).toBe(3);
-    expect(profile.maneuverIds).toEqual([]);
+    expect(profile.maneuverIds).toEqual(['prostrar', 'ataque-preciso', 'aparar']);
   });
 
   it('derives Guardian spell and Fighter mastery limits from class level', () => {
@@ -186,8 +274,8 @@ describe('CharacterBuilderComponent profile resolution', () => {
       spell('luz', 'Luz', 0, ['Clérigo', 'Mago']),
     ];
     component.profileForm.controls.featIds.setValue(['iniciado-em-magia-druida']);
-    component.profileForm.controls.cantripIds.setValue(['arte-druidica', 'producao-de-chamas']);
-    component.profileForm.controls.magicInitiateSpellIds.setValue(['falar-com-animais']);
+    component.setSpellGrant('cantrips.iniciado-em-magia-druida', ['arte-druidica', 'producao-de-chamas']);
+    component.setSpellGrant('feat.iniciado-em-magia-druida', ['falar-com-animais']);
 
     expect(component.cantripLimit).toBe(2);
     expect(component.cantripItems.map((item) => item.id)).not.toContain('luz');

@@ -1,0 +1,308 @@
+{
+  "options": [
+    {
+      "id": "background.acolito",
+      "name": "Acólito",
+      "kind": "background",
+      "summary": "Valores de Atributo: Inteligência, Sabedoria, Carisma Talento: Iniciado em Magia (Clérigo) (veja o capítulo 5) Proficiências em Perícias: Intuição, Religião Proficiência com Ferramentas: Suprimentos de Calígrafo Equipamento: Escolha A ou B: (A) Suprimentos de Calígrafo, Livro (orações), Símbolo Sagrado, Pergaminho (10 folhas), Túnica, 8 PO; ou (B) 50 PO",
+      "description": "Valores de Atributo: Inteligência, Sabedoria, Carisma Talento: Iniciado em Magia (Clérigo) (veja o capítulo 5) Proficiências em Perícias: Intuição, Religião Proficiência com Ferramentas: Suprimentos de Calígrafo Equipamento: Escolha A ou B: (A) Suprimentos de Calígrafo, Livro (orações), Símbolo Sagrado, Pergaminho (10 folhas), Túnica, 8 PO; ou (B) 50 PO",
+      "abilityOptions": [
+        "intelligence",
+        "wisdom",
+        "charisma"
+      ],
+      "abilityPoints": 3,
+      "grantedFeatId": "iniciado-em-magia-clerigo",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 178
+      }
+    },
+    {
+      "id": "background.andarilho",
+      "name": "Andarilho",
+      "kind": "background",
+      "summary": "Valores de Atributo: Destreza, Sabedoria, Carisma Talento: Sortudo (veja o capítulo 5) Proficiências em Perícias: Furtividade, Intuição Proficiência com Ferramentas: Ferramentas de Ladrão Equipamento: Escolha A ou B: (A) 2 Adagas, Ferramentas de Ladrão, Kit de Jogos (qualquer um), 2 Algibeiras, Roupas de Viagem, Saco de Dormir, 16 PO; ou (B) 50 PO",
+      "description": "Valores de Atributo: Destreza, Sabedoria, Carisma Talento: Sortudo (veja o capítulo 5) Proficiências em Perícias: Furtividade, Intuição Proficiência com Ferramentas: Ferramentas de Ladrão Equipamento: Escolha A ou B: (A) 2 Adagas, Ferramentas de Ladrão, Kit de Jogos (qualquer um), 2 Algibeiras, Roupas de Viagem, Saco de Dormir, 16 PO; ou (B) 50 PO",
+      "abilityOptions": [
+        "dexterity",
+        "wisdom",
+        "charisma"
+      ],
+      "abilityPoints": 3,
+      "grantedFeatId": "sortudo",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 178
+      }
+    },
+    {
+      "id": "background.artesao",
+      "name": "Artesão",
+      "kind": "background",
+      "summary": "Valores de Atributo: Força, Destreza, Inteligência Talento: Artifista (veja o capítulo 5) Proficiências em Perícias: Investigação, Persuasão Proficiência com Ferramentas: Escolha um tipo de Ferramentas de Artesão (veja o capítulo 6) Equipamento: Escolha A ou B: (A) Ferramentas de Artesão (a mesma que acima), 2 Algibeiras, Roupas de Viagem, 32 PO; ou (B) 50 PO",
+      "description": "Valores de Atributo: Força, Destreza, Inteligência Talento: Artifista (veja o capítulo 5) Proficiências em Perícias: Investigação, Persuasão Proficiência com Ferramentas: Escolha um tipo de Ferramentas de Artesão (veja o capítulo 6) Equipamento: Escolha A ou B: (A) Ferramentas de Artesão (a mesma que acima), 2 Algibeiras, Roupas de Viagem, 32 PO; ou (B) 50 PO",
+      "abilityOptions": [
+        "strength",
+        "dexterity",
+        "intelligence"
+      ],
+      "abilityPoints": 3,
+      "grantedFeatId": "artesao",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 179
+      }
+    },
+    {
+      "id": "background.artista",
+      "name": "Artista",
+      "kind": "background",
+      "summary": "Valores de Atributo: Força, Destreza, Carisma Talento: Músico (veja o capítulo 5) Proficiências em Perícias: Acrobacia, Atuação Proficiência com Ferramentas: Escolha um tipo de Instrumento Musical (veja o capítulo 6) Equipamento: Escolha A ou B: (A) Instrumento Musical (o mesmo que acima), Espelho, 2 Fantasias, Perfume, Roupas de Viagem, 11 PO; ou (B) 50 PO",
+      "description": "Valores de Atributo: Força, Destreza, Carisma Talento: Músico (veja o capítulo 5) Proficiências em Perícias: Acrobacia, Atuação Proficiência com Ferramentas: Escolha um tipo de Instrumento Musical (veja o capítulo 6) Equipamento: Escolha A ou B: (A) Instrumento Musical (o mesmo que acima), Espelho, 2 Fantasias, Perfume, Roupas de Viagem, 11 PO; ou (B) 50 PO",
+      "abilityOptions": [
+        "strength",
+        "dexterity",
+        "charisma"
+      ],
+      "abilityPoints": 3,
+      "grantedFeatId": "musico",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 179
+      }
+    },
+    {
+      "id": "background.charlatao",
+      "name": "Charlatão",
+      "kind": "background",
+      "summary": "Valores de Atributo: Destreza, Constituição, Carisma Talento: Habilidoso (veja o capítulo 5) Proficiências em Perícias: Enganação, Prestidigitação Proficiência com Ferramentas: Kit de Falsificação Equipamento: Escolha A ou B: (A) Kit de Falsificação, Fantasia, Roupas Finas, 15 PO; ou (B) 50 PO Assim que você atingiu a idade para pedir uma cerveja, escolheu seu banquinho favorito em cada taverna a quinze quilômetros de onde nasceu. Ao percorrer o circuito de bares e botequins, aprendeu a lidar com os infelizes em busca de mentiras reconfortantes — talvez uma poção falsa ou registros de ancestralidade forjados.",
+      "description": "Valores de Atributo: Destreza, Constituição, Carisma Talento: Habilidoso (veja o capítulo 5) Proficiências em Perícias: Enganação, Prestidigitação Proficiência com Ferramentas: Kit de Falsificação Equipamento: Escolha A ou B: (A) Kit de Falsificação, Fantasia, Roupas Finas, 15 PO; ou (B) 50 PO Assim que você atingiu a idade para pedir uma cerveja, escolheu seu banquinho favorito em cada taverna a quinze quilômetros de onde nasceu. Ao percorrer o circuito de bares e botequins, aprendeu a lidar com os infelizes em busca de mentiras reconfortantes — talvez uma poção falsa ou registros de ancestralidade forjados.",
+      "abilityOptions": [
+        "dexterity",
+        "constitution",
+        "charisma"
+      ],
+      "abilityPoints": 3,
+      "grantedFeatId": "habilidoso",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 180
+      }
+    },
+    {
+      "id": "background.criminoso",
+      "name": "Criminoso",
+      "kind": "background",
+      "summary": "Valores de Atributo: Destreza, Constituição, Inteligência Talento: Alerta (veja o capítulo 5) Proficiências em Perícias: Furtividade, Prestidigitação Proficiência com Ferramentas: Ferramentas de Ladrão Equipamento: Escolha A ou B: (A) 2 Adagas, Ferramentas de Ladrão, 2 Algibeiras, Pé de Cabra, Roupas de Viagem, 16 PO; ou (B) 50 PO",
+      "description": "Valores de Atributo: Destreza, Constituição, Inteligência Talento: Alerta (veja o capítulo 5) Proficiências em Perícias: Furtividade, Prestidigitação Proficiência com Ferramentas: Ferramentas de Ladrão Equipamento: Escolha A ou B: (A) 2 Adagas, Ferramentas de Ladrão, 2 Algibeiras, Pé de Cabra, Roupas de Viagem, 16 PO; ou (B) 50 PO",
+      "abilityOptions": [
+        "dexterity",
+        "constitution",
+        "intelligence"
+      ],
+      "abilityPoints": 3,
+      "grantedFeatId": "alerta",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 180
+      }
+    },
+    {
+      "id": "background.eremita",
+      "name": "Eremita",
+      "kind": "background",
+      "summary": "Valores de Atributo: Constituição, Sabedoria, Carisma Talento: Curandeiro (veja o capítulo 5) Proficiências em Perícias: Medicina, Religião Proficiência com Ferramentas: Kit de Herbalismo Equipamento: Escolha A ou B: (A) Cajado, Kit de Herbalismo, Lâmpada, Livro (filosofia), Óleo (3 frascos), Roupas de Viagem, Saco de Dormir, 16 PO; ou (B) 50 PO",
+      "description": "Valores de Atributo: Constituição, Sabedoria, Carisma Talento: Curandeiro (veja o capítulo 5) Proficiências em Perícias: Medicina, Religião Proficiência com Ferramentas: Kit de Herbalismo Equipamento: Escolha A ou B: (A) Cajado, Kit de Herbalismo, Lâmpada, Livro (filosofia), Óleo (3 frascos), Roupas de Viagem, Saco de Dormir, 16 PO; ou (B) 50 PO",
+      "abilityOptions": [
+        "constitution",
+        "wisdom",
+        "charisma"
+      ],
+      "abilityPoints": 3,
+      "grantedFeatId": "curandeiro",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 181
+      }
+    },
+    {
+      "id": "background.escriba",
+      "name": "Escriba",
+      "kind": "background",
+      "summary": "Valores de Atributo: Destreza, Inteligência, Sabedoria Talento: Habilidoso (veja o capítulo 5) Proficiências em Perícias: Investigação, Percepção Proficiência com Ferramentas: Suprimentos de Calígrafo Equipamento: Escolha A ou B: (A) Suprimentos de Calígrafo, Lâmpada, Óleo (3 frascos), Pergaminho (12 folhas), Roupas Finas, 23 PO; ou (B) 50 PO",
+      "description": "Valores de Atributo: Destreza, Inteligência, Sabedoria Talento: Habilidoso (veja o capítulo 5) Proficiências em Perícias: Investigação, Percepção Proficiência com Ferramentas: Suprimentos de Calígrafo Equipamento: Escolha A ou B: (A) Suprimentos de Calígrafo, Lâmpada, Óleo (3 frascos), Pergaminho (12 folhas), Roupas Finas, 23 PO; ou (B) 50 PO",
+      "abilityOptions": [
+        "dexterity",
+        "intelligence",
+        "wisdom"
+      ],
+      "abilityPoints": 3,
+      "grantedFeatId": "habilidoso",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 181
+      }
+    },
+    {
+      "id": "background.fazendeiro",
+      "name": "Fazendeiro",
+      "kind": "background",
+      "summary": "Valores de Atributo: Força, Constituição, Sabedoria Talento: Vigoroso (veja o capítulo 5) Proficiência em Perícias: Lidar com Animais, Natureza Proficiência com Ferramentas: Ferramentas de Carpinteiro Equipamento: Escolha A ou B: (A) Foice, Ferramentas de Carpinteiro, Kit de Curandeiro, Balde de Ferro, Pá, 30 PO; ou (B) 50 PO",
+      "description": "Valores de Atributo: Força, Constituição, Sabedoria Talento: Vigoroso (veja o capítulo 5) Proficiência em Perícias: Lidar com Animais, Natureza Proficiência com Ferramentas: Ferramentas de Carpinteiro Equipamento: Escolha A ou B: (A) Foice, Ferramentas de Carpinteiro, Kit de Curandeiro, Balde de Ferro, Pá, 30 PO; ou (B) 50 PO",
+      "abilityOptions": [
+        "strength",
+        "constitution",
+        "wisdom"
+      ],
+      "abilityPoints": 3,
+      "grantedFeatId": "vigoroso",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 182
+      }
+    },
+    {
+      "id": "background.guarda",
+      "name": "Guarda",
+      "kind": "background",
+      "summary": "Valores de Atributo: Força, Inteligência, Sabedoria Talento: Alerta (veja o capítulo 5) Proficiência em Perícias: Atletismo, Percepção Proficiência com Ferramentas: Escolha um tipo de Kit de Jogos (veja o capítulo 6) Equipamento: Escolha A ou B: (A) Lança, Besta Leve, 20 Virotes, Kit de Jogo (o mesmo que acima), Aljava, Grilhões, Lanterna Coberta, Roupas de Viagem, 12 PO; ou (B) 50 PO Seus pés doem quando você se lembra das incontáveis horas que passou em seu posto na torre.",
+      "description": "Valores de Atributo: Força, Inteligência, Sabedoria Talento: Alerta (veja o capítulo 5) Proficiência em Perícias: Atletismo, Percepção Proficiência com Ferramentas: Escolha um tipo de Kit de Jogos (veja o capítulo 6) Equipamento: Escolha A ou B: (A) Lança, Besta Leve, 20 Virotes, Kit de Jogo (o mesmo que acima), Aljava, Grilhões, Lanterna Coberta, Roupas de Viagem, 12 PO; ou (B) 50 PO Seus pés doem quando você se lembra das incontáveis horas que passou em seu posto na torre.",
+      "abilityOptions": [
+        "strength",
+        "intelligence",
+        "wisdom"
+      ],
+      "abilityPoints": 3,
+      "grantedFeatId": "alerta",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 182
+      }
+    },
+    {
+      "id": "background.guia",
+      "name": "Guia",
+      "kind": "background",
+      "summary": "Valores de Atributo: Destreza, Constituição, Sabedoria Talento: Iniciado em Magia (Druida) (veja o capítulo 5) Proficiências em Perícias: Furtividade, Sobrevivência Proficiência com Ferramentas: Ferramentas de Cartógrafo Equipamento: Escolha A ou B: (A) Arco Curto, 20 Flechas, Ferramentas de Cartógrafo, Aljava, Roupas de Viagem, Saco de Dormir, Tenda, 3 PO; ou (B) 50 PO",
+      "description": "Valores de Atributo: Destreza, Constituição, Sabedoria Talento: Iniciado em Magia (Druida) (veja o capítulo 5) Proficiências em Perícias: Furtividade, Sobrevivência Proficiência com Ferramentas: Ferramentas de Cartógrafo Equipamento: Escolha A ou B: (A) Arco Curto, 20 Flechas, Ferramentas de Cartógrafo, Aljava, Roupas de Viagem, Saco de Dormir, Tenda, 3 PO; ou (B) 50 PO",
+      "abilityOptions": [
+        "dexterity",
+        "constitution",
+        "wisdom"
+      ],
+      "abilityPoints": 3,
+      "grantedFeatId": "iniciado-em-magia-druida",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 183
+      }
+    },
+    {
+      "id": "background.marinheiro",
+      "name": "Marinheiro",
+      "kind": "background",
+      "summary": "Valores de Atributo: Força, Destreza, Sabedoria Talento: Valentão de Taverna (veja o capítulo 5) Proficiências em Perícias: Acrobacia, Percepção Proficiência com Ferramentas: Ferramentas de Navegador Equipamento: Escolha A ou B: (A) Adaga, Ferramentas de Navegador, Corda, Roupas de Viagem, 20 PO; ou (B) 50 PO",
+      "description": "Valores de Atributo: Força, Destreza, Sabedoria Talento: Valentão de Taverna (veja o capítulo 5) Proficiências em Perícias: Acrobacia, Percepção Proficiência com Ferramentas: Ferramentas de Navegador Equipamento: Escolha A ou B: (A) Adaga, Ferramentas de Navegador, Corda, Roupas de Viagem, 20 PO; ou (B) 50 PO",
+      "abilityOptions": [
+        "strength",
+        "dexterity",
+        "wisdom"
+      ],
+      "abilityPoints": 3,
+      "grantedFeatId": "brigao-de-taverna",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 183
+      }
+    },
+    {
+      "id": "background.mercador",
+      "name": "Mercador",
+      "kind": "background",
+      "summary": "Valores de Atributo: Constituição, Inteligência, Carisma Talento: Sortudo (veja o capítulo 5) Proficiência em Perícia: Lidar com Animais, Persuasão Proficiência com Ferramentas: Ferramentas de Navegador Equipamento: Escolha A ou B: (A) Ferramentas de Navegador, 2 Algibeiras, Roupas de Viagem, 22 PO; ou (B) 50 PO",
+      "description": "Valores de Atributo: Constituição, Inteligência, Carisma Talento: Sortudo (veja o capítulo 5) Proficiência em Perícia: Lidar com Animais, Persuasão Proficiência com Ferramentas: Ferramentas de Navegador Equipamento: Escolha A ou B: (A) Ferramentas de Navegador, 2 Algibeiras, Roupas de Viagem, 22 PO; ou (B) 50 PO",
+      "abilityOptions": [
+        "constitution",
+        "intelligence",
+        "charisma"
+      ],
+      "abilityPoints": 3,
+      "grantedFeatId": "sortudo",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 184
+      }
+    },
+    {
+      "id": "background.nobre",
+      "name": "Nobre",
+      "kind": "background",
+      "summary": "Valores de Atributo: Força, Inteligência, Carisma Talento: Habilidoso (veja o capítulo 5) Proficiências em Perícias: História, Persuasão Proficiência com Ferramentas: Escolha um tipo de Kit de Jogos (veja o capítulo 6) Equipamento: Escolha A ou B: (A) Kit de Jogos (o mesmo que acima), Perfume, Roupas Finas, 29 PO; ou (B) 50 PO",
+      "description": "Valores de Atributo: Força, Inteligência, Carisma Talento: Habilidoso (veja o capítulo 5) Proficiências em Perícias: História, Persuasão Proficiência com Ferramentas: Escolha um tipo de Kit de Jogos (veja o capítulo 6) Equipamento: Escolha A ou B: (A) Kit de Jogos (o mesmo que acima), Perfume, Roupas Finas, 29 PO; ou (B) 50 PO",
+      "abilityOptions": [
+        "strength",
+        "intelligence",
+        "charisma"
+      ],
+      "abilityPoints": 3,
+      "grantedFeatId": "habilidoso",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 184
+      }
+    },
+    {
+      "id": "background.sabio",
+      "name": "Sábio",
+      "kind": "background",
+      "summary": "Valores de Atributo: Constituição, Inteligência, Sabedoria Talento: Iniciado em Magia (Mago) (veja o capítulo 5) Proficiência em Perícias: Arcanismo, História Proficiência com Ferramentas: Suprimentos de Calígrafo Equipamento: Escolha A ou B: (A) Cajado, Suprimentos de Calígrafo, Livro (história), Pergaminho (8 folhas), Túnica, 8 PO; ou (B) 50 PO.",
+      "description": "Valores de Atributo: Constituição, Inteligência, Sabedoria Talento: Iniciado em Magia (Mago) (veja o capítulo 5) Proficiência em Perícias: Arcanismo, História Proficiência com Ferramentas: Suprimentos de Calígrafo Equipamento: Escolha A ou B: (A) Cajado, Suprimentos de Calígrafo, Livro (história), Pergaminho (8 folhas), Túnica, 8 PO; ou (B) 50 PO.",
+      "abilityOptions": [
+        "constitution",
+        "intelligence",
+        "wisdom"
+      ],
+      "abilityPoints": 3,
+      "grantedFeatId": "iniciado-em-magia-mago",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 185
+      }
+    },
+    {
+      "id": "background.soldado",
+      "name": "Soldado",
+      "kind": "background",
+      "summary": "Valores de Atributo: Força, Destreza, Constituição Talento: Atacante Selvagem (veja o capítulo 5) Proficiência em Perícias: Atletismo, Intimidação Proficiência com Ferramentas: Escolha um tipo de Kit de Jogos (veja o capítulo 6) Equipamento: Escolha A ou B: (A) Lança, Arco Curto, 20 Flechas, Kit de Curandeiro, Kit de Jogo (o mesmo que acima), Aljava, Roupas de Viagem, 14 PO; ou (B) 50 PO",
+      "description": "Valores de Atributo: Força, Destreza, Constituição Talento: Atacante Selvagem (veja o capítulo 5) Proficiência em Perícias: Atletismo, Intimidação Proficiência com Ferramentas: Escolha um tipo de Kit de Jogos (veja o capítulo 6) Equipamento: Escolha A ou B: (A) Lança, Arco Curto, 20 Flechas, Kit de Curandeiro, Kit de Jogo (o mesmo que acima), Aljava, Roupas de Viagem, 14 PO; ou (B) 50 PO",
+      "abilityOptions": [
+        "strength",
+        "dexterity",
+        "constitution"
+      ],
+      "abilityPoints": 3,
+      "grantedFeatId": "atacante-selvagem",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 185
+      }
+    }
+  ]
+}

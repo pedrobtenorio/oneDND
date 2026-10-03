@@ -19,6 +19,8 @@ const conditionResult = (
   state: TurnState
 ): ConditionResult => {
   switch (condition.type) {
+    case 'choice':
+      return Object.values(profile.choices ?? {}).flat().includes(condition.id) ? { status: 'pass' } : { status: 'fail', reason: { code: 'choice', message: 'Escolha não selecionada.' } };
     case 'class-level':
       return classLevel(profile, condition.classId) >= condition.min
         ? { status: 'pass' }
@@ -175,6 +177,7 @@ export const evaluateRules = (
 ): RuleEvaluation[] => rules.map((rule) => evaluateRule(rule, profile, context, state));
 
 export const isRuleRelevant = (rule: RuleDefinition, profile: CharacterProfile): boolean => {
+  if (rule.conditions.some(c => c.type === 'choice' && !Object.values(profile.choices ?? {}).flat().includes(c.id))) return false;
   const maneuver = rule.conditions.find((condition) => condition.type === 'maneuver');
   if (maneuver?.type === 'maneuver' && !profile.maneuverIds.includes(maneuver.id)) return false;
   const acquiredChoice = rule.conditions.find(

@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, combineLatest, forkJoin, map, shareReplay, switchMap } from 'rxjs';
 
 import {
+  CharacterFeature,
   RuleCondition,
   RuleCost,
   RuleDefinition,
@@ -39,12 +40,16 @@ export class TurnRuleCatalogService {
       if (new Set(options.map((option) => option.id)).size !== options.length) {
         throw new Error('duplicate turn option id');
       }
+      const features = files.flatMap(file => file.features ?? []);
+      const choiceGroups = files.flatMap(file => file.choiceGroups ?? []);
       const staticRules = files.flatMap((file) => file.rules ?? []);
       const rules = [
         ...staticRules,
-        ...this.subclassOverviewRules(options, staticRules),
+        ...features.filter(feature => !staticRules.some(rule => rule.id === feature.id)).map(feature => this.featureRule(feature)),
+        ...this.choiceReferenceRules(options),
         ...this.maneuverRules(options, staticRules),
-        ...spells.flatMap((spell) => [this.spellRule(spell), this.spellRule(spell, true)]),
+        ...spells.flatMap((spell) => [this.spellRule(spell), this.spellRule(spell, true), ...(spell.castingTime === 'Ação' ? [this.spellRule(spell, false, true)] : [])]),
+        ...this.metamagicRules(options),
       ];
       const ids = new Set<string>();
       for (const rule of rules) {
@@ -53,6 +58,7 @@ export class TurnRuleCatalogService {
       }
       this.validateReferences(options, rules, spells);
       return {
+        features, choiceGroups, spellGrants: files.flatMap(file => file.spellGrants ?? []),
         manifest: catalog.manifest,
         options,
         rules,
@@ -65,33 +71,43 @@ export class TurnRuleCatalogService {
     return this.catalog$;
   }
 
-  private subclassOverviewRules(options: CharacterOption[], existingRules: RuleDefinition[]): RuleDefinition[] {
-    const represented = new Set(existingRules.filter((rule) => rule.origin === 'subclass').map((rule) => rule.originId));
-    return options
-      .filter((option) => option.kind === 'subclass' && !represented.has(option.id))
-      .map((option): RuleDefinition => ({
-        id: `subclass.${option.id}.overview`,
-        name: option.name,
-        summary: `${option.summary} Os resultados específicos são confirmados quando a característica for usada.`,
-        origin: 'subclass',
-        originId: option.id,
-        activation: 'free',
-        category: 'informational',
-        conditions: [{ type: 'subclass', id: option.id }],
-        costs: [],
-        effects: [],
-        support: 'informational',
-        source: option.source,
-      }));
+  private featureRule(feature: CharacterFeature): RuleDefinition {
+    const conditions: RuleCondition[] = [];
+    if (feature.classId) conditions.push({ type: 'class-level', classId: feature.classId, min: feature.minLevel });
+    if (feature.subclassId) conditions.push({ type: 'subclass', id: feature.subclassId });
+    if (feature.speciesId) conditions.push({ type: 'species', id: feature.speciesId });
+    return { id: feature.id, name: feature.name, summary: feature.description,
+      origin: feature.subclassId ? 'subclass' : feature.speciesId ? 'species' : 'class',
+      originId: feature.subclassId ?? feature.speciesId ?? feature.classId!, activation: 'free', category: 'informational',
+      conditions, costs: [], effects: [], support: 'informational', source: feature.source };
   }
 
-  private spellRule(spell: Spell, freeCast = false): RuleDefinition {
+  private choiceReferenceRules(options: CharacterOption[]): RuleDefinition[] {
+    return options.filter(o => ['invocation', 'metamagic', 'class-choice'].includes(o.kind)).map(o => ({
+      id: `reference.${o.id}`, name: o.name, summary: o.description ?? o.summary,
+      origin: 'class', originId: o.requirements?.find(r => r.classId)?.classId ?? 'bruxo',
+      activation: 'free', category: 'informational', conditions: [{ type: 'choice', id: o.id }],
+      costs: [], effects: [], support: 'informational', source: o.source,
+    }));
+  }
+
+  private metamagicRules(options: CharacterOption[]): RuleDefinition[] {
+    return options.filter(o => o.kind === 'metamagic' && o.id !== 'metamagic.magia-acelerada').map(o => {
+      const amount = o.id === 'metamagic.magia-agravada' ? 2 : 1;
+      return { id:`use.${o.id}`,name:o.name,summary:o.description ?? o.summary,origin:'class',originId:'feiticeiro',activation:'free',category:'modifier',
+        conditions:[{type:'choice',id:o.id},{type:'resource',id:'sorcery-point',atLeast:amount,label:'Pontos de Feitiçaria'}, {type:'fact',id:`${o.id}.eligible`,equals:true,label:`a magia atende a ${o.name} e o limite de Metamagia por conjuração foi respeitado`}],
+        costs:[{type:'resource',id:'sorcery-point',amount}],effects:[],support:'prompt',source:o.source };
+    });
+  }
+
+  private spellRule(spell: Spell, freeCast = false, quickened = false): RuleDefinition {
     const isReaction = spell.castingTime.includes('Reação');
-    const isBonus = spell.castingTime.includes('Ação Bônus');
+    const isBonus = quickened || spell.castingTime.includes('Ação Bônus');
     const activation = isReaction ? 'reaction' : isBonus ? 'bonus-action' : 'action';
     const conditions: RuleCondition[] = [
       { type: 'not-raging' },
     ];
+    if (!['Ação', 'Ação Bônus'].includes(spell.castingTime) && !isReaction) conditions.push({type:'fact',id:`spell-long-cast-${spell.id}`,equals:true,label:`o tempo de conjuração completo (${spell.castingTime}) e a concentração necessária foram cumpridos`});
     if (!freeCast) conditions.unshift({ type: 'spell-prepared', id: spell.id });
     const costs: RuleCost[] = [];
     const effects: RuleEffect[] = [];
@@ -111,6 +127,15 @@ export class TurnRuleCatalogService {
       costs.push({ type: 'reaction' });
     }
 
+    if (quickened) {
+      conditions.push({type:'choice',id:'metamagic.magia-acelerada'}, {type:'resource',id:'sorcery-point',atLeast:2,label:'Pontos de Feitiçaria'}, {type:'marker',id:'leveled-spell-cast',equals:false,label:'Magia Acelerada não pode seguir uma magia de 1º círculo ou superior.'});
+      costs.push({type:'resource',id:'sorcery-point',amount:2});
+      effects.push({type:'marker',id:'quickened-spell-used',value:true});
+    }
+    if (spell.level > 0) {
+      conditions.push({type:'marker',id:'quickened-spell-used',equals:false,label:'Magia Acelerada impede outra magia de 1º círculo ou superior neste turno.'});
+      effects.push({type:'marker',id:'leveled-spell-cast',value:true});
+    }
     if (freeCast) {
       conditions.push({ type: 'resource', id: `free-spell-${spell.id}`, atLeast: 1, label: `Uso gratuito de ${spell.name}` });
       costs.push({ type: 'resource', id: `free-spell-${spell.id}`, amount: 1 });
@@ -127,8 +152,8 @@ export class TurnRuleCatalogService {
     }
 
     return {
-      id: `spell.${spell.id}${freeCast ? '.free' : ''}`,
-      name: `${spell.name}${freeCast ? ' (uso gratuito)' : ''}`,
+      id: `spell.${spell.id}${quickened ? '.quickened' : freeCast ? '.free' : ''}`,
+      name: `${spell.name}${quickened ? ' (Magia Acelerada)' : freeCast ? ' (uso gratuito)' : ''}`,
       summary: `${spell.castingTime}; ${spell.range}; ${spell.duration}. Resolva o efeito descrito na magia.`,
       origin: 'spell',
       originId: spell.id,
@@ -138,7 +163,7 @@ export class TurnRuleCatalogService {
       costs,
       effects,
       support: 'prompt',
-      source: { book: 'Livro do Jogador', revision: '2024 - Erratas de Agosto', page: 236 },
+      source: { book: 'Livro do Jogador', revision: '2024 - Erratas de Agosto', page: spell.sourcePage ?? 239 },
       tags: ['magia', spell.level === 0 ? 'truque' : `${spell.level}-circulo`, ...(freeCast ? ['free-cast'] : [])],
       referenceText: [
         spell.level === 0 ? 'Truque' : `${spell.level}º círculo`,

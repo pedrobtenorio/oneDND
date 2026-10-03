@@ -59,7 +59,7 @@ describe('turn engine', () => {
   it('validates total level and every multiclass prerequisite', () => {
     expect(validateProfile(profile())).toEqual([]);
     expect(validateProfile(profile({ abilities: { strength: 10, dexterity: 12, constitution: 14, intelligence: 10, wisdom: 10, charisma: 10 } })).length).toBeGreaterThan(0);
-    expect(validateProfile(profile({ classes: [{ classId: 'ladino', level: 7, order: 0 }] }))).toContain('O nível total deve estar entre 1 e 6.');
+    expect(validateProfile(profile({ classes: [{ classId: 'ladino', level: 9, order: 0 }] }))).toContain('O nível total deve estar entre 1 e 8.');
   });
 
   it('does not stack Extra Attack from multiple classes', () => {

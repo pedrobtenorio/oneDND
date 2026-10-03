@@ -1,0 +1,3178 @@
+{
+  "options": [
+    {
+      "id": "invocation.armadura-de-sombras",
+      "name": "Armadura de Sombras",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Você pode conjurar Armadura Arcana em si sem gastar um espaço de magia.",
+      "description": "Você pode conjurar Armadura Arcana em si sem gastar um espaço de magia.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 71
+      }
+    },
+    {
+      "id": "invocation.explosao-agonizante",
+      "name": "Explosão Agonizante",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Pré-requisitos: Bruxo Nível 2 ou superior, um Truque de Bruxo que Cause Dano Escolha um dos seus truques conhecidos de Bruxo que cause dano. Você pode adicionar seu modificador de Carisma às jogadas de dano dessa magia. Repetível. Você pode adquirir esta invocação mais de uma vez, escolhendo um truque elegível diferente a cada vez.",
+      "description": "Pré-requisitos: Bruxo Nível 2 ou superior, um Truque de Bruxo que Cause Dano Escolha um dos seus truques conhecidos de Bruxo que cause dano. Você pode adicionar seu modificador de Carisma às jogadas de dano dessa magia. Repetível. Você pode adquirir esta invocação mais de uma vez, escolhendo um truque elegível diferente a cada vez.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 71
+      }
+    },
+    {
+      "id": "invocation.explosao-repulsiva",
+      "name": "Explosão Repulsiva",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Pré-requisitos: Bruxo Nível 2 ou superior, um Truque de Bruxo que Cause Dano com uma Jogada de Ataque Escolha um dos seus truques conhecidos de Bruxo que exija uma jogada de ataque. Ao atingir uma criatura Grande ou menor com esse truque, você pode empurrá-la até 3 metros para longe de você. Repetível. Você pode adquirir esta invocação mais de uma vez, escolhendo um truque elegível diferente a cada vez.",
+      "description": "Pré-requisitos: Bruxo Nível 2 ou superior, um Truque de Bruxo que Cause Dano com uma Jogada de Ataque Escolha um dos seus truques conhecidos de Bruxo que exija uma jogada de ataque. Ao atingir uma criatura Grande ou menor com esse truque, você pode empurrá-la até 3 metros para longe de você. Repetível. Você pode adquirir esta invocação mais de uma vez, escolhendo um truque elegível diferente a cada vez.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 71
+      }
+    },
+    {
+      "id": "invocation.investimento-do-mestre-da-corrente",
+      "name": "Investimento do Mestre da Corrente",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Pré-requisitos: Bruxo Nível 5 ou superior, Pacto da Corrente Ao conjurar Convocar Familiar , você infunde o familiar invocado com uma dose de seu poder místico, concedendo à criatura os seguintes benefícios. Aéreo ou Aquático. O familiar obtém um Deslocamento de Voo ou um Deslocamento de Natação (à sua escolha) de 12 metros. Ataque Rápido. Como uma Ação Bônus, você pode ordenar o familiar a executar a ação Atacar. CD para Evitar sua Magia. Se o familiar forçar uma criatura a realizar uma salvaguarda, ela usa a CD para evitar sua magia. Dano Necrótico ou Radiante. Sempre que o familiar causar d",
+      "description": "Pré-requisitos: Bruxo Nível 5 ou superior, Pacto da Corrente Ao conjurar Convocar Familiar , você infunde o familiar invocado com uma dose de seu poder místico, concedendo à criatura os seguintes benefícios. Aéreo ou Aquático. O familiar obtém um Deslocamento de Voo ou um Deslocamento de Natação (à sua escolha) de 12 metros. Ataque Rápido. Como uma Ação Bônus, você pode ordenar o familiar a executar a ação Atacar. CD para Evitar sua Magia. Se o familiar forçar uma criatura a realizar uma salvaguarda, ela usa a CD para evitar sua magia. Dano Necrótico ou Radiante. Sempre que o familiar causar dano Contundente, Cortante ou Perfurante, você pode substituir o dano por Necrótico ou Radiante. Resistência. Quando o familiar sofre dano, você pode executar uma Reação para conceder Resistência contra esse dano.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 5
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 71
+      },
+      "requiresOptionIds": [
+        "invocation.pacto-da-corrente"
+      ]
+    },
+    {
+      "id": "invocation.lamento-das-sepulturas",
+      "name": "Lamento das Sepulturas",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Pré-requisito: Bruxo Nível 7 ou superior Você pode conjurar Falar com Mortos sem gastar um espaço de magia.",
+      "description": "Pré-requisito: Bruxo Nível 7 ou superior Você pode conjurar Falar com Mortos sem gastar um espaço de magia.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 7
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 71
+      }
+    },
+    {
+      "id": "invocation.lamina-sedenta",
+      "name": "Lâmina Sedenta",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Pré-requisitos: Bruxo Nível 5 ou superior, Pacto da Lâmina Você adquire a característica Ataque Extra apenas para sua arma de pacto e você pode atacar duas vezes com ela, em vez de uma, quando executar a ação Atacar no seu turno.",
+      "description": "Pré-requisitos: Bruxo Nível 5 ou superior, Pacto da Lâmina Você adquire a característica Ataque Extra apenas para sua arma de pacto e você pode atacar duas vezes com ela, em vez de uma, quando executar a ação Atacar no seu turno.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 5
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 71
+      },
+      "requiresOptionIds": [
+        "invocation.pacto-da-lamina"
+      ]
+    },
+    {
+      "id": "invocation.lanca-mistica",
+      "name": "Lança Mística",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Pré-requisitos: Bruxo Nível 2 ou superior, um Truque de Bruxo que Cause Dano Escolha um dos seus truques conhecidos de Bruxo que cause dano e tenha um alcance de 3 metros ou mais. Ao conjurar essa magia, seu alcance aumenta em um número de metros igual a 9 vezes o seu nível de Bruxo. Repetível. Você pode adquirir esta invocação mais de uma vez, escolhendo um truque elegível diferente a cada vez.",
+      "description": "Pré-requisitos: Bruxo Nível 2 ou superior, um Truque de Bruxo que Cause Dano Escolha um dos seus truques conhecidos de Bruxo que cause dano e tenha um alcance de 3 metros ou mais. Ao conjurar essa magia, seu alcance aumenta em um número de metros igual a 9 vezes o seu nível de Bruxo. Repetível. Você pode adquirir esta invocação mais de uma vez, escolhendo um truque elegível diferente a cada vez.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 72
+      }
+    },
+    {
+      "id": "invocation.licoes-dos-grandes-antigos",
+      "name": "Lições dos Grandes Antigos",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Pré-requisito: Bruxo Nível 2 ou superior Você recebeu conhecimento de uma entidade antiga do multiverso, permitindo que você obtenha um talento de Origem à sua escolha. Repetível. Você pode adquirir esta invocação mais de uma vez, escolhendo um talento de Origem diferente cada vez.",
+      "description": "Pré-requisito: Bruxo Nível 2 ou superior Você recebeu conhecimento de uma entidade antiga do multiverso, permitindo que você obtenha um talento de Origem à sua escolha. Repetível. Você pode adquirir esta invocação mais de uma vez, escolhendo um talento de Origem diferente cada vez.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 72
+      }
+    },
+    {
+      "id": "invocation.mascara-das-muitas-faces",
+      "name": "Máscara das Muitas Faces",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Pré-requisito: Bruxo Nível 2 ou superior Você pode conjurar Disfarçar-se sem gastar um espaço de magia.",
+      "description": "Pré-requisito: Bruxo Nível 2 ou superior Você pode conjurar Disfarçar-se sem gastar um espaço de magia.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 72
+      }
+    },
+    {
+      "id": "invocation.mente-mistica",
+      "name": "Mente Mística",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Você tem Vantagem em salvaguardas de Constituição que realiza para manter a Concentração.",
+      "description": "Você tem Vantagem em salvaguardas de Constituição que realiza para manter a Concentração.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 72
+      }
+    },
+    {
+      "id": "invocation.mestre-das-infindaveis-formas",
+      "name": "Mestre das Infindáveis Formas",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Pré-requisito: Bruxo Nível 5 ou superior Você pode conjurar Alterar-se sem gastar um espaço de magia.",
+      "description": "Pré-requisito: Bruxo Nível 5 ou superior Você pode conjurar Alterar-se sem gastar um espaço de magia.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 5
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 72
+      }
+    },
+    {
+      "id": "invocation.olhar-de-duas-mentes",
+      "name": "Olhar de Duas Mentes",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Pré-requisito: Bruxo Nível 5 ou superior Como uma Ação Bônus, você pode tocar uma criatura voluntária e perceber através de seus sentidos até o final do seu próximo turno. Enquanto a criatura estiver no mesmo plano de existência que você, você pode executar uma Ação Bônus nos turnos subsequentes para manter essa conexão, estendendo a duração até o final do seu próximo turno. A conexão encerra se você não a mantiver deste modo. Ao perceber através dos sentidos da outra criatura, você se beneficia de quaisquer sentidos especiais possuídos por ela e pode conjurar magias como se estivesse em seu e",
+      "description": "Pré-requisito: Bruxo Nível 5 ou superior Como uma Ação Bônus, você pode tocar uma criatura voluntária e perceber através de seus sentidos até o final do seu próximo turno. Enquanto a criatura estiver no mesmo plano de existência que você, você pode executar uma Ação Bônus nos turnos subsequentes para manter essa conexão, estendendo a duração até o final do seu próximo turno. A conexão encerra se você não a mantiver deste modo. Ao perceber através dos sentidos da outra criatura, você se beneficia de quaisquer sentidos especiais possuídos por ela e pode conjurar magias como se estivesse em seu espaço ou no espaço da outra criatura se vocês dois estiverem a até 18 metros um do outro.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 5
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 72
+      }
+    },
+    {
+      "id": "invocation.pacto-da-corrente",
+      "name": "Pacto da Corrente",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Você aprende a magia Convocar Familiar e pode conjurá-la como uma ação Usar Magia sem gastar um espaço de magia. Ao conjurar a magia, você escolhe uma das formas normais para o seu familiar ou uma das seguintes formas especiais: Cobra Peçonhenta, Diabrete, Esfinge Maravilhosa, Esqueleto, Pseudodragão, Quasit, Slaad Girino, Sprite (veja o apêndice B para o bloco de estatísticas do familiar). Além disso, ao executar ação Atacar, você pode renunciar a um de seus próprios ataques para permitir que seu familiar realize um ataque próprio como uma Reação dele.",
+      "description": "Você aprende a magia Convocar Familiar e pode conjurá-la como uma ação Usar Magia sem gastar um espaço de magia. Ao conjurar a magia, você escolhe uma das formas normais para o seu familiar ou uma das seguintes formas especiais: Cobra Peçonhenta, Diabrete, Esfinge Maravilhosa, Esqueleto, Pseudodragão, Quasit, Slaad Girino, Sprite (veja o apêndice B para o bloco de estatísticas do familiar). Além disso, ao executar ação Atacar, você pode renunciar a um de seus próprios ataques para permitir que seu familiar realize um ataque próprio como uma Reação dele.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 72
+      }
+    },
+    {
+      "id": "invocation.pacto-da-lamina",
+      "name": "Pacto da Lâmina",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Como uma Ação Bônus, você pode conjurar uma arma de pacto em sua mão — uma arma Corpo a Corpo Simples ou Marcial à sua escolha com a qual você se vincula — ou cria um vínculo com uma arma mágica que você toca; você não pode se vincular a uma arma mágica se outra pessoa estiver sintonizada ou outro Bruxo tiver vínculo com ela. Até que o vínculo encerre, você tem proficiência com a arma e pode usá-la como Foco de Conjuração. Ao atacar com a arma vinculada, você pode usar seu modificador de Carisma para as jogadas de ataque e dano em vez de usar Força ou Destreza; e você pode causar dano Necrótic",
+      "description": "Como uma Ação Bônus, você pode conjurar uma arma de pacto em sua mão — uma arma Corpo a Corpo Simples ou Marcial à sua escolha com a qual você se vincula — ou cria um vínculo com uma arma mágica que você toca; você não pode se vincular a uma arma mágica se outra pessoa estiver sintonizada ou outro Bruxo tiver vínculo com ela. Até que o vínculo encerre, você tem proficiência com a arma e pode usá-la como Foco de Conjuração. Ao atacar com a arma vinculada, você pode usar seu modificador de Carisma para as jogadas de ataque e dano em vez de usar Força ou Destreza; e você pode causar dano Necrótico, Psíquico ou Radiante ou o tipo de dano normal da arma. Seu vínculo com a arma encerra se você executar a Ação Bônus desta característica novamente, se a arma estiver a mais de 1,5 metro de você por 1 minuto ou mais, ou se você morrer. Uma arma conjurada desaparece quando o vínculo encerra.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 72
+      }
+    },
+    {
+      "id": "invocation.pacto-do-tomo",
+      "name": "Pacto do Tomo",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Ao costurar fios de sombra, você conjura um livro em sua mão ao final de um Descanso Curto ou Longo. Este Livro das Sombras (você determina a aparência dele) contém magia mística que só você pode acessar, concedendo-lhe os benefícios abaixo. O livro desaparece se você conjurar outro livro com essa característica ou se você morrer. Truques e Rituais. Quando o livro surgir, escolha três truques e duas magias de 1º círculo que tenham o marcador Ritual. As magias podem ser da lista de magias de qualquer classe e devem ser magias que você ainda não tem preparadas. Enquanto o livro estiver com você,",
+      "description": "Ao costurar fios de sombra, você conjura um livro em sua mão ao final de um Descanso Curto ou Longo. Este Livro das Sombras (você determina a aparência dele) contém magia mística que só você pode acessar, concedendo-lhe os benefícios abaixo. O livro desaparece se você conjurar outro livro com essa característica ou se você morrer. Truques e Rituais. Quando o livro surgir, escolha três truques e duas magias de 1º círculo que tenham o marcador Ritual. As magias podem ser da lista de magias de qualquer classe e devem ser magias que você ainda não tem preparadas. Enquanto o livro estiver com você, você tem as magias escolhidas preparadas e elas funcionam como magias de Bruxo para você. Foco de Conjuração. Você pode usar o livro como um Foco de Conjuração.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 72
+      }
+    },
+    {
+      "id": "invocation.passo-ascendente",
+      "name": "Passo Ascendente",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Pré-requisito: Bruxo Nível 5 ou superior Você pode conjurar Levitação em si sem gastar um espaço de magia.",
+      "description": "Pré-requisito: Bruxo Nível 5 ou superior Você pode conjurar Levitação em si sem gastar um espaço de magia.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 5
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 72
+      }
+    },
+    {
+      "id": "invocation.presente-das-profundezas",
+      "name": "Presente das Profundezas",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Pré-requisito: Bruxo Nível 5 ou superior Você pode respirar debaixo d’água e obter um Deslocamento de Natação igual ao seu Deslocamento. Você também pode conjurar Respirar na Água uma vez sem gastar um espaço de magia e novamente sempre que completar um Descanso Longo.",
+      "description": "Pré-requisito: Bruxo Nível 5 ou superior Você pode respirar debaixo d’água e obter um Deslocamento de Natação igual ao seu Deslocamento. Você também pode conjurar Respirar na Água uma vez sem gastar um espaço de magia e novamente sempre que completar um Descanso Longo.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 5
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 72
+      }
+    },
+    {
+      "id": "invocation.punicao-mistica",
+      "name": "Punição Mística",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Pré-requisitos: Bruxo Nível 5 ou superior, Pacto da Lâmina Uma vez por turno, ao atingir uma criatura com sua arma de pacto, você pode gastar um espaço de Magia de Pacto para causar 1d8 pontos de dano Energético adicionais ao alvo, mais 1d8 por círculo do espaço de magia, e pode impor ao alvo a condição Caído se ele for Enorme ou menor.",
+      "description": "Pré-requisitos: Bruxo Nível 5 ou superior, Pacto da Lâmina Uma vez por turno, ao atingir uma criatura com sua arma de pacto, você pode gastar um espaço de Magia de Pacto para causar 1d8 pontos de dano Energético adicionais ao alvo, mais 1d8 por círculo do espaço de magia, e pode impor ao alvo a condição Caído se ele for Enorme ou menor.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 5
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 73
+      },
+      "requiresOptionIds": [
+        "invocation.pacto-da-lamina"
+      ]
+    },
+    {
+      "id": "invocation.salto-sobrenatural",
+      "name": "Salto Sobrenatural",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Pré-requisito: Bruxo Nível 2 ou superior Você pode conjurar Salto em si sem gastar um espaço de magia.",
+      "description": "Pré-requisito: Bruxo Nível 2 ou superior Você pode conjurar Salto em si sem gastar um espaço de magia.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 73
+      }
+    },
+    {
+      "id": "invocation.uno-com-as-sombras",
+      "name": "Uno com as Sombras",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Pré-requisito: Bruxo Nível 5 ou superior Enquanto estiver em uma área de Meia-luz ou Escuridão, você pode conjurar Invisibilidade em si sem gastar um espaço de magia.",
+      "description": "Pré-requisito: Bruxo Nível 5 ou superior Enquanto estiver em uma área de Meia-luz ou Escuridão, você pode conjurar Invisibilidade em si sem gastar um espaço de magia.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 5
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 73
+      }
+    },
+    {
+      "id": "invocation.vigor-infero",
+      "name": "Vigor Ínfero",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Pré-requisito: Bruxo Nível 2 ou superior Você pode conjurar Vitalidade Vazia em si sem gastar um espaço de magia. Ao conjurar a magia com essa característica, você não joga o dado para os Pontos de Vida Temporários, pois recebe automaticamente o número máximo no dado.",
+      "description": "Pré-requisito: Bruxo Nível 2 ou superior Você pode conjurar Vitalidade Vazia em si sem gastar um espaço de magia. Ao conjurar a magia com essa característica, você não joga o dado para os Pontos de Vida Temporários, pois recebe automaticamente o número máximo no dado.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 73
+      }
+    },
+    {
+      "id": "invocation.visao-diabolica",
+      "name": "Visão Diabólica",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Pré-requisito: Bruxo Nível 2 ou superior Você pode ver normalmente em Meia-luz e Escuridão — mágicas e não mágicas — a até 36 metros de você.",
+      "description": "Pré-requisito: Bruxo Nível 2 ou superior Você pode ver normalmente em Meia-luz e Escuridão — mágicas e não mágicas — a até 36 metros de você.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 73
+      }
+    },
+    {
+      "id": "invocation.visoes-nebulosas",
+      "name": "Visões Nebulosas",
+      "kind": "invocation",
+      "group": "invocations",
+      "summary": "Pré-requisito: Bruxo Nível 2 ou superior Você pode conjurar Imagem Silenciosa sem gastar um espaço de magia.",
+      "description": "Pré-requisito: Bruxo Nível 2 ou superior Você pode conjurar Imagem Silenciosa sem gastar um espaço de magia.",
+      "requirements": [
+        {
+          "classId": "bruxo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 73
+      }
+    },
+    {
+      "id": "metamagic.magia-acelerada",
+      "name": "Magia Acelerada",
+      "kind": "metamagic",
+      "group": "metamagic",
+      "summary": "Custo: 2 Pontos de Feitiçaria Ao conjurar uma magia que tenha um tempo de conjuração de uma ação, você pode gastar 2 Pontos de Feitiçaria para alterar o tempo de conjuração para uma Ação Bônus para esta conjuração. Você não pode modificar uma magia deste modo se já conjurou uma magia de 1º círculo ou superior no turno atual, nem pode conjurar uma magia de 1º círculo ou superior neste turno após modificar uma magia deste modo.",
+      "description": "Custo: 2 Pontos de Feitiçaria Ao conjurar uma magia que tenha um tempo de conjuração de uma ação, você pode gastar 2 Pontos de Feitiçaria para alterar o tempo de conjuração para uma Ação Bônus para esta conjuração. Você não pode modificar uma magia deste modo se já conjurou uma magia de 1º círculo ou superior no turno atual, nem pode conjurar uma magia de 1º círculo ou superior neste turno após modificar uma magia deste modo.",
+      "requirements": [
+        {
+          "classId": "feiticeiro",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 105
+      }
+    },
+    {
+      "id": "metamagic.magia-agravada",
+      "name": "Magia Agravada",
+      "kind": "metamagic",
+      "group": "metamagic",
+      "summary": "Custo: 2 Pontos de Feitiçaria Ao conjurar uma magia que força uma criatura a realizar uma salvaguarda, você pode gastar 2 Pontos de Feitiçaria para conceder a um alvo da magia Desvantagem em salvaguardas contra a magia.",
+      "description": "Custo: 2 Pontos de Feitiçaria Ao conjurar uma magia que força uma criatura a realizar uma salvaguarda, você pode gastar 2 Pontos de Feitiçaria para conceder a um alvo da magia Desvantagem em salvaguardas contra a magia.",
+      "requirements": [
+        {
+          "classId": "feiticeiro",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 105
+      }
+    },
+    {
+      "id": "metamagic.magia-buscadora",
+      "name": "Magia Buscadora",
+      "kind": "metamagic",
+      "group": "metamagic",
+      "summary": "Custo: 1 Ponto de Feitiçaria Ao realizar uma jogada de ataque com uma magia e errar, você pode gastar 1 Ponto de Feitiçaria para jogar novamente o d20 e deve usar o novo resultado. Você pode usar Magia Buscadora mesmo que já tenha usado uma opção diferente de Metamagia durante a conjuração da magia.",
+      "description": "Custo: 1 Ponto de Feitiçaria Ao realizar uma jogada de ataque com uma magia e errar, você pode gastar 1 Ponto de Feitiçaria para jogar novamente o d20 e deve usar o novo resultado. Você pode usar Magia Buscadora mesmo que já tenha usado uma opção diferente de Metamagia durante a conjuração da magia.",
+      "requirements": [
+        {
+          "classId": "feiticeiro",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 105
+      }
+    },
+    {
+      "id": "metamagic.magia-cautelosa",
+      "name": "Magia Cautelosa",
+      "kind": "metamagic",
+      "group": "metamagic",
+      "summary": "Custo: 1 Ponto de Feitiçaria Ao conjurar uma magia que força outras criaturas a realizar uma salvaguarda, você pode proteger algumas dessas criaturas da força total da magia. Para isso, gaste 1 Ponto de Feitiçaria e escolha um número dessas criaturas igual até seu modificador de Carisma (mínimo de uma criatura). Uma criatura escolhida é automaticamente bem-sucedida na salvaguarda contra a magia, e não sofre dano se normalmente sofreria metade do dano em caso de sucesso.",
+      "description": "Custo: 1 Ponto de Feitiçaria Ao conjurar uma magia que força outras criaturas a realizar uma salvaguarda, você pode proteger algumas dessas criaturas da força total da magia. Para isso, gaste 1 Ponto de Feitiçaria e escolha um número dessas criaturas igual até seu modificador de Carisma (mínimo de uma criatura). Uma criatura escolhida é automaticamente bem-sucedida na salvaguarda contra a magia, e não sofre dano se normalmente sofreria metade do dano em caso de sucesso.",
+      "requirements": [
+        {
+          "classId": "feiticeiro",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 106
+      }
+    },
+    {
+      "id": "metamagic.magia-distante",
+      "name": "Magia Distante",
+      "kind": "metamagic",
+      "group": "metamagic",
+      "summary": "Custo: 1 Ponto de Feitiçaria Ao conjurar uma magia que tenha um alcance de pelo menos 1,5 metro, você pode gastar 1 Ponto de Feitiçaria para dobrar o alcance da magia. Ou quando você conjura uma magia que tem um alcance de Toque, você pode gastar 1 Ponto de Feitiçaria para que o alcance da magia seja 9 metros.",
+      "description": "Custo: 1 Ponto de Feitiçaria Ao conjurar uma magia que tenha um alcance de pelo menos 1,5 metro, você pode gastar 1 Ponto de Feitiçaria para dobrar o alcance da magia. Ou quando você conjura uma magia que tem um alcance de Toque, você pode gastar 1 Ponto de Feitiçaria para que o alcance da magia seja 9 metros.",
+      "requirements": [
+        {
+          "classId": "feiticeiro",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 106
+      }
+    },
+    {
+      "id": "metamagic.magia-duplicada",
+      "name": "Magia Duplicada",
+      "kind": "metamagic",
+      "group": "metamagic",
+      "summary": "Custo: 1 Ponto de Feitiçaria Ao conjurar uma magia, como Enfeitiçar Pessoa , que pode ser conjurada com um espaço de magia de círculo superior para atingir uma criatura adicional, você pode gastar 1 Ponto de Feitiçaria para aumentar o círculo efetivo da magia em 1.",
+      "description": "Custo: 1 Ponto de Feitiçaria Ao conjurar uma magia, como Enfeitiçar Pessoa , que pode ser conjurada com um espaço de magia de círculo superior para atingir uma criatura adicional, você pode gastar 1 Ponto de Feitiçaria para aumentar o círculo efetivo da magia em 1.",
+      "requirements": [
+        {
+          "classId": "feiticeiro",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 106
+      }
+    },
+    {
+      "id": "metamagic.magia-persistente",
+      "name": "Magia Persistente",
+      "kind": "metamagic",
+      "group": "metamagic",
+      "summary": "Custo: 1 Ponto de Feitiçaria Ao conjurar uma magia que tenha uma duração de 1 minuto ou mais, você pode gastar 1 Ponto de Feitiçaria para dobrar sua duração para até o máximo de 24 horas. Se a magia afetada exigir Concentração, você tem Vantagem em qualquer salvaguarda que realizar para manter essa Concentração.",
+      "description": "Custo: 1 Ponto de Feitiçaria Ao conjurar uma magia que tenha uma duração de 1 minuto ou mais, você pode gastar 1 Ponto de Feitiçaria para dobrar sua duração para até o máximo de 24 horas. Se a magia afetada exigir Concentração, você tem Vantagem em qualquer salvaguarda que realizar para manter essa Concentração.",
+      "requirements": [
+        {
+          "classId": "feiticeiro",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 106
+      }
+    },
+    {
+      "id": "metamagic.magia-potencializada",
+      "name": "Magia Potencializada",
+      "kind": "metamagic",
+      "group": "metamagic",
+      "summary": "Custo: 1 Ponto de Feitiçaria Ao jogar dano para uma magia, você pode gastar 1 Ponto de Feitiçaria para jogar novamente um número de dados de dano igual a até seu modificador de Carisma (mínimo de um), e deve usar os novos resultados. Você pode usar Magia Potencializada mesmo que já tenha usado uma opção diferente de Metamagia durante a conjuração da magia.",
+      "description": "Custo: 1 Ponto de Feitiçaria Ao jogar dano para uma magia, você pode gastar 1 Ponto de Feitiçaria para jogar novamente um número de dados de dano igual a até seu modificador de Carisma (mínimo de um), e deve usar os novos resultados. Você pode usar Magia Potencializada mesmo que já tenha usado uma opção diferente de Metamagia durante a conjuração da magia.",
+      "requirements": [
+        {
+          "classId": "feiticeiro",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 106
+      }
+    },
+    {
+      "id": "metamagic.magia-sutil",
+      "name": "Magia Sutil",
+      "kind": "metamagic",
+      "group": "metamagic",
+      "summary": "Custo: 1 Ponto de Feitiçaria Ao conjurar uma magia, você pode gastar 1 Ponto de Feitiçaria para conjurá-la sem quaisquer componentes Verbais, Somáticos ou Materiais, exceto componentes Materiais consumidos pela magia ou que têm um custo detalhado na magia.",
+      "description": "Custo: 1 Ponto de Feitiçaria Ao conjurar uma magia, você pode gastar 1 Ponto de Feitiçaria para conjurá-la sem quaisquer componentes Verbais, Somáticos ou Materiais, exceto componentes Materiais consumidos pela magia ou que têm um custo detalhado na magia.",
+      "requirements": [
+        {
+          "classId": "feiticeiro",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 106
+      }
+    },
+    {
+      "id": "metamagic.magia-transmutada",
+      "name": "Magia Transmutada",
+      "kind": "metamagic",
+      "group": "metamagic",
+      "summary": "Custo: 1 Ponto de Feitiçaria Ao conjurar uma magia que cause um tipo de dano da lista a seguir, você pode gastar 1 Ponto de Feitiçaria para alterar esse tipo de dano para um dos outros tipos listados: Ácido, Elétrico, Gélido, Ígneo, Trovejante, Venenoso.",
+      "description": "Custo: 1 Ponto de Feitiçaria Ao conjurar uma magia que cause um tipo de dano da lista a seguir, você pode gastar 1 Ponto de Feitiçaria para alterar esse tipo de dano para um dos outros tipos listados: Ácido, Elétrico, Gélido, Ígneo, Trovejante, Venenoso.",
+      "requirements": [
+        {
+          "classId": "feiticeiro",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 106
+      }
+    },
+    {
+      "id": "cleric.protetor",
+      "name": "Protetor",
+      "kind": "class-choice",
+      "group": "cleric-order",
+      "summary": "Proficiência com armas marciais e treinamento com armadura pesada.",
+      "description": "Proficiência com armas marciais e treinamento com armadura pesada.",
+      "requirements": [
+        {
+          "classId": "clerigo",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 82
+      }
+    },
+    {
+      "id": "cleric.taumaturgo",
+      "name": "Taumaturgo",
+      "kind": "class-choice",
+      "group": "cleric-order",
+      "summary": "Truque adicional de Clérigo; Sabedoria (mínimo +1) em testes de Arcanismo e Religião.",
+      "description": "Truque adicional de Clérigo; Sabedoria (mínimo +1) em testes de Arcanismo e Religião.",
+      "requirements": [
+        {
+          "classId": "clerigo",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 82
+      }
+    },
+    {
+      "id": "druid.protetor",
+      "name": "Protetor",
+      "kind": "class-choice",
+      "group": "druid-order",
+      "summary": "Proficiência com armas marciais e treinamento com armadura média.",
+      "description": "Proficiência com armas marciais e treinamento com armadura média.",
+      "requirements": [
+        {
+          "classId": "druida",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 92
+      }
+    },
+    {
+      "id": "druid.magista",
+      "name": "Xamã",
+      "kind": "class-choice",
+      "group": "druid-order",
+      "summary": "Truque adicional de Druida; Sabedoria (mínimo +1) em testes de Arcanismo e Natureza.",
+      "description": "Truque adicional de Druida; Sabedoria (mínimo +1) em testes de Arcanismo e Natureza.",
+      "requirements": [
+        {
+          "classId": "druida",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 92
+      }
+    },
+    {
+      "id": "cleric.golpe-divino",
+      "name": "Golpe Divino",
+      "kind": "class-choice",
+      "group": "blessed-strikes",
+      "summary": "Uma vez no seu turno, +1d8 necrótico ou radiante ao acertar um ataque com arma.",
+      "description": "Uma vez no seu turno, +1d8 necrótico ou radiante ao acertar um ataque com arma.",
+      "requirements": [
+        {
+          "classId": "clerigo",
+          "minClassLevel": 7
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 83
+      }
+    },
+    {
+      "id": "cleric.conjuracao-poderosa",
+      "name": "Conjuração Poderosa",
+      "kind": "class-choice",
+      "group": "blessed-strikes",
+      "summary": "Some Sabedoria ao dano dos truques de Clérigo.",
+      "description": "Some Sabedoria ao dano dos truques de Clérigo.",
+      "requirements": [
+        {
+          "classId": "clerigo",
+          "minClassLevel": 7
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 83
+      }
+    },
+    {
+      "id": "druid.ataque-primal",
+      "name": "Ataque Primal",
+      "kind": "class-choice",
+      "group": "elemental-fury",
+      "summary": "Uma vez no seu turno, +1d8 elétrico, gélido, ígneo ou trovejante ao acertar com arma ou Forma Selvagem.",
+      "description": "Uma vez no seu turno, +1d8 elétrico, gélido, ígneo ou trovejante ao acertar com arma ou Forma Selvagem.",
+      "requirements": [
+        {
+          "classId": "druida",
+          "minClassLevel": 7
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 93
+      }
+    },
+    {
+      "id": "druid.conjuracao-poderosa",
+      "name": "Conjuração Poderosa",
+      "kind": "class-choice",
+      "group": "elemental-fury",
+      "summary": "Some Sabedoria ao dano dos truques de Druida.",
+      "description": "Some Sabedoria ao dano dos truques de Druida.",
+      "requirements": [
+        {
+          "classId": "druida",
+          "minClassLevel": 7
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 93
+      }
+    },
+    {
+      "id": "wild.coruja",
+      "name": "Coruja",
+      "kind": "class-choice",
+      "group": "wild-aspect",
+      "summary": "Visão no Escuro de 18 m, ou +18 m se já a possui.",
+      "description": "Visão no Escuro de 18 m, ou +18 m se já a possui.",
+      "requirements": [
+        {
+          "classId": "barbaro",
+          "minClassLevel": 6
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 56
+      }
+    },
+    {
+      "id": "wild.pantera",
+      "name": "Pantera",
+      "kind": "class-choice",
+      "group": "wild-aspect",
+      "summary": "Deslocamento de Escalada igual ao seu Deslocamento.",
+      "description": "Deslocamento de Escalada igual ao seu Deslocamento.",
+      "requirements": [
+        {
+          "classId": "barbaro",
+          "minClassLevel": 6
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 56
+      }
+    },
+    {
+      "id": "wild.salmao",
+      "name": "Salmão",
+      "kind": "class-choice",
+      "group": "wild-aspect",
+      "summary": "Deslocamento de Natação igual ao seu Deslocamento.",
+      "description": "Deslocamento de Natação igual ao seu Deslocamento.",
+      "requirements": [
+        {
+          "classId": "barbaro",
+          "minClassLevel": 6
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 56
+      }
+    },
+    {
+      "id": "hunter.multiattack",
+      "name": "Defesa Contra Ataques Múltiplos",
+      "kind": "class-choice",
+      "group": "hunter-defense",
+      "summary": "Ao ser atingido, imponha Desvantagem nos demais ataques daquela criatura contra você neste turno.",
+      "description": "Ao ser atingido, imponha Desvantagem nos demais ataques daquela criatura contra você neste turno.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 7
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 122
+      }
+    },
+    {
+      "id": "hunter.escape",
+      "name": "Escapar de Hordas",
+      "kind": "class-choice",
+      "group": "hunter-defense",
+      "summary": "Ataques de Oportunidade contra você têm Desvantagem.",
+      "description": "Ataques de Oportunidade contra você têm Desvantagem.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 7
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 122
+      }
+    },
+    {
+      "id": "land.arido",
+      "name": "Árido",
+      "kind": "class-choice",
+      "group": "land",
+      "summary": "Determina as magias sempre preparadas. Pode ser alterado após Descanso Longo.",
+      "description": "Determina as magias sempre preparadas. Pode ser alterado após Descanso Longo.",
+      "requirements": [
+        {
+          "classId": "druida",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 97
+      }
+    },
+    {
+      "id": "land.polar",
+      "name": "Polar",
+      "kind": "class-choice",
+      "group": "land",
+      "summary": "Determina as magias sempre preparadas. Pode ser alterado após Descanso Longo.",
+      "description": "Determina as magias sempre preparadas. Pode ser alterado após Descanso Longo.",
+      "requirements": [
+        {
+          "classId": "druida",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 97
+      }
+    },
+    {
+      "id": "land.temperado",
+      "name": "Temperado",
+      "kind": "class-choice",
+      "group": "land",
+      "summary": "Determina as magias sempre preparadas. Pode ser alterado após Descanso Longo.",
+      "description": "Determina as magias sempre preparadas. Pode ser alterado após Descanso Longo.",
+      "requirements": [
+        {
+          "classId": "druida",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 97
+      }
+    },
+    {
+      "id": "land.tropical",
+      "name": "Tropical",
+      "kind": "class-choice",
+      "group": "land",
+      "summary": "Determina as magias sempre preparadas. Pode ser alterado após Descanso Longo.",
+      "description": "Determina as magias sempre preparadas. Pode ser alterado após Descanso Longo.",
+      "requirements": [
+        {
+          "classId": "druida",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 97
+      }
+    },
+    {
+      "id": "dragon.acido",
+      "name": "Ácido",
+      "kind": "class-choice",
+      "group": "dragon-affinity",
+      "summary": "Resistência a este dano; adicione Carisma a uma jogada de dano deste tipo de uma magia.",
+      "description": "Resistência a este dano; adicione Carisma a uma jogada de dano deste tipo de uma magia.",
+      "requirements": [
+        {
+          "classId": "feiticeiro",
+          "minClassLevel": 6
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 110
+      }
+    },
+    {
+      "id": "dragon.eletrico",
+      "name": "Elétrico",
+      "kind": "class-choice",
+      "group": "dragon-affinity",
+      "summary": "Resistência a este dano; adicione Carisma a uma jogada de dano deste tipo de uma magia.",
+      "description": "Resistência a este dano; adicione Carisma a uma jogada de dano deste tipo de uma magia.",
+      "requirements": [
+        {
+          "classId": "feiticeiro",
+          "minClassLevel": 6
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 110
+      }
+    },
+    {
+      "id": "dragon.gelido",
+      "name": "Gélido",
+      "kind": "class-choice",
+      "group": "dragon-affinity",
+      "summary": "Resistência a este dano; adicione Carisma a uma jogada de dano deste tipo de uma magia.",
+      "description": "Resistência a este dano; adicione Carisma a uma jogada de dano deste tipo de uma magia.",
+      "requirements": [
+        {
+          "classId": "feiticeiro",
+          "minClassLevel": 6
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 110
+      }
+    },
+    {
+      "id": "dragon.igneo",
+      "name": "Ígneo",
+      "kind": "class-choice",
+      "group": "dragon-affinity",
+      "summary": "Resistência a este dano; adicione Carisma a uma jogada de dano deste tipo de uma magia.",
+      "description": "Resistência a este dano; adicione Carisma a uma jogada de dano deste tipo de uma magia.",
+      "requirements": [
+        {
+          "classId": "feiticeiro",
+          "minClassLevel": 6
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 110
+      }
+    },
+    {
+      "id": "dragon.venenoso",
+      "name": "Venenoso",
+      "kind": "class-choice",
+      "group": "dragon-affinity",
+      "summary": "Resistência a este dano; adicione Carisma a uma jogada de dano deste tipo de uma magia.",
+      "description": "Resistência a este dano; adicione Carisma a uma jogada de dano deste tipo de uma magia.",
+      "requirements": [
+        {
+          "classId": "feiticeiro",
+          "minClassLevel": 6
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 110
+      }
+    },
+    {
+      "id": "lore-skills.acrobacia",
+      "name": "Acrobacia",
+      "kind": "class-choice",
+      "group": "lore-skills",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 66
+      }
+    },
+    {
+      "id": "lore-skills.arcanismo",
+      "name": "Arcanismo",
+      "kind": "class-choice",
+      "group": "lore-skills",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 66
+      }
+    },
+    {
+      "id": "lore-skills.atletismo",
+      "name": "Atletismo",
+      "kind": "class-choice",
+      "group": "lore-skills",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 66
+      }
+    },
+    {
+      "id": "lore-skills.atuacao",
+      "name": "Atuação",
+      "kind": "class-choice",
+      "group": "lore-skills",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 66
+      }
+    },
+    {
+      "id": "lore-skills.enganacao",
+      "name": "Enganação",
+      "kind": "class-choice",
+      "group": "lore-skills",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 66
+      }
+    },
+    {
+      "id": "lore-skills.furtividade",
+      "name": "Furtividade",
+      "kind": "class-choice",
+      "group": "lore-skills",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 66
+      }
+    },
+    {
+      "id": "lore-skills.historia",
+      "name": "História",
+      "kind": "class-choice",
+      "group": "lore-skills",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 66
+      }
+    },
+    {
+      "id": "lore-skills.intimidacao",
+      "name": "Intimidação",
+      "kind": "class-choice",
+      "group": "lore-skills",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 66
+      }
+    },
+    {
+      "id": "lore-skills.intuicao",
+      "name": "Intuição",
+      "kind": "class-choice",
+      "group": "lore-skills",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 66
+      }
+    },
+    {
+      "id": "lore-skills.investigacao",
+      "name": "Investigação",
+      "kind": "class-choice",
+      "group": "lore-skills",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 66
+      }
+    },
+    {
+      "id": "lore-skills.lidar-com-animais",
+      "name": "Lidar com Animais",
+      "kind": "class-choice",
+      "group": "lore-skills",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 66
+      }
+    },
+    {
+      "id": "lore-skills.medicina",
+      "name": "Medicina",
+      "kind": "class-choice",
+      "group": "lore-skills",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 66
+      }
+    },
+    {
+      "id": "lore-skills.natureza",
+      "name": "Natureza",
+      "kind": "class-choice",
+      "group": "lore-skills",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 66
+      }
+    },
+    {
+      "id": "lore-skills.percepcao",
+      "name": "Percepção",
+      "kind": "class-choice",
+      "group": "lore-skills",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 66
+      }
+    },
+    {
+      "id": "lore-skills.persuasao",
+      "name": "Persuasão",
+      "kind": "class-choice",
+      "group": "lore-skills",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 66
+      }
+    },
+    {
+      "id": "lore-skills.prestidigitacao",
+      "name": "Prestidigitação",
+      "kind": "class-choice",
+      "group": "lore-skills",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 66
+      }
+    },
+    {
+      "id": "lore-skills.religiao",
+      "name": "Religião",
+      "kind": "class-choice",
+      "group": "lore-skills",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 66
+      }
+    },
+    {
+      "id": "lore-skills.sobrevivencia",
+      "name": "Sobrevivência",
+      "kind": "class-choice",
+      "group": "lore-skills",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 66
+      }
+    },
+    {
+      "id": "wizard-scholar.arcanismo",
+      "name": "Arcanismo",
+      "kind": "class-choice",
+      "group": "wizard-scholar",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "mago",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 148
+      }
+    },
+    {
+      "id": "wizard-scholar.historia",
+      "name": "História",
+      "kind": "class-choice",
+      "group": "wizard-scholar",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "mago",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 148
+      }
+    },
+    {
+      "id": "wizard-scholar.investigacao",
+      "name": "Investigação",
+      "kind": "class-choice",
+      "group": "wizard-scholar",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "mago",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 148
+      }
+    },
+    {
+      "id": "wizard-scholar.medicina",
+      "name": "Medicina",
+      "kind": "class-choice",
+      "group": "wizard-scholar",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "mago",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 148
+      }
+    },
+    {
+      "id": "wizard-scholar.natureza",
+      "name": "Natureza",
+      "kind": "class-choice",
+      "group": "wizard-scholar",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "mago",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 148
+      }
+    },
+    {
+      "id": "wizard-scholar.religiao",
+      "name": "Religião",
+      "kind": "class-choice",
+      "group": "wizard-scholar",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "mago",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 148
+      }
+    },
+    {
+      "id": "barbarian-knowledge.atletismo",
+      "name": "Atletismo",
+      "kind": "class-choice",
+      "group": "barbarian-knowledge",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "barbaro",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 52
+      }
+    },
+    {
+      "id": "barbarian-knowledge.intimidacao",
+      "name": "Intimidação",
+      "kind": "class-choice",
+      "group": "barbarian-knowledge",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "barbaro",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 52
+      }
+    },
+    {
+      "id": "barbarian-knowledge.lidar-com-animais",
+      "name": "Lidar com Animais",
+      "kind": "class-choice",
+      "group": "barbarian-knowledge",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "barbaro",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 52
+      }
+    },
+    {
+      "id": "barbarian-knowledge.natureza",
+      "name": "Natureza",
+      "kind": "class-choice",
+      "group": "barbarian-knowledge",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "barbaro",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 52
+      }
+    },
+    {
+      "id": "barbarian-knowledge.percepcao",
+      "name": "Percepção",
+      "kind": "class-choice",
+      "group": "barbarian-knowledge",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "barbaro",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 52
+      }
+    },
+    {
+      "id": "barbarian-knowledge.sobrevivencia",
+      "name": "Sobrevivência",
+      "kind": "class-choice",
+      "group": "barbarian-knowledge",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "barbaro",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 52
+      }
+    },
+    {
+      "id": "bard-expertise.acrobacia",
+      "name": "Acrobacia",
+      "kind": "class-choice",
+      "group": "bard-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 60
+      }
+    },
+    {
+      "id": "bard-expertise.arcanismo",
+      "name": "Arcanismo",
+      "kind": "class-choice",
+      "group": "bard-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 60
+      }
+    },
+    {
+      "id": "bard-expertise.atletismo",
+      "name": "Atletismo",
+      "kind": "class-choice",
+      "group": "bard-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 60
+      }
+    },
+    {
+      "id": "bard-expertise.atuacao",
+      "name": "Atuação",
+      "kind": "class-choice",
+      "group": "bard-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 60
+      }
+    },
+    {
+      "id": "bard-expertise.enganacao",
+      "name": "Enganação",
+      "kind": "class-choice",
+      "group": "bard-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 60
+      }
+    },
+    {
+      "id": "bard-expertise.furtividade",
+      "name": "Furtividade",
+      "kind": "class-choice",
+      "group": "bard-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 60
+      }
+    },
+    {
+      "id": "bard-expertise.historia",
+      "name": "História",
+      "kind": "class-choice",
+      "group": "bard-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 60
+      }
+    },
+    {
+      "id": "bard-expertise.intimidacao",
+      "name": "Intimidação",
+      "kind": "class-choice",
+      "group": "bard-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 60
+      }
+    },
+    {
+      "id": "bard-expertise.intuicao",
+      "name": "Intuição",
+      "kind": "class-choice",
+      "group": "bard-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 60
+      }
+    },
+    {
+      "id": "bard-expertise.investigacao",
+      "name": "Investigação",
+      "kind": "class-choice",
+      "group": "bard-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 60
+      }
+    },
+    {
+      "id": "bard-expertise.lidar-com-animais",
+      "name": "Lidar com Animais",
+      "kind": "class-choice",
+      "group": "bard-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 60
+      }
+    },
+    {
+      "id": "bard-expertise.medicina",
+      "name": "Medicina",
+      "kind": "class-choice",
+      "group": "bard-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 60
+      }
+    },
+    {
+      "id": "bard-expertise.natureza",
+      "name": "Natureza",
+      "kind": "class-choice",
+      "group": "bard-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 60
+      }
+    },
+    {
+      "id": "bard-expertise.percepcao",
+      "name": "Percepção",
+      "kind": "class-choice",
+      "group": "bard-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 60
+      }
+    },
+    {
+      "id": "bard-expertise.persuasao",
+      "name": "Persuasão",
+      "kind": "class-choice",
+      "group": "bard-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 60
+      }
+    },
+    {
+      "id": "bard-expertise.prestidigitacao",
+      "name": "Prestidigitação",
+      "kind": "class-choice",
+      "group": "bard-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 60
+      }
+    },
+    {
+      "id": "bard-expertise.religiao",
+      "name": "Religião",
+      "kind": "class-choice",
+      "group": "bard-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 60
+      }
+    },
+    {
+      "id": "bard-expertise.sobrevivencia",
+      "name": "Sobrevivência",
+      "kind": "class-choice",
+      "group": "bard-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "bardo",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 60
+      }
+    },
+    {
+      "id": "rogue-expertise.acrobacia",
+      "name": "Acrobacia",
+      "kind": "class-choice",
+      "group": "rogue-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "ladino",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 137
+      }
+    },
+    {
+      "id": "rogue-expertise.arcanismo",
+      "name": "Arcanismo",
+      "kind": "class-choice",
+      "group": "rogue-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "ladino",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 137
+      }
+    },
+    {
+      "id": "rogue-expertise.atletismo",
+      "name": "Atletismo",
+      "kind": "class-choice",
+      "group": "rogue-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "ladino",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 137
+      }
+    },
+    {
+      "id": "rogue-expertise.atuacao",
+      "name": "Atuação",
+      "kind": "class-choice",
+      "group": "rogue-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "ladino",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 137
+      }
+    },
+    {
+      "id": "rogue-expertise.enganacao",
+      "name": "Enganação",
+      "kind": "class-choice",
+      "group": "rogue-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "ladino",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 137
+      }
+    },
+    {
+      "id": "rogue-expertise.furtividade",
+      "name": "Furtividade",
+      "kind": "class-choice",
+      "group": "rogue-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "ladino",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 137
+      }
+    },
+    {
+      "id": "rogue-expertise.historia",
+      "name": "História",
+      "kind": "class-choice",
+      "group": "rogue-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "ladino",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 137
+      }
+    },
+    {
+      "id": "rogue-expertise.intimidacao",
+      "name": "Intimidação",
+      "kind": "class-choice",
+      "group": "rogue-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "ladino",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 137
+      }
+    },
+    {
+      "id": "rogue-expertise.intuicao",
+      "name": "Intuição",
+      "kind": "class-choice",
+      "group": "rogue-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "ladino",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 137
+      }
+    },
+    {
+      "id": "rogue-expertise.investigacao",
+      "name": "Investigação",
+      "kind": "class-choice",
+      "group": "rogue-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "ladino",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 137
+      }
+    },
+    {
+      "id": "rogue-expertise.lidar-com-animais",
+      "name": "Lidar com Animais",
+      "kind": "class-choice",
+      "group": "rogue-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "ladino",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 137
+      }
+    },
+    {
+      "id": "rogue-expertise.medicina",
+      "name": "Medicina",
+      "kind": "class-choice",
+      "group": "rogue-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "ladino",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 137
+      }
+    },
+    {
+      "id": "rogue-expertise.natureza",
+      "name": "Natureza",
+      "kind": "class-choice",
+      "group": "rogue-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "ladino",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 137
+      }
+    },
+    {
+      "id": "rogue-expertise.percepcao",
+      "name": "Percepção",
+      "kind": "class-choice",
+      "group": "rogue-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "ladino",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 137
+      }
+    },
+    {
+      "id": "rogue-expertise.persuasao",
+      "name": "Persuasão",
+      "kind": "class-choice",
+      "group": "rogue-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "ladino",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 137
+      }
+    },
+    {
+      "id": "rogue-expertise.prestidigitacao",
+      "name": "Prestidigitação",
+      "kind": "class-choice",
+      "group": "rogue-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "ladino",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 137
+      }
+    },
+    {
+      "id": "rogue-expertise.religiao",
+      "name": "Religião",
+      "kind": "class-choice",
+      "group": "rogue-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "ladino",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 137
+      }
+    },
+    {
+      "id": "rogue-expertise.sobrevivencia",
+      "name": "Sobrevivência",
+      "kind": "class-choice",
+      "group": "rogue-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "ladino",
+          "minClassLevel": 1
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 137
+      }
+    },
+    {
+      "id": "ranger-expertise.acrobacia",
+      "name": "Acrobacia",
+      "kind": "class-choice",
+      "group": "ranger-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 118
+      }
+    },
+    {
+      "id": "ranger-expertise.arcanismo",
+      "name": "Arcanismo",
+      "kind": "class-choice",
+      "group": "ranger-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 118
+      }
+    },
+    {
+      "id": "ranger-expertise.atletismo",
+      "name": "Atletismo",
+      "kind": "class-choice",
+      "group": "ranger-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 118
+      }
+    },
+    {
+      "id": "ranger-expertise.atuacao",
+      "name": "Atuação",
+      "kind": "class-choice",
+      "group": "ranger-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 118
+      }
+    },
+    {
+      "id": "ranger-expertise.enganacao",
+      "name": "Enganação",
+      "kind": "class-choice",
+      "group": "ranger-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 118
+      }
+    },
+    {
+      "id": "ranger-expertise.furtividade",
+      "name": "Furtividade",
+      "kind": "class-choice",
+      "group": "ranger-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 118
+      }
+    },
+    {
+      "id": "ranger-expertise.historia",
+      "name": "História",
+      "kind": "class-choice",
+      "group": "ranger-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 118
+      }
+    },
+    {
+      "id": "ranger-expertise.intimidacao",
+      "name": "Intimidação",
+      "kind": "class-choice",
+      "group": "ranger-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 118
+      }
+    },
+    {
+      "id": "ranger-expertise.intuicao",
+      "name": "Intuição",
+      "kind": "class-choice",
+      "group": "ranger-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 118
+      }
+    },
+    {
+      "id": "ranger-expertise.investigacao",
+      "name": "Investigação",
+      "kind": "class-choice",
+      "group": "ranger-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 118
+      }
+    },
+    {
+      "id": "ranger-expertise.lidar-com-animais",
+      "name": "Lidar com Animais",
+      "kind": "class-choice",
+      "group": "ranger-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 118
+      }
+    },
+    {
+      "id": "ranger-expertise.medicina",
+      "name": "Medicina",
+      "kind": "class-choice",
+      "group": "ranger-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 118
+      }
+    },
+    {
+      "id": "ranger-expertise.natureza",
+      "name": "Natureza",
+      "kind": "class-choice",
+      "group": "ranger-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 118
+      }
+    },
+    {
+      "id": "ranger-expertise.percepcao",
+      "name": "Percepção",
+      "kind": "class-choice",
+      "group": "ranger-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 118
+      }
+    },
+    {
+      "id": "ranger-expertise.persuasao",
+      "name": "Persuasão",
+      "kind": "class-choice",
+      "group": "ranger-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 118
+      }
+    },
+    {
+      "id": "ranger-expertise.prestidigitacao",
+      "name": "Prestidigitação",
+      "kind": "class-choice",
+      "group": "ranger-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 118
+      }
+    },
+    {
+      "id": "ranger-expertise.religiao",
+      "name": "Religião",
+      "kind": "class-choice",
+      "group": "ranger-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 118
+      }
+    },
+    {
+      "id": "ranger-expertise.sobrevivencia",
+      "name": "Sobrevivência",
+      "kind": "class-choice",
+      "group": "ranger-expertise",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 2
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 118
+      }
+    },
+    {
+      "id": "fey-glamour.atuacao",
+      "name": "Atuação",
+      "kind": "class-choice",
+      "group": "fey-glamour",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 120
+      }
+    },
+    {
+      "id": "fey-glamour.enganacao",
+      "name": "Enganação",
+      "kind": "class-choice",
+      "group": "fey-glamour",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 120
+      }
+    },
+    {
+      "id": "fey-glamour.persuasao",
+      "name": "Persuasão",
+      "kind": "class-choice",
+      "group": "fey-glamour",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guardiao",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 120
+      }
+    },
+    {
+      "id": "battle-study.acrobacia",
+      "name": "Acrobacia",
+      "kind": "class-choice",
+      "group": "battle-study",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guerreiro",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 133
+      }
+    },
+    {
+      "id": "battle-study.atletismo",
+      "name": "Atletismo",
+      "kind": "class-choice",
+      "group": "battle-study",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guerreiro",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 133
+      }
+    },
+    {
+      "id": "battle-study.historia",
+      "name": "História",
+      "kind": "class-choice",
+      "group": "battle-study",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guerreiro",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 133
+      }
+    },
+    {
+      "id": "battle-study.intimidacao",
+      "name": "Intimidação",
+      "kind": "class-choice",
+      "group": "battle-study",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guerreiro",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 133
+      }
+    },
+    {
+      "id": "battle-study.intuicao",
+      "name": "Intuição",
+      "kind": "class-choice",
+      "group": "battle-study",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guerreiro",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 133
+      }
+    },
+    {
+      "id": "battle-study.lidar-com-animais",
+      "name": "Lidar com Animais",
+      "kind": "class-choice",
+      "group": "battle-study",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guerreiro",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 133
+      }
+    },
+    {
+      "id": "battle-study.percepcao",
+      "name": "Percepção",
+      "kind": "class-choice",
+      "group": "battle-study",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guerreiro",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 133
+      }
+    },
+    {
+      "id": "battle-study.sobrevivencia",
+      "name": "Sobrevivência",
+      "kind": "class-choice",
+      "group": "battle-study",
+      "summary": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "description": "Registre a perícia escolhida. Para Especialização, escolha uma perícia em que já seja proficiente; confira suas proficiências de origem e classe.",
+      "requirements": [
+        {
+          "classId": "guerreiro",
+          "minClassLevel": 3
+        }
+      ],
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 133
+      }
+    }
+  ],
+  "choiceGroups": [
+    {
+      "id": "invocations",
+      "name": "Invocações Místicas",
+      "classId": "bruxo",
+      "minLevel": 1,
+      "limits": [
+        0,
+        1,
+        3,
+        3,
+        3,
+        5,
+        5,
+        6,
+        6
+      ]
+    },
+    {
+      "id": "metamagic",
+      "name": "Metamagia",
+      "classId": "feiticeiro",
+      "minLevel": 2,
+      "limits": [
+        0,
+        0,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "id": "cleric-order",
+      "name": "Ordem Divina",
+      "classId": "clerigo",
+      "minLevel": 1,
+      "limits": [
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "druid-order",
+      "name": "Ordem Primal",
+      "classId": "druida",
+      "minLevel": 1,
+      "limits": [
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "blessed-strikes",
+      "name": "Golpes Abençoados",
+      "classId": "clerigo",
+      "minLevel": 7,
+      "limits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "elemental-fury",
+      "name": "Fúria Elemental",
+      "classId": "druida",
+      "minLevel": 7,
+      "limits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "wild-aspect",
+      "name": "Aspecto dos Selvagens",
+      "classId": "barbaro",
+      "minLevel": 6,
+      "limits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "subclassId": "coracao-selvagem"
+    },
+    {
+      "id": "hunter-defense",
+      "name": "Táticas Defensivas",
+      "classId": "guardiao",
+      "minLevel": 7,
+      "limits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "subclassId": "cacador"
+    },
+    {
+      "id": "land",
+      "name": "Terreno do Círculo da Terra",
+      "classId": "druida",
+      "minLevel": 3,
+      "limits": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "subclassId": "circulo-da-terra"
+    },
+    {
+      "id": "dragon-affinity",
+      "name": "Afinidade Elemental",
+      "classId": "feiticeiro",
+      "minLevel": 6,
+      "limits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "subclassId": "feiticaria-draconica"
+    },
+    {
+      "id": "lore-skills",
+      "name": "Proficiências Bônus",
+      "classId": "bardo",
+      "minLevel": 3,
+      "limits": [
+        0,
+        0,
+        0,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "subclassId": "colegio-do-conhecimento"
+    },
+    {
+      "id": "wizard-scholar",
+      "name": "Acadêmico",
+      "classId": "mago",
+      "minLevel": 2,
+      "limits": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "barbarian-knowledge",
+      "name": "Conhecimento Primordial",
+      "classId": "barbaro",
+      "minLevel": 3,
+      "limits": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "bard-expertise",
+      "name": "Especialista · Bardo",
+      "classId": "bardo",
+      "minLevel": 2,
+      "limits": [
+        0,
+        0,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "id": "rogue-expertise",
+      "name": "Especialista · Ladino",
+      "classId": "ladino",
+      "minLevel": 1,
+      "limits": [
+        0,
+        2,
+        2,
+        2,
+        2,
+        2,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "ranger-expertise",
+      "name": "Explorador Hábil · Especialização",
+      "classId": "guardiao",
+      "minLevel": 2,
+      "limits": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "fey-glamour",
+      "name": "Glamour Transcendental",
+      "classId": "guardiao",
+      "minLevel": 3,
+      "limits": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "subclassId": "andarilho-feerico"
+    },
+    {
+      "id": "battle-study",
+      "name": "Estudioso da Guerra · Perícia",
+      "classId": "guerreiro",
+      "minLevel": 3,
+      "limits": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "subclassId": "mestre-da-batalha"
+    }
+  ]
+}

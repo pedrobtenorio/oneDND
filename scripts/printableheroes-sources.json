@@ -1,0 +1,21 @@
+[
+ {"id":"human-wizard","file":369771},
+ {"id":"half-elf-cleric","file":494783},
+ {"id":"elf-ranger","file":571271},
+ {"id":"dragonborn-set-1","file":767588},
+ {"id":"human-merchant","file":865292},
+ {"id":"human-townsfolk","file":911337},
+ {"id":"dragonborn-set-2","file":1314817},
+ {"id":"orc-warband","file":1864910},
+ {"id":"duergar","file":4913424,"extension":"zip"},
+ {"id":"human-warrior","file":5156745},
+ {"id":"tiefling-elementalist","file":5228207},
+ {"id":"human-knights","file":5572959},
+ {"id":"heroes-set-2","file":8360149},
+ {"id":"heroes-set-1","file":8671265},
+ {"id":"goliath-barbarians","file":9117327},
+ {"id":"human-cultist","file":9395737},
+ {"id":"gnomes","file":9917339},
+ {"id":"drow-warriors","file":10504486},
+ {"id":"duergar-ranger","file":11102008,"extension":"zip"}
+]

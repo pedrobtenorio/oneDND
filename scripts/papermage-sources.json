@@ -1,0 +1,19 @@
+[
+  {"id":"aasimar-wizard","post":48061852,"file":97608677,"name":"Maga aasimar","origin":"aasimar","styles":["mago","feiticeiro"],"appearance":"feminina"},
+  {"id":"gnome-fighter","post":46570053,"file":93034770,"name":"Guerreira gnoma","origin":"gnomo","styles":["guerreiro","paladino"],"appearance":"feminina"},
+  {"id":"elf-fighter","post":38420098,"file":67947563,"name":"Guerreira elfa","origin":"elfo","styles":["guerreiro","paladino"],"appearance":"feminina","box":[0,0.51,0.3333,0.99]},
+  {"id":"halfling-monk","post":36623039,"file":62284115,"name":"Monja pequenina","origin":"halfling","styles":["monge"],"appearance":"feminina"},
+  {"id":"dragonborn-rogue","post":36113841,"file":60656934,"name":"Ladina draconata","origin":"draconato","styles":["ladino","guardiao"],"appearance":"feminina"},
+  {"id":"orc-cleric","post":35085830,"file":57407778,"name":"Clériga orc","origin":"orc","styles":["clerigo","paladino"],"appearance":"feminina"},
+  {"id":"gnome-bard","post":33233882,"file":51762247,"name":"Bardo gnomo","origin":"gnomo","styles":["bardo"],"appearance":"masculina","box":[0,0.51,0.3333,0.99]},
+  {"id":"gnome-druid","post":33027619,"file":51147382,"name":"Druida gnomo","origin":"gnomo","styles":["druida"],"appearance":"masculina","box":[0,0.51,0.3333,0.99]},
+  {"id":"aasimar-bard","post":32507851,"file":49509448,"name":"Barda aasimar","origin":"aasimar","styles":["bardo"],"appearance":"feminina"},
+  {"id":"half-elf-paladin","post":31460005,"file":46391136,"name":"Paladina meio-elfa","origin":"elfo","styles":["paladino","guerreiro"],"appearance":"feminina"},
+  {"id":"elf-paladin","post":30884444,"file":44738734,"name":"Paladino elfo","origin":"elfo","styles":["paladino","guerreiro"],"appearance":"masculina"},
+  {"id":"elf-ranger","post":30512358,"file":43658464,"name":"Guardiã elfa","origin":"elfo","styles":["guardiao"],"appearance":"feminina"},
+  {"id":"dwarf-paladin","post":30311943,"file":42990512,"name":"Paladino anão","origin":"anao","styles":["paladino","guerreiro"],"appearance":"masculina","box":[0,0.51,0.3333,0.99]},
+  {"id":"elf-bard","post":30132318,"file":42518606,"name":"Barda elfa","origin":"elfo","styles":["bardo"],"appearance":"feminina","box":[0,0.01,0.3333,0.93]},
+  {"id":"elf-wizard","post":29976990,"file":41985880,"name":"Mago elfo","origin":"elfo","styles":["mago","feiticeiro"],"appearance":"masculina"},
+  {"id":"tiefling-bard","post":29759465,"file":41554838,"name":"Barda tiferina","origin":"tiefling","styles":["bardo"],"appearance":"feminina"},
+  {"id":"tiefling-warlock","post":28330691,"file":38516945,"name":"Bruxo tiferino","origin":"tiefling","styles":["bruxo","feiticeiro"],"appearance":"masculina","image":"Im5.jp2","box":[0,0.03,0.93,0.84]}
+]

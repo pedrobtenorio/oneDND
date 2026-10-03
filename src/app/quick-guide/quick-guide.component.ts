@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, DestroyRef, QueryList, ViewChildren, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, QueryList, ViewChildren, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { combineLatest, map, startWith } from 'rxjs';
+import { combineLatest, debounceTime, distinctUntilChanged, map, shareReplay, startWith } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 
@@ -21,6 +21,7 @@ import { buildDescriptionParts, LinkPart } from '../utils/linkify';
 type GuideItemView = GuideItem & {
   effects: string[];
   effectParts: LinkPart<GuideItem>[][];
+  searchText: string;
 };
 
 type GuideItemGroupView = {
@@ -33,6 +34,7 @@ type GuideCategoryView = Omit<GuideCategory, 'items'> & {
   items: GuideItemView[];
   itemGroups: GuideItemGroupView[];
   summons: Summon[];
+  searchText: string;
 };
 
 @Component({
@@ -51,6 +53,7 @@ type GuideCategoryView = Omit<GuideCategory, 'items'> & {
   ],
   templateUrl: './quick-guide.component.html',
   styleUrl: './quick-guide.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QuickGuideComponent implements AfterViewInit {
   @ViewChildren(MatExpansionPanel) private readonly panels!: QueryList<MatExpansionPanel>;
@@ -61,14 +64,20 @@ export class QuickGuideComponent implements AfterViewInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly summons$ = this.summonService.getSummons();
   readonly searchControl = new FormControl('', { nonNullable: true });
-  readonly categories$ = this.guideService.getGuide();
+  private readonly preparedCategories$ = combineLatest([
+    this.guideService.getGuide(),
+    this.summons$,
+  ]).pipe(
+    map(([categories, summons]) => this.prepareCategories(categories, summons)),
+    shareReplay({ bufferSize: 1, refCount: true }),
+  );
 
   readonly filteredCategories$ = combineLatest([
-    this.categories$,
-    this.summons$,
-    this.searchControl.valueChanges.pipe(startWith('')),
+    this.preparedCategories$,
+    this.searchControl.valueChanges.pipe(debounceTime(120), startWith(''), distinctUntilChanged()),
   ]).pipe(
-    map(([categories, summons, search]) => this.filterCategories(categories, summons, search))
+    map(([categories, search]) => this.filterCategories(categories, search)),
+    shareReplay({ bufferSize: 1, refCount: true }),
   );
 
   ngAfterViewInit(): void {
@@ -102,50 +111,45 @@ export class QuickGuideComponent implements AfterViewInit {
           if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
-        }, 0);
+        }, 225);
       });
   }
 
-  private filterCategories(categories: GuideCategory[], allSummons: Summon[], search: string): GuideCategoryView[] {
-    const query = this.normalizeSearchValue(search);
+  private prepareCategories(categories: GuideCategory[], allSummons: Summon[]): GuideCategoryView[] {
     const linkableItems = this.getLinkableItems(categories);
-
     const toItemView = (category: GuideCategory) => (item: GuideItem): GuideItemView => {
       const effects = this.buildEffects(category.id, item.description);
-      return { ...item, effects, effectParts: effects.map((e) => buildDescriptionParts(e, linkableItems)) };
+      return {
+        ...item,
+        effects,
+        effectParts: effects.map((effect) => buildDescriptionParts(effect, linkableItems)),
+        searchText: this.normalizeSearchValue(this.getSearchText(item)),
+      };
     };
+    return categories.map((category): GuideCategoryView => {
+      if (category.id === 'invocacoes-familiares') {
+        return { ...category, items: [], itemGroups: [], summons: allSummons, searchText: this.normalizeSearchValue(category.title) };
+      }
+      const items = this.sortCategoryItems(category.id, category.items).map(toItemView(category));
+      return { ...category, items, itemGroups: this.buildItemGroups(category.id, items), summons: [], searchText: this.normalizeSearchValue(category.title) };
+    });
+  }
 
+  private filterCategories(categories: GuideCategoryView[], search: string): GuideCategoryView[] {
+    const query = this.normalizeSearchValue(search);
     return categories.flatMap((category): GuideCategoryView[] => {
       if (category.id === 'invocacoes-familiares') {
-        const filteredSummons = query
-          ? allSummons.filter((s) => this.normalizeSearchValue(s.name + ' ' + s.type).includes(query))
-          : allSummons;
-        return filteredSummons.length > 0
-          ? [{ ...category, items: [], itemGroups: [], summons: filteredSummons }]
-          : [];
+        const summons = query ? category.summons.filter((summon) => this.normalizeSearchValue(`${summon.name} ${summon.type}`).includes(query)) : category.summons;
+        return !query || category.searchText.includes(query) || summons.length ? [{ ...category, summons }] : [];
       }
-
-      const categoryMatches = !query || this.normalizeSearchValue(category.title).includes(query);
-      const items = categoryMatches
-        ? category.items
-        : category.items.filter((item) => this.normalizeSearchValue(this.getSearchText(item)).includes(query));
-      const sortedItems = this.sortCategoryItems(category.id, items);
-
-      return sortedItems.length > 0
-        ? [{
-            ...category,
-            items: sortedItems.map(toItemView(category)),
-            itemGroups: this.buildItemGroups(category.id, sortedItems, toItemView(category)),
-            summons: [],
-          }]
-        : [];
+      const items = !query || category.searchText.includes(query) ? category.items : category.items.filter((item) => item.searchText.includes(query));
+      return items.length ? [{ ...category, items, itemGroups: this.buildItemGroups(category.id, items) }] : [];
     });
   }
 
   private buildItemGroups(
     categoryId: string,
-    items: GuideItem[],
-    toItemView: (item: GuideItem) => GuideItemView
+    items: GuideItemView[],
   ): GuideItemGroupView[] {
     if (categoryId !== 'pericias') {
       return [];
@@ -160,7 +164,7 @@ export class QuickGuideComponent implements AfterViewInit {
       ['CON', 'Constituição'],
     ]);
 
-    const groups = new Map<string, GuideItem[]>();
+    const groups = new Map<string, GuideItemView[]>();
     for (const item of items) {
       const ability = this.getSkillAbility(item.name);
       const key = ability || 'OUTROS';
@@ -170,7 +174,7 @@ export class QuickGuideComponent implements AfterViewInit {
     return [...groups.entries()].map(([ability, groupedItems]) => ({
       id: ability.toLowerCase(),
       title: labels.get(ability) ?? ability,
-      items: groupedItems.map(toItemView),
+      items: groupedItems,
     }));
   }
 

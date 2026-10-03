@@ -1,3 +1,6 @@
+import { ABILITIES, automaticSpells as grantedSpells, eligibleChoice, finalAbilities, spellFitsGrant, spellSelectionGrants, SpellSelectionGrant, validateBonuses } from '../utils/character-choices';
+import { AbilityId, AbilityScores, FeatSelection, CharacterChoiceGroup } from '../models/turn-planner.models';
+import { preparedLimit, cantripLimit, maxSpellCircle, featLevels, movementSpeed } from '../utils/character-progression';
 import { CommonModule } from '@angular/common';
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -21,6 +24,9 @@ import { WeaponsService } from '../services/weapons.service';
 import { classLevel, hasSpellcasting, totalLevel, validateProfile } from '../utils/turn-engine/turn-profile';
 import { normalizeKey } from '../utils/linkify';
 import { CheckboxChoiceGroupComponent, CheckboxChoiceItem } from './checkbox-choice-group.component';
+import { buildCharacterExamples, CharacterExample } from './character-examples';
+import { CLASS_VISUALS, classArt, profileArt } from '../utils/class-visuals';
+import { PortraitPickerComponent } from './portrait-picker.component';
 
 const createId = (): string =>
   globalThis.crypto?.randomUUID?.() ?? `profile-${Date.now()}-${Math.random().toString(36).slice(2)}`;
@@ -50,13 +56,6 @@ const SPELL_CLASS_BY_ID: Partial<Record<TurnClassId, string>> = {
   feiticeiro: 'Feiticeiro', guardiao: 'Guardião', mago: 'Mago', paladino: 'Paladino',
 };
 
-const PREPARED_SPELLS: Partial<Record<TurnClassId, number[]>> = {
-  bardo: [0, 4, 5, 6, 7, 9], bruxo: [0, 2, 3, 4, 5, 6],
-  clerigo: [0, 4, 5, 6, 7, 9], druida: [0, 4, 5, 6, 7, 9],
-  feiticeiro: [0, 2, 4, 6, 7, 9], guardiao: [0, 2, 3, 4, 5, 6],
-  mago: [0, 4, 5, 6, 7, 9], paladino: [0, 2, 3, 4, 5, 6],
-};
-
 type ArrayControlName =
   | 'fightingStyleIds'
   | 'maneuverIds'
@@ -70,11 +69,25 @@ type ArrayControlName =
 @Component({
   selector: 'app-character-builder',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, CheckboxChoiceGroupComponent],
+  imports: [CommonModule, ReactiveFormsModule, CheckboxChoiceGroupComponent, PortraitPickerComponent],
   templateUrl: './character-builder.component.html',
   styleUrl: './character-builder.component.css',
 })
 export class CharacterBuilderComponent implements OnInit {
+  portraitId = '';
+  readonly classVisuals = CLASS_VISUALS;
+  readonly classArt = classArt;
+  readonly profileArt = profileArt;
+
+  playExample(example: CharacterExample): void {
+    void this.router.navigate(['/turno'], { queryParams: { personagem: example.profile.id } });
+  }
+
+  adjustClassLevel(classId: TurnClassId, delta: number): void {
+    const control = this.profileForm.controls[classId];
+    control.setValue(Math.max(0, Math.min(8, control.value + delta)));
+    this.classLevelChanged(classId);
+  }
   private readonly fb = inject(FormBuilder);
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
@@ -84,8 +97,9 @@ export class CharacterBuilderComponent implements OnInit {
   readonly storage = inject(TurnPlannerStorageService);
 
   readonly steps = [
-    { title: 'Identidade e progressão', short: 'Identidade' },
-    { title: 'Atributos finais', short: 'Atributos' },
+    { title: 'Identidade e origem', short: 'Origem' },
+    { title: 'Classes e progressão', short: 'Classes' },
+    { title: 'Atributos e talentos', short: 'Atributos' },
     { title: 'Características e escolhas', short: 'Escolhas' },
     { title: 'Equipamento e revisão', short: 'Equipamento' },
   ];
@@ -108,11 +122,127 @@ export class CharacterBuilderComponent implements OnInit {
   spells: Spell[] = [];
   weapons: WeaponsData | null = null;
   profiles: CharacterProfile[] = [];
+  examples: CharacterExample[] = [];
   currentStep = 0;
   furthestStep = 0;
   errors: string[] = [];
   notice = '';
   loadError = '';
+
+  readonly abilityIds = ABILITIES;
+  abilityMode: 'base' | 'legacy-final' = 'base';
+  backgroundId = '';
+  backgroundBonuses: Partial<AbilityScores> = {};
+  featSelections: FeatSelection[] = [];
+  choices: Record<string, string[]> = {};
+  spellSelections: Record<string, string[]> = {};
+
+  get backgrounds(): CharacterOption[] { return this.optionsByKind('background'); }
+  get background(): CharacterOption | undefined { return this.backgrounds.find(o => o.id === this.backgroundId); }
+  get finalAbilityValues(): AbilityScores {
+    const raw = this.profileForm.getRawValue();
+    const base = Object.fromEntries(ABILITIES.map(id => [id, raw[id]])) as unknown as AbilityScores;
+    return this.abilityMode === 'base' ? finalAbilities(base, [this.backgroundBonuses, ...this.featSelections.map(f => f.bonuses)]) : base;
+  }
+  get featSlots(): Array<{ id: string; name: string; origin: boolean }> {
+    const slots = this.classes.flatMap(c => featLevels(c.id, this.profileForm.controls[c.id].value).map(level => ({ id: `class.${c.id}.${level}`, name: `${c.name} · nível ${level}`, origin: false })));
+    if (this.profileForm.controls.speciesId.value === 'humano') slots.unshift({ id: 'species.humano', name: 'Humano · Versátil', origin: true });
+    if (Object.values(this.choices).flat().includes('invocation.licoes-dos-grandes-antigos')) slots.push({ id: 'invocation.lessons', name: 'Lições dos Grandes Antigos', origin: true });
+    return slots;
+  }
+  featFor(source: string): FeatSelection | undefined { return this.featSelections.find(f => f.source === source); }
+  featOption(source: string): CharacterOption | undefined { return this.catalog?.options.find(o => o.id === this.featFor(source)?.optionId); }
+  featOptions(origin: boolean): CharacterOption[] {
+    return [...(origin ? this.originFeats : this.generalFeats)]
+      .sort((left, right) => left.name.localeCompare(right.name, 'pt-BR'));
+  }
+  setFeat(source: string, event: Event): void {
+    const optionId = (event.target as HTMLSelectElement).value;
+    this.featSelections = [...this.featSelections.filter(f => f.source !== source), ...(optionId ? [{ source, optionId, bonuses: {} }] : [])];
+    this.syncFeats();
+    this.refreshErrors();
+  }
+  setBonus(ability: AbilityId, event: Event, source?: string): void {
+    const input = event.target as HTMLInputElement;
+    const requested = Number(input.value);
+    if (source) {
+      const feat = this.featFor(source), option = this.featOption(source);
+      if (feat && option) {
+        const spentElsewhere = Object.entries(feat.bonuses).reduce((sum, [id, value]) => id === ability ? sum : sum + (value ?? 0), 0);
+        const available = Math.max(0, (option.abilityPoints ?? 0) - spentElsewhere);
+        const value = Math.max(0, Math.min(2, available, Number.isFinite(requested) ? requested : 0));
+        feat.bonuses = { ...feat.bonuses, [ability]: value };
+        input.value = String(value);
+      }
+    } else {
+      const spentElsewhere = Object.entries(this.backgroundBonuses).reduce((sum, [id, value]) => id === ability ? sum : sum + (value ?? 0), 0);
+      const value = Math.max(0, Math.min(2, 3 - spentElsewhere, Number.isFinite(requested) ? requested : 0));
+      this.backgroundBonuses = { ...this.backgroundBonuses, [ability]: value };
+      input.value = String(value);
+    }
+    this.refreshErrors();
+  }
+  changeBackground(event: Event): void {
+    this.backgroundId = (event.target as HTMLSelectElement).value;
+    this.backgroundBonuses = {};
+    this.syncFeats();
+    this.refreshErrors();
+  }
+  private syncFeats(): void {
+    if (this.abilityMode === 'base') this.profileForm.controls.featIds.setValue([...new Set([...(this.background?.grantedFeatId ? [this.background.grantedFeatId] : []), ...this.featSelections.map(f => f.optionId)])]);
+  }
+  reviewLegacy(): void {
+    this.abilityMode = 'base';
+    this.notice = 'Revise os atributos base: os números exibidos eram os valores finais antigos. Informe os valores anteriores aos bônus e distribua os bônus abaixo. As magias e escolhas antigas permanecem até sua revisão.';
+    this.syncFeats();
+  }
+  private selectionProfile(): CharacterProfile {
+    const v = this.profileForm.getRawValue();
+    return { id:v.id, name:v.name, speciesId:v.speciesId, speciesChoiceId:v.speciesChoiceId,
+      classes:this.classes.filter(c => v[c.id] > 0).map((c, order) => ({classId:c.id,level:v[c.id],order})),
+      subclassIds:this.classes.filter(c => v[c.id] >= 3).map(c => this.selectedSubclass(c.id)).filter(Boolean),
+      abilities:this.finalAbilityValues, featIds:v.featIds, fightingStyleIds:v.fightingStyleIds,
+      choices:this.choices, maneuverIds:v.maneuverIds, preparedSpellIds:[], weaponIds:v.weaponIds,
+      masteryIds:[], masteryWeaponIds:v.masteryWeaponIds, armor:v.armor, hasShield:v.hasShield, speed:v.speed, updatedAt:'' };
+  }
+  get choiceGroups(): CharacterChoiceGroup[] {
+    const p = this.selectionProfile();
+    return (this.catalog?.choiceGroups ?? []).filter(g => classLevel(p, g.classId) >= g.minLevel && (!g.subclassId || p.subclassIds.includes(g.subclassId)));
+  }
+  choiceLimit(group: CharacterChoiceGroup): number { return group.limits[this.profileForm.controls[group.classId].value] ?? 0; }
+  choiceItems(group: CharacterChoiceGroup): CheckboxChoiceItem[] {
+    return (this.catalog?.options ?? []).filter(o => o.group === group.id).map(o => ({id:o.id,label:o.name,description:o.summary,disabled:!eligibleChoice(o,this.selectionProfile()),disabledReason:eligibleChoice(o,this.selectionProfile()) ? undefined : 'Confira o nível e as escolhas exigidas.'}));
+  }
+  setChoice(group: string, ids: string[]): void { this.choices = { ...this.choices, [group]: ids }; this.syncFeats(); this.refreshErrors(); }
+  get spellGrants(): SpellSelectionGrant[] { return spellSelectionGrants(this.selectionProfile()); }
+  spellGrantItems(grant: SpellSelectionGrant): CheckboxChoiceItem[] {
+    const profile = this.selectionProfile();
+    const classId = grant.id.startsWith('book.')
+      ? 'mago'
+      : /^(?:class|cantrips)\.([^.]+)/.exec(grant.id)?.[1];
+    const automatic = new Set(classId && this.catalog
+      ? (this.catalog.spellGrants ?? [])
+          .filter(item => item.classId === classId && classLevel(profile, item.classId) >= item.minLevel
+            && (!item.subclassId || profile.subclassIds.includes(item.subclassId))
+            && (!item.choiceId || Object.values(profile.choices ?? {}).flat().includes(item.choiceId)))
+          .flatMap(item => item.spellIds)
+      : []);
+    const book = new Set(Object.entries(this.spellSelections).filter(([id]) => id.startsWith('book.')).flatMap(([,ids]) => ids));
+    const otherBook = new Set(Object.entries(this.spellSelections).filter(([id]) => id.startsWith('book.') && id !== grant.id).flatMap(([,ids]) => ids));
+    return this.spells.filter(spell => spellFitsGrant(spell,grant) && !automatic.has(spell.id) && (grant.id !== 'class.mago' || book.has(spell.id)) && (!grant.purpose || !otherBook.has(spell.id)) && !(grant.id === 'cantrips.ladino' && spell.id === 'maos-magicas')).map(spell => this.spellChoiceItem(spell));
+  }
+  setSpellGrant(id: string, values: string[]): void { this.spellSelections = { ...this.spellSelections, [id]: values }; this.refreshErrors(); }
+  choicesFor(id: string): string[] { return this.choices[id] ?? []; }
+  spellsFor(id: string): string[] { return this.spellSelections[id] ?? []; }
+  get hasSpellSources(): boolean { return Object.keys(this.spellSelections).length > 0; }
+  featSlotExists(id: string): boolean { return this.featSlots.some(s => s.id === id); }
+  removeOldFeat(id: string): void { this.featSelections = this.featSelections.filter(f => f.source !== id); this.syncFeats(); }
+  get removedChoiceKeys(): string[] { return Object.keys(this.choices).filter(id => this.choices[id].length && !this.choiceGroups.some(g => g.id === id)); }
+  get removedSpellKeys(): string[] { return Object.keys(this.spellSelections).filter(id => this.spellSelections[id].length && !this.spellGrants.some(g => g.id === id)); }
+  get acquiredFeatures() {
+    const p = this.selectionProfile();
+    return (this.catalog?.features ?? []).filter(f => (!f.classId || classLevel(p,f.classId) >= f.minLevel) && (!f.subclassId || p.subclassIds.includes(f.subclassId)) && (!f.speciesId || p.speciesId === f.speciesId));
+  }
 
   readonly profileForm = this.fb.nonNullable.group({
     id: createId(),
@@ -151,7 +281,7 @@ export class CharacterBuilderComponent implements OnInit {
     intelligence: 10,
     wisdom: 12,
     charisma: 10,
-    featIds: [['alerta', 'sortudo']] as string[][],
+    featIds: [[]] as string[][],
     fightingStyleIds: [[]] as string[][],
     maneuverIds: [[]] as string[][],
     preparedSpellIds: [[]] as string[][],
@@ -166,6 +296,7 @@ export class CharacterBuilderComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.profileForm.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.refreshErrors());
     combineLatest([
       this.catalogService.getCatalog(),
       this.spellService.getSpells(),
@@ -177,6 +308,7 @@ export class CharacterBuilderComponent implements OnInit {
           this.catalog = catalog;
           this.spells = spells;
           this.weapons = weapons;
+          this.examples = buildCharacterExamples(catalog, spells);
         },
         error: (error: unknown) => {
           this.loadError = error instanceof Error ? error.message : 'Não foi possível carregar os dados do personagem.';
@@ -240,32 +372,33 @@ export class CharacterBuilderComponent implements OnInit {
     return totalLevel(profile);
   }
 
+  profileClassSummary(profile: CharacterProfile): string {
+    return [...profile.classes]
+      .sort((left, right) => left.order - right.order)
+      .map(entry => `${this.classes.find(item => item.id === entry.classId)?.name ?? entry.classId} ${entry.level}`)
+      .join(' / ');
+  }
+
   get originFeatLimit(): number {
     return this.profileForm.controls.speciesId.value === 'humano' ? 2 : 1;
   }
 
   get generalFeatLimit(): number {
-    return this.classes.filter((entry) => this.profileForm.controls[entry.id].value >= 4).length;
+    return this.classes.reduce((n, entry) => n + featLevels(entry.id, this.profileForm.controls[entry.id].value).length, 0);
   }
 
   get fightingStyleLimit(): number {
     return (this.profileForm.controls.guerreiro.value >= 1 ? 1 : 0) +
       (this.profileForm.controls.guardiao.value >= 2 ? 1 : 0) +
-      (this.profileForm.controls.paladino.value >= 2 ? 1 : 0);
+      (this.profileForm.controls.paladino.value >= 2 ? 1 : 0) + (this.selectedSubclass('guerreiro') === 'campeao' && this.profileForm.controls.guerreiro.value >= 7 ? 1 : 0);
   }
 
   get maneuverLimit(): number {
-    return this.selectedSubclass('guerreiro') === 'mestre-da-batalha' ? 3 : 0;
+    return this.selectedSubclass('guerreiro') === 'mestre-da-batalha' ? (this.profileForm.controls.guerreiro.value >= 7 ? 5 : 3) : 0;
   }
 
   get classSpellLimit(): number {
-    let limit = this.classes.reduce((sum, entry) => {
-      const table = PREPARED_SPELLS[entry.id];
-      return sum + (table?.[this.profileForm.controls[entry.id].value] ?? 0);
-    }, 0);
-    if (this.selectedSubclass('guerreiro') === 'cavaleiro-mistico') limit += [0, 0, 0, 3, 4, 4][this.profileForm.controls.guerreiro.value] ?? 0;
-    if (this.selectedSubclass('ladino') === 'trapaceiro-arcano') limit += [0, 0, 0, 3, 4, 4][this.profileForm.controls.ladino.value] ?? 0;
-    return limit;
+    return this.classes.reduce((sum, entry) => sum + preparedLimit(entry.id, this.profileForm.controls[entry.id].value, ['cavaleiro-mistico', 'trapaceiro-arcano'].includes(this.selectedSubclass(entry.id))), 0);
   }
 
   get freeSpellLimit(): number {
@@ -287,16 +420,7 @@ export class CharacterBuilderComponent implements OnInit {
   }
 
   get cantripLimit(): number {
-    const level = (id: TurnClassId): number => this.profileForm.controls[id].value;
-    return this.cantripGrantLists.length * 2 +
-      (level('bardo') ? (level('bardo') >= 4 ? 3 : 2) : 0) +
-      (level('bruxo') ? (level('bruxo') >= 4 ? 3 : 2) : 0) +
-      (level('clerigo') ? (level('clerigo') >= 4 ? 4 : 3) : 0) +
-      (level('druida') ? (level('druida') >= 4 ? 3 : 2) : 0) +
-      (level('feiticeiro') ? 4 : 0) +
-      (level('mago') ? (level('mago') >= 4 ? 4 : 3) : 0) +
-      (this.selectedSubclass('guerreiro') === 'cavaleiro-mistico' ? 2 : 0) +
-      (this.selectedSubclass('ladino') === 'trapaceiro-arcano' ? 3 : 0);
+    return this.cantripGrantLists.length * 2 + this.classes.reduce((sum, entry) => sum + cantripLimit(entry.id, this.profileForm.controls[entry.id].value, ['cavaleiro-mistico', 'trapaceiro-arcano'].includes(this.selectedSubclass(entry.id))), 0);
   }
 
   get magicInitiateSpellLimit(): number {
@@ -309,13 +433,14 @@ export class CharacterBuilderComponent implements OnInit {
     const ranger = this.profileForm.controls.guardiao.value;
     const rogue = this.profileForm.controls.ladino.value;
     const paladin = this.profileForm.controls.paladino.value;
-    return Math.max(
+    const classMasteries = Math.max(
       barbarian >= 4 ? 3 : barbarian >= 1 ? 2 : 0,
       fighter >= 4 ? 4 : fighter >= 1 ? 3 : 0,
       ranger >= 1 ? 2 : 0,
       rogue >= 1 ? 2 : 0,
       paladin >= 1 ? 2 : 0,
     );
+    return classMasteries + (this.profileForm.controls.featIds.value.includes('mestre-em-armas') ? 1 : 0);
   }
 
   get originSelected(): string[] {
@@ -410,6 +535,7 @@ export class CharacterBuilderComponent implements OnInit {
 
   speciesChanged(): void {
     this.profileForm.controls.speciesChoiceId.setValue('');
+    if (this.abilityMode === 'base') this.profileForm.controls.speed.setValue(this.profileForm.controls.speciesId.value === 'golias' ? 10.5 : 9);
   }
 
   classLevelChanged(classId: TurnClassId): void {
@@ -428,31 +554,22 @@ export class CharacterBuilderComponent implements OnInit {
     const preserved = this.profileForm.controls.featIds.value.filter((id) => !groupIds.has(id));
     this.profileForm.controls.featIds.setValue([...preserved, ...selected]);
     this.pruneSpellChoices();
+    this.refreshErrors();
   }
 
   setArraySelection(control: ArrayControlName, selected: string[]): void {
     this.profileForm.controls[control].setValue(selected);
     if (control === 'fightingStyleIds') this.pruneSpellChoices();
+    this.refreshErrors();
   }
 
   private pruneSpellChoices(): void {
-    const cantripIds = new Set(this.cantripItems.map((item) => item.id));
-    const initiateSpellIds = new Set(this.magicInitiateSpellItems.map((item) => item.id));
-    const otherSpellIds = new Set(this.freeSpellItems.map((item) => item.id));
-    this.profileForm.controls.cantripIds.setValue(
-      this.profileForm.controls.cantripIds.value.filter((id) => cantripIds.has(id)).slice(0, this.cantripLimit)
-    );
-    this.profileForm.controls.magicInitiateSpellIds.setValue(
-      this.profileForm.controls.magicInitiateSpellIds.value.filter((id) => initiateSpellIds.has(id)).slice(0, this.magicInitiateSpellLimit)
-    );
-    this.profileForm.controls.freeSpellIds.setValue(
-      this.profileForm.controls.freeSpellIds.value.filter((id) => otherSpellIds.has(id)).slice(0, this.freeSpellLimit)
-    );
+    // Keep invalid selections visible until the user explicitly revises them.
   }
 
   nextStep(): void {
     this.errors = this.validateStep(this.currentStep);
-    if (this.errors.length) return;
+    if (this.errors.length) { this.focusInvalidField(); return; }
     if (this.currentStep < this.steps.length - 1) {
       this.currentStep += 1;
       this.furthestStep = Math.max(this.furthestStep, this.currentStep);
@@ -475,6 +592,17 @@ export class CharacterBuilderComponent implements OnInit {
 
   openStep(index: number): void {
     if (index <= this.furthestStep) {
+      if (index > this.currentStep) {
+        for (let step = this.currentStep; step < index; step += 1) {
+          const errors = this.validateStep(step);
+          if (errors.length) {
+            this.currentStep = step;
+            this.errors = errors;
+            this.focusInvalidField();
+            return;
+          }
+        }
+      }
       this.currentStep = index;
       this.errors = [];
       this.focusStep();
@@ -484,13 +612,20 @@ export class CharacterBuilderComponent implements OnInit {
   saveProfile(openTurn = false): void {
     const profile = this.buildProfile();
     this.errors = this.validateConfiguredProfile(profile);
-    if (this.errors.length) return;
+    if (this.errors.length) { this.focusInvalidField(); return; }
     this.storage.upsertProfile(profile);
     this.notice = `Personagem “${profile.name}” salvo.`;
     if (openTurn) void this.router.navigate(['/turno'], { queryParams: { personagem: profile.id } });
   }
 
   loadProfile(profile: CharacterProfile): void {
+    this.portraitId = profile.portraitId ?? '';
+    this.abilityMode = profile.abilityMode ?? 'legacy-final';
+    this.backgroundId = profile.backgroundId ?? '';
+    this.backgroundBonuses = { ...(profile.backgroundBonuses ?? {}) };
+    this.featSelections = (profile.featSelections ?? []).map(f => ({ ...f, bonuses: { ...f.bonuses } }));
+    this.choices = structuredClone(profile.choices ?? {});
+    this.spellSelections = structuredClone(profile.spellSelections ?? {});
     const levels = Object.fromEntries(this.classes.map((item) => [item.id, classLevel(profile, item.id)])) as Record<TurnClassId, number>;
     const featIds = this.normalizeMagicInitiateFeatIds(profile);
     const automatic = this.speciesSpellGrants(profile.speciesChoiceId ?? '', totalLevel(profile));
@@ -533,12 +668,12 @@ export class CharacterBuilderComponent implements OnInit {
       magoSubclassId: profile.subclassIds.find((id) => this.subclassesFor('mago').some((item) => item.id === id)) ?? '',
       mongeSubclassId: profile.subclassIds.find((id) => this.subclassesFor('monge').some((item) => item.id === id)) ?? '',
       paladinoSubclassId: profile.subclassIds.find((id) => this.subclassesFor('paladino').some((item) => item.id === id)) ?? '',
-      strength: profile.abilities.strength,
-      dexterity: profile.abilities.dexterity,
-      constitution: profile.abilities.constitution,
-      intelligence: profile.abilities.intelligence,
-      wisdom: profile.abilities.wisdom,
-      charisma: profile.abilities.charisma,
+      strength: (profile.baseAbilities ?? profile.abilities).strength,
+      dexterity: (profile.baseAbilities ?? profile.abilities).dexterity,
+      constitution: (profile.baseAbilities ?? profile.abilities).constitution,
+      intelligence: (profile.baseAbilities ?? profile.abilities).intelligence,
+      wisdom: (profile.baseAbilities ?? profile.abilities).wisdom,
+      charisma: (profile.baseAbilities ?? profile.abilities).charisma,
       featIds: featIds.filter((id) => !id.startsWith('cacador-')),
       fightingStyleIds: profile.fightingStyleIds,
       maneuverIds: profile.maneuverIds,
@@ -550,7 +685,7 @@ export class CharacterBuilderComponent implements OnInit {
       masteryWeaponIds: profile.masteryWeaponIds,
       armor: profile.armor,
       hasShield: profile.hasShield,
-      speed: profile.speed,
+      speed: profile.baseSpeed ?? profile.speed,
     });
     this.currentStep = 0;
     this.furthestStep = this.steps.length - 1;
@@ -558,7 +693,17 @@ export class CharacterBuilderComponent implements OnInit {
     this.notice = `Editando “${profile.name}”.`;
   }
 
+  useExample(example: CharacterExample): void {
+    const profile = structuredClone(example.profile);
+    profile.id = createId();
+    profile.updatedAt = new Date().toISOString();
+    this.loadProfile(profile);
+    this.notice = `Modelo “${profile.name}” carregado. Revise as escolhas e salve para adicioná-lo à sua biblioteca.`;
+  }
+
   newProfile(): void {
+    this.portraitId = '';
+    this.abilityMode = 'base'; this.backgroundId = ''; this.backgroundBonuses = {}; this.featSelections = []; this.choices = {}; this.spellSelections = {};
     this.profileForm.reset({
       id: createId(), name: 'Novo personagem', speciesId: 'humano', speciesChoiceId: '',
       hunterPreyId: 'cacador-assassino-de-colossos', primaryClass: 'ladino',
@@ -568,7 +713,7 @@ export class CharacterBuilderComponent implements OnInit {
       druidaSubclassId: '', feiticeiroSubclassId: '', guardiaoSubclassId: '', guerreiroSubclassId: '',
       ladinoSubclassId: '', magoSubclassId: '', mongeSubclassId: '', paladinoSubclassId: '',
       strength: 10, dexterity: 16, constitution: 14, intelligence: 10, wisdom: 12, charisma: 10,
-      featIds: ['alerta', 'sortudo'], fightingStyleIds: [], maneuverIds: [], preparedSpellIds: [],
+      featIds: [], fightingStyleIds: [], maneuverIds: [], preparedSpellIds: [],
       cantripIds: [], magicInitiateSpellIds: [], freeSpellIds: [],
       weaponIds: ['weapon-rapieira', 'weapon-arco-curto'], masteryWeaponIds: ['weapon-rapieira', 'weapon-arco-curto'],
       armor: 'light', hasShield: false, speed: 9,
@@ -614,9 +759,7 @@ export class CharacterBuilderComponent implements OnInit {
 
   buildProfile(): CharacterProfile {
     const value = this.profileForm.getRawValue();
-    const selectedFeatIds = this.catalog
-      ? [...this.originSelected.slice(0, this.originFeatLimit), ...this.generalSelected.slice(0, this.generalFeatLimit)]
-      : value.featIds;
+    const selectedFeatIds = value.featIds;
     const order = [value.primaryClass, ...this.classes.map((item) => item.id).filter((id) => id !== value.primaryClass)];
     const classes = this.classes
       .map((item) => ({ classId: item.id, level: value[item.id], order: order.indexOf(item.id) }))
@@ -626,7 +769,7 @@ export class CharacterBuilderComponent implements OnInit {
       .map((entry) => value[SUBCLASS_CONTROL_BY_CLASS[entry.id]])
       .filter((id): id is string => !!id);
     const weaponById = new Map(this.allWeapons.map((weapon) => [weapon.id, weapon]));
-    const masteryWeaponIds = value.masteryWeaponIds.slice(0, this.masteryLimit);
+    const masteryWeaponIds = value.masteryWeaponIds;
     const masteryIds = masteryWeaponIds
       .map((id) => weaponById.get(id))
       .filter((weapon): weapon is WeaponEntry => !!weapon)
@@ -634,12 +777,14 @@ export class CharacterBuilderComponent implements OnInit {
     const automaticSpells = this.speciesSpellGrants(value.speciesChoiceId, classes.reduce((sum, item) => sum + item.level, 0));
     if (selectedFeatIds.includes('tocado-pelas-fadas')) automaticSpells.free.push('passo-nebuloso');
     if (selectedFeatIds.includes('tocado-pela-sombra')) automaticSpells.free.push('invisibilidade');
+    if (selectedFeatIds.includes('telepata')) automaticSpells.free.push('detectar-pensamentos');
     if (value.paladino >= 2) automaticSpells.free.push('destruicao-divina');
     if (value.paladino >= 5) automaticSpells.free.push('convocar-montaria');
     const freeSpellChoiceLimit = selectedFeatIds.filter((id) =>
       ['tocado-pelas-fadas', 'tocado-pela-sombra'].includes(id)
     ).length;
-    const cantripIds = value.cantripIds.slice(0, this.cantripLimit);
+    const cantripIds = [...value.cantripIds];
+    if (selectedFeatIds.includes('telecinetico')) cantripIds.push('maos-magicas');
     const magicInitiateCount = selectedFeatIds.filter((id) => id in MAGIC_INITIATE_LISTS).length;
     const magicInitiateSpellIds = magicInitiateCount
       ? value.magicInitiateSpellIds.slice(0, magicInitiateCount)
@@ -650,7 +795,7 @@ export class CharacterBuilderComponent implements OnInit {
       ...automaticSpells.free,
     ])];
     const preparedSpellIds = [...new Set([
-      ...value.preparedSpellIds.slice(0, this.classSpellLimit),
+      ...value.preparedSpellIds,
       ...automaticSpells.prepared,
       ...cantripIds,
       ...freeSpellIds,
@@ -658,30 +803,47 @@ export class CharacterBuilderComponent implements OnInit {
       ...(value.paladino >= 2 ? ['destruicao-divina'] : []),
       ...(value.paladino >= 5 ? ['convocar-montaria'] : []),
     ])];
+    const allocated = Object.entries(this.spellSelections).filter(([id]) => !id.startsWith('book.')).flatMap(([,ids]) => ids);
+    const granted = this.catalog ? grantedSpells(this.selectionProfile(), this.catalog) : [];
+    const sourceAware = Object.keys(this.spellSelections).length > 0 || this.abilityMode === 'base';
+    const sourceCantrips = allocated.filter(id => this.spells.find(s => s.id === id)?.level === 0);
+    const sourceFree = Object.entries(this.spellSelections).filter(([id]) => id.startsWith('feat.') && id !== 'feat.conjurador-ritualista').flatMap(([, ids]) => ids);
+    if (selectedFeatIds.includes('telecinetico')) sourceCantrips.push('maos-magicas');
+    if (selectedFeatIds.includes('telepata')) sourceFree.push('detectar-pensamentos');
+    if (subclassIds.includes('patrono-arquifada')) sourceFree.push('passo-nebuloso');
+    if (subclassIds.includes('circulo-das-estrelas')) sourceFree.push('raio-guia');
+    if (value.speciesId === 'aasimar') granted.push('luz');
+    if (value.speciesId === 'tiefling') granted.push('taumaturgia');
+    if (subclassIds.includes('trapaceiro-arcano')) granted.push('maos-magicas');
     return {
+      abilityMode: this.abilityMode,
+      ...(this.abilityMode === 'base' ? { baseAbilities: Object.fromEntries(ABILITIES.map(a => [a, value[a]])) as unknown as AbilityScores } : {}),
+      backgroundId: this.backgroundId || undefined,
+      backgroundBonuses: { ...this.backgroundBonuses },
+      featSelections: this.featSelections.map(f => ({ ...f, bonuses:{...f.bonuses} })),
+      choices: structuredClone(this.choices), spellSelections: structuredClone(this.spellSelections), needsReview: this.abilityMode === 'legacy-final',
       id: value.id,
       name: value.name.trim() || 'Personagem sem nome',
       speciesId: value.speciesId,
+      portraitId: this.portraitId || undefined,
       speciesChoiceId: value.speciesChoiceId || undefined,
       classes,
-      abilities: {
-        strength: value.strength, dexterity: value.dexterity, constitution: value.constitution,
-        intelligence: value.intelligence, wisdom: value.wisdom, charisma: value.charisma,
-      },
+      abilities: this.finalAbilityValues,
       subclassIds,
       featIds: [...selectedFeatIds, ...(this.selectedSubclass('guardiao') === 'cacador' ? [value.hunterPreyId] : [])],
-      fightingStyleIds: this.fightingStyleLimit ? value.fightingStyleIds.slice(0, this.fightingStyleLimit) : [],
-      maneuverIds: this.maneuverLimit ? value.maneuverIds.slice(0, this.maneuverLimit) : [],
-      preparedSpellIds,
-      cantripIds,
-      magicInitiateSpellIds,
-      freeSpellIds,
+      fightingStyleIds: value.fightingStyleIds,
+      maneuverIds: value.maneuverIds,
+      preparedSpellIds: sourceAware ? [...new Set([...allocated, ...granted, ...automaticSpells.prepared, ...automaticSpells.free, ...sourceFree, ...(value.guardiao ? ['marca-do-predador'] : [])])] : preparedSpellIds,
+      cantripIds: sourceAware ? sourceCantrips : cantripIds,
+      magicInitiateSpellIds: sourceAware ? Object.entries(this.spellSelections).filter(([id]) => id.startsWith('feat.iniciado')).flatMap(([, ids]) => ids) : magicInitiateSpellIds,
+      freeSpellIds: sourceAware ? [...new Set([...sourceFree, ...automaticSpells.free])] : freeSpellIds,
       weaponIds: value.weaponIds,
       masteryWeaponIds,
       masteryIds: [...new Set(masteryIds)],
       armor: value.armor,
       hasShield: value.hasShield,
-      speed: value.speed,
+      baseSpeed: this.abilityMode === 'base' ? value.speed : undefined,
+      speed: this.abilityMode === 'base' ? movementSpeed(this.selectionProfile(),value.speed) : value.speed,
       updatedAt: new Date().toISOString(),
     };
   }
@@ -690,25 +852,86 @@ export class CharacterBuilderComponent implements OnInit {
     if (step === 0) {
       const errors: string[] = [];
       if (!this.profileForm.controls.name.value.trim()) errors.push('Informe o nome do personagem.');
-      if (this.totalConfiguredLevel < 1 || this.totalConfiguredLevel > 6) errors.push('O nível total deve estar entre 1 e 6.');
-      if (this.profileForm.controls[this.profileForm.controls.primaryClass.value].value < 1) errors.push('A primeira classe precisa ter ao menos um nível.');
+      if (!this.profileForm.controls.speciesId.value) errors.push('Selecione uma espécie.');
       if (this.speciesChoices.length && !this.profileForm.controls.speciesChoiceId.value) errors.push('Selecione a escolha interna da espécie.');
-      for (const entry of this.classes.filter((item) => this.profileForm.controls[item.id].value >= 3)) {
-        if (!this.selectedSubclass(entry.id)) errors.push(`Selecione uma subclasse de ${entry.name}.`);
-      }
+      if (this.abilityMode === 'base' && !this.background) errors.push('Selecione um antecedente.');
       return errors;
     }
-    if (step === 1) return validateProfile(this.buildProfile());
-    if (step === 2) return this.validateChoices(false);
-    return [];
+    if (step === 1) {
+      const errors: string[] = [];
+      if (this.totalConfiguredLevel < 1 || this.totalConfiguredLevel > 8) errors.push('O nível total deve estar entre 1 e 8.');
+      for (const entry of this.classes.filter((item) => this.profileForm.controls[item.id].value >= 3)) {
+        if (!this.subclassesFor(entry.id).some(o => o.id === this.selectedSubclass(entry.id))) errors.push(`Selecione uma subclasse de ${entry.name}.`);
+      }
+      for (const entry of this.classes) if (this.profileForm.controls[entry.id].value < 3 && this.selectedSubclass(entry.id)) errors.push(`Remova a subclasse de ${entry.name}: exige nível 3.`);
+      return errors;
+    }
+    if (step === 2) return [...validateProfile(this.buildProfile()), ...this.validateOrigin()];
+    if (step === 3) return this.validateChoices(false);
+    if (step === 4) return this.validateChoices(true);
+    return ['Etapa desconhecida.'];
   }
 
   private validateConfiguredProfile(profile: CharacterProfile): string[] {
-    return [...new Set([...validateProfile(profile), ...this.validateStep(0), ...this.validateChoices(true)])];
+    return [...new Set([...validateProfile(profile), ...this.validateStep(0), ...this.validateStep(1), ...this.validateOrigin(), ...this.validateChoices(true)])];
+  }
+
+  inlineError(...fragments: string[]): string {
+    const normalized = fragments.map((fragment) => normalizeKey(fragment));
+    return this.errors.find((error) => normalized.some((fragment) => normalizeKey(error).includes(fragment))) ?? '';
+  }
+
+  inlineOptionError(optionIds: string[]): string {
+    const names = (this.catalog?.options ?? []).filter((option) => optionIds.includes(option.id)).map((option) => option.name);
+    return names.length ? this.inlineError(...names) : '';
+  }
+
+  private refreshErrors(): void {
+    if (this.errors.length) this.errors = this.validateStep(this.currentStep);
+  }
+
+  private validateOrigin(): string[] {
+    if (this.abilityMode === 'legacy-final') return [];
+    const errors: string[] = [];
+    if (!this.background) errors.push('Selecione um antecedente.');
+    else errors.push(...validateBonuses(this.backgroundBonuses, this.background.abilityOptions ?? [], 3));
+    const sources = new Set(this.featSlots.map(slot => slot.id));
+    for (const slot of this.featSlots) {
+      const feat = this.featFor(slot.id), option = this.featOption(slot.id);
+      const expectedKind = slot.origin ? 'feat-origin' : 'feat-general';
+      if (!feat || !option || option.kind !== expectedKind) { errors.push(`${slot.name}: selecione um talento ${slot.origin ? 'de Origem' : 'Geral'} válido.`); continue; }
+      errors.push(...validateBonuses(feat.bonuses,option.abilityOptions ?? [],option.abilityPoints ?? 0).map(e => `${option.name}: ${e}`));
+      const prior = this.featSlots.slice(0,this.featSlots.indexOf(slot)).map(s => this.featFor(s.id)?.bonuses ?? {});
+      const raw = this.profileForm.getRawValue();
+      const before = finalAbilities(Object.fromEntries(ABILITIES.map(a => [a,raw[a]])) as unknown as AbilityScores,[this.backgroundBonuses,...prior]);
+      errors.push(...this.optionErrors(option,{...this.selectionProfile(),abilities:before}).map(error => `${option.name}: ${error}`));
+      if (!option.repeatable && this.featSelections.filter(f => f.optionId === option.id).length + (this.background?.grantedFeatId === option.id ? 1 : 0) > 1) errors.push(`${option.name} não pode ser escolhido novamente.`);
+    }
+    if (this.featSelections.some(f => !sources.has(f.source))) errors.push('Há talentos de níveis ou origens removidos. Revise as escolhas antigas.');
+    return errors;
   }
 
   private validateChoices(includeEquipment: boolean): string[] {
     const errors: string[] = [];
+    const p = this.selectionProfile();
+    if (this.abilityMode === 'base' || Object.keys(this.spellSelections).length) {
+      for (const grant of this.spellGrants) {
+        const selected = this.spellSelections[grant.id] ?? [];
+        const eligible = new Set(this.spellGrantItems(grant).map(s => s.id));
+        if (selected.length !== grant.limit || new Set(selected).size !== selected.length || selected.some(id => !eligible.has(id))) errors.push(`${grant.name}: selecione ${grant.limit} magia(s) válidas para esta origem.`);
+      }
+      for (const [id, selected] of Object.entries(this.spellSelections)) if (selected.length && !this.spellGrants.some(g => g.id === id)) errors.push(`Revise as magias da origem removida: ${id}.`);
+      for (const group of this.choiceGroups) {
+        const selected = this.choices[group.id] ?? [];
+        if (selected.length !== this.choiceLimit(group) || selected.some(id => !this.catalog?.options.some(o => o.id === id && o.group === group.id && eligibleChoice(o,p)))) errors.push(`${group.name}: revise as ${this.choiceLimit(group)} escolha(s).`);
+      }
+      for (const [id, values] of Object.entries(this.choices)) if (values.length && !this.choiceGroups.some(g => g.id === id)) errors.push(`Revise a escolha que não está mais disponível: ${id}.`);
+      if (this.profileForm.controls.fightingStyleIds.value.length !== this.fightingStyleLimit) errors.push(`Selecione ${this.fightingStyleLimit} estilo(s) de luta.`);
+      if (this.profileForm.controls.maneuverIds.value.length !== this.maneuverLimit) errors.push(`Selecione ${this.maneuverLimit} manobra(s).`);
+      if (includeEquipment && this.profileForm.controls.masteryWeaponIds.value.length !== this.masteryLimit) errors.push(`Selecione ${this.masteryLimit} maestria(s).`);
+      for (const option of this.catalog?.options.filter(o => p.fightingStyleIds.includes(o.id)) ?? []) errors.push(...this.optionErrors(option,p).map(error => `${option.name}: ${error}`));
+      return errors;
+    }
     if (this.originSelected.length !== this.originFeatLimit) errors.push(`Selecione ${this.originFeatLimit} talento(s) de Origem.`);
     if (this.generalSelected.length !== this.generalFeatLimit) errors.push(`Talentos Gerais: selecione ${this.generalFeatLimit}.`);
     if (this.profileForm.controls.fightingStyleIds.value.length !== this.fightingStyleLimit) errors.push(`Estilos de Luta: selecione ${this.fightingStyleLimit}.`);
@@ -725,7 +948,7 @@ export class CharacterBuilderComponent implements OnInit {
     if (includeEquipment && this.profileForm.controls.masteryWeaponIds.value.length !== this.masteryLimit) errors.push(`Maestrias em Arma: selecione ${this.masteryLimit}.`);
     const profile = this.buildProfile();
     const selectedOptions = this.catalog?.options.filter((item) => [...profile.featIds, ...profile.fightingStyleIds].includes(item.id)) ?? [];
-    for (const option of selectedOptions) errors.push(...this.optionErrors(option, profile));
+    for (const option of selectedOptions) errors.push(...this.optionErrors(option, profile).map(error => `${option.name}: ${error}`));
     return errors.filter((error) => !error.endsWith('selecione 0.'));
   }
 
@@ -746,14 +969,15 @@ export class CharacterBuilderComponent implements OnInit {
   private hasTrainingFeature(feature: NonNullable<OptionRequirement['feature']>, profile: CharacterProfile): boolean {
     if (feature === 'spellcasting') return hasSpellcasting(profile);
     const classes = new Set(profile.classes.map((entry) => entry.classId));
-    if (feature === 'martial-weapon-training') return ['barbaro', 'guardiao', 'guerreiro', 'paladino'].some((id) => classes.has(id as TurnClassId));
-    if (feature === 'light-armor-training') return ['barbaro', 'bardo', 'bruxo', 'clerigo', 'druida', 'guardiao', 'guerreiro', 'ladino', 'paladino'].some((id) => classes.has(id as TurnClassId));
-    if (feature === 'medium-armor-training') return ['barbaro', 'clerigo', 'guardiao', 'guerreiro', 'paladino'].some((id) => classes.has(id as TurnClassId));
-    if (feature === 'heavy-armor-training') return ['guerreiro', 'paladino'].some((id) => classes.has(id as TurnClassId)) || profile.armor === 'heavy';
-    return ['barbaro', 'clerigo', 'druida', 'guardiao', 'guerreiro', 'paladino'].some((id) => classes.has(id as TurnClassId));
+    const feats = new Set(profile.featIds);
+    if (feature === 'martial-weapon-training') return feats.has('treinamento-armas-marciais') || ['barbaro', 'guardiao', 'guerreiro', 'paladino'].some((id) => classes.has(id as TurnClassId));
+    if (feature === 'light-armor-training') return feats.has('especialista-armaduras-leves') || ['barbaro', 'bardo', 'bruxo', 'clerigo', 'druida', 'guardiao', 'guerreiro', 'ladino', 'paladino'].some((id) => classes.has(id as TurnClassId));
+    if (feature === 'medium-armor-training') return feats.has('especialista-armaduras-medias') || ['barbaro', 'clerigo', 'guardiao', 'guerreiro', 'paladino'].some((id) => classes.has(id as TurnClassId));
+    if (feature === 'heavy-armor-training') return feats.has('especialista-armaduras-pesadas') || ['guerreiro', 'paladino'].some((id) => classes.has(id as TurnClassId));
+    return feats.has('especialista-armaduras-leves') || ['barbaro', 'clerigo', 'druida', 'guardiao', 'guerreiro', 'paladino'].some((id) => classes.has(id as TurnClassId));
   }
 
-  private abilityName(ability: keyof CharacterProfile['abilities']): string {
+  abilityName(ability: keyof CharacterProfile['abilities']): string {
     return ({ strength: 'Força', dexterity: 'Destreza', constitution: 'Constituição', intelligence: 'Inteligência', wisdom: 'Sabedoria', charisma: 'Carisma' })[ability];
   }
 
@@ -809,7 +1033,8 @@ export class CharacterBuilderComponent implements OnInit {
       lists.push({ name, maxLevel });
     }
     if (this.selectedSubclass('guerreiro') === 'cavaleiro-mistico' || this.selectedSubclass('ladino') === 'trapaceiro-arcano') {
-      lists.push({ name: 'Mago', maxLevel: 1 });
+      const level = Math.max(this.selectedSubclass('guerreiro') === 'cavaleiro-mistico' ? this.profileForm.controls.guerreiro.value : 0, this.selectedSubclass('ladino') === 'trapaceiro-arcano' ? this.profileForm.controls.ladino.value : 0);
+      lists.push({ name: 'Mago', maxLevel: level >= 7 ? 2 : 1 });
     }
     return lists;
   }
@@ -861,6 +1086,12 @@ export class CharacterBuilderComponent implements OnInit {
     setTimeout(() => document.querySelector<HTMLElement>('#character-step-title')?.focus());
   }
 
+  private focusInvalidField(): void {
+    setTimeout(() => document.querySelector<HTMLElement>(
+      '.wizard-card [aria-invalid="true"] input, .wizard-card [aria-invalid="true"] select, .wizard-card input[aria-invalid="true"], .wizard-card select[aria-invalid="true"]',
+    )?.focus());
+  }
+
   private speciesSpellGrants(choiceId: string, level: number): { prepared: string[]; free: string[] } {
     const prepared: string[] = [];
     const free: string[] = [];
@@ -878,7 +1109,7 @@ export class CharacterBuilderComponent implements OnInit {
     };
     const spells = lineage[choiceId];
     if (spells) {
-      add(spells[0]);
+      if (choiceId !== 'elfo-alto' || this.abilityMode === 'legacy-final') add(spells[0]);
       if (level >= 3 && spells[1]) add(spells[1], true);
       if (level >= 5 && spells[2]) add(spells[2], true);
     }
@@ -886,6 +1117,7 @@ export class CharacterBuilderComponent implements OnInit {
       add('ilusao-menor');
       add('falar-com-animais', true);
     }
+    if (choiceId === 'gnomo-das-rochas') { add('consertar'); add('prestidigitacao-arcana'); }
     return { prepared, free };
   }
 }

@@ -1,3 +1,4 @@
+import { spellSlots, MAX_CHARACTER_LEVEL } from '../character-progression';
 import {
   CharacterProfile,
   ResourcePool,
@@ -25,7 +26,7 @@ export const hasSpellcasting = (profile: CharacterProfile): boolean =>
   );
 
 export const attackCount = (profile: CharacterProfile): number =>
-  profile.classes.some((entry) => entry.level >= 5 && ['barbaro', 'guardiao', 'guerreiro', 'monge', 'paladino'].includes(entry.classId)) ? 2 : 1;
+  (profile.subclassIds.includes('colegio-da-bravura') && classLevel(profile, 'bardo') >= 6) || Object.values(profile.choices ?? {}).flat().includes('invocation.lamina-sedenta') || profile.classes.some((entry) => entry.level >= 5 && ['barbaro', 'guardiao', 'guerreiro', 'monge', 'paladino'].includes(entry.classId)) ? 2 : 1;
 
 const pool = (
   label: string,
@@ -57,7 +58,7 @@ export const buildInitialResources = (profile: CharacterProfile): Record<string,
     resources['action-surge'] = pool('Surto de Ação', 1, { amount: 'all' });
   }
   if (profile.subclassIds.includes('mestre-da-batalha')) {
-    resources['superiority-die'] = pool('Dados de Superioridade', 4, { amount: 'all' });
+    resources['superiority-die'] = pool('Dados de Superioridade', fighter >= 7 ? 5 : 4, { amount: 'all' });
   }
   if (ranger >= 1) resources['favored-enemy'] = pool('Inimigo Favorito', ranger >= 5 ? 3 : 2);
   if (bard >= 1) resources['bardic-inspiration'] = pool(
@@ -66,8 +67,8 @@ export const buildInitialResources = (profile: CharacterProfile): Record<string,
     bard >= 5 ? { amount: 'all' } : undefined
   );
   if (warlock >= 2) resources['magical-cunning'] = pool('Astúcia Mágica', 1);
-  if (cleric >= 2) resources['channel-divinity'] = pool('Canalizar Divindade', 2, { amount: 1 });
-  if (druid >= 2) resources['wild-shape'] = pool('Forma Selvagem', 2, { amount: 1 });
+  if (cleric >= 2) resources['channel-divinity'] = pool('Canalizar Divindade', cleric >= 6 ? 3 : 2, { amount: 1 });
+  if (druid >= 2) resources['wild-shape'] = pool('Forma Selvagem', druid >= 6 ? 3 : 2, { amount: 1 });
   if (sorcerer >= 1) resources['innate-sorcery'] = pool('Feitiçaria Inata', 2);
   if (sorcerer >= 2) resources['sorcery-point'] = pool(
     'Pontos de Feitiçaria',
@@ -80,19 +81,12 @@ export const buildInitialResources = (profile: CharacterProfile): Record<string,
   if (paladin >= 1) resources['lay-on-hands'] = pool('Mãos Consagradas', paladin * 5);
   if (paladin >= 3) resources['channel-divinity'] = pool('Canalizar Divindade', 2, { amount: 1 });
 
-  const fullCasterLevel = bard + cleric + druid + sorcerer + classLevel(profile, 'mago');
-  const sharedCasterLevel = fullCasterLevel + Math.ceil(ranger / 2) + Math.ceil(paladin / 2) +
-    (profile.subclassIds.includes('cavaleiro-mistico') ? Math.floor(fighter / 3) : 0) +
-    (profile.subclassIds.includes('trapaceiro-arcano') ? Math.floor(classLevel(profile, 'ladino') / 3) : 0);
-  const slotTable = [
-    [], [2], [3], [4, 2], [4, 3], [4, 3, 2], [4, 3, 3],
-  ];
-  const slots = slotTable[Math.min(6, sharedCasterLevel)] ?? [];
+  const slots = spellSlots(profile);
   slots.forEach((amount, index) => {
     resources[`spell-slot-${index + 1}`] = pool(`Espaços de ${index + 1}º círculo`, amount);
   });
   if (warlock >= 1) {
-    const circle = warlock >= 5 ? 3 : warlock >= 3 ? 2 : 1;
+    const circle = Math.ceil(warlock / 2);
     const amount = warlock >= 2 ? 2 : 1;
     resources[`pact-slot-${circle}`] = pool(`Espaços de Pacto de ${circle}º círculo`, amount, { amount: 'all' });
   }
@@ -124,6 +118,35 @@ export const buildInitialResources = (profile: CharacterProfile): Record<string,
   for (const spellId of profile.freeSpellIds ?? []) {
     resources[`free-spell-${spellId}`] = pool(`Uso gratuito: ${spellId}`, 1);
   }
+
+  if (profile.speciesChoiceId === 'gnomo-florestal' && resources['free-spell-falar-com-animais']) resources['free-spell-falar-com-animais'] = pool('Linhagem Gnomo Florestal', proficiency);
+  const mod = (id: keyof CharacterProfile['abilities']) => Math.max(1, Math.floor((profile.abilities[id] - 10) / 2));
+  const subclassPool = (sub: string, min: number, cls: TurnClassId, id: string, label: string, max: number, short = false) => {
+    if (profile.subclassIds.includes(sub) && classLevel(profile, cls) >= min) resources[id] = pool(label, max, short ? { amount: 'all' } : undefined);
+  };
+  subclassPool('zelote',3,'barbaro','divine-healing','Campeão dos Deuses · d12',barbarian >= 6 ? 5 : 4);
+  subclassPool('colegio-do-glamour',3,'bardo','beguiling-magic','Magia Fascinante',1);
+  subclassPool('colegio-do-glamour',6,'bardo','mantle-majesty','Manto de Majestade',1);
+  subclassPool('patrono-arquifada',3,'bruxo','free-spell-passo-nebuloso','Passos Feéricos',mod('charisma'));
+  subclassPool('patrono-grande-antigo',6,'bruxo','clairvoyant','Combatente Clarividente',1,true);
+  subclassPool('patrono-infero',6,'bruxo','dark-luck','A Sorte do Próprio Tenebroso',mod('charisma'));
+  subclassPool('dominio-da-guerra',3,'clerigo','war-priest','Sacerdote da Guerra',mod('wisdom'),true);
+  subclassPool('dominio-da-luz',3,'clerigo','warding-flare','Labareda Protetora',mod('wisdom'),cleric >= 6);
+  subclassPool('circulo-das-estrelas',3,'druida','free-spell-raio-guia','Mapa Estelar · Raio Guia',mod('wisdom'));
+  subclassPool('circulo-das-estrelas',6,'druida','cosmic-omen','Presságio Cósmico',mod('wisdom'));
+  subclassPool('circulo-da-terra',6,'druida','natural-recovery','Recuperação Natural',1);
+  subclassPool('feiticaria-mecanica',3,'feiticeiro','restore-balance','Restaurar Equilíbrio',mod('charisma'));
+  subclassPool('magia-selvagem',3,'feiticeiro','tides-chaos','Marés do Caos',1);
+  subclassPool('mestre-da-batalha',7,'guerreiro','know-enemy','Conheça Seu Inimigo',1);
+  subclassPool('adivinhador',3,'mago','portent','Prodígio · previsões',2);
+  subclassPool('ilusionista',6,'mago','spectral-beast','Criaturas Espectrais · Fera',1);
+  subclassPool('ilusionista',6,'mago','spectral-fey','Criaturas Espectrais · Feérico',1);
+  subclassPool('guerreiro-da-mao-espalmada',6,'monge','wholeness','Integridade Corporal',mod('wisdom'));
+  if (classLevel(profile,'mago')) resources['arcane-recovery'] = pool('Recuperação Arcana',1);
+  // Psi dice are class-level based and may not be shared between the two subclasses.
+  delete resources['psionic-energy-die'];
+  if (profile.subclassIds.includes('guerreiro-psi')) resources['psionic-fighter'] = pool('Dados Psiônicos · Guerreiro',fighter >= 5 ? 6 : 4,{amount:1});
+  if (profile.subclassIds.includes('lamina-alma')) resources['psionic-rogue'] = pool('Dados Psiônicos · Ladino',classLevel(profile,'ladino') >= 5 ? 6 : 4,{amount:1});
 
   return resources;
 };
@@ -194,10 +217,13 @@ export const createInitialTurnState = (profile: CharacterProfile): TurnState => 
 export const validateProfile = (profile: CharacterProfile): string[] => {
   const errors: string[] = [];
   const total = totalLevel(profile);
-  if (total < 1 || total > 6) {
-    errors.push('O nível total deve estar entre 1 e 6.');
+  if (!Number.isInteger(total) || total < 1 || total > MAX_CHARACTER_LEVEL) {
+    errors.push('O nível total deve estar entre 1 e 8.');
   }
 
+  if (new Set(profile.classes.map(c => c.classId)).size !== profile.classes.length) errors.push('Classes repetidas no perfil.');
+  if (profile.classes.some(c => !Number.isInteger(c.level) || c.level < 1 || c.level > MAX_CHARACTER_LEVEL)) errors.push('Níveis de classe devem ser inteiros entre 1 e 8.');
+  if (Object.values(profile.abilities).some(n => !Number.isInteger(n) || n < 1 || n > 20)) errors.push('Atributos devem ser inteiros entre 1 e 20.');
   for (const entry of profile.classes.filter((item) => item.level > 0)) {
     const abilities = profile.abilities;
     const valid =

@@ -1,0 +1,657 @@
+{
+  "spellGrants": [
+    {
+      "classId": "bruxo",
+      "subclassId": "patrono-arquifada",
+      "minLevel": 3,
+      "spellIds": [
+        "acalmar-emocoes",
+        "fogo-das-fadas",
+        "forca-espectral",
+        "passo-nebuloso",
+        "sono"
+      ]
+    },
+    {
+      "classId": "bruxo",
+      "subclassId": "patrono-arquifada",
+      "minLevel": 5,
+      "spellIds": [
+        "crescimento-de-plantas",
+        "piscar"
+      ]
+    },
+    {
+      "classId": "bruxo",
+      "subclassId": "patrono-arquifada",
+      "minLevel": 7,
+      "spellIds": [
+        "dominar-fera",
+        "invisibilidade-maior"
+      ]
+    },
+    {
+      "classId": "bruxo",
+      "subclassId": "patrono-celestial",
+      "minLevel": 3,
+      "spellIds": [
+        "auxilio",
+        "chama-sagrada",
+        "curar-ferimentos",
+        "luz",
+        "raio-guia",
+        "restauracao-menor"
+      ]
+    },
+    {
+      "classId": "bruxo",
+      "subclassId": "patrono-celestial",
+      "minLevel": 5,
+      "spellIds": [
+        "luz-do-dia",
+        "revivificar"
+      ]
+    },
+    {
+      "classId": "bruxo",
+      "subclassId": "patrono-celestial",
+      "minLevel": 7,
+      "spellIds": [
+        "defensor-da-fe",
+        "muralha-de-fogo"
+      ]
+    },
+    {
+      "classId": "bruxo",
+      "subclassId": "patrono-grande-antigo",
+      "minLevel": 3,
+      "spellIds": [
+        "detectar-pensamentos",
+        "forca-espectral",
+        "gargalhada-nefasta-de-tasha",
+        "sussurros-dissonantes"
+      ]
+    },
+    {
+      "classId": "bruxo",
+      "subclassId": "patrono-grande-antigo",
+      "minLevel": 5,
+      "spellIds": [
+        "clarividencia",
+        "fome-de-hadar"
+      ]
+    },
+    {
+      "classId": "bruxo",
+      "subclassId": "patrono-grande-antigo",
+      "minLevel": 7,
+      "spellIds": [
+        "confusao",
+        "invocar-aberracao"
+      ]
+    },
+    {
+      "classId": "bruxo",
+      "subclassId": "patrono-infero",
+      "minLevel": 3,
+      "spellIds": [
+        "comando",
+        "maos-flamejantes",
+        "raio-ardente",
+        "sugestao"
+      ]
+    },
+    {
+      "classId": "bruxo",
+      "subclassId": "patrono-infero",
+      "minLevel": 5,
+      "spellIds": [
+        "bola-de-fogo",
+        "nuvem-fetida"
+      ]
+    },
+    {
+      "classId": "bruxo",
+      "subclassId": "patrono-infero",
+      "minLevel": 7,
+      "spellIds": [
+        "escudo-ardente",
+        "muralha-de-fogo"
+      ]
+    },
+    {
+      "classId": "clerigo",
+      "subclassId": "dominio-da-guerra",
+      "minLevel": 3,
+      "spellIds": [
+        "arma-espiritual",
+        "arma-magica",
+        "escudo-da-fe",
+        "raio-guia"
+      ]
+    },
+    {
+      "classId": "clerigo",
+      "subclassId": "dominio-da-guerra",
+      "minLevel": 5,
+      "spellIds": [
+        "guardioes-espirituais",
+        "manto-do-cruzado"
+      ]
+    },
+    {
+      "classId": "clerigo",
+      "subclassId": "dominio-da-guerra",
+      "minLevel": 7,
+      "spellIds": [
+        "escudo-ardente",
+        "movimentacao-livre"
+      ]
+    },
+    {
+      "classId": "clerigo",
+      "subclassId": "dominio-da-luz",
+      "minLevel": 3,
+      "spellIds": [
+        "fogo-das-fadas",
+        "maos-flamejantes",
+        "raio-ardente",
+        "ver-o-invisivel"
+      ]
+    },
+    {
+      "classId": "clerigo",
+      "subclassId": "dominio-da-luz",
+      "minLevel": 5,
+      "spellIds": [
+        "bola-de-fogo",
+        "luz-do-dia"
+      ]
+    },
+    {
+      "classId": "clerigo",
+      "subclassId": "dominio-da-luz",
+      "minLevel": 7,
+      "spellIds": [
+        "muralha-de-fogo",
+        "olho-arcano"
+      ]
+    },
+    {
+      "classId": "clerigo",
+      "subclassId": "dominio-da-trapaca",
+      "minLevel": 3,
+      "spellIds": [
+        "disfarcar-se",
+        "enfeiticar-pessoa",
+        "invisibilidade",
+        "passo-sem-rastro"
+      ]
+    },
+    {
+      "classId": "clerigo",
+      "subclassId": "dominio-da-trapaca",
+      "minLevel": 5,
+      "spellIds": [
+        "indetectavel",
+        "padrao-hipnotico"
+      ]
+    },
+    {
+      "classId": "clerigo",
+      "subclassId": "dominio-da-trapaca",
+      "minLevel": 7,
+      "spellIds": [
+        "confusao",
+        "porta-dimensional"
+      ]
+    },
+    {
+      "classId": "clerigo",
+      "subclassId": "dominio-da-vida",
+      "minLevel": 3,
+      "spellIds": [
+        "auxilio",
+        "bencao",
+        "curar-ferimentos",
+        "restauracao-menor"
+      ]
+    },
+    {
+      "classId": "clerigo",
+      "subclassId": "dominio-da-vida",
+      "minLevel": 5,
+      "spellIds": [
+        "palavra-curativa-em-massa",
+        "revivificar"
+      ]
+    },
+    {
+      "classId": "clerigo",
+      "subclassId": "dominio-da-vida",
+      "minLevel": 7,
+      "spellIds": [
+        "aura-de-vida",
+        "protecao-contra-a-morte"
+      ]
+    },
+    {
+      "classId": "druida",
+      "subclassId": "circulo-da-lua",
+      "minLevel": 3,
+      "spellIds": [
+        "curar-ferimentos",
+        "fagulha-estelar",
+        "raio-lunar"
+      ]
+    },
+    {
+      "classId": "druida",
+      "subclassId": "circulo-da-lua",
+      "minLevel": 5,
+      "spellIds": [
+        "invocar-animais"
+      ]
+    },
+    {
+      "classId": "druida",
+      "subclassId": "circulo-da-lua",
+      "minLevel": 7,
+      "spellIds": [
+        "fonte-do-luar"
+      ]
+    },
+    {
+      "classId": "druida",
+      "subclassId": "circulo-da-terra",
+      "minLevel": 3,
+      "spellIds": [
+        "maos-flamejantes",
+        "raio-de-fogo",
+        "turvar"
+      ],
+      "choiceId": "land.arido"
+    },
+    {
+      "classId": "druida",
+      "subclassId": "circulo-da-terra",
+      "minLevel": 5,
+      "spellIds": [
+        "bola-de-fogo"
+      ],
+      "choiceId": "land.arido"
+    },
+    {
+      "classId": "druida",
+      "subclassId": "circulo-da-terra",
+      "minLevel": 7,
+      "spellIds": [
+        "malogro"
+      ],
+      "choiceId": "land.arido"
+    },
+    {
+      "classId": "druida",
+      "subclassId": "circulo-da-terra",
+      "minLevel": 3,
+      "spellIds": [
+        "nevoa-obscurecente",
+        "paralisar-pessoa",
+        "raio-de-gelo"
+      ],
+      "choiceId": "land.polar"
+    },
+    {
+      "classId": "druida",
+      "subclassId": "circulo-da-terra",
+      "minLevel": 5,
+      "spellIds": [
+        "nevasca"
+      ],
+      "choiceId": "land.polar"
+    },
+    {
+      "classId": "druida",
+      "subclassId": "circulo-da-terra",
+      "minLevel": 7,
+      "spellIds": [
+        "tempestade-glacial"
+      ],
+      "choiceId": "land.polar"
+    },
+    {
+      "classId": "druida",
+      "subclassId": "circulo-da-terra",
+      "minLevel": 3,
+      "spellIds": [
+        "passo-nebuloso",
+        "sono",
+        "toque-chocante"
+      ],
+      "choiceId": "land.temperado"
+    },
+    {
+      "classId": "druida",
+      "subclassId": "circulo-da-terra",
+      "minLevel": 5,
+      "spellIds": [
+        "relampago"
+      ],
+      "choiceId": "land.temperado"
+    },
+    {
+      "classId": "druida",
+      "subclassId": "circulo-da-terra",
+      "minLevel": 7,
+      "spellIds": [
+        "movimentacao-livre"
+      ],
+      "choiceId": "land.temperado"
+    },
+    {
+      "classId": "druida",
+      "subclassId": "circulo-da-terra",
+      "minLevel": 3,
+      "spellIds": [
+        "bolha-acida",
+        "raio-nauseante",
+        "teia"
+      ],
+      "choiceId": "land.tropical"
+    },
+    {
+      "classId": "druida",
+      "subclassId": "circulo-da-terra",
+      "minLevel": 5,
+      "spellIds": [
+        "nuvem-fetida"
+      ],
+      "choiceId": "land.tropical"
+    },
+    {
+      "classId": "druida",
+      "subclassId": "circulo-da-terra",
+      "minLevel": 7,
+      "spellIds": [
+        "polimorfia"
+      ],
+      "choiceId": "land.tropical"
+    },
+    {
+      "classId": "druida",
+      "subclassId": "circulo-do-mar",
+      "minLevel": 3,
+      "spellIds": [
+        "despedacar",
+        "lufada-de-vento",
+        "nevoa-obscurecente",
+        "onda-trovejante",
+        "raio-de-gelo"
+      ]
+    },
+    {
+      "classId": "druida",
+      "subclassId": "circulo-do-mar",
+      "minLevel": 5,
+      "spellIds": [
+        "relampago",
+        "respirar-na-agua"
+      ]
+    },
+    {
+      "classId": "druida",
+      "subclassId": "circulo-do-mar",
+      "minLevel": 7,
+      "spellIds": [
+        "controlar-agua",
+        "tempestade-glacial"
+      ]
+    },
+    {
+      "classId": "feiticeiro",
+      "subclassId": "feiticaria-aberrante",
+      "minLevel": 3,
+      "spellIds": [
+        "acalmar-emocoes",
+        "bracos-de-hadar",
+        "detectar-pensamentos",
+        "sussurros-dissonantes",
+        "talho-mental"
+      ]
+    },
+    {
+      "classId": "feiticeiro",
+      "subclassId": "feiticaria-aberrante",
+      "minLevel": 5,
+      "spellIds": [
+        "fome-de-hadar",
+        "remeter"
+      ]
+    },
+    {
+      "classId": "feiticeiro",
+      "subclassId": "feiticaria-aberrante",
+      "minLevel": 7,
+      "spellIds": [
+        "invocar-aberracao",
+        "tentaculos-negros-de-evard"
+      ]
+    },
+    {
+      "classId": "feiticeiro",
+      "subclassId": "feiticaria-draconica",
+      "minLevel": 3,
+      "spellIds": [
+        "alterar-se",
+        "comando",
+        "orbe-cromatico",
+        "sopro-de-dragao"
+      ]
+    },
+    {
+      "classId": "feiticeiro",
+      "subclassId": "feiticaria-draconica",
+      "minLevel": 5,
+      "spellIds": [
+        "medo",
+        "voo"
+      ]
+    },
+    {
+      "classId": "feiticeiro",
+      "subclassId": "feiticaria-draconica",
+      "minLevel": 7,
+      "spellIds": [
+        "enfeiticar-monstro",
+        "olho-arcano"
+      ]
+    },
+    {
+      "classId": "feiticeiro",
+      "subclassId": "feiticaria-mecanica",
+      "minLevel": 3,
+      "spellIds": [
+        "alarme",
+        "auxilio",
+        "protecao-contra-o-bem-e-o-mal",
+        "restauracao-menor"
+      ]
+    },
+    {
+      "classId": "feiticeiro",
+      "subclassId": "feiticaria-mecanica",
+      "minLevel": 5,
+      "spellIds": [
+        "dissipar-magia",
+        "protecao-contra-energia"
+      ]
+    },
+    {
+      "classId": "feiticeiro",
+      "subclassId": "feiticaria-mecanica",
+      "minLevel": 7,
+      "spellIds": [
+        "invocar-constructo",
+        "movimentacao-livre"
+      ]
+    },
+    {
+      "classId": "guardiao",
+      "subclassId": "andarilho-feerico",
+      "minLevel": 3,
+      "spellIds": [
+        "enfeiticar-pessoa"
+      ]
+    },
+    {
+      "classId": "guardiao",
+      "subclassId": "andarilho-feerico",
+      "minLevel": 5,
+      "spellIds": [
+        "passo-nebuloso"
+      ]
+    },
+    {
+      "classId": "guardiao",
+      "subclassId": "vigilante-das-sombras",
+      "minLevel": 3,
+      "spellIds": [
+        "disfarcar-se"
+      ]
+    },
+    {
+      "classId": "guardiao",
+      "subclassId": "vigilante-das-sombras",
+      "minLevel": 5,
+      "spellIds": [
+        "corda-extradimensional"
+      ]
+    },
+    {
+      "classId": "paladino",
+      "subclassId": "juramento-da-devocao",
+      "minLevel": 3,
+      "spellIds": [
+        "escudo-da-fe",
+        "protecao-contra-o-bem-e-o-mal"
+      ]
+    },
+    {
+      "classId": "paladino",
+      "subclassId": "juramento-da-devocao",
+      "minLevel": 5,
+      "spellIds": [
+        "auxilio",
+        "zona-da-verdade"
+      ]
+    },
+    {
+      "classId": "paladino",
+      "subclassId": "juramento-da-gloria",
+      "minLevel": 3,
+      "spellIds": [
+        "heroismo",
+        "raio-guia"
+      ]
+    },
+    {
+      "classId": "paladino",
+      "subclassId": "juramento-da-gloria",
+      "minLevel": 5,
+      "spellIds": [
+        "aprimorar-atributo",
+        "arma-magica"
+      ]
+    },
+    {
+      "classId": "paladino",
+      "subclassId": "juramento-da-vinganca",
+      "minLevel": 3,
+      "spellIds": [
+        "marca-do-predador",
+        "perdicao"
+      ]
+    },
+    {
+      "classId": "paladino",
+      "subclassId": "juramento-da-vinganca",
+      "minLevel": 5,
+      "spellIds": [
+        "paralisar-pessoa",
+        "passo-nebuloso"
+      ]
+    },
+    {
+      "classId": "paladino",
+      "subclassId": "juramento-dos-ancioes",
+      "minLevel": 3,
+      "spellIds": [
+        "falar-com-animais",
+        "golpe-constritor"
+      ]
+    },
+    {
+      "classId": "paladino",
+      "subclassId": "juramento-dos-ancioes",
+      "minLevel": 5,
+      "spellIds": [
+        "passo-nebuloso",
+        "raio-lunar"
+      ]
+    },
+    {
+      "classId": "bardo",
+      "minLevel": 3,
+      "spellIds": [
+        "enfeiticar-pessoa",
+        "reflexos"
+      ],
+      "subclassId": "colegio-do-glamour"
+    },
+    {
+      "classId": "bardo",
+      "minLevel": 6,
+      "spellIds": [
+        "comando"
+      ],
+      "subclassId": "colegio-do-glamour"
+    },
+    {
+      "classId": "druida",
+      "minLevel": 3,
+      "spellIds": [
+        "orientacao",
+        "raio-guia"
+      ],
+      "subclassId": "circulo-das-estrelas"
+    },
+    {
+      "classId": "druida",
+      "minLevel": 1,
+      "spellIds": [
+        "falar-com-animais"
+      ]
+    },
+    {
+      "classId": "druida",
+      "minLevel": 2,
+      "spellIds": [
+        "convocar-familiar"
+      ]
+    },
+    {
+      "classId": "paladino",
+      "minLevel": 2,
+      "spellIds": [
+        "destruicao-divina"
+      ]
+    },
+    {
+      "classId": "paladino",
+      "minLevel": 5,
+      "spellIds": [
+        "convocar-montaria"
+      ]
+    }
+  ]
+}

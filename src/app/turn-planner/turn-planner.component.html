@@ -1,9 +1,9 @@
 <div class="turn-page">
   <header class="hero">
     <div>
-      <span class="kicker">D&amp;D 2024 · níveis 1–6</span>
+      <span class="kicker">D&amp;D 2024 · níveis 1–8</span>
       <h1>Auxiliar de Turnos</h1>
-      <p>Escolha um personagem salvo e acompanhe custos, gatilhos e bloqueios durante o turno.</p>
+      <p>Escolha um personagem salvo ou um dos modelos prontos e acompanhe custos, gatilhos e bloqueios durante o turno.</p>
     </div>
     <label class="density-toggle"><input type="checkbox" [checked]="didactic" (change)="didactic = !didactic" /> Modo didático</label>
   </header>
@@ -17,11 +17,12 @@
       <a class="secondary-button link-button" routerLink="/personagens">Gerenciar personagens</a>
     </div>
     @if (profiles.length) {
-      <div class="picker-grid" role="radiogroup" aria-label="Personagens salvos">
+      <div class="picker-grid" role="radiogroup" aria-label="Personagens jogáveis">
         @for (profile of profiles; track profile.id) {
           <label class="profile-option" [class.selected]="selectedProfileId === profile.id">
+            <img [src]="profileArt(profile)" alt="" loading="lazy" width="72" height="80" />
             <input type="radio" name="turn-profile" [checked]="selectedProfileId === profile.id" (change)="selectProfile(profile.id)" />
-            <span><strong>{{ profile.name }}</strong><small>Nível {{ profileLevel(profile) }}{{ profile.classes.length > 1 ? ' · multiclasse' : '' }}</small></span>
+            <span><strong>{{ profile.name }} @if (isExample(profile)) { <em>Exemplo</em> }</strong><small>Nível {{ profileLevel(profile) }}{{ profile.classes.length > 1 ? ' · multiclasse' : '' }}</small></span>
           </label>
         }
       </div>
@@ -34,7 +35,7 @@
   </section>
 
   @if (sessionStarted && state && activeProfile) {
-    <section class="active-character" aria-live="polite"><span>Personagem ativo</span><strong>{{ activeProfile.name }}</strong></section>
+    <section class="active-character" aria-live="polite"><img class="active-portrait" [src]="profileArt(activeProfile)" alt="" width="64" height="76" /><span>Personagem ativo</span><strong>{{ activeProfile.name }}</strong></section>
     <section class="session" [class.reaction-phase]="state.phase === 'reaction-window'">
       <app-turn-resource-bar [state]="state" (resourceChange)="store.setResource($event.id, $event.current)" />
       @if (combatEnded) {
