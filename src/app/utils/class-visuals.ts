@@ -13,7 +13,7 @@ export const CLASS_VISUALS: Record<TurnClassId, { image: string; role: string; c
   guerreiro: { image: 'humans-swordsman', role: 'Armas · técnica · versatilidade', color: '#687585' },
   ladino: { image: 'humans-thief+female', role: 'Precisão · furtividade · perícia', color: '#7e6364' },
   mago: { image: 'humans-mage', role: 'Estudo · grimório · magia', color: '#516a93' },
-  monge: { image: 'humans-footpad', role: 'Disciplina · agilidade · foco', color: '#93764a' },
+  monge: { image: 'humans-mage-white', role: 'Disciplina · agilidade · foco', color: '#93764a' },
   paladino: { image: 'humans-paladin', role: 'Juramento · proteção · combate', color: '#9c874e' },
 };
 

@@ -24,6 +24,7 @@ import { RuleDetailsComponent } from './rule-details.component';
 import { TurnActionBoardComponent } from './turn-action-board.component';
 import { TurnResourceBarComponent } from './turn-resource-bar.component';
 import { TurnTimelineComponent } from './turn-timeline.component';
+import { UiMotionDirective } from '../shared/ui-motion.directive';
 
 const unknownFacts = (): Record<string, 'unknown'> => ({
   'attack-advantage': 'unknown',
@@ -65,6 +66,7 @@ export const describeRemainingTurnEconomy = (
   standalone: true,
   providers: [TurnPlannerStore],
   imports: [
+    UiMotionDirective,
     CommonModule,
     RouterLink,
     CombatContextComponent,

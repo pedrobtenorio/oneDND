@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { UiMotionDirective } from './shared/ui-motion.directive';
 
 @Component({
-  selector: 'app-root', standalone: true, imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  selector: 'app-root', standalone: true, imports: [RouterOutlet, RouterLink, RouterLinkActive, UiMotionDirective],
   template: `
     <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
     <header class="mobile-header"><a routerLink="/guia" class="brand">One D&amp;D <small>Compêndio de aventura</small></a>
       <button type="button" (click)="menuOpen = !menuOpen" [attr.aria-expanded]="menuOpen" aria-controls="main-navigation">{{ menuOpen ? 'Fechar menu' : 'Menu' }}</button>
     </header>
-    <aside class="sidebar" [class.open]="menuOpen" (keydown.escape)="menuOpen = false">
+    <aside class="sidebar" [appMotion]="menuOpen" motionKind="select" [class.open]="menuOpen" (keydown.escape)="menuOpen = false">
       <a routerLink="/guia" class="brand" (click)="menuOpen = false"><span class="brand-mark" aria-hidden="true">✧</span>One D&amp;D<small>Compêndio de aventura</small></a>
       <p class="nav-label">Sua mesa, organizada</p>
       <nav id="main-navigation" aria-label="Navegação principal">

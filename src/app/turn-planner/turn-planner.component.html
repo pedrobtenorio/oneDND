@@ -9,7 +9,7 @@
   </header>
 
   @if (loadError) { <p class="alert error" role="alert">{{ loadError }}</p> }
-  @if (notice) { <p class="alert" role="status">{{ notice }}</p> }
+  @if (notice) { <p class="alert" [appMotion]="notice" role="status">{{ notice }}</p> }
 
   <section class="character-picker" aria-labelledby="character-picker-title">
     <div class="picker-heading">
@@ -19,7 +19,7 @@
     @if (profiles.length) {
       <div class="picker-grid" role="radiogroup" aria-label="Personagens jogáveis">
         @for (profile of profiles; track profile.id) {
-          <label class="profile-option" [class.selected]="selectedProfileId === profile.id">
+          <label class="profile-option" [appMotion]="selectedProfileId === profile.id" motionKind="select" [class.selected]="selectedProfileId === profile.id">
             <img [src]="profileArt(profile)" alt="" loading="lazy" width="72" height="80" />
             <input type="radio" name="turn-profile" [checked]="selectedProfileId === profile.id" (change)="selectProfile(profile.id)" />
             <span><strong>{{ profile.name }} @if (isExample(profile)) { <em>Exemplo</em> }</strong><small>Nível {{ profileLevel(profile) }}{{ profile.classes.length > 1 ? ' · multiclasse' : '' }}</small></span>
@@ -35,11 +35,11 @@
   </section>
 
   @if (sessionStarted && state && activeProfile) {
-    <section class="active-character" aria-live="polite"><img class="active-portrait" [src]="profileArt(activeProfile)" alt="" width="64" height="76" /><span>Personagem ativo</span><strong>{{ activeProfile.name }}</strong></section>
+    <section class="active-character" [appMotion]="activeProfile.id" aria-live="polite"><img class="active-portrait" [src]="profileArt(activeProfile)" alt="" width="64" height="76" /><span>Personagem ativo</span><strong>{{ activeProfile.name }}</strong><a class="secondary-button" [routerLink]="['/personagens', activeProfile.id]" target="_blank" rel="noopener">Ver ficha ↗</a></section>
     <section class="session" [class.reaction-phase]="state.phase === 'reaction-window'">
       <app-turn-resource-bar [state]="state" (resourceChange)="store.setResource($event.id, $event.current)" />
       @if (combatEnded) {
-        <section class="between-combats" aria-labelledby="between-combats-title">
+        <section class="between-combats" appMotion aria-labelledby="between-combats-title">
           <span class="confirmation-kicker">Fora de combate</span>
           <h2 id="between-combats-title">Descansos e recuperação</h2>
           <p>O histórico deste combate foi apagado. Os recursos gastos continuam registrados até que um descanso os recupere.</p>
@@ -62,10 +62,10 @@
         <div class="context-card"><app-combat-context [context]="context" (factChange)="factChanged($event)" /></div>
 
         @if (state.awaitingAttackOutcome) {
-          <section class="outcome" aria-live="assertive"><strong>Qual foi o resultado do ataque?</strong><button class="primary-button" type="button" (click)="store.attackResult('hit')">Acertou</button><button class="secondary-button" type="button" (click)="store.attackResult('miss')">Errou</button></section>
+          <section class="outcome" appMotion aria-live="assertive"><strong>Qual foi o resultado do ataque?</strong><button class="primary-button" type="button" (click)="store.attackResult('hit')">Acertou</button><button class="secondary-button" type="button" (click)="store.attackResult('miss')">Errou</button></section>
         }
         @if (state.currentTrigger) {
-          <section class="trigger-banner"><span>Gatilho ativo: <strong>{{ state.currentTrigger }}</strong></span><button class="text-button" type="button" (click)="store.clearTrigger()">Concluir gatilhos</button></section>
+          <section class="trigger-banner" [appMotion]="state.currentTrigger"><span>Gatilho ativo: <strong>{{ state.currentTrigger }}</strong></span><button class="text-button" type="button" (click)="store.clearTrigger()">Concluir gatilhos</button></section>
         }
         @if (canPerformNextAttack) {
           <section class="next-attack-banner">
@@ -80,7 +80,7 @@
               <div class="movement-actions" aria-label="Registrar movimento"><span>Registrar movimento:</span><button class="secondary-button" type="button" (click)="store.move(1.5)" [disabled]="state.movementRemaining < 1.5">1,5 m</button><button class="secondary-button" type="button" (click)="store.move(3)" [disabled]="state.movementRemaining < 3">3 m</button></div>
               <app-turn-action-board [evaluations]="ownTurnEvaluations" [didactic]="didactic" (inspect)="inspect($event)" />
             } @else {
-              <section class="reaction-heading"><span>Turno encerrado</span><h2>Janela de Reação</h2><p>A Reação e os efeitos relevantes continuam acompanhados até o início do próximo turno.</p></section>
+              <section class="reaction-heading" appMotion><span>Turno encerrado</span><h2>Janela de Reação</h2><p>A Reação e os efeitos relevantes continuam acompanhados até o início do próximo turno.</p></section>
               <app-turn-action-board [evaluations]="reactionEvaluations" [didactic]="didactic" (inspect)="inspect($event)" />
             }
           </div>

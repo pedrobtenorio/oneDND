@@ -25,8 +25,9 @@
   .character-page .example-card p { color:#605447; }
   .character-page .example-badge { position:absolute; top:12px; right:12px; border:1px solid #c5ad73; color:#ffe5ad; background:#273136; z-index:1; }
   .character-page .example-card .example-role { color:#75402f; }
-  .character-page .example-actions { margin-top:auto; display:flex; width:100%; gap:8px; padding-top:8px; }
-  .character-page .example-card button { flex:1; padding:0 8px; font-size:.76rem; }
+  .character-page .example-actions { margin-top:auto; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); width:100%; gap:8px; padding-top:8px; }
+  .character-page .example-actions>a,.character-page .example-actions>button { display:flex; align-items:center; justify-content:center; min-height:44px; padding:8px; font-family:inherit; font-size:.76rem; line-height:1.2; white-space:nowrap; text-decoration:none; box-sizing:border-box; }
+  .character-page .example-actions>.primary-button { grid-column:1/-1; grid-row:1; }
   .character-page .example-card .primary-button { background:#273136; color:#fff1d6; border-color:#273136; }
   .character-page .stepper button { border-radius:5px; min-height:58px; }
   .character-page .stepper button.active { background:#273136; color:#fff1d6; border-color:#b28b4b; }
@@ -40,6 +41,9 @@
   .class-copy { padding:12px 14px 6px; flex:1; }
   .class-copy h3 { margin:0; color:#fff2d7; font-size:1.4rem; }
   .class-copy p { margin:6px 0; font-size:.72rem; color:#d2d5cf; line-height:1.5; }
+  .character-page .class-copy .text-button { color:#ffe4ac; border:1px solid #aa915f; background:transparent; }
+  .character-page .class-copy .text-button:hover { color:#fff8e9; background:#414d4d; }
+  .character-page .class-copy .text-button:focus-visible { outline:2px solid #ffe4ac; outline-offset:3px; }
   .class-level-controls { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:8px 14px 14px; }
   .class-level-controls label { display:flex; align-items:center; gap:8px; color:#ead7b5; font-size:.75rem; }
   .class-level-controls input { width:44px; min-height:36px; border:1px solid #b89b64; border-radius:4px; background:#fff8e8; color:#283136; text-align:center; }
