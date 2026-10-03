@@ -3,12 +3,6 @@
 .picker-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .picker-heading span, .active-character span { color: #9b6422; font-size: .7rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
 .picker-heading h2 { margin: 3px 0 0; color: #572018; font: 800 1.15rem 'Cinzel', Georgia, serif; }
-.picker-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 9px; margin-top: 14px; }
-.profile-option { display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid #b69d76; border-radius: 11px; color: #41291c; background: #fffdf5; cursor: pointer; }
-.profile-option.selected { border-color: #7b2921; background: #f3dbad; box-shadow: var(--shadow); }
-.profile-option input { width: 18px; height: 18px; accent-color: #7b2921; }
-.profile-option span { display: grid; gap: 3px; }
-.profile-option small { color: #75685c; }
 .start-button { display: block; margin: 16px 0 0 auto; }
 .empty-picker { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; padding: 14px; border-radius: 10px; background: #f4e4c5; }
 .empty-picker p { margin: 0; }

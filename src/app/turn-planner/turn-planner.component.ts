@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { profileArt } from '../utils/class-visuals';
+import { portraitFraming } from '../utils/portrait-catalog';
+import { CLASS_NAMES } from '../utils/character-reference';
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -80,6 +82,10 @@ export const describeRemainingTurnEconomy = (
 })
 export class TurnPlannerComponent implements OnInit {
   readonly profileArt = profileArt;
+  readonly portraitFraming = portraitFraming;
+  profileClasses(profile: CharacterProfile):string {
+    return profile.classes.map(c=>`${CLASS_NAMES[c.classId]} ${c.level}`).join(' · ');
+  }
   private readonly destroyRef = inject(DestroyRef);
   private readonly route = inject(ActivatedRoute);
   private readonly catalogService = inject(TurnRuleCatalogService);

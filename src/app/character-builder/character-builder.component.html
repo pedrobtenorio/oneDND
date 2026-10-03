@@ -44,7 +44,7 @@
       <div class="example-grid" #exampleGallery tabindex="0" aria-label="Galeria de personagens de exemplo">
         @for (example of examples; track example.profile.id) {
           <article class="example-card">
-            <img class="example-art" [src]="profileArt(example.profile)" alt="" loading="lazy" width="400" height="400" />
+            <img class="example-art" [class.framed]="!!portraitFraming(example.profile.portraitId)" [src]="profileArt(example.profile)" [style.object-view-box]="portraitFraming(example.profile.portraitId)" alt="" loading="lazy" width="400" height="400" />
             <div class="example-card-heading">
               <span class="example-badge">Nível 8</span>
               <h3>{{ example.profile.name }}</h3>

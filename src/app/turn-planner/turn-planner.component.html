@@ -17,12 +17,14 @@
       <a class="secondary-button link-button" routerLink="/personagens">Gerenciar personagens</a>
     </div>
     @if (profiles.length) {
-      <div class="picker-grid" role="radiogroup" aria-label="Personagens jogáveis">
+      <div class="picker-navigation"><span>Explore os personagens</span><button type="button" aria-label="Ver personagens anteriores" (click)="profileGallery.scrollBy({left:-240,behavior:'smooth'})">←</button><button type="button" aria-label="Ver próximos personagens" (click)="profileGallery.scrollBy({left:240,behavior:'smooth'})">→</button></div>
+      <div class="picker-grid" #profileGallery tabindex="0" role="radiogroup" aria-label="Personagens jogáveis">
         @for (profile of profiles; track profile.id) {
           <label class="profile-option" [appMotion]="selectedProfileId === profile.id" motionKind="select" [class.selected]="selectedProfileId === profile.id">
-            <img [src]="profileArt(profile)" alt="" loading="lazy" width="72" height="80" />
+            <img [src]="profileArt(profile)" [class.framed]="!!portraitFraming(profile.portraitId)" [style.object-view-box]="portraitFraming(profile.portraitId)" alt="" loading="lazy" width="220" height="200" />
             <input type="radio" name="turn-profile" [checked]="selectedProfileId === profile.id" (change)="selectProfile(profile.id)" />
-            <span><strong>{{ profile.name }} @if (isExample(profile)) { <em>Exemplo</em> }</strong><small>Nível {{ profileLevel(profile) }}{{ profile.classes.length > 1 ? ' · multiclasse' : '' }}</small></span>
+            @if (isExample(profile)) { <em>Exemplo</em> }
+            <span class="profile-card-copy"><strong>{{ profile.name }}</strong><small>{{ profileClasses(profile) }}</small><small>Nível {{ profileLevel(profile) }}{{ profile.classes.length > 1 ? ' · multiclasse' : '' }}</small></span>
           </label>
         }
       </div>
@@ -35,7 +37,7 @@
   </section>
 
   @if (sessionStarted && state && activeProfile) {
-    <section class="active-character" [appMotion]="activeProfile.id" aria-live="polite"><img class="active-portrait" [src]="profileArt(activeProfile)" alt="" width="64" height="76" /><span>Personagem ativo</span><strong>{{ activeProfile.name }}</strong><a class="secondary-button" [routerLink]="['/personagens', activeProfile.id]" target="_blank" rel="noopener">Ver ficha ↗</a></section>
+    <section class="active-character" [appMotion]="activeProfile.id" aria-live="polite"><img class="active-portrait" [src]="profileArt(activeProfile)" [class.framed]="!!portraitFraming(activeProfile.portraitId)" [style.object-view-box]="portraitFraming(activeProfile.portraitId)" alt="" width="64" height="76" /><span>Personagem ativo</span><strong>{{ activeProfile.name }}</strong><a class="secondary-button" [routerLink]="['/personagens', activeProfile.id]" target="_blank" rel="noopener">Ver ficha ↗</a></section>
     <section class="session" [class.reaction-phase]="state.phase === 'reaction-window'">
       <app-turn-resource-bar [state]="state" (resourceChange)="store.setResource($event.id, $event.current)" />
       @if (combatEnded) {

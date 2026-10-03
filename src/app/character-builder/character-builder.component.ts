@@ -2,6 +2,7 @@ import { ABILITIES, automaticSpells as grantedSpells, eligibleChoice, finalAbili
 import { AbilityId, AbilityScores, AbilityGeneration, FeatSelection, CharacterChoiceGroup } from '../models/turn-planner.models';
 import { AbilityScorePickerComponent } from '../shared/ability-score-picker.component';
 import { validateGeneration } from '../utils/ability-generation';
+import { portraitFraming } from '../utils/portrait-catalog';
 import { preparedLimit, cantripLimit, maxSpellCircle, featLevels, movementSpeed } from '../utils/character-progression';
 import { CommonModule } from '@angular/common';
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
@@ -119,6 +120,7 @@ export class CharacterBuilderComponent implements OnInit {
   readonly classVisuals = CLASS_VISUALS;
   readonly classArt = classArt;
   readonly profileArt = profileArt;
+  readonly portraitFraming = portraitFraming;
 
   playExample(example: CharacterExample): void {
     void this.router.navigate(['/turno'], { queryParams: { personagem: example.profile.id } });
