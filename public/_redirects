@@ -1,1 +1,7 @@
-/*    /index.html   200
+/ /guia 301
+/personagens /index.csr.html 200
+/personagens/* /index.csr.html 200
+/turno /index.csr.html 200
+/busca /index.csr.html 200
+/monstros /index.csr.html 200
+/* /404.html 404

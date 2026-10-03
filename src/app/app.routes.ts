@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
+import pages from './seo/pages.json';
 
 export const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'guia' },
+  ...pages.filter(p=>p.path==='classes'||p.classId).map(p=>({path:p.path,data:{classId:p.classId},loadComponent:()=>import('./seo/class-guide.component').then(m=>m.ClassGuideComponent)})),
   {
     path: 'guia',
     loadComponent: () =>
@@ -39,4 +41,5 @@ export const appRoutes: Routes = [
     loadComponent: () =>
       import('./monster-builder/monster-builder.component').then((m) => m.MonsterBuilderComponent),
   },
+  { path:'**',loadComponent:()=>import('./seo/not-found.component').then(m=>m.NotFoundComponent) },
 ];
