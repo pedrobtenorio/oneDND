@@ -18,6 +18,7 @@ export interface CharacterExample {
 interface ExampleDefinition {
   id: string;
   name: string;
+  portraitId: string;
   role: string;
   description: string;
   speciesId: string;
@@ -42,6 +43,7 @@ interface ExampleDefinition {
 const DEFINITIONS: ExampleDefinition[] = [
   {
     id: 'example-rodrigo', name: 'Rodrigo', role: 'Defensor e comandante de linha de frente',
+    portraitId: 'printableheroes-mini-1159-0-0-standee-1-image-1',
     description: 'Guerreiro Campeão disciplinado, protege aliados com escudo e controla o campo de batalha.',
     speciesId: 'humano', classId: 'guerreiro', subclassId: 'campeao', backgroundId: 'background.guarda',
     baseAbilities: scores(15, 12, 14, 8, 13, 10), backgroundBonuses: { strength: 2, intelligence: 1 },
@@ -53,6 +55,7 @@ const DEFINITIONS: ExampleDefinition[] = [
   },
   {
     id: 'example-lia', name: 'Lia', role: 'Batedora, infiltradora e especialista',
+    portraitId: 'printableheroes-mini-974-0-0-standee-2-image-2',
     description: 'Ladina Ladrã ágil, combina reconhecimento, precisão à distância e perícias de exploração.',
     speciesId: 'halfling', classId: 'ladino', subclassId: 'ladrao', backgroundId: 'background.escriba',
     baseAbilities: scores(8, 15, 14, 13, 12, 10), backgroundBonuses: { dexterity: 2, wisdom: 1 },
@@ -63,6 +66,7 @@ const DEFINITIONS: ExampleDefinition[] = [
   },
   {
     id: 'example-ines', name: 'Inês', role: 'Curandeira e sustentação do grupo',
+    portraitId: 'printableheroes-mini-160-0-0-standee-1-image-1',
     description: 'Clériga da Vida resistente, mantém o grupo de pé e ocupa a linha de frente quando necessário.',
     speciesId: 'anao', classId: 'clerigo', subclassId: 'dominio-da-vida', backgroundId: 'background.eremita',
     baseAbilities: scores(8, 14, 13, 10, 15, 12), backgroundBonuses: { wisdom: 2, constitution: 1 },
@@ -73,6 +77,7 @@ const DEFINITIONS: ExampleDefinition[] = [
   },
   {
     id: 'example-nuno', name: 'Nuno', role: 'Arcanista de campo e especialista em evocação',
+    portraitId: 'printableheroes-mini-127-0-0-gnome-alchemist-0101',
     description: 'Mago Evocador estudioso, usa controle e dano em área sem perder o foco na investigação.',
     speciesId: 'gnomo', speciesChoiceId: 'gnomo-das-rochas', classId: 'mago', subclassId: 'evocador', backgroundId: 'background.escriba',
     baseAbilities: scores(8, 13, 14, 15, 12, 10), backgroundBonuses: { intelligence: 2, dexterity: 1 },
@@ -82,6 +87,7 @@ const DEFINITIONS: ExampleDefinition[] = [
   },
   {
     id: 'example-dinis', name: 'Dinis', role: 'Porta-voz, apoio e conhecedor versátil',
+    portraitId: 'printableheroes-mini-204-0-0-swashbuckler-101',
     description: 'Bardo do Conhecimento carismático, abre caminhos sociais e oferece soluções para quase qualquer desafio.',
     speciesId: 'humano', classId: 'bardo', subclassId: 'colegio-do-conhecimento', backgroundId: 'background.charlatao',
     baseAbilities: scores(8, 14, 13, 10, 12, 15), backgroundBonuses: { charisma: 2, constitution: 1 },
@@ -95,6 +101,7 @@ const DEFINITIONS: ExampleDefinition[] = [
   },
   {
     id: 'example-raul', name: 'Raul', role: 'Resgate, choque e resistência',
+    portraitId: 'printableheroes-mini-6-0-0-goliath_barbarian_0101',
     description: 'Bárbaro Berserker de ancestralidade pétrea, abre passagem e absorve a pressão sobre os aliados.',
     speciesId: 'golias', speciesChoiceId: 'golias-pedra', classId: 'barbaro', subclassId: 'berserker', backgroundId: 'background.fazendeiro',
     baseAbilities: scores(15, 14, 13, 8, 12, 10), backgroundBonuses: { strength: 2, constitution: 1 },
@@ -105,6 +112,7 @@ const DEFINITIONS: ExampleDefinition[] = [
   },
   {
     id: 'example-altair', name: 'Altair', role: 'Capitão protetor e rastreador tático',
+    portraitId: 'printableheroes-mini-587-0-0-01',
     description: 'Guardião Caçador e capitão dos Sentinelas, protege sua patrulha e persegue ameaças com precisão.',
     speciesId: 'humano', classId: 'guardiao', subclassId: 'cacador', backgroundId: 'background.guarda',
     baseAbilities: scores(12, 15, 14, 8, 14, 13), backgroundBonuses: { strength: 1, wisdom: 2 },
@@ -138,6 +146,7 @@ export function buildCharacterExamples(catalog: TurnCatalog, spells: Spell[]): C
     const profile: CharacterProfile = {
       id: definition.id,
       name: definition.name,
+      portraitId: definition.portraitId,
       abilityMode: 'base',
       baseAbilities: { ...definition.baseAbilities },
       backgroundId: definition.backgroundId,

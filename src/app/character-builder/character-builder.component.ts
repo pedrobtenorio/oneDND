@@ -25,6 +25,8 @@ import { classLevel, hasSpellcasting, totalLevel, validateProfile } from '../uti
 import { normalizeKey } from '../utils/linkify';
 import { CheckboxChoiceGroupComponent, CheckboxChoiceItem } from './checkbox-choice-group.component';
 import { buildCharacterExamples, CharacterExample } from './character-examples';
+import { CLASS_VISUALS, classArt, profileArt } from '../utils/class-visuals';
+import { PortraitPickerComponent } from './portrait-picker.component';
 
 const createId = (): string =>
   globalThis.crypto?.randomUUID?.() ?? `profile-${Date.now()}-${Math.random().toString(36).slice(2)}`;
@@ -67,11 +69,25 @@ type ArrayControlName =
 @Component({
   selector: 'app-character-builder',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, CheckboxChoiceGroupComponent],
+  imports: [CommonModule, ReactiveFormsModule, CheckboxChoiceGroupComponent, PortraitPickerComponent],
   templateUrl: './character-builder.component.html',
   styleUrl: './character-builder.component.css',
 })
 export class CharacterBuilderComponent implements OnInit {
+  portraitId = '';
+  readonly classVisuals = CLASS_VISUALS;
+  readonly classArt = classArt;
+  readonly profileArt = profileArt;
+
+  playExample(example: CharacterExample): void {
+    void this.router.navigate(['/turno'], { queryParams: { personagem: example.profile.id } });
+  }
+
+  adjustClassLevel(classId: TurnClassId, delta: number): void {
+    const control = this.profileForm.controls[classId];
+    control.setValue(Math.max(0, Math.min(8, control.value + delta)));
+    this.classLevelChanged(classId);
+  }
   private readonly fb = inject(FormBuilder);
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
@@ -603,6 +619,7 @@ export class CharacterBuilderComponent implements OnInit {
   }
 
   loadProfile(profile: CharacterProfile): void {
+    this.portraitId = profile.portraitId ?? '';
     this.abilityMode = profile.abilityMode ?? 'legacy-final';
     this.backgroundId = profile.backgroundId ?? '';
     this.backgroundBonuses = { ...(profile.backgroundBonuses ?? {}) };
@@ -685,6 +702,7 @@ export class CharacterBuilderComponent implements OnInit {
   }
 
   newProfile(): void {
+    this.portraitId = '';
     this.abilityMode = 'base'; this.backgroundId = ''; this.backgroundBonuses = {}; this.featSelections = []; this.choices = {}; this.spellSelections = {};
     this.profileForm.reset({
       id: createId(), name: 'Novo personagem', speciesId: 'humano', speciesChoiceId: '',
@@ -807,6 +825,7 @@ export class CharacterBuilderComponent implements OnInit {
       id: value.id,
       name: value.name.trim() || 'Personagem sem nome',
       speciesId: value.speciesId,
+      portraitId: this.portraitId || undefined,
       speciesChoiceId: value.speciesChoiceId || undefined,
       classes,
       abilities: this.finalAbilityValues,

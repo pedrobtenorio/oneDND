@@ -1,0 +1,18 @@
+.portrait-picker { margin-top:24px; padding:18px; border:1px solid var(--card-border); border-radius:8px; background:#f3ecdE; }
+.portrait-preview { display:flex; align-items:flex-start; gap:18px; }
+.portrait-preview>img { width:92px; height:108px; flex-shrink:0; object-fit:cover; object-position:top; border:1px solid #b69a66; border-radius:6px; background:#46534d; }
+.portrait-preview h3 { margin:0 0 4px; font-size:1.15rem; }
+.portrait-preview strong { color:var(--wine); font-size:.85rem; }
+.portrait-preview p,.portrait-note { margin:6px 0 12px; font-size:.8rem; color:var(--ink-soft); line-height:1.6; }
+.portrait-filters { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin:20px 0 8px; }
+.portrait-gallery-heading { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:8px; }
+.portrait-gallery { display:grid; grid-template-columns:repeat(auto-fill,minmax(125px,1fr)); gap:12px; max-height:465px; overflow-y:auto; padding:4px 8px 8px 4px; scrollbar-color:#ab8950 #e3d6bd; }
+.portrait-option { position:relative; display:flex; flex-direction:column; border:1px solid #cab792; border-radius:6px; overflow:hidden; background:var(--surface); cursor:pointer; }
+.portrait-option input { position:absolute; top:8px; right:8px; width:18px; height:18px; margin:0; accent-color:var(--wine); }
+.portrait-option img { width:100%; height:150px; object-fit:contain; object-position:top; background:#46534d; }
+.portrait-option strong { font-size:.78rem; padding:8px 8px 3px; line-height:1.4; }
+.portrait-option small { padding:0 8px 10px; font-size:.68rem; color:var(--muted); }
+.portrait-option.selected { border-color:var(--wine); box-shadow:0 0 0 2px var(--wine); }
+.portrait-option:focus-within { outline:3px solid var(--gold); outline-offset:1px; }
+.portrait-note { margin-top:14px; }
+@media(max-width:620px) { .portrait-picker { padding:12px; } .portrait-preview { gap:12px; } .portrait-preview>img { width:70px; height:90px; } .portrait-filters { grid-template-columns:1fr; gap:8px; } .portrait-gallery { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; } .portrait-option img { height:130px; } }

@@ -60,6 +60,7 @@ export interface CharacterClassLevel {
 }
 
 export interface CharacterProfile {
+  portraitId?: string;
   baseSpeed?: number;
   abilityMode?: 'base' | 'legacy-final';
   baseAbilities?: AbilityScores;

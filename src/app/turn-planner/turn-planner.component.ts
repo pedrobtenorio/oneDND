@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { profileArt } from '../utils/class-visuals';
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -76,6 +77,7 @@ export const describeRemainingTurnEconomy = (
   styleUrl: './turn-planner.component.css',
 })
 export class TurnPlannerComponent implements OnInit {
+  readonly profileArt = profileArt;
   private readonly destroyRef = inject(DestroyRef);
   private readonly route = inject(ActivatedRoute);
   private readonly catalogService = inject(TurnRuleCatalogService);

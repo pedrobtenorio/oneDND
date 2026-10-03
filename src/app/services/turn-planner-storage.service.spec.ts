@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { CharacterProfile, TurnDraftExportV1 } from '../models/turn-planner.models';
 import { TurnPlannerStorageService } from './turn-planner-storage.service';
+import { profileArt } from '../utils/class-visuals';
 
 const profile = (id = 'profile-1'): CharacterProfile => ({
   id,
@@ -24,6 +25,25 @@ const profile = (id = 'profile-1'): CharacterProfile => ({
 });
 
 describe('TurnPlannerStorageService', () => {
+  it('preserves a portrait through storage reload and library export/import', () => {
+    const service = TestBed.inject(TurnPlannerStorageService);
+    service.upsertProfile({ ...profile(), portraitId:'elves-ranger+female' });
+    const reloaded = new TurnPlannerStorageService();
+    expect(reloaded.profiles[0].portraitId).toBe('elves-ranger+female');
+    reloaded.importLibrary(reloaded.exportLibrary());
+    expect(reloaded.profiles.every(p => p.portraitId === 'elves-ranger+female')).toBeTrue();
+    expect(profileArt(reloaded.profiles[0])).toBe('/assets/art/elves-ranger+female.webp');
+  });
+
+  it('preserves missing portrait IDs with a safe class fallback and rejects URLs on import', () => {
+    const service = TestBed.inject(TurnPlannerStorageService);
+    const original = { ...profile(), portraitId:'removed-portrait' };
+    service.importLibrary(JSON.stringify({schemaVersion:1, profiles:[original], drafts:[]}));
+    expect(service.profiles[0].portraitId).toBe('removed-portrait');
+    expect(profileArt(service.profiles[0])).toBe('/assets/art/humans-thief+female.webp');
+    expect(() => service.importLibrary(JSON.stringify({schemaVersion:1, profiles:[{...original, portraitId:'https://example.com/a.png'}], drafts:[]}))).toThrow();
+    expect(service.profiles.length).toBe(1);
+  });
   beforeEach(() => {
     for (const key of ['profiles.v1','profiles.v2','drafts.v1','drafts.v2','backup.v1']) localStorage.removeItem(`dnd.turn-planner.${key}`);
     localStorage.removeItem('dnd.turn-planner.drafts.v1');

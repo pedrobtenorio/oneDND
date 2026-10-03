@@ -106,6 +106,17 @@ describe('turn planner components', () => {
 });
 
 describe('CharacterBuilderComponent profile resolution', () => {
+  it('preserves the chosen portrait when editing and resets it for a new character', () => {
+    TestBed.configureTestingModule({imports:[CharacterBuilderComponent], providers:[provideHttpClient(), provideHttpClientTesting(), provideRouter([])]});
+    const component = TestBed.createComponent(CharacterBuilderComponent).componentInstance;
+    component.portraitId = 'elves-ranger+female';
+    const profile = component.buildProfile();
+    expect(profile.portraitId).toBe('elves-ranger+female');
+    component.loadProfile(profile);
+    expect(component.portraitId).toBe('elves-ranger+female');
+    component.newProfile();
+    expect(component.buildProfile().portraitId).toBeUndefined();
+  });
   it('blocks forward step navigation while the current step has pending fields', () => {
     TestBed.configureTestingModule({
       imports: [CharacterBuilderComponent],

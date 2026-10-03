@@ -1,0 +1,79 @@
+@mixin theme {
+  :root { --parchment:#eee8dc; --surface:#fffaf0; --wine:#793e39; --wine-dark:#293136; --gold:#b28b4b; --gold-bright:#e6c789; --card-border:#d3c5ad; --panel-radius:8px; --shadow:0 6px 20px #26231e0a; }
+  body { background:#eee8dc; }
+  .turn-page { padding-top:24px; }
+  .turn-page .hero { position:relative; overflow:hidden; padding:32px; min-height:200px; border:1px solid #b28b4b; border-radius:8px; background:#273136; color:#fff8e9; }
+  .turn-page .hero::after { content:''; position:absolute; inset:0 15% 0 auto; width:240px; background:url('/assets/art/humans-paladin.webp') center 18% / 240px auto no-repeat; opacity:.16; pointer-events:none; }
+  .turn-page .hero>div,.turn-page .hero>button,.turn-page .hero>label { position:relative; z-index:1; }
+  .turn-page .hero h1 { color:#fff8e9; font-weight:500; font-size:clamp(2rem,4vw,3rem); }
+  .turn-page .hero p { max-width:580px; color:#d4d5cc; }
+  .turn-page .hero .kicker { color:var(--gold-bright); }
+  .turn-page .hero-button { background:var(--gold-bright); border-color:var(--gold-bright); color:#293136; font-weight:650; }
+  .character-page { gap:24px; }
+  .character-page .library-panel,.character-page .wizard-card { min-width:0; background:var(--surface); border-radius:8px; border-color:var(--card-border); }
+  .character-page .example-panel { background:#273136; border-color:#a58a57; padding:24px; }
+  .character-page .example-panel .section-heading h2 { color:#fff4d9; font-size:1.5rem; }
+  .character-page .example-panel .section-heading span { color:var(--gold-bright); }
+  .character-page .example-panel .section-heading>p { color:#d4d5cc; }
+  .gallery-controls { display:flex; align-items:center; gap:10px; color:#d4d5cc; font-size:.8rem; }
+  .gallery-controls button { width:38px; height:38px; background:transparent; border:1px solid #aa915f; border-radius:50%; color:#ffe4ac; }
+  .gallery-controls button:hover { background:#414d4d; }
+  .character-page .example-grid { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:18px; padding:8px 0 16px; scrollbar-color:#b28b4b #1d262a; }
+  .character-page .example-card { position:relative; flex:0 0 260px; scroll-snap-align:start; overflow:hidden; border:1px solid #b79b65; border-radius:4px; padding:190px 18px 18px; background:#eee5d3; min-height:420px; }
+  .character-page .example-art { position:absolute; inset:0 0 auto; width:100%; height:180px; object-fit:contain; object-position:center top; background:#404a47; border-bottom:1px solid #b79b65; }
+  .character-page .example-card h3 { color:#293136; font-size:1.5rem; }
+  .character-page .example-card p { color:#605447; }
+  .character-page .example-badge { position:absolute; top:12px; right:12px; border:1px solid #c5ad73; color:#ffe5ad; background:#273136; z-index:1; }
+  .character-page .example-card .example-role { color:#75402f; }
+  .character-page .example-actions { margin-top:auto; display:flex; width:100%; gap:8px; padding-top:8px; }
+  .character-page .example-card button { flex:1; padding:0 8px; font-size:.76rem; }
+  .character-page .example-card .primary-button { background:#273136; color:#fff1d6; border-color:#273136; }
+  .character-page .stepper button { border-radius:5px; min-height:58px; }
+  .character-page .stepper button.active { background:#273136; color:#fff1d6; border-color:#b28b4b; }
+  .character-page .stepper button.active>span { background:var(--gold-bright); color:#273136; }
+  .character-page .wizard-heading h2 { font-size:1.65rem; color:#293136; }
+  .character-page .class-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .class-choice { position:relative; display:flex; flex-direction:column; overflow:hidden; border:1px solid #c2b495; border-radius:5px; background:#273136; transition:border-color .15s,box-shadow .15s; }
+  .class-choice:hover { border-color:var(--gold); box-shadow:0 4px 12px #2225; }
+  .class-choice.chosen { border-color:#d5b06c; box-shadow:0 0 0 2px #d5b06c; }
+  .class-choice>img { width:100%; height:170px; object-fit:contain; object-position:center top; background:var(--class-color); }
+  .class-copy { padding:12px 14px 6px; flex:1; }
+  .class-copy h3 { margin:0; color:#fff2d7; font-size:1.4rem; }
+  .class-copy p { margin:6px 0; font-size:.72rem; color:#d2d5cf; line-height:1.5; }
+  .class-level-controls { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:8px 14px 14px; }
+  .class-level-controls label { display:flex; align-items:center; gap:8px; color:#ead7b5; font-size:.75rem; }
+  .class-level-controls input { width:44px; min-height:36px; border:1px solid #b89b64; border-radius:4px; background:#fff8e8; color:#283136; text-align:center; }
+  .class-level-controls button { width:34px; height:34px; border:1px solid #9f885c; border-radius:50%; color:#ffe4ac; background:transparent; font-size:1.2rem; }
+  .class-level-controls button:hover:not(:disabled) { color:#273136; background:var(--gold-bright); }
+  .class-level-controls .invalid input { border-color:#e9726a; }
+  .turn-page .profile-option { padding:10px; border-radius:6px; border-color:var(--card-border); }
+  .turn-page .profile-option>img { width:64px; height:76px; flex-shrink:0; object-fit:cover; object-position:top; border-radius:4px; background:#4d5853; }
+  .turn-page .profile-option.selected { border-color:#98703b; background:#f0dfbb; box-shadow:inset 0 0 0 1px #98703b; }
+  .character-page .saved-portrait { width:60px; height:72px; flex-shrink:0; object-fit:cover; object-position:top; border:1px solid #b69a66; border-radius:4px; background:#46534d; }
+  .character-page .profile-card>div:not(.profile-card-actions) { flex:1; display:grid; gap:3px; }
+  .turn-page .active-character .active-portrait { width:64px; height:76px; object-fit:cover; object-position:top; background:#46534d; border-radius:4px; }
+  .turn-page .primary-button { background:#793e39; }
+  .turn-page .secondary-button:hover,.turn-page .primary-button:hover { filter:brightness(.94); }
+  .turn-page .ability-card { border-radius:6px; background:#f3ead6; }
+  .content .page>h1 { min-height:140px; display:flex; align-items:center; padding:24px 170px 24px 28px; color:#fff1d6; border:1px solid #b28b4b; border-radius:8px; background:#273136 url('/assets/art/humans-mage.webp') right 12px top 8px / 155px auto no-repeat; }
+  .content app-armas .page>h1 { background-image:url('/assets/art/humans-swordsman.webp'); }
+  .content app-quick-guide .page>h1 { background-image:url('/assets/art/humans-mage-white+female.webp'); }
+  .content .page-intro { color:#6c5e4f; }
+  @media(prefers-reduced-motion:no-preference) { .character-page .example-grid { scroll-behavior:smooth; } }
+  @media(max-width:620px) {
+    .turn-page .hero { padding:24px 20px; }
+    .turn-page .hero::after { right:-40px; }
+    .character-page .example-panel { padding:18px; }
+    .character-page .example-card { flex-basis:240px; }
+    .character-page .class-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .class-choice>img { height:145px; }
+    .class-copy { padding:10px; }
+    .class-copy h3 { font-size:1.1rem; }
+    .class-level-controls { gap:4px; padding:8px; }
+    .class-level-controls label { gap:4px; }
+    .class-level-controls label>span { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+    .class-level-controls input { width:36px; }
+    .class-level-controls button { width:28px; height:32px; }
+    .content .page>h1 { padding:20px 110px 20px 20px; background-size:110px; min-height:130px; }
+  }
+}

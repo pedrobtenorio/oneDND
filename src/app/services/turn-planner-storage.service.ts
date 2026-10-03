@@ -166,6 +166,7 @@ export class TurnPlannerStorageService {
       typeof value['id'] !== 'string' ||
       typeof value['name'] !== 'string' ||
       typeof value['speciesId'] !== 'string' ||
+      (value['portraitId'] !== undefined && (typeof value['portraitId'] !== 'string' || !/^[a-zA-Z0-9][a-zA-Z0-9+_-]{0,79}$/.test(value['portraitId']))) ||
       !classes ||
       !classes.every((entry) =>
         isRecord(entry) &&

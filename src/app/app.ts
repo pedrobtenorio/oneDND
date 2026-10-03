@@ -16,25 +16,26 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
           <a [routerLink]="link.path" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="menuOpen = false"><span aria-hidden="true">{{ link.icon }}</span>{{ link.label }}</a>
         }
       </nav>
-      <footer>Livro do Jogador · 2024<br><span>Personagens do nível 1 ao 8</span></footer>
+      <footer>Livro do Jogador · 2024<br><span>Personagens do nível 1 ao 8</span><br><a href="/assets/art/credits.html" target="_blank" rel="noopener">Créditos das ilustrações ↗</a></footer>
     </aside>
     <main id="main-content" class="content" tabindex="-1"><router-outlet /></main>
   `,
   styles: `
     :host { display:block; min-height:100vh; }
-    .sidebar { position:fixed; inset:0 auto 0 0; width:224px; display:flex; flex-direction:column; padding:32px 18px 24px; background:var(--wine-dark); color:var(--parchment-light); border-right:1px solid var(--gold); z-index:30; }
+    .sidebar { position:fixed; inset:0 auto 0 0; width:224px; display:flex; flex-direction:column; padding:32px 18px 24px; background:#20272b; color:var(--parchment-light); border-right:1px solid var(--gold); z-index:30; }
     .brand { display:block; color:var(--parchment-light); text-decoration:none; font:700 1.45rem Georgia,serif; padding:0 10px; }
-    .brand-mark { display:block; color:var(--gold-bright); font-size:2.8rem; margin-bottom:12px; }
+    .brand-mark { display:grid; place-items:center; width:64px; height:64px; border:1px solid var(--gold); transform:rotate(45deg); color:var(--gold-bright); font-size:2.8rem; margin:8px 0 28px 10px; }
     .brand small { display:block; margin-top:8px; color:#e2cdb6; font:400 .76rem system-ui,sans-serif; letter-spacing:.04em; }
     .nav-label { margin:44px 12px 12px; font-size:.66rem; text-transform:uppercase; letter-spacing:.12em; color:#ddc7b7; }
     nav { display:grid; gap:6px; }
     nav a { display:flex; align-items:center; gap:12px; min-height:46px; padding:10px 12px; border-radius:6px; color:#f1e7dc; text-decoration:none; font-size:.87rem; }
     nav a span { width:22px; color:var(--gold-bright); text-align:center; }
     nav a:hover { background:#ffffff12; }
-    nav a.active { background:var(--parchment); color:var(--wine-dark); font-weight:650; }
-    nav a.active span { color:var(--wine); }
+    nav a.active { background:#343b3c; color:#f5dfac; font-weight:650; box-shadow:inset 3px 0 var(--gold-bright); }
+    nav a.active span { color:var(--gold-bright); }
     footer { margin-top:auto; padding:28px 12px 0; font-size:.72rem; line-height:1.9; color:#dfcabc; }
     footer span { color:#c7b6aa; }
+    footer a { color:var(--gold-bright); }
     .content { margin-left:224px; min-width:0; min-height:100vh; }
     .mobile-header { display:none; }
     .skip-link { position:fixed; top:-80px; left:16px; z-index:1001; padding:12px; background:var(--parchment-light); }

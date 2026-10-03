@@ -22,6 +22,7 @@
     <div class="profile-grid">
       @for (profile of profiles; track profile.id) {
         <article class="profile-card" [class.active]="profile.id === profileForm.controls.id.value">
+          <img class="saved-portrait" [src]="profileArt(profile)" alt="" loading="lazy" width="60" height="72" />
           <div><strong>{{ profile.name }}</strong><small>Nível {{ profileLevel(profile) }}{{ profile.classes.length > 1 ? ' · multiclasse' : '' }}</small></div>
           <div class="profile-card-actions">
             <button class="secondary-button" type="button" (click)="loadProfile(profile)">Editar</button>
@@ -37,11 +38,12 @@
     <section class="library-panel example-panel" aria-labelledby="examples-title">
       <div class="section-heading">
         <div><span>Prontos para jogar</span><h2 id="examples-title">Personagens de exemplo · nível 8</h2></div>
-        <p>Carregue uma cópia no assistente para revisar, personalizar e salvar.</p>
+        <div class="gallery-controls"><button type="button" aria-label="Ver personagens anteriores" (click)="exampleGallery.scrollBy({left: -278})">←</button><span>Explore o grupo</span><button type="button" aria-label="Ver próximos personagens" (click)="exampleGallery.scrollBy({left: 278})">→</button></div>
       </div>
-      <div class="example-grid">
+      <div class="example-grid" #exampleGallery tabindex="0" aria-label="Galeria de personagens de exemplo">
         @for (example of examples; track example.profile.id) {
           <article class="example-card">
+            <img class="example-art" [src]="profileArt(example.profile)" alt="" loading="lazy" width="400" height="400" />
             <div class="example-card-heading">
               <span class="example-badge">Nível 8</span>
               <h3>{{ example.profile.name }}</h3>
@@ -49,7 +51,7 @@
             </div>
             <p class="example-role">{{ example.role }}</p>
             <p>{{ example.description }}</p>
-            <button class="secondary-button" type="button" (click)="useExample(example)">Usar como base</button>
+            <div class="example-actions"><button class="primary-button" type="button" (click)="playExample(example)">Jogar</button><button class="secondary-button" type="button" (click)="useExample(example)">Usar como base</button></div>
           </article>
         }
       </div>
@@ -65,6 +67,7 @@
           [class.completed]="index < currentStep || index <= furthestStep"
           [disabled]="index > furthestStep"
           [attr.aria-current]="currentStep === index ? 'step' : null"
+          [attr.aria-label]="'Etapa ' + (index + 1) + ': ' + step.title"
           (click)="openStep(index)"
         >
           <span>{{ index + 1 }}</span>
@@ -94,12 +97,21 @@
           <label class="field" [class.invalid]="inlineError('selecione um antecedente')"><span>Antecedente</span><select [value]="backgroundId" (change)="changeBackground($event)" [attr.aria-invalid]="inlineError('selecione um antecedente') ? 'true' : null"><option value="">Selecione</option>@for (option of backgrounds; track option.id) { <option [value]="option.id">{{ option.name }}</option> }</select>@if (inlineError('selecione um antecedente'); as error) { <small class="field-error">{{ error }}</small> }</label>
           @if (background) { <p class="helper">{{ background.summary }}</p> }
         }
+        <app-portrait-picker [selectedId]="portraitId" (portraitChange)="portraitId = $event" />
       }
       @if (currentStep === 1) {
         <div class="progression-heading"><div><strong>Níveis de classe</strong><small>A primeira classe é definida automaticamente pela primeira que receber um nível.</small></div><span>{{ totalConfiguredLevel }}/8</span></div>
         <div class="class-grid" [class.invalid-group]="inlineError('nível total', 'níveis de classe')">
           @for (entry of classes; track entry.id) {
-            <label class="level-card" [class.invalid]="inlineError('nível total', 'níveis de classe')"><span>{{ entry.name }}</span><input type="number" min="0" max="8" [formControlName]="entry.id" (input)="classLevelChanged(entry.id)" [attr.aria-invalid]="inlineError('nível total', 'níveis de classe') ? 'true' : null" /></label>
+            <article class="class-choice" [class.chosen]="profileForm.controls[entry.id].value > 0" [style.--class-color]="classVisuals[entry.id].color">
+              <img [src]="classArt(entry.id)" alt="" loading="lazy" width="400" height="400" />
+              <div class="class-copy"><h3>{{ entry.name }}</h3><p>{{ classVisuals[entry.id].role }}</p></div>
+              <div class="class-level-controls">
+                <button type="button" [attr.aria-label]="'Remover nível de ' + entry.name" [disabled]="profileForm.controls[entry.id].value === 0" (click)="adjustClassLevel(entry.id, -1)">−</button>
+                <label [class.invalid]="inlineError('nível total', 'níveis de classe')"><span>Nível</span><input type="number" min="0" max="8" [formControlName]="entry.id" (input)="classLevelChanged(entry.id)" [attr.aria-label]="'Níveis de ' + entry.name" [attr.aria-invalid]="inlineError('nível total', 'níveis de classe') ? 'true' : null" /></label>
+                <button type="button" [attr.aria-label]="'Adicionar nível de ' + entry.name" [disabled]="totalConfiguredLevel >= 8" (click)="adjustClassLevel(entry.id, 1)">+</button>
+              </div>
+            </article>
           }
         </div>
         @if (inlineError('nível total', 'níveis de classe'); as error) { <small class="field-error group-error">{{ error }}</small> }
