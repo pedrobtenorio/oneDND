@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { SeoService } from './seo/seo.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { UiMotionDirective } from './shared/ui-motion.directive';
 
@@ -54,11 +55,13 @@ import { UiMotionDirective } from './shared/ui-motion.directive';
   `,
 })
 export class App {
+  private readonly seo = inject(SeoService);
   menuOpen = false;
   readonly links = [
     { path:'/personagens', label:'Personagens', icon:'♙' },
     { path:'/turno', label:'Auxiliar de turnos', icon:'⚔' },
     { path:'/guia', label:'Guia de regras', icon:'▤' },
+    { path:'/classes', label:'Classes', icon:'♧' },
     { path:'/magias', label:'Magias', icon:'✧' },
     { path:'/armas', label:'Armas', icon:'◇' },
     { path:'/busca', label:'Buscar no compêndio', icon:'⌕' },

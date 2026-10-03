@@ -1,0 +1,10 @@
+/assets/art/*
+  X-Robots-Tag: noindex
+/data/*
+  X-Robots-Tag: noindex
+/personagens/*
+  X-Robots-Tag: noindex, follow
+/busca
+  X-Robots-Tag: noindex, follow
+/monstros
+  X-Robots-Tag: noindex, follow

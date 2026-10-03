@@ -75,3 +75,20 @@ Para reproduzir PrintableHeroes, execute em sequência `python scripts/sync-prin
 Os cartões da biblioteca e dos exemplos oferecem **Ver ficha**, na rota `/personagens/:id`. A ficha é somente de consulta: usa os atributos finais salvos, separa o grimório das magias disponíveis, apresenta talentos, características adquiridas e a capacidade máxima dos recursos. Os usos durante o combate continuam no auxiliar de turnos. A ficha pode ser aberta em outra aba a partir do personagem ativo.
 
 No criador, **entender e comparar** permite consultar duas classes, subclasses ou talentos lado a lado sem alterar a seleção. As características até o nível 8 indicam as concessões futuras, com referências de página e pré-requisitos do catálogo. O criador registra perícias por origem (classe inicial, multiclasse, espécie, talentos e características), valida limites e requisitos de Especialização e preserva escolhas incompatíveis para revisão. A ficha apresenta as 18 perícias, atributo associado, bônus total e origem, incluindo Pau pra Toda Obra, Taumaturgo, Xamã e Glamour Transcendental. Habilidoso permite combinar perícias e ferramentas. As escolhas adicionais são preservadas em `skillSelections` no armazenamento/exportação v2; personagens anteriores continuam acessíveis e indicam pendências até a revisão explícita.
+
+## SEO e hospedagem na Netlify
+
+O endereço oficial é https://guiarapidodnd.netlify.app. O build gera HTML estático para Guia, Magias, Armas, a apresentação das classes e as 12 páginas individuais de classe. Essas páginas podem ser lidas sem executar JavaScript; a navegação interativa usa hidratação Angular. As regras em painéis do Guia continuam carregadas ao abrir, para preservar a velocidade da pesquisa.
+
+`SeoService` atualiza títulos, descrições, URLs canônicas, prévias Open Graph/Twitter e dados estruturados de página e navegação. O catálogo de páginas fica em `src/app/seo/pages.json`. Fichas pessoais, busca e o construtor de monstros não são indexados. Não há dados de personagens salvos no HTML publicado.
+
+`netlify.toml` define Node 22, o comando de build e a pasta de publicação `dist/ficha-automatica/browser`. Não é necessário servidor Angular em produção. `prebuild` gera sitemap, robots e cabeçalhos a partir de `SITE_URL`; ao mudar o domínio, atualize essa variável na configuração da Netlify. Deploys de prévia recebem bloqueio de indexação. Rotas inexistentes retornam uma página 404; ferramentas sem pré-renderização usam `index.csr.html`.
+
+Para validar após alterações:
+
+```bash
+npm run build
+npm run test:seo
+```
+
+A validação verifica o HTML das 16 páginas de conteúdo, metadados, canonical, dados estruturados, links de subclasses, sitemap e arquivos de publicação. Depois do deploy, cadastre a propriedade no Google Search Console e envie `https://guiarapidodnd.netlify.app/sitemap.xml`. A indexação e a posição nos resultados dependem dos buscadores.
