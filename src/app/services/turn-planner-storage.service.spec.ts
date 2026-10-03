@@ -25,6 +25,27 @@ const profile = (id = 'profile-1'): CharacterProfile => ({
 });
 
 describe('TurnPlannerStorageService', () => {
+  it('preserva dados e método de atributos no ciclo de salvamento e importação', () => {
+    const service=TestBed.inject(TurnPlannerStorageService);
+    const abilities={strength:9,dexterity:9,constitution:9,intelligence:9,wisdom:9,charisma:9};
+    const rolls=Array.from({length:6},()=>[1,2,3,4]);
+    service.upsertProfile({...profile(),abilityMode:'base',baseAbilities:abilities,abilities:{...abilities,dexterity:11,intelligence:10},backgroundId:'escriba',backgroundBonuses:{dexterity:2,intelligence:1},featSelections:[],abilityGeneration:{method:'roll',rolls}});
+    const reloaded=new TurnPlannerStorageService();
+    const exported=reloaded.exportLibrary();reloaded.importLibrary(exported);
+    expect(reloaded.profiles.every(p=>p.abilityGeneration?.method==='roll'&&JSON.stringify(p.abilityGeneration.rolls)===JSON.stringify(rolls))).toBeTrue();
+    const invalid=JSON.parse(exported);invalid.profiles[0].abilityGeneration.rolls[0]=[7,2,3,4];
+    expect(()=>reloaded.importLibrary(JSON.stringify(invalid))).toThrow();
+  });
+  it('preserva perícias por origem ao salvar, recarregar e importar v2', () => {
+    const service=TestBed.inject(TurnPlannerStorageService);
+    service.upsertProfile({...profile(),skillSelections:{'class.ladino':['acrobacia','furtividade','intuicao','investigacao'],'species.humano':['percepcao']}});
+    const reloaded=new TurnPlannerStorageService();
+    const exported=reloaded.exportLibrary();
+    reloaded.importLibrary(exported);
+    expect(reloaded.profiles[0].skillSelections).toEqual({'class.ladino':['acrobacia','furtividade','intuicao','investigacao'],'species.humano':['percepcao']});
+    const malformed=JSON.parse(exported);malformed.profiles[0].skillSelections={'class.ladino':[true]};
+    expect(()=>reloaded.importLibrary(JSON.stringify(malformed))).toThrowError('Perícias malformadas.');
+  });
   it('preserves a portrait through storage reload and library export/import', () => {
     const service = TestBed.inject(TurnPlannerStorageService);
     service.upsertProfile({ ...profile(), portraitId:'elves-ranger+female' });

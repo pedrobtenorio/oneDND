@@ -19,13 +19,12 @@
 .progression-heading div { display: grid; }
 .progression-heading small { color: #75685c; font-weight: 500; }
 .progression-heading span { padding: 5px 10px; border-radius: 999px; color: #fff5d9; background: #6f241e; font-weight: 900; }
-.ability-grid { display: grid; grid-template-columns: repeat(4, minmax(120px, 1fr)); gap: 10px; }
 .level-card, .ability-card { display: grid; gap: 8px; padding: 13px; border: 1px solid #b89e76; border-radius: 11px; color: #522019; background: #fffdf5; font-weight: 900; }
 .level-card input, .ability-card input { width: 100%; min-height: 40px; box-sizing: border-box; border: 1px solid #a88c61; border-radius: 8px; background: white; text-align: center; font: 800 1.05rem inherit; }
 .field.invalid input, .field.invalid select, .level-card.invalid input, .ability-card.invalid input { border-color: #a32620; }
 .field.invalid input:focus, .field.invalid select:focus, .level-card.invalid input:focus, .ability-card.invalid input:focus { outline: 2px solid #a32620; outline-offset: 2px; }
 .field-error { color: #8f1f1a; font-size: .76rem; font-weight: 800; line-height: 1.4; }
-.ability-grid { grid-template-columns: repeat(3, minmax(130px, 1fr)); }
+.ability-grid { display: grid; grid-template-columns: repeat(3, minmax(130px, 1fr)); gap: 10px; }
 .helper, .step-intro { color: #6d6054; font-size: .84rem; line-height: 1.5; }
 .choice-sections { display: grid; gap: 24px; }
 .equipment-grid { display: grid; grid-template-columns: repeat(3, minmax(160px, 1fr)); align-items: end; gap: 12px; margin-bottom: 24px; }
@@ -40,3 +39,4 @@
 @media (max-width: 620px) { .section-heading, .wizard-actions { align-items: stretch; flex-direction: column; } .ability-grid, .equipment-grid { grid-template-columns: repeat(2, minmax(120px, 1fr)); } .finish-actions { display: grid; } }
 @media (max-width: 430px) { .stepper button strong { display: none; } .ability-grid, .equipment-grid { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; } }
+#class-explanation { scroll-margin-top: 90px; }

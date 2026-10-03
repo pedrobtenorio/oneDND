@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { validateGeneration } from '../utils/ability-generation';
 import { BehaviorSubject } from 'rxjs';
 
 import {
@@ -202,6 +203,7 @@ export class TurnPlannerStorageService {
     }
     const profile = value as unknown as CharacterProfile;
     const total = profile.classes.reduce((n, c) => n + c.level, 0);
+    if (profile.skillSelections !== undefined && (!isRecord(profile.skillSelections) || !Object.values(profile.skillSelections).every(isStringArray))) throw new Error('Perícias malformadas.');
     if (total < 1 || total > 8 || new Set(profile.classes.map(c => c.classId)).size !== profile.classes.length) throw new Error('Nível total inválido: esperado entre 1 e 8, sem classes repetidas.');
     if (legacy || !profile.abilityMode) return { ...profile, abilityMode: 'legacy-final', needsReview: true };
     if (!['base', 'legacy-final'].includes(profile.abilityMode)) throw new Error('Modo de atributos inválido.');
@@ -209,6 +211,11 @@ export class TurnPlannerStorageService {
       if (choices !== undefined && (!isRecord(choices) || !Object.values(choices).every(isStringArray))) throw new Error('Escolhas malformadas.');
     }
     if (profile.baseAbilities && !abilityIds.every(id => Number.isInteger(profile.baseAbilities?.[id]) && profile.baseAbilities![id] >= 1 && profile.baseAbilities![id] <= 20)) throw new Error('Atributos base inválidos.');
+    if (profile.abilityGeneration !== undefined) {
+      if (!isRecord(profile.abilityGeneration) || !['free','roll','array','point-buy'].includes(profile.abilityGeneration.method) || !profile.baseAbilities) throw new Error('Método de atributos inválido.');
+      const errors=validateGeneration(profile.baseAbilities,profile.abilityGeneration);
+      if(errors.length)throw new Error(errors.join(' '));
+    }
     if (profile.backgroundBonuses && !Object.values(profile.backgroundBonuses).every(n => Number.isInteger(n) && n >= 0 && n <= 2)) throw new Error('Bônus de antecedente inválidos.');
     if (profile.featSelections && (!Array.isArray(profile.featSelections) || !profile.featSelections.every(f => isRecord(f) && typeof f['source'] === 'string' && typeof f['optionId'] === 'string' && isRecord(f['bonuses']) && Object.values(f['bonuses']).every(n => isFiniteNumber(n) && Number.isInteger(n) && n >= 0 && n <= 2)))) throw new Error('Talentos malformados.');
     if (profile.abilityMode === 'base') {

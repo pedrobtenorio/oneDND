@@ -59,7 +59,14 @@ export interface CharacterClassLevel {
   order: number;
 }
 
+export interface AbilityGeneration {
+  method: 'free' | 'roll' | 'array' | 'point-buy';
+  rolls?: number[][];
+}
+
 export interface CharacterProfile {
+  abilityGeneration?: AbilityGeneration;
+  skillSelections?: Record<string, string[]>;
   portraitId?: string;
   baseSpeed?: number;
   abilityMode?: 'base' | 'legacy-final';
