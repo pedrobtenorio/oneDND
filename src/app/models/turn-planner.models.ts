@@ -31,6 +31,10 @@ export type RuleTrigger =
 export type RuleSupport = 'structured' | 'prompt' | 'informational';
 
 export type OptionKind =
+  | 'background'
+  | 'invocation'
+  | 'metamagic'
+  | 'class-choice'
   | 'species'
   | 'species-choice'
   | 'subclass'
@@ -56,6 +60,15 @@ export interface CharacterClassLevel {
 }
 
 export interface CharacterProfile {
+  baseSpeed?: number;
+  abilityMode?: 'base' | 'legacy-final';
+  baseAbilities?: AbilityScores;
+  backgroundId?: string;
+  backgroundBonuses?: Partial<AbilityScores>;
+  featSelections?: FeatSelection[];
+  choices?: Record<string, string[]>;
+  spellSelections?: Record<string, string[]>;
+  needsReview?: boolean;
   id: string;
   name: string;
   speciesId: string;
@@ -77,6 +90,40 @@ export interface CharacterProfile {
   hasShield: boolean;
   speed: number;
   updatedAt: string;
+}
+
+export interface FeatSelection {
+  source: string;
+  optionId: string;
+  bonuses: Partial<AbilityScores>;
+}
+
+export interface CharacterFeature {
+  id: string;
+  name: string;
+  classId?: TurnClassId;
+  subclassId?: string;
+  speciesId?: string;
+  minLevel: number;
+  description: string;
+  source: RuleSource;
+}
+
+export interface CharacterChoiceGroup {
+  id: string;
+  name: string;
+  classId: TurnClassId;
+  subclassId?: string;
+  minLevel: number;
+  limits: number[];
+}
+
+export interface AutomaticSpellGrant {
+  classId: TurnClassId;
+  subclassId?: string;
+  choiceId?: string;
+  minLevel: number;
+  spellIds: string[];
 }
 
 export interface CombatContext {
@@ -110,6 +157,15 @@ export interface OptionRequirement {
 }
 
 export interface CharacterOption {
+  beastCr?: number;
+  flies?: boolean;
+  group?: string;
+  abilityOptions?: AbilityId[];
+  abilityPoints?: number;
+  repeatable?: boolean;
+  grantedFeatId?: string;
+  requiresOptionIds?: string[];
+  description?: string;
   id: string;
   name: string;
   kind: OptionKind;
@@ -120,6 +176,7 @@ export interface CharacterOption {
 }
 
 export type RuleCondition =
+  | { type: 'choice'; id: string }
   | { type: 'class-level'; classId: TurnClassId; min: number }
   | { type: 'subclass'; id: string }
   | { type: 'species'; id: string }
@@ -194,11 +251,17 @@ export interface TurnRuleManifest {
 }
 
 export interface TurnRuleFile {
+  spellGrants?: AutomaticSpellGrant[];
+  features?: CharacterFeature[];
+  choiceGroups?: CharacterChoiceGroup[];
   options?: CharacterOption[];
   rules?: RuleDefinition[];
 }
 
 export interface TurnCatalog {
+  spellGrants?: AutomaticSpellGrant[];
+  features?: CharacterFeature[];
+  choiceGroups?: CharacterChoiceGroup[];
   manifest: TurnRuleManifest;
   options: CharacterOption[];
   rules: RuleDefinition[];
@@ -282,4 +345,8 @@ export interface TurnDraftExportV1 {
   exportedAt: string;
   profiles: CharacterProfile[];
   drafts: TurnDraft[];
+}
+
+export interface TurnDraftExportV2 extends Omit<TurnDraftExportV1, 'schemaVersion'> {
+  schemaVersion: 2;
 }

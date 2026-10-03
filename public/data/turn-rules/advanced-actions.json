@@ -1,0 +1,2082 @@
+{
+  "rules": [
+    {
+      "id": "feature.arvore-do-mundo.ramos-da-arvore",
+      "name": "Ramos da Árvore",
+      "summary": "Sempre que uma criatura que você pode ver começar o turno a até 9 metros de você enquanto sua Fúria estiver ativa, você pode executar uma Reação para convocar ramos espectrais da Árvore do Mundo ao redor dela. O alvo deve ser bem-sucedido em uma salvaguarda de Força (CD 8 mais seu modificador de Força e seu Bônus de Proficiência) ou é teleportado para um espaço desocupado à sua vista a até 1,5 metro de você ou no espaço desocupado mais próximo à sua vista. Depois que o alvo se teleportar, você pode reduzir o Deslocamento dele a 0 até o final do turno atual.",
+      "origin": "subclass",
+      "originId": "arvore-do-mundo",
+      "activation": "reaction",
+      "category": "reaction",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "barbaro",
+          "min": 6
+        },
+        {
+          "type": "subclass",
+          "id": "arvore-do-mundo"
+        },
+        {
+          "type": "reaction-available"
+        },
+        {
+          "type": "fact",
+          "id": "feature.arvore-do-mundo.ramos-da-arvore.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Ramos da Árvore atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "reaction"
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 54
+      }
+    },
+    {
+      "id": "feature.colegio-do-conhecimento.palavras-de-interrupcao",
+      "name": "Palavras de Interrupção",
+      "summary": "Você aprende a usar sua sagacidade para distrair, confundir e diminuir sobrenaturalmente a confiança e a competência dos outros. Quando uma criatura à sua vista a até 18 metros de você realizar uma jogada de dano, ou for bem-sucedida em um teste de atributo ou jogada de ataque, você pode executar uma Reação para gastar um uso da sua Inspiração de Bardo. Jogue o dado de Inspiração de Bardo e subtraia o número jogado do resultado da criatura, reduzindo o dano ou transformando potencialmente o sucesso em fracasso.",
+      "origin": "subclass",
+      "originId": "colegio-do-conhecimento",
+      "activation": "reaction",
+      "category": "reaction",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "bardo",
+          "min": 3
+        },
+        {
+          "type": "subclass",
+          "id": "colegio-do-conhecimento"
+        },
+        {
+          "type": "reaction-available"
+        },
+        {
+          "type": "resource",
+          "id": "bardic-inspiration",
+          "atLeast": 1,
+          "label": "Palavras de Interrupção"
+        },
+        {
+          "type": "fact",
+          "id": "feature.colegio-do-conhecimento.palavras-de-interrupcao.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Palavras de Interrupção atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "reaction"
+        },
+        {
+          "type": "resource",
+          "id": "bardic-inspiration",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 66
+      }
+    },
+    {
+      "id": "feature.colegio-da-danca.movimento-inspirador",
+      "name": "Movimento Inspirador",
+      "summary": "Quando um inimigo à sua vista encerra o turno dele a até 1,5 metro de você, você pode executar uma Reação e gastar um uso da sua Inspiração de Bardo para se mover até metade do seu Deslocamento. Em seguida, um aliado à sua escolha a até 9 metros de você também pode se mover até metade do Deslocamento dele usando a própria Reação. Nenhum movimento dessa característica provoca Ataques de Oportunidade.",
+      "origin": "subclass",
+      "originId": "colegio-da-danca",
+      "activation": "reaction",
+      "category": "reaction",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "bardo",
+          "min": 6
+        },
+        {
+          "type": "subclass",
+          "id": "colegio-da-danca"
+        },
+        {
+          "type": "reaction-available"
+        },
+        {
+          "type": "resource",
+          "id": "bardic-inspiration",
+          "atLeast": 1,
+          "label": "Movimento Inspirador"
+        },
+        {
+          "type": "fact",
+          "id": "feature.colegio-da-danca.movimento-inspirador.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Movimento Inspirador atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "reaction"
+        },
+        {
+          "type": "resource",
+          "id": "bardic-inspiration",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 65
+      }
+    },
+    {
+      "id": "feature.colegio-da-danca.gingado-coordenado",
+      "name": "Gingado Coordenado",
+      "summary": "Ao jogar Iniciativa, você pode gastar um uso da sua Inspiração de Bardo se não estiver com a condição Incapacitado. Ao realizar isso, jogue o dado da sua Inspiração de Bardo; você e cada aliado a até 9 metros de você que puder ver ou ouvir você adquire um bônus na Iniciativa igual ao número jogado.",
+      "origin": "subclass",
+      "originId": "colegio-da-danca",
+      "activation": "free",
+      "category": "modifier",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "bardo",
+          "min": 6
+        },
+        {
+          "type": "subclass",
+          "id": "colegio-da-danca"
+        },
+        {
+          "type": "resource",
+          "id": "bardic-inspiration",
+          "atLeast": 1,
+          "label": "Gingado Coordenado"
+        },
+        {
+          "type": "fact",
+          "id": "feature.colegio-da-danca.gingado-coordenado.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Gingado Coordenado atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "resource",
+          "id": "bardic-inspiration",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 65
+      }
+    },
+    {
+      "id": "feature.colegio-do-glamour.manto-de-inspiracao",
+      "name": "Manto de Inspiração",
+      "summary": "Você pode canalizar magia feérica em uma canção ou dança, revigorando os outros. Como um Ação Bônus, você pode usar uma das suas Inspirações de Bardo, jogando um dado de Inspiração de Bardo. Escolha um número de criaturas a até 18 metros de você igual ao seu modificador de Carisma (no mínimo uma criatura). Cada uma dessas criaturas recebe um número de Pontos de Vida Temporários igual a duas vezes o número jogado no dado de Inspiração de Bardo e, então, cada uma pode executar uma Reação para se mover até o máximo do Deslocamento sem provocar Ataques de Oportunidade.",
+      "origin": "subclass",
+      "originId": "colegio-do-glamour",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "bardo",
+          "min": 3
+        },
+        {
+          "type": "subclass",
+          "id": "colegio-do-glamour"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "resource",
+          "id": "bardic-inspiration",
+          "atLeast": 1,
+          "label": "Manto de Inspiração"
+        },
+        {
+          "type": "fact",
+          "id": "feature.colegio-do-glamour.manto-de-inspiracao.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Manto de Inspiração atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        },
+        {
+          "type": "resource",
+          "id": "bardic-inspiration",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 67
+      }
+    },
+    {
+      "id": "feature.patrono-infero.a-sorte-do-proprio-tenebroso",
+      "name": "A Sorte do Próprio Tenebroso",
+      "summary": "Você pode chamar seu patrono Ínfero para alterar o destino a seu favor. Ao realizar um teste de atributo ou uma salvaguarda, você pode usar essa característica para adicionar 1d10 à sua jogada. Você pode fazer isso após ver a jogada, mas antes que qualquer um dos efeitos da jogada ocorra. Você pode usar essa característica um número de vezes igual ao seu modificador de Carisma (mínimo de uma vez), no máximo uma vez por jogada, e restaura todos os usos gastos ao completar um Descanso Longo.",
+      "origin": "subclass",
+      "originId": "patrono-infero",
+      "activation": "free",
+      "category": "modifier",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "bruxo",
+          "min": 6
+        },
+        {
+          "type": "subclass",
+          "id": "patrono-infero"
+        },
+        {
+          "type": "resource",
+          "id": "dark-luck",
+          "atLeast": 1,
+          "label": "A Sorte do Próprio Tenebroso"
+        },
+        {
+          "type": "fact",
+          "id": "feature.patrono-infero.a-sorte-do-proprio-tenebroso.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de A Sorte do Próprio Tenebroso atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "resource",
+          "id": "dark-luck",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 79
+      }
+    },
+    {
+      "id": "feature.dominio-da-luz.labareda-protetora",
+      "name": "Labareda Protetora",
+      "summary": "Quando uma criatura à sua vista a até 9 metros de você realiza uma jogada de ataque, você pode executar uma Reação para impor Desvantagem na jogada de ataque, fazendo com que a luz brilhe antes de acertar ou errar. Você pode usar essa característica um número de vezes igual ao seu modificador de Sabedoria (mínimo de uma vez) e restaura todos os usos gastos ao completar um Descanso Longo.",
+      "origin": "subclass",
+      "originId": "dominio-da-luz",
+      "activation": "reaction",
+      "category": "reaction",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "clerigo",
+          "min": 3
+        },
+        {
+          "type": "subclass",
+          "id": "dominio-da-luz"
+        },
+        {
+          "type": "reaction-available"
+        },
+        {
+          "type": "resource",
+          "id": "warding-flare",
+          "atLeast": 1,
+          "label": "Labareda Protetora"
+        },
+        {
+          "type": "fact",
+          "id": "feature.dominio-da-luz.labareda-protetora.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Labareda Protetora atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "reaction"
+        },
+        {
+          "type": "resource",
+          "id": "warding-flare",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 86
+      }
+    },
+    {
+      "id": "feature.dominio-da-luz.brilho-do-amanhecer",
+      "name": "Brilho do Amanhecer",
+      "summary": "Como uma ação Usar Magia, você ergue seu Símbolo Sagrado e gasta o uso de seu Canalizar Divindade para emitir um feixe de luz em uma Emanação de 9 metros originada em você. Qualquer Escuridão mágica, como a criada pela magia Escuridão , nessa área é dissipada. Além disso, cada criatura à sua escolha nessa área deve realizar uma salvaguarda de Constituição, sofrendo dano Radiante igual a 2d10 mais seu nível de Clérigo se falhar ou metade desse dano em caso de sucesso.",
+      "origin": "subclass",
+      "originId": "dominio-da-luz",
+      "activation": "action",
+      "category": "action",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "clerigo",
+          "min": 3
+        },
+        {
+          "type": "subclass",
+          "id": "dominio-da-luz"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "action-available"
+        },
+        {
+          "type": "resource",
+          "id": "channel-divinity",
+          "atLeast": 1,
+          "label": "Brilho do Amanhecer"
+        },
+        {
+          "type": "fact",
+          "id": "feature.dominio-da-luz.brilho-do-amanhecer.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Brilho do Amanhecer atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "action"
+        },
+        {
+          "type": "resource",
+          "id": "channel-divinity",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 86
+      }
+    },
+    {
+      "id": "feature.dominio-da-guerra.ataque-direcionado",
+      "name": "Ataque Direcionado",
+      "summary": "Quando você ou uma criatura a até 9 metros de você erra uma jogada de ataque, você pode gastar um uso de seu Canalizar Divindade e dar a essa jogada um Subclasse bônus de +10, potencialmente fazendo-o acertar. Você usa sua Reação para conceder esse bônus a uma jogada de ataque a outra criatura.",
+      "origin": "subclass",
+      "originId": "dominio-da-guerra",
+      "activation": "reaction",
+      "category": "reaction",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "clerigo",
+          "min": 3
+        },
+        {
+          "type": "subclass",
+          "id": "dominio-da-guerra"
+        },
+        {
+          "type": "reaction-available"
+        },
+        {
+          "type": "resource",
+          "id": "channel-divinity",
+          "atLeast": 1,
+          "label": "Ataque Direcionado"
+        },
+        {
+          "type": "fact",
+          "id": "feature.dominio-da-guerra.ataque-direcionado.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Ataque Direcionado atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "reaction"
+        },
+        {
+          "type": "resource",
+          "id": "channel-divinity",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 85
+      }
+    },
+    {
+      "id": "feature.dominio-da-vida.preservar-a-vida",
+      "name": "Preservar a Vida",
+      "summary": "Com uma ação Usar Magia, você exibe seu Símbolo Sagrado e usa seu Canalizar Divindade para evocar uma energia de cura que pode restaurar um número de Pontos de Vida igual a cinco vezes seu nível de Clérigo. Escolha criaturas Sangrando a até 9 metros de você (que pode incluir você) e divida esses Pontos de Vida entre elas. Esta característica pode restaurar uma criatura a não mais que a metade dos Pontos de Vida máximo dela.",
+      "origin": "subclass",
+      "originId": "dominio-da-vida",
+      "activation": "action",
+      "category": "action",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "clerigo",
+          "min": 3
+        },
+        {
+          "type": "subclass",
+          "id": "dominio-da-vida"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "action-available"
+        },
+        {
+          "type": "resource",
+          "id": "channel-divinity",
+          "atLeast": 1,
+          "label": "Preservar a Vida"
+        },
+        {
+          "type": "fact",
+          "id": "feature.dominio-da-vida.preservar-a-vida.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Preservar a Vida atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "action"
+        },
+        {
+          "type": "resource",
+          "id": "channel-divinity",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 89
+      }
+    },
+    {
+      "id": "feature.dominio-da-trapaca.invocar-duplicidade",
+      "name": "Invocar Duplicidade",
+      "summary": "Como uma Ação Bônus, você pode gastar um uso de seu Canalizar Divindade para criar uma ilusão visual perfeita de si em um espaço desocupado à sua vista a até 9 metros de si. A ilusão é intangível e não ocupa seu espaço. Ela permanece por 1 minuto e acaba se você tiver a condição Incapacitado ou a encerrar (nenhuma ação é necessária). A ilusão é animada e imita suas expressões e gestos. Enquanto ela persistir, você adquire os seguintes benefícios. Conjurar Magias. Você pode conjurar magias como se estivesse no espaço da ilusão, mas deve usar seus próprios sentidos. Distração. Quando você e sua ilusão estão a até 1,5 metro de uma criatura que pode ver a ilusão, você tem Vantagem em jogadas de ataque contra essa criatura, considerando quão perturbadora a ilusão é para o alvo. Mover. Como uma Ação Bônus, você pode mover a ilusão até 9 metros para um espaço desocupado que esteja a até 36 metros de você.",
+      "origin": "subclass",
+      "originId": "dominio-da-trapaca",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "clerigo",
+          "min": 3
+        },
+        {
+          "type": "subclass",
+          "id": "dominio-da-trapaca"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "resource",
+          "id": "channel-divinity",
+          "atLeast": 1,
+          "label": "Invocar Duplicidade"
+        },
+        {
+          "type": "fact",
+          "id": "feature.dominio-da-trapaca.invocar-duplicidade.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Invocar Duplicidade atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        },
+        {
+          "type": "resource",
+          "id": "channel-divinity",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 88
+      }
+    },
+    {
+      "id": "feature.circulo-da-terra.auxilio-da-terra",
+      "name": "Auxílio da Terra",
+      "summary": "Como uma ação Usar Magia, você pode gastar um uso de sua Forma Selvagem e escolher um ponto a até 18 metros de você. Flores que concedem vitalidade e espinhos drenadores de vida surgem momentaneamente em uma Esfera de 3 metros de raio, centrada nesse ponto. Cada criatura à sua escolha na Esfera deve realizar uma salvaguarda de Constituição contra a CD para evitar sua magia, sofrendo 2d6 pontos de dano Necrótico se falhar ou metade desse dano em caso de sucesso. Uma criatura à sua escolha na área restaura 2d6 Pontos de Vida. O dano e cura aumentam em 1d6 quando você atinge o nível 10 (3d6) e 14 (4d6) de Druida.",
+      "origin": "subclass",
+      "originId": "circulo-da-terra",
+      "activation": "action",
+      "category": "action",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "druida",
+          "min": 3
+        },
+        {
+          "type": "subclass",
+          "id": "circulo-da-terra"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "action-available"
+        },
+        {
+          "type": "resource",
+          "id": "wild-shape",
+          "atLeast": 1,
+          "label": "Auxílio da Terra"
+        },
+        {
+          "type": "fact",
+          "id": "feature.circulo-da-terra.auxilio-da-terra.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Auxílio da Terra atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "action"
+        },
+        {
+          "type": "resource",
+          "id": "wild-shape",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 97
+      }
+    },
+    {
+      "id": "feature.circulo-das-estrelas.forma-estrelada",
+      "name": "Forma Estrelada",
+      "summary": "Como uma Ação Bônus, você pode gastar um uso de sua característica Forma Selvagem para assumir uma forma estrelada em vez de multimorfar. Enquanto em sua forma estrelada, você mantém suas estatísticas de jogo, mas seu corpo se torna luminoso, com articulações que brilham como estrelas e linhas brilhantes conectando-as, como em um mapa estelar. Essa forma emite Luz Plena em um raio de 3 metros e Meia-luz por mais 3 metros. A forma dura 10 minutos e encerra se você a dispensar (nenhuma ação é necessária), ter a condição Incapacitado ou se você usar essa característica novamente. Sempre que você assumir sua forma estrelada, escolha qual das constelações a seguir brilha em seu corpo; sua escolha concede certos benefícios enquanto estiver na forma. Arqueiro. Uma constelação de um arqueiro aparece em você. Ao ativar e nos turnos subsequentes como uma Ação Bônus, você pode realizar um ataque mágico à distância, disparando uma flecha luminosa que atinge uma criatura a até 18 metros. Em caso de acerto, o ataque causa 1d8 pontos de dano Radiante + seu modificador de Sabedoria. Dragão. Uma constelação de um dragão sábio aparece em você. Quando realizar um teste de Inteligência ou Sabedoria, ou uma salvaguarda de Constituição para manter a Concentração, você trata um resultado 9 ou menor no d20 como um 10. Taça. Uma constelação de um cálice vivificante aparece em você. Sempre que você conjurar uma magia, usando um espaço de que restaure Pontos de Vida em uma criatura, você ou outra criatura a até 9 metros de você pode restaurar Pontos de Vida iguais a 1d8 + seu modificador de Sabedoria.",
+      "origin": "subclass",
+      "originId": "circulo-das-estrelas",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "druida",
+          "min": 3
+        },
+        {
+          "type": "subclass",
+          "id": "circulo-das-estrelas"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "resource",
+          "id": "wild-shape",
+          "atLeast": 1,
+          "label": "Forma Estrelada"
+        },
+        {
+          "type": "fact",
+          "id": "feature.circulo-das-estrelas.forma-estrelada.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Forma Estrelada atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        },
+        {
+          "type": "resource",
+          "id": "wild-shape",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 98
+      }
+    },
+    {
+      "id": "feature.circulo-das-estrelas.pressagio-cosmico",
+      "name": "Presságio Cósmico",
+      "summary": "Sempre que você completar um Descanso Longo, pode consultar seu Mapa Estelar em busca de presságios e jogar um dado. Até completar o próximo Descanso Longo, você tem acesso a uma Reação especial com base no número que obteve: Prosperidade (par) . Sempre que uma criatura à sua vista a até 9 metros de você realizar um Teste de D20, você pode executar uma Reação para jogar 1d6 e adicionar o resultado jogado ao total. Infortúnio (ímpar). Sempre que uma criatura à sua vista a até 9 metros de você realizar um Teste de D20, você pode executar uma Reação para jogar 1d6 e subtrair o resultado jogado do total. Você pode usar essa Reação um número de vezes igual ao seu modificador de Sabedoria (mínimo de uma vez) e restaura todos os usos gastos ao completar um Descanso Longo.",
+      "origin": "subclass",
+      "originId": "circulo-das-estrelas",
+      "activation": "reaction",
+      "category": "reaction",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "druida",
+          "min": 6
+        },
+        {
+          "type": "subclass",
+          "id": "circulo-das-estrelas"
+        },
+        {
+          "type": "reaction-available"
+        },
+        {
+          "type": "resource",
+          "id": "cosmic-omen",
+          "atLeast": 1,
+          "label": "Presságio Cósmico"
+        },
+        {
+          "type": "fact",
+          "id": "feature.circulo-das-estrelas.pressagio-cosmico.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Presságio Cósmico atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "reaction"
+        },
+        {
+          "type": "resource",
+          "id": "cosmic-omen",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 100
+      }
+    },
+    {
+      "id": "feature.circulo-do-mar.ira-do-mar",
+      "name": "Ira do Mar",
+      "summary": "Como uma Ação Bônus, você pode gastar um uso da sua Forma Selvagem para manifestar uma Emanação de 1,5 metro, que toma a forma de respingos de água do oceano ao seu redor por 10 minutos. Ela se encerra caso você a disperse (nenhuma ação é necessária), manifeste-a novamente ou tenha a condição Incapacitado. Ao manifestar a Emanação e como uma Ação Bônus em seus turnos subsequentes, você pode escolher outra criatura à sua vista na Emanação. O alvo deve ser bem- -sucedido em uma salvaguarda de Constituição contra a sua CD para evitar magia ou sofre dano Gélido e, se a criatura for Grande ou menor, é empurrada até 4,5 metros para longe de você. Para determinar esse dano, jogue um número de d6s igual ao seu modificador de Sabedoria (mínimo de um dado).",
+      "origin": "subclass",
+      "originId": "circulo-do-mar",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "druida",
+          "min": 3
+        },
+        {
+          "type": "subclass",
+          "id": "circulo-do-mar"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "resource",
+          "id": "wild-shape",
+          "atLeast": 1,
+          "label": "Ira do Mar"
+        },
+        {
+          "type": "fact",
+          "id": "feature.circulo-do-mar.ira-do-mar.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Ira do Mar atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        },
+        {
+          "type": "resource",
+          "id": "wild-shape",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 101
+      }
+    },
+    {
+      "id": "feature.feiticaria-mecanica.restaurar-equilibrio",
+      "name": "Restaurar Equilíbrio",
+      "summary": "Sua conexão com o plano de ordem absoluta permite equalizar momentos caóticos. Quando uma criatura à sua vista a até 18 metros de você estiver prestes a jogar um d20 com Vantagem ou Desvantagem, você pode executar uma Reação para evitar que o teste seja afetado por Vantagem e Desvantagem. Você pode usar essa característica um número de vezes igual ao seu modificador de Carisma (mínimo de uma vez) e restaura todos os usos gastos ao completar um Descanso Longo.",
+      "origin": "subclass",
+      "originId": "feiticaria-mecanica",
+      "activation": "reaction",
+      "category": "reaction",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "feiticeiro",
+          "min": 3
+        },
+        {
+          "type": "subclass",
+          "id": "feiticaria-mecanica"
+        },
+        {
+          "type": "reaction-available"
+        },
+        {
+          "type": "resource",
+          "id": "restore-balance",
+          "atLeast": 1,
+          "label": "Restaurar Equilíbrio"
+        },
+        {
+          "type": "fact",
+          "id": "feature.feiticaria-mecanica.restaurar-equilibrio.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Restaurar Equilíbrio atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "reaction"
+        },
+        {
+          "type": "resource",
+          "id": "restore-balance",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 112
+      }
+    },
+    {
+      "id": "feature.magia-selvagem.distorcer-a-sorte",
+      "name": "Distorcer a Sorte",
+      "summary": "Você consegue distorcer o destino usando sua magia selvagem. Imediatamente após outra criatura à sua vista jogar o d20 para um Teste de D20, você pode executar uma Reação e gastar 1 Ponto de Feitiçaria para jogar 1d4 e aplicar o resultado jogado como bônus ou penalidade (à sua escolha) no teste de d20.",
+      "origin": "subclass",
+      "originId": "magia-selvagem",
+      "activation": "reaction",
+      "category": "reaction",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "feiticeiro",
+          "min": 6
+        },
+        {
+          "type": "subclass",
+          "id": "magia-selvagem"
+        },
+        {
+          "type": "reaction-available"
+        },
+        {
+          "type": "resource",
+          "id": "sorcery-point",
+          "atLeast": 2,
+          "label": "Distorcer a Sorte"
+        },
+        {
+          "type": "fact",
+          "id": "feature.magia-selvagem.distorcer-a-sorte.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Distorcer a Sorte atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "reaction"
+        },
+        {
+          "type": "resource",
+          "id": "sorcery-point",
+          "amount": 2
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 113
+      }
+    },
+    {
+      "id": "feature.mestre-da-batalha.conheca-seu-inimigo",
+      "name": "Conheça Seu Inimigo",
+      "summary": "Como uma Ação Bônus, você pode examinar certos pontos fortes e fracos de uma criatura à sua vista a até 9 metros de você; você sabe se essa criatura tem Imunidades, Resistências ou Vulnerabilidades, e se a criatura tiver alguma, você sabe quais são. Após usar essa característica, você não pode fazer isso novamente até completar um Descanso Longo. Você também pode recuperar um uso da característica Subclasse Mestre da Batalha gastando um Dado de Superioridade (nenhuma ação é necessária).",
+      "origin": "subclass",
+      "originId": "mestre-da-batalha",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "guerreiro",
+          "min": 7
+        },
+        {
+          "type": "subclass",
+          "id": "mestre-da-batalha"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "resource",
+          "id": "know-enemy",
+          "atLeast": 1,
+          "label": "Conheça Seu Inimigo"
+        },
+        {
+          "type": "fact",
+          "id": "feature.mestre-da-batalha.conheca-seu-inimigo.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Conheça Seu Inimigo atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        },
+        {
+          "type": "resource",
+          "id": "know-enemy",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 133
+      }
+    },
+    {
+      "id": "feature.guerreiro-da-mao-espalmada.integridade-corporal",
+      "name": "Integridade Corporal",
+      "summary": "Você adquire a capacidade de se curar. Como uma Ação Bônus, você pode jogar seu dado de Artes Marciais. Você recupera um número de Pontos de Vida igual ao resultado mais seu modificador de Sabedoria (mínimo de 1 Ponto de Vida recuperado). Você pode usar essa característica um número de vezes igual ao seu modificador de Sabedoria (mínimo de uma vez) e restaura todos os usos gastos ao completar um Descanso Longo.",
+      "origin": "subclass",
+      "originId": "guerreiro-da-mao-espalmada",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "monge",
+          "min": 6
+        },
+        {
+          "type": "subclass",
+          "id": "guerreiro-da-mao-espalmada"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "resource",
+          "id": "wholeness",
+          "atLeast": 1,
+          "label": "Integridade Corporal"
+        },
+        {
+          "type": "fact",
+          "id": "feature.guerreiro-da-mao-espalmada.integridade-corporal.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Integridade Corporal atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        },
+        {
+          "type": "resource",
+          "id": "wholeness",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 162
+      }
+    },
+    {
+      "id": "feature.guerreiro-das-sombras.passo-da-sombra",
+      "name": "Passo da Sombra",
+      "summary": "Enquanto estiver inteiramente em Meia-luz ou Escuridão, você pode executar uma Ação Bônus para se teleportar até 18 metros para um espaço desocupado à sua vista que também esteja sob Meia-luz ou Escuridão. Você então tem Vantagem no próximo ataque corpo a corpo que realizar antes do final do turno atual.",
+      "origin": "subclass",
+      "originId": "guerreiro-das-sombras",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "monge",
+          "min": 6
+        },
+        {
+          "type": "subclass",
+          "id": "guerreiro-das-sombras"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "fact",
+          "id": "feature.guerreiro-das-sombras.passo-da-sombra.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Passo da Sombra atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 164
+      }
+    },
+    {
+      "id": "feature.guerreiro-dos-elementos.explosao-elemental",
+      "name": "Explosão Elemental",
+      "summary": "Como uma ação Usar Magia, você pode gastar 2 Pontos de Foco para fazer com que energia elemental exploda em uma Esfera de 6 metros de raio centrada em um ponto a até 36 metros de você. Escolha um tipo de dano: Ácido, Elétrico, Gélido, Ígneo ou Trovejante. Cada criatura na Esfera deve realizar uma salvaguarda de Destreza. Se falhar, uma criatura sofre dano do tipo escolhido igual a três jogadas de seus dados de Artes Marciais. Em caso de sucesso, uma criatura sofre metade do dano.",
+      "origin": "subclass",
+      "originId": "guerreiro-dos-elementos",
+      "activation": "action",
+      "category": "action",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "monge",
+          "min": 6
+        },
+        {
+          "type": "subclass",
+          "id": "guerreiro-dos-elementos"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "action-available"
+        },
+        {
+          "type": "resource",
+          "id": "focus-point",
+          "atLeast": 2,
+          "label": "Explosão Elemental"
+        },
+        {
+          "type": "fact",
+          "id": "feature.guerreiro-dos-elementos.explosao-elemental.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Explosão Elemental atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "action"
+        },
+        {
+          "type": "resource",
+          "id": "focus-point",
+          "amount": 2
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 165
+      }
+    },
+    {
+      "id": "feature.juramento-dos-ancioes.a-ira-da-natureza",
+      "name": "A Ira da Natureza",
+      "summary": "Como uma ação Usar Magia, você pode gastar um uso do seu Canalizar Divindade para conjurar videiras espectrais em torno de criaturas próximas. Cada criatura à sua escolha que você possa ver a até 4,5 metros de você deve ser bem-sucedida em uma salvaguarda de Força ou tem a condição Contido por 1 minuto. Uma criatura Contida repete a salvaguarda no final de cada um dos turnos dela, encerrando o efeito em caso de sucesso.",
+      "origin": "subclass",
+      "originId": "juramento-dos-ancioes",
+      "activation": "action",
+      "category": "action",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "paladino",
+          "min": 3
+        },
+        {
+          "type": "subclass",
+          "id": "juramento-dos-ancioes"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "action-available"
+        },
+        {
+          "type": "resource",
+          "id": "channel-divinity",
+          "atLeast": 1,
+          "label": "A Ira da Natureza"
+        },
+        {
+          "type": "fact",
+          "id": "feature.juramento-dos-ancioes.a-ira-da-natureza.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de A Ira da Natureza atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "action"
+        },
+        {
+          "type": "resource",
+          "id": "channel-divinity",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 174
+      }
+    },
+    {
+      "id": "feature.juramento-da-gloria.atleta-inigualavel",
+      "name": "Atleta Inigualável",
+      "summary": "Como uma Ação Bônus, você pode gastar um uso do seu Canalizar Divindade para aprimorar seu atletismo. Por 1 hora, você tem Vantagem em testes de Força (Atletismo) e Destreza (Acrobacia), e a distância de seus Saltos Longos e Salto em Altura aumenta em 3 metros (essa distância adicional custa movimento padrão).",
+      "origin": "subclass",
+      "originId": "juramento-da-gloria",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "paladino",
+          "min": 3
+        },
+        {
+          "type": "subclass",
+          "id": "juramento-da-gloria"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "resource",
+          "id": "channel-divinity",
+          "atLeast": 1,
+          "label": "Atleta Inigualável"
+        },
+        {
+          "type": "fact",
+          "id": "feature.juramento-da-gloria.atleta-inigualavel.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Atleta Inigualável atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        },
+        {
+          "type": "resource",
+          "id": "channel-divinity",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 173
+      }
+    },
+    {
+      "id": "feature.juramento-da-gloria.destruicao-inspiradora",
+      "name": "Destruição Inspiradora",
+      "summary": "Imediatamente após conjurar Destruição Divina , você pode gastar um uso do seu Canalizar Divindade e distribuir Pontos de Vida Temporários para criaturas à sua escolha a até 9 metros de si, incluindo você. O número total de Pontos de Vida Temporários é igual a 2d8 mais o seu nível de Paladino, dividido entre as criaturas escolhidas, como preferir.",
+      "origin": "subclass",
+      "originId": "juramento-da-gloria",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "paladino",
+          "min": 3
+        },
+        {
+          "type": "subclass",
+          "id": "juramento-da-gloria"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "resource",
+          "id": "channel-divinity",
+          "atLeast": 1,
+          "label": "Destruição Inspiradora"
+        },
+        {
+          "type": "fact",
+          "id": "feature.juramento-da-gloria.destruicao-inspiradora.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Destruição Inspiradora atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        },
+        {
+          "type": "resource",
+          "id": "channel-divinity",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 173
+      }
+    },
+    {
+      "id": "feature.abjurador.protecao-projetada",
+      "name": "Proteção Projetada",
+      "summary": "Quando uma criatura à sua vista a até 9 metros de você sofrer dano, você pode executar uma Reação para que sua Proteção Arcana absorva esse dano. Caso isto reduza a proteção a 0 Pontos de Vida, a criatura protegida sofre qualquer dano restante. Se essa criatura tiver alguma Resistência ou Vulnerabilidade, aplique-as antes de reduzir os Pontos de Vida da proteção.",
+      "origin": "subclass",
+      "originId": "abjurador",
+      "activation": "reaction",
+      "category": "reaction",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "mago",
+          "min": 6
+        },
+        {
+          "type": "subclass",
+          "id": "abjurador"
+        },
+        {
+          "type": "reaction-available"
+        },
+        {
+          "type": "fact",
+          "id": "feature.abjurador.protecao-projetada.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Proteção Projetada atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "reaction"
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 154
+      }
+    },
+    {
+      "id": "feature.bardo.contra-encantamento",
+      "name": "Contra-Encantamento",
+      "summary": "Você pode usar notas musicais ou palavras de poder para interromper efeitos que influenciam a mente. Se você ou uma criatura a até 9 metros de você falhar em uma salvaguarda contra um efeito que aplica as condições Amedrontado ou Enfeitiçado, você pode executar uma Reação para jogar novamente a salvaguarda, e a nova jogada tem Vantagem.",
+      "origin": "class",
+      "originId": "bardo",
+      "activation": "reaction",
+      "category": "reaction",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "bardo",
+          "min": 7
+        },
+        {
+          "type": "reaction-available"
+        },
+        {
+          "type": "fact",
+          "id": "feature.bardo.contra-encantamento.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Contra-Encantamento atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "reaction"
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 61
+      }
+    },
+    {
+      "id": "feature.dominio-da-guerra.sacerdote-da-guerra",
+      "name": "Sacerdote da Guerra",
+      "summary": "Como uma Ação Bônus, você pode realizar um ataque com uma arma ou um Ataque Desarmado. Você pode usar essa Ação Bônus um número de vezes igual ao seu modificador de Sabedoria (mínimo de uma vez). Você restaura todos os usos gastos ao completar um Descanso Curto ou Longo.",
+      "origin": "subclass",
+      "originId": "dominio-da-guerra",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "clerigo",
+          "min": 3
+        },
+        {
+          "type": "subclass",
+          "id": "dominio-da-guerra"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "resource",
+          "id": "war-priest",
+          "atLeast": 1,
+          "label": "Sacerdote da Guerra"
+        },
+        {
+          "type": "fact",
+          "id": "feature.dominio-da-guerra.sacerdote-da-guerra.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Sacerdote da Guerra atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        },
+        {
+          "type": "resource",
+          "id": "war-priest",
+          "amount": 1
+        }
+      ],
+      "effects": [
+        {
+          "type": "grant-attack",
+          "amount": 1
+        }
+      ],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 86
+      }
+    },
+    {
+      "id": "feature.feiticaria-mecanica.bastiao-da-lei.1",
+      "name": "Bastião da Lei (1)",
+      "summary": "Você pode acessar a grande equação da existência para imbuir uma criatura com um escudo cintilante de ordem. Como uma ação Usar Magia, você pode gastar de 1 a 5 Pontos de Feitiçaria para criar uma proteção mágica ao seu redor ou de outra criatura à sua vista a até 9 metros de você. A proteção é representada por um número de d8s igual ao número de Pontos de Feitiçaria gastos para criá-la. Quando a criatura protegida sofre dano, ela pode gastar um número desses dados, jogá-los e reduzir o dano sofrido pelo resultado desses dados. A proteção dura até você completar um Descanso Longo ou até usar esta característica novamente.",
+      "origin": "subclass",
+      "originId": "feiticaria-mecanica",
+      "activation": "action",
+      "category": "action",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "feiticeiro",
+          "min": 6
+        },
+        {
+          "type": "subclass",
+          "id": "feiticaria-mecanica"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "action-available"
+        },
+        {
+          "type": "resource",
+          "id": "sorcery-point",
+          "atLeast": 1,
+          "label": "Bastião da Lei"
+        },
+        {
+          "type": "fact",
+          "id": "feature.feiticaria-mecanica.bastiao-da-lei.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Bastião da Lei atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "action"
+        },
+        {
+          "type": "resource",
+          "id": "sorcery-point",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 112
+      }
+    },
+    {
+      "id": "feature.feiticaria-mecanica.bastiao-da-lei.2",
+      "name": "Bastião da Lei (2)",
+      "summary": "Você pode acessar a grande equação da existência para imbuir uma criatura com um escudo cintilante de ordem. Como uma ação Usar Magia, você pode gastar de 1 a 5 Pontos de Feitiçaria para criar uma proteção mágica ao seu redor ou de outra criatura à sua vista a até 9 metros de você. A proteção é representada por um número de d8s igual ao número de Pontos de Feitiçaria gastos para criá-la. Quando a criatura protegida sofre dano, ela pode gastar um número desses dados, jogá-los e reduzir o dano sofrido pelo resultado desses dados. A proteção dura até você completar um Descanso Longo ou até usar esta característica novamente.",
+      "origin": "subclass",
+      "originId": "feiticaria-mecanica",
+      "activation": "action",
+      "category": "action",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "feiticeiro",
+          "min": 6
+        },
+        {
+          "type": "subclass",
+          "id": "feiticaria-mecanica"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "action-available"
+        },
+        {
+          "type": "resource",
+          "id": "sorcery-point",
+          "atLeast": 2,
+          "label": "Bastião da Lei"
+        },
+        {
+          "type": "fact",
+          "id": "feature.feiticaria-mecanica.bastiao-da-lei.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Bastião da Lei atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "action"
+        },
+        {
+          "type": "resource",
+          "id": "sorcery-point",
+          "amount": 2
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 112
+      }
+    },
+    {
+      "id": "feature.feiticaria-mecanica.bastiao-da-lei.3",
+      "name": "Bastião da Lei (3)",
+      "summary": "Você pode acessar a grande equação da existência para imbuir uma criatura com um escudo cintilante de ordem. Como uma ação Usar Magia, você pode gastar de 1 a 5 Pontos de Feitiçaria para criar uma proteção mágica ao seu redor ou de outra criatura à sua vista a até 9 metros de você. A proteção é representada por um número de d8s igual ao número de Pontos de Feitiçaria gastos para criá-la. Quando a criatura protegida sofre dano, ela pode gastar um número desses dados, jogá-los e reduzir o dano sofrido pelo resultado desses dados. A proteção dura até você completar um Descanso Longo ou até usar esta característica novamente.",
+      "origin": "subclass",
+      "originId": "feiticaria-mecanica",
+      "activation": "action",
+      "category": "action",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "feiticeiro",
+          "min": 6
+        },
+        {
+          "type": "subclass",
+          "id": "feiticaria-mecanica"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "action-available"
+        },
+        {
+          "type": "resource",
+          "id": "sorcery-point",
+          "atLeast": 3,
+          "label": "Bastião da Lei"
+        },
+        {
+          "type": "fact",
+          "id": "feature.feiticaria-mecanica.bastiao-da-lei.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Bastião da Lei atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "action"
+        },
+        {
+          "type": "resource",
+          "id": "sorcery-point",
+          "amount": 3
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 112
+      }
+    },
+    {
+      "id": "feature.feiticaria-mecanica.bastiao-da-lei.4",
+      "name": "Bastião da Lei (4)",
+      "summary": "Você pode acessar a grande equação da existência para imbuir uma criatura com um escudo cintilante de ordem. Como uma ação Usar Magia, você pode gastar de 1 a 5 Pontos de Feitiçaria para criar uma proteção mágica ao seu redor ou de outra criatura à sua vista a até 9 metros de você. A proteção é representada por um número de d8s igual ao número de Pontos de Feitiçaria gastos para criá-la. Quando a criatura protegida sofre dano, ela pode gastar um número desses dados, jogá-los e reduzir o dano sofrido pelo resultado desses dados. A proteção dura até você completar um Descanso Longo ou até usar esta característica novamente.",
+      "origin": "subclass",
+      "originId": "feiticaria-mecanica",
+      "activation": "action",
+      "category": "action",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "feiticeiro",
+          "min": 6
+        },
+        {
+          "type": "subclass",
+          "id": "feiticaria-mecanica"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "action-available"
+        },
+        {
+          "type": "resource",
+          "id": "sorcery-point",
+          "atLeast": 4,
+          "label": "Bastião da Lei"
+        },
+        {
+          "type": "fact",
+          "id": "feature.feiticaria-mecanica.bastiao-da-lei.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Bastião da Lei atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "action"
+        },
+        {
+          "type": "resource",
+          "id": "sorcery-point",
+          "amount": 4
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 112
+      }
+    },
+    {
+      "id": "feature.feiticaria-mecanica.bastiao-da-lei.5",
+      "name": "Bastião da Lei (5)",
+      "summary": "Você pode acessar a grande equação da existência para imbuir uma criatura com um escudo cintilante de ordem. Como uma ação Usar Magia, você pode gastar de 1 a 5 Pontos de Feitiçaria para criar uma proteção mágica ao seu redor ou de outra criatura à sua vista a até 9 metros de você. A proteção é representada por um número de d8s igual ao número de Pontos de Feitiçaria gastos para criá-la. Quando a criatura protegida sofre dano, ela pode gastar um número desses dados, jogá-los e reduzir o dano sofrido pelo resultado desses dados. A proteção dura até você completar um Descanso Longo ou até usar esta característica novamente.",
+      "origin": "subclass",
+      "originId": "feiticaria-mecanica",
+      "activation": "action",
+      "category": "action",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "feiticeiro",
+          "min": 6
+        },
+        {
+          "type": "subclass",
+          "id": "feiticaria-mecanica"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "action-available"
+        },
+        {
+          "type": "resource",
+          "id": "sorcery-point",
+          "atLeast": 5,
+          "label": "Bastião da Lei"
+        },
+        {
+          "type": "fact",
+          "id": "feature.feiticaria-mecanica.bastiao-da-lei.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Bastião da Lei atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "action"
+        },
+        {
+          "type": "resource",
+          "id": "sorcery-point",
+          "amount": 5
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 112
+      }
+    },
+    {
+      "id": "feature.zelote.campeao-dos-deuses.1",
+      "name": "Campeão dos Deuses (1)",
+      "summary": "Uma entidade divina assegura que você possa continuar lutando. Você tem uma reserva de quatro d12s que pode gastar para se curar. Como uma Ação Bônus, você pode gastar dados da reserva, jogá-los e recuperar uma quantidade de Pontos de Vida igual ao total do resultado. Sua reserva restaura todos os dados gastos quando você completa um Descanso Longo. O número máximo de dados na reserva aumenta em um quando você atinge os níveis de Bárbaro 6 (5 dados), 12 (6 dados) e 17 (7 dados).",
+      "origin": "subclass",
+      "originId": "zelote",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "barbaro",
+          "min": 3
+        },
+        {
+          "type": "subclass",
+          "id": "zelote"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "resource",
+          "id": "divine-healing",
+          "atLeast": 1,
+          "label": "Campeão dos Deuses"
+        },
+        {
+          "type": "fact",
+          "id": "feature.zelote.campeao-dos-deuses.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Campeão dos Deuses atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        },
+        {
+          "type": "resource",
+          "id": "divine-healing",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 57
+      }
+    },
+    {
+      "id": "feature.zelote.campeao-dos-deuses.2",
+      "name": "Campeão dos Deuses (2)",
+      "summary": "Uma entidade divina assegura que você possa continuar lutando. Você tem uma reserva de quatro d12s que pode gastar para se curar. Como uma Ação Bônus, você pode gastar dados da reserva, jogá-los e recuperar uma quantidade de Pontos de Vida igual ao total do resultado. Sua reserva restaura todos os dados gastos quando você completa um Descanso Longo. O número máximo de dados na reserva aumenta em um quando você atinge os níveis de Bárbaro 6 (5 dados), 12 (6 dados) e 17 (7 dados).",
+      "origin": "subclass",
+      "originId": "zelote",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "barbaro",
+          "min": 3
+        },
+        {
+          "type": "subclass",
+          "id": "zelote"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "resource",
+          "id": "divine-healing",
+          "atLeast": 2,
+          "label": "Campeão dos Deuses"
+        },
+        {
+          "type": "fact",
+          "id": "feature.zelote.campeao-dos-deuses.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Campeão dos Deuses atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        },
+        {
+          "type": "resource",
+          "id": "divine-healing",
+          "amount": 2
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 57
+      }
+    },
+    {
+      "id": "feature.zelote.campeao-dos-deuses.3",
+      "name": "Campeão dos Deuses (3)",
+      "summary": "Uma entidade divina assegura que você possa continuar lutando. Você tem uma reserva de quatro d12s que pode gastar para se curar. Como uma Ação Bônus, você pode gastar dados da reserva, jogá-los e recuperar uma quantidade de Pontos de Vida igual ao total do resultado. Sua reserva restaura todos os dados gastos quando você completa um Descanso Longo. O número máximo de dados na reserva aumenta em um quando você atinge os níveis de Bárbaro 6 (5 dados), 12 (6 dados) e 17 (7 dados).",
+      "origin": "subclass",
+      "originId": "zelote",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "barbaro",
+          "min": 3
+        },
+        {
+          "type": "subclass",
+          "id": "zelote"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "resource",
+          "id": "divine-healing",
+          "atLeast": 3,
+          "label": "Campeão dos Deuses"
+        },
+        {
+          "type": "fact",
+          "id": "feature.zelote.campeao-dos-deuses.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Campeão dos Deuses atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        },
+        {
+          "type": "resource",
+          "id": "divine-healing",
+          "amount": 3
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 57
+      }
+    },
+    {
+      "id": "feature.zelote.campeao-dos-deuses.4",
+      "name": "Campeão dos Deuses (4)",
+      "summary": "Uma entidade divina assegura que você possa continuar lutando. Você tem uma reserva de quatro d12s que pode gastar para se curar. Como uma Ação Bônus, você pode gastar dados da reserva, jogá-los e recuperar uma quantidade de Pontos de Vida igual ao total do resultado. Sua reserva restaura todos os dados gastos quando você completa um Descanso Longo. O número máximo de dados na reserva aumenta em um quando você atinge os níveis de Bárbaro 6 (5 dados), 12 (6 dados) e 17 (7 dados).",
+      "origin": "subclass",
+      "originId": "zelote",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "barbaro",
+          "min": 3
+        },
+        {
+          "type": "subclass",
+          "id": "zelote"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "resource",
+          "id": "divine-healing",
+          "atLeast": 4,
+          "label": "Campeão dos Deuses"
+        },
+        {
+          "type": "fact",
+          "id": "feature.zelote.campeao-dos-deuses.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Campeão dos Deuses atendem à descrição"
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        },
+        {
+          "type": "resource",
+          "id": "divine-healing",
+          "amount": 4
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 57
+      }
+    },
+    {
+      "id": "feature.zelote.campeao-dos-deuses.5",
+      "name": "Campeão dos Deuses (5)",
+      "summary": "Uma entidade divina assegura que você possa continuar lutando. Você tem uma reserva de quatro d12s que pode gastar para se curar. Como uma Ação Bônus, você pode gastar dados da reserva, jogá-los e recuperar uma quantidade de Pontos de Vida igual ao total do resultado. Sua reserva restaura todos os dados gastos quando você completa um Descanso Longo. O número máximo de dados na reserva aumenta em um quando você atinge os níveis de Bárbaro 6 (5 dados), 12 (6 dados) e 17 (7 dados).",
+      "origin": "subclass",
+      "originId": "zelote",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "barbaro",
+          "min": 3
+        },
+        {
+          "type": "subclass",
+          "id": "zelote"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "resource",
+          "id": "divine-healing",
+          "atLeast": 5,
+          "label": "Campeão dos Deuses"
+        },
+        {
+          "type": "fact",
+          "id": "feature.zelote.campeao-dos-deuses.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Campeão dos Deuses atendem à descrição"
+        },
+        {
+          "type": "class-level",
+          "classId": "barbaro",
+          "min": 6
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        },
+        {
+          "type": "resource",
+          "id": "divine-healing",
+          "amount": 5
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 57
+      }
+    },
+    {
+      "id": "feature.cavaleiro-mistico.magia-de-guerra",
+      "name": "Magia de Guerra",
+      "summary": "Ao executar a ação Atacar no seu turno, você pode substituir um dos ataques por uma conjuração de um de seus truques de Mago que tenha um tempo de conjuração de uma ação.",
+      "origin": "subclass",
+      "originId": "cavaleiro-mistico",
+      "activation": "free",
+      "category": "modifier",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "guerreiro",
+          "min": 7
+        },
+        {
+          "type": "subclass",
+          "id": "cavaleiro-mistico"
+        },
+        {
+          "type": "fact",
+          "id": "feature.cavaleiro-mistico.magia-de-guerra.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Magia de Guerra atendem à descrição"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "attacks-remaining"
+        },
+        {
+          "type": "fact",
+          "id": "cavaleiro-mistico.magia-de-guerra.cantrip",
+          "equals": true,
+          "label": "o truque é conhecido, tem tempo de uma ação e pertence à lista permitida"
+        }
+      ],
+      "costs": [],
+      "effects": [
+        {
+          "type": "consume-attack",
+          "amount": 1
+        }
+      ],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 131
+      }
+    },
+    {
+      "id": "feature.colegio-da-bravura.ataque-extra",
+      "name": "Ataque Extra",
+      "summary": "Você pode atacar duas vezes, em vez de uma, sempre que executar a ação Atacar no seu turno. Além disso, você pode conjurar um de seus truques que tenha um tempo de conjuração de uma ação no lugar de um desses ataques.",
+      "origin": "subclass",
+      "originId": "colegio-da-bravura",
+      "activation": "free",
+      "category": "modifier",
+      "conditions": [
+        {
+          "type": "class-level",
+          "classId": "bardo",
+          "min": 6
+        },
+        {
+          "type": "subclass",
+          "id": "colegio-da-bravura"
+        },
+        {
+          "type": "fact",
+          "id": "feature.colegio-da-bravura.ataque-extra.eligible",
+          "equals": true,
+          "label": "os alvos, alcance e gatilho de Ataque Extra atendem à descrição"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "attacks-remaining"
+        },
+        {
+          "type": "fact",
+          "id": "colegio-da-bravura.ataque-extra.cantrip",
+          "equals": true,
+          "label": "o truque é conhecido, tem tempo de uma ação e pertence à lista permitida"
+        }
+      ],
+      "costs": [],
+      "effects": [
+        {
+          "type": "consume-attack",
+          "amount": 1
+        }
+      ],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 64
+      }
+    }
+  ]
+}

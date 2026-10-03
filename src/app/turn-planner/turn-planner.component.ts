@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { take } from 'rxjs';
+import { combineLatest } from 'rxjs';
 
 import {
   CharacterProfile,
@@ -15,7 +15,9 @@ import {
 import { TurnPlannerStorageService } from '../services/turn-planner-storage.service';
 import { TurnPlannerStore } from '../services/turn-planner-store.service';
 import { TurnRuleCatalogService } from '../services/turn-rule-catalog.service';
+import { SpellService } from '../services/spell.service';
 import { totalLevel } from '../utils/turn-engine/turn-profile';
+import { buildCharacterExamples } from '../character-builder/character-examples';
 import { CombatContextComponent } from './combat-context.component';
 import { RuleDetailsComponent } from './rule-details.component';
 import { TurnActionBoardComponent } from './turn-action-board.component';
@@ -77,11 +79,13 @@ export class TurnPlannerComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly route = inject(ActivatedRoute);
   private readonly catalogService = inject(TurnRuleCatalogService);
+  private readonly spellService = inject(SpellService);
   readonly storage = inject(TurnPlannerStorageService);
   readonly store = inject(TurnPlannerStore);
 
   catalog: TurnCatalog | null = null;
   profiles: CharacterProfile[] = [];
+  exampleProfileIds = new Set<string>();
   selectedProfileId = '';
   activeProfile: CharacterProfile | null = null;
   context: CombatContext = { facts: unknownFacts(), conditions: [], targetName: 'Alvo principal' };
@@ -98,24 +102,29 @@ export class TurnPlannerComponent implements OnInit {
   finishCombatConfirmationOpen = false;
 
   ngOnInit(): void {
-    this.catalogService.getCatalog()
-      .pipe(take(1), takeUntilDestroyed(this.destroyRef))
+    const requestedProfile = this.route.snapshot.queryParamMap.get('personagem');
+    combineLatest([
+      this.catalogService.getCatalog(),
+      this.spellService.getSpells(),
+      this.storage.profiles$,
+    ])
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: (catalog) => (this.catalog = catalog),
+        next: ([catalog, spells, savedProfiles]) => {
+          this.catalog = catalog;
+          const exampleProfiles = buildCharacterExamples(catalog, spells).map(example => example.profile);
+          this.exampleProfileIds = new Set(exampleProfiles.map(profile => profile.id));
+          this.profiles = [...savedProfiles, ...exampleProfiles];
+          if (requestedProfile && this.profiles.some(profile => profile.id === requestedProfile)) {
+            this.selectedProfileId = requestedProfile;
+          } else if (!this.profiles.some(profile => profile.id === this.selectedProfileId)) {
+            this.selectedProfileId = this.profiles[0]?.id ?? '';
+          }
+        },
         error: (error: unknown) => {
-          this.loadError = error instanceof Error ? error.message : 'Não foi possível carregar o catálogo.';
+          this.loadError = error instanceof Error ? error.message : 'Não foi possível carregar os personagens e o catálogo.';
         },
       });
-
-    const requestedProfile = this.route.snapshot.queryParamMap.get('personagem');
-    this.storage.profiles$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((profiles) => {
-      this.profiles = profiles;
-      if (requestedProfile && profiles.some((profile) => profile.id === requestedProfile)) {
-        this.selectedProfileId = requestedProfile;
-      } else if (!profiles.some((profile) => profile.id === this.selectedProfileId)) {
-        this.selectedProfileId = profiles[0]?.id ?? '';
-      }
-    });
     this.storage.storageWarning$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((warning) => {
       if (warning) this.notice = warning;
     });
@@ -154,6 +163,10 @@ export class TurnPlannerComponent implements OnInit {
     return totalLevel(profile);
   }
 
+  isExample(profile: CharacterProfile): boolean {
+    return this.exampleProfileIds.has(profile.id);
+  }
+
   get ownTurnEvaluations(): RuleEvaluation[] {
     return this.evaluations.filter((item) => item.rule.category !== 'reaction' && item.rule.id !== 'core.perform-attack');
   }
@@ -178,7 +191,7 @@ export class TurnPlannerComponent implements OnInit {
   startSession(): void {
     const profile = this.selectedProfile;
     if (!profile || !this.catalog) {
-      this.notice = 'Escolha um personagem salvo antes de iniciar.';
+      this.notice = 'Escolha um personagem antes de iniciar.';
       return;
     }
     this.activeProfile = profile;

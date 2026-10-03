@@ -1,53 +1,1037 @@
 {
   "options": [
-    { "id": "aasimar", "name": "Aasimar", "kind": "species", "summary": "Herança celestial com resistência, cura e revelação sobrenatural.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 187 } },
-    { "id": "anao", "name": "Anão", "kind": "species", "summary": "Resiliência, visão no escuro e ligação com a pedra.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 188 } },
-    { "id": "draconato", "name": "Draconato", "kind": "species", "summary": "Ancestralidade dracônica, sopro e voo temporário.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 189 } },
-    { "id": "elfo", "name": "Elfo", "kind": "species", "summary": "Linhagem feérica que concede magia e sentidos aguçados.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 190 } },
-    { "id": "gnomo", "name": "Gnomo", "kind": "species", "summary": "Linhagem feérica e astúcia mágica.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 191 } },
-    { "id": "golias", "name": "Golias", "kind": "species", "summary": "Ancestralidade gigante com crescimento e poder escolhido.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 192 } },
-    { "id": "halfling", "name": "Halfling", "kind": "species", "summary": "Sorte, bravura e agilidade para atravessar espaços ocupados.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 193 } },
-    { "id": "humano", "name": "Humano", "kind": "species", "summary": "Versátil; recebe um talento de Origem adicional.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 194 } },
-    { "id": "orc", "name": "Orc", "kind": "species", "summary": "Mobilidade explosiva e resistência para permanecer de pé.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 195 } },
-    { "id": "tiefling", "name": "Tiefling", "kind": "species", "summary": "Legado sobrenatural que define resistência e magias.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 196 } },
-
-    { "id": "aasimar-asas-celestiais", "name": "Asas Celestiais", "kind": "species-choice", "parentId": "aasimar", "summary": "Revelação Celestial que concede voo temporário.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 187 } },
-    { "id": "aasimar-resplendor-interior", "name": "Resplendor Interior", "kind": "species-choice", "parentId": "aasimar", "summary": "Revelação Celestial que causa dano radiante ao redor.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 187 } },
-    { "id": "aasimar-mortalha-necrotica", "name": "Mortalha Necrótica", "kind": "species-choice", "parentId": "aasimar", "summary": "Revelação Celestial ameaçadora.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 187 } },
-    { "id": "draconato-acido", "name": "Ancestralidade: Ácido", "kind": "species-choice", "parentId": "draconato", "summary": "Sopro e resistência de ácido.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 189 } },
-    { "id": "draconato-eletrico", "name": "Ancestralidade: Elétrico", "kind": "species-choice", "parentId": "draconato", "summary": "Sopro e resistência elétricos.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 189 } },
-    { "id": "draconato-fogo", "name": "Ancestralidade: Fogo", "kind": "species-choice", "parentId": "draconato", "summary": "Sopro e resistência de fogo.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 189 } },
-    { "id": "draconato-frio", "name": "Ancestralidade: Frio", "kind": "species-choice", "parentId": "draconato", "summary": "Sopro e resistência de frio.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 189 } },
-    { "id": "draconato-veneno", "name": "Ancestralidade: Veneno", "kind": "species-choice", "parentId": "draconato", "summary": "Sopro e resistência de veneno.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 189 } },
-    { "id": "elfo-drow", "name": "Linhagem Drow", "kind": "species-choice", "parentId": "elfo", "summary": "Magias drow conforme o nível.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 190 } },
-    { "id": "elfo-alto", "name": "Linhagem Alto Elfo", "kind": "species-choice", "parentId": "elfo", "summary": "Truque arcano e magias conforme o nível.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 190 } },
-    { "id": "elfo-silvestre", "name": "Linhagem Elfo Silvestre", "kind": "species-choice", "parentId": "elfo", "summary": "Deslocamento ampliado e magias conforme o nível.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 190 } },
-    { "id": "gnomo-florestal", "name": "Linhagem Gnomo Florestal", "kind": "species-choice", "parentId": "gnomo", "summary": "Ilusão e comunicação com animais.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 191 } },
-    { "id": "gnomo-das-rochas", "name": "Linhagem Gnomo das Rochas", "kind": "species-choice", "parentId": "gnomo", "summary": "Prestidigitação e engenhocas mecânicas.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 191 } },
-    { "id": "golias-nuvem", "name": "Ancestralidade: Nuvem", "kind": "species-choice", "parentId": "golias", "summary": "Teleporte curto como Ação Bônus.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 192 } },
-    { "id": "golias-fogo", "name": "Ancestralidade: Fogo", "kind": "species-choice", "parentId": "golias", "summary": "Dano de fogo adicional em um acerto.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 192 } },
-    { "id": "golias-gelo", "name": "Ancestralidade: Gelo", "kind": "species-choice", "parentId": "golias", "summary": "Dano de frio e redução do deslocamento do alvo.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 192 } },
-    { "id": "golias-colina", "name": "Ancestralidade: Colina", "kind": "species-choice", "parentId": "golias", "summary": "Derruba o alvo após causar dano.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 192 } },
-    { "id": "golias-pedra", "name": "Ancestralidade: Pedra", "kind": "species-choice", "parentId": "golias", "summary": "Reduz dano com uma Reação.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 192 } },
-    { "id": "golias-tempestade", "name": "Ancestralidade: Tempestade", "kind": "species-choice", "parentId": "golias", "summary": "Causa dano ao atacante com uma Reação.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 192 } },
-    { "id": "tiefling-abissal", "name": "Legado Abissal", "kind": "species-choice", "parentId": "tiefling", "summary": "Resistência a veneno e magias abissais.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 196 } },
-    { "id": "tiefling-ctonico", "name": "Legado Ctônico", "kind": "species-choice", "parentId": "tiefling", "summary": "Resistência necrótica e magias ctônicas.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 196 } },
-    { "id": "tiefling-infernal", "name": "Legado Infernal", "kind": "species-choice", "parentId": "tiefling", "summary": "Resistência a fogo e magias infernais.", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 196 } }
+    {
+      "id": "aasimar",
+      "name": "Aasimar",
+      "kind": "species",
+      "summary": "Herança celestial com resistência, cura e revelação sobrenatural.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 186
+      },
+      "description": "Tipo de Criatura: Humanoide Tamanho: Médio (cerca de 1,20-2,10 metros de altura) ou Pequeno (cerca de 0,60-1,20 metro de altura), escolhido ao selecionar esta espécie Deslocamento: 9 metros Resistência Celestial. Você tem Resistência a dano Necrótico e Radiante. Visão no Escuro. Você tem Visão no Escuro com um alcance de 18 metros. Mãos Curativas. Você executa uma ação Usar Magia, toca uma criatura e joga um número de d4s igual ao seu Bônus de Proficiência. A criatura restaura número de Pontos de Vida igual ao total jogado. Após usar esse traço, você não pode usá-lo novamente até completar um Descanso Longo. Portador da Luz. Você conhece o truque Luz . Carisma é seu atributo de conjuração para isso. Revelação Celestial. No nível 3 de personagem, você pode se transformar como uma Ação Bônus usando uma das opções abaixo (escolha a opção cada vez que você se transformar). A transformação se mantém por 1 minuto ou até você a encerrar (nenhuma ação é necessária). Uma vez que você se transforma, não pode fazê-lo novamente até completar um Descanso Longo. Uma vez em cada um dos seus turnos, até que a transformação termine, você pode infligir dano adicional a um alvo ao causar dano a ele com um ataque ou uma magia. O dano adicional é igual ao seu Bônus de Proficiência, e o tipo de dano adicional é Necrótico para Manto Necrótico ou Radiante para Asas Celestiais e Transfiguração Radiante. Aqui estão as opções de transformação: Asas Celestiais. Duas asas espectrais brotam em suas costas temporariamente. Até que a transformação se encerre, você tem um Deslocamento de Voo igual ao seu Deslocamento. Manto Necrótico. Seus olhos se tornam brevemente poças de escuridão, e asas que não voam brotam em suas costas temporariamente. Criaturas que não sejam seus aliados a até 3 metros de você devem ser bem-sucedidas em uma salvaguarda de Carisma (CD 8 + seu modificador de Carisma e seu Bônus de Proficiência) ou têm a condição Amedrontado até o final do seu próximo turno. Transfiguração Radiante. Luz abrasadora irradia temporariamente de seus olhos e boca. Pela duração da transformação, você emite Luz Plena em um raio de 3 metros e Meia-luz por mais 3 metros, e no fim de cada um de seus turnos, cada criatura a até 3 metros de você sofre dano Radiante igual ao seu Bônus de Proficiência."
+    },
+    {
+      "id": "anao",
+      "name": "Anão",
+      "kind": "species",
+      "summary": "Resiliência, visão no escuro e ligação com a pedra.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 187
+      },
+      "description": "Tipo de Criatura: Humanoide Tamanho: Médio (cerca de 1,20-1,50 metro de altura) Deslocamento: 9 metros Visão no Escuro. Você tem Visão no Escuro com um alcance de 36 metros. Resistência a Toxinas. Você tem Resistência a Dano Venenoso. Você também tem Vantagem nas salvaguardas que realizar para evitar ou encerrar a condição Envenenado. Tenacidade Anã. Seus Pontos de Vida máximos aumentam em 1, e novamente em 1, sempre que você atinge um nível de personagem. Conhecimento de Pedras. Como uma Ação Bônus, você adquire Sismiconsciência com um alcance de 18 metros por 10 minutos. Você deve estar em, ou tocar, uma superfície de pedra para usar a Sismiconsciência. A pedra pode ser natural ou trabalhada. Você pode usar essa Ação Bônus um número de vezes igual ao seu Bônus de Proficiência, e você restaura todos os usos gastos quando completa um Descanso Longo."
+    },
+    {
+      "id": "draconato",
+      "name": "Draconato",
+      "kind": "species",
+      "summary": "Ancestralidade dracônica, sopro e voo temporário.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 188
+      },
+      "description": "Tipo de Criatura: Humanoide Tamanho: Médio (cerca de 1,50-2,10 metros de altura) Deslocamento: 9 metros Herança Dracônica. Sua linhagem deriva de um progenitor dracônico. Escolha o tipo de dragão da tabela Herança Dracônica. Sua escolha afeta suas características de Ataque de Sopro e Resistência a Dano, bem como sua aparência. Herança Dracônica Dragão Tipo de Dano Dragão Tipo de Dano Azul Elétrico Negro Ácido Branco Gélido Ouro Ígneo Bronze Elétrico Prata Gélido Cobre Ácido Verde Venenoso Latão Ígneo Vermelho Ígneo Ataque de Sopro. Ao executar a ação Atacar no seu turno, você pode substituir um de seus ataques por uma emissão de energia mágica em um Cone de 4,5 metros ou em uma Linha de 9 metros de comprimento e 1,5 metros de largura (escolha a forma a cada vez). Cada criatura nessa área deve realizar uma salvaguarda de Destreza (CD 8 + seu modificador de Constituição e seu Bônus de Proficiência). Se falhar, uma criatura sofre 1d10 pontos de dano do tipo determinado por seu traço Herança Dracônica. Em caso de sucesso, uma criatura sofre metade do dano. Esse dano aumenta em 1d10 quando você atinge os níveis de personagem 5 (2d10), 11 (3d10) e 17 (4d10). Você pode usar esse Ataque de Sopro um número de vezes igual ao seu Bônus de Proficiência, e você restaura todos os usos gastos quando completa um Descanso Longo. Resistência a Dano. Você tem Resistência ao tipo de dano determinado por seu traço Herança Dracônica. Visão no Escuro. Você tem Visão no Escuro com um alcance de 18 metros. Voo Dracônico. No nível 5 do personagem, você pode canalizar magia dracônica para beneficiar de um voo temporário. Como uma Ação Bônus, você cria asas espectrais nas costas que duram 10 minutos ou até que você as retraia (nenhuma ação é necessária) ou tem a condição Incapacitado. Pela duração, você tem um Deslocamento de Voo igual ao seu Deslocamento. Suas asas parecem feitas da mesma energia que o seu Ataque de Sopro. Após usar esse traço, você não pode usá-lo novamente até completar um Descanso Longo."
+    },
+    {
+      "id": "elfo",
+      "name": "Elfo",
+      "kind": "species",
+      "summary": "Linhagem feérica que concede magia e sentidos aguçados.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 189
+      },
+      "description": "Tipo de Criatura: Humanoide Tamanho: Médio (cerca de 1,50-1,80 metro de altura) Deslocamento: 9 metros Visão no Escuro. Você tem Visão no Escuro com um alcance de 18 metros. Linhagem Élfica. Você é de uma linhagem que lhe concede habilidades sobrenaturais. Escolha uma linhagem da tabela Linhagem Élfica. Você adquire o benefício de nível 1 dessa linhagem. Ao atingir os níveis 3 e 5, você aprende uma magia de círculo superior, conforme indicado na tabela. Essa magia está sempre preparada e pode ser conjurada uma vez sem usar um espaço de magia, restaurando essa capacidade ao completar um Descanso Longo. Linhagem Élfica Linhagem Nível 1 Alto Elfo Você conhece o truque Prestidigitação Arcana . Sempre um Descanso Longo, você pode substituir este truque diferente da lista de magias de Mago. Drow O alcance da sua Visão no Escuro aumenta para 36 também conhece o truque Luzes Dançantes . Elfo Silvestre Seu Deslocamento aumenta para 10,5 metros. Você truque Arte Druídica . Além disso, você pode conjurá-la usando qualquer espaço de magia apropriado que possua. Inteligência, Sabedoria ou Carisma é seu atributo de conjuração para as magias que você conjura com este traço (escolha o atributo quando selecionar a linhagem). Ancestralidade Feérica. Você tem Vantagem ao realizar salvaguardas para evitar ou encerrar a condição Enfeitiçado. Sentidos Aguçados. Você tem proficiência na perícia Intuição, Percepção ou Sobrevivência. Transe. Você pode completar um Descanso Longo em 4 horas ao meditar, sem a necessidade de dormir, mantendo a consciência, e magia não pode forçá-lo a dormir. Nível 3 Nível 5 que completar Detectar Magia Passo Nebuloso por um truque metros. Você Fogo das Fadas Escuridão também conhece o Passos Largos Passos Sem Rastro"
+    },
+    {
+      "id": "gnomo",
+      "name": "Gnomo",
+      "kind": "species",
+      "summary": "Linhagem feérica e astúcia mágica.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 191
+      },
+      "description": "Tipo de Criatura: Humanoide Tamanho: Pequeno (cerca de 0,90-1,20 metro de altura) Deslocamento: 9 metros Visão no Escuro. Você tem Visão no Escuro com um alcance de 18 metros. Astúcia de Gnomo. Você tem Vantagem em salvaguardas de Inteligência, Sabedoria e Carisma. Linhagem Gnômica. Você pertence a uma linhagem que lhe confere habilidades sobrenaturais. Escolha uma das seguintes opções; sua escolha determina se Inteligência, Sabedoria ou Carisma é seu atributo de conjuração para as magias desse traço (escolha o atributo quando selecionar a linhagem): Gnomo das Rochas. Você conhece os truques Prestidigitação Arcana e Reparar . Além disso, você pode gastar 10 minutos conjurando Prestidigitação Arcana para fabricar um dispositivo mecânico minúsculo (CA 5, 1 PV), como um brinquedo, isqueiro mecânico ou caixa de música. Ao fabricar o dispositivo, você determina a função dele escolhendo um efeito de Prestidigitação Arcana ; o dispositivo produz esse efeito sempre que você ou outra criatura executa uma Ação Bônus para ativá-lo com um toque. Se o efeito escolhido tiver opções possíveis, você escolhe uma dessas opções para o dispositivo ao fabricá-lo. Por exemplo, se você escolher o efeito de Brincar com Fogo da magia, você determina se o dispositivo acende ou extingue fogo; o dispositivo não faz ambas as coisas. Você pode ter três desses dispositivos ao mesmo tempo, e cada um se desfaz 8 horas após ser fabricado ou quando você o desmonta com um toque como uma ação Usar Objeto. Gnomo do Bosque. Você conhece o truque Ilusão Menor . Você também sempre tem a magia Falar com Animais preparada. É possível conjurá-la sem um espaço de magia um número de vezes igual ao seu Bônus de Proficiência, e você restaura todos os usos gastos quando completa um Descanso Longo. Você também pode usar qualquer espaço de magia que tiver para conjurá-la."
+    },
+    {
+      "id": "golias",
+      "name": "Golias",
+      "kind": "species",
+      "summary": "Ancestralidade gigante com crescimento e poder escolhido.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 192
+      },
+      "description": "Tipo de Criatura: Humanoide Tamanho: Médio (cerca de 2,10-2,40 metros de altura) Deslocamento: 10,5 metros Ancestralidade Gigante. Você é descendente de Gigantes. Escolha um dos seguintes benefícios — um benefício sobrenatural de sua ancestralidade; você pode usar o benefício escolhido um número de vezes igual ao seu Bônus de Proficiência, e você restaura todos os usos gastos quando completa um Descanso Longo: Arrepio do Gelo (Gigante do Gelo). Ao atingir um alvo com uma jogada de ataque e causar dano a ele, você também pode infligir 1d6 pontos de dano Gélido a esse alvo e reduzir o Deslocamento dele em 3 metros até o início do seu próximo turno. Queimadura de Fogo (Gigante de Fogo). Ao atingir um alvo com uma jogada de ataque e causar dano a ele, você também pode causar 1d10 pontos de dano Ígneo a esse alvo. Resistência da Pedra (Gigante da Pedra). Ao sofrer dano, pode executar uma Reação para jogar 1d12. Adicione seu modificador de Constituição ao número obtido e reduza o dano desse total. Salto da Nuvem (Gigante das Nuvens). Como uma Ação Bônus, você se teleporta magicamente até 9 metros para um espaço desocupado à sua vista. Tombo da Colina (Gigante da Colina). Ao atingir uma criatura Grande ou menor com uma jogada de ataque e causar dano a ela, você pode impor a esse alvo a condição Caído. Trovão da Tempestade (Gigante da Tempestade). Ao sofrer dano de uma criatura a até 18 metros de você, você pode executar uma Reação para causar 1d8 pontos de dano Trovejante a essa criatura. Forma Grande. A partir do nível 5 de personagem, você pode alterar seu tamanho para Grande como uma Ação Bônus se estiver em um espaço grande o suficiente. Essa transformação se mantém por 10 minutos ou até que você a encerrar (nenhuma ação é necessária). Pela duração, você tem Vantagem em testes de Força, e seu Deslocamento aumenta em 3 metros. Após usar este traço, você não pode utilizá-lo novamente até completar um Descanso Longo. Porte Poderoso. Você tem Vantagem em qualquer teste de atributo que realizar para encerrar a condição Imobilizado. Você também conta como um tamanho maior ao determinar sua capacidade de carga."
+    },
+    {
+      "id": "halfling",
+      "name": "Pequenino",
+      "kind": "species",
+      "summary": "Sorte, bravura e agilidade para atravessar espaços ocupados.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 195
+      },
+      "description": "Tipo de Criatura: Humanoide Tamanho: Pequeno (cerca de 0,60-0,90 metro de altura) Deslocamento: 9 metros Corajoso. Você tem Vantagem nas salvaguardas que realizar para evitar ou encerrar a condição Amedrontado. Agilidade Pequenina. Você pode se mover pelo espaço de qualquer criatura que seja um tamanho maior que você, mas você não pode parar no mesmo espaço. Sorte. Ao tirar 1 no D20 de um Teste de D20, você pode jogar novamente o dado e deve usar a nova jogada. Furtividade Natural. Você pode executar a ação Esconder mesmo quando estiver encoberto apenas por uma criatura que seja pelo menos um tamanho maior que você."
+    },
+    {
+      "id": "humano",
+      "name": "Humano",
+      "kind": "species",
+      "summary": "Versátil; recebe um talento de Origem adicional.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 193
+      },
+      "description": "Tipo de Criatura: Humanoide Tamanho: Médio (cerca de 1,20-2,10 metros de altura) ou Pequeno (cerca de 0,60-1,20 metro de altura), escolhido ao selecionar esta espécie Deslocamento: 9 metros Eficiente. Você adquire Inspiração Heroica sempre que completar um Descanso Longo. Hábil. Você adquire proficiência em uma perícia à sua escolha. Versátil. Você adquire um talento de Origem à sua escolha (veja o capítulo 5). Habilidoso é recomendado."
+    },
+    {
+      "id": "orc",
+      "name": "Orc",
+      "kind": "species",
+      "summary": "Mobilidade explosiva e resistência para permanecer de pé.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 194
+      },
+      "description": "Tipo de Criatura: Humanoide Tamanho: Médio (cerca de 1,80-2,10 metros de altura) Deslocamento: 9 metros Pico de Adrenalina. Você pode executar a ação Correr como uma Ação Bônus. Ao executar isso, você adquire um número de Pontos de Vida Temporários igual ao seu Bônus de Proficiência. Você pode usar este traço um número de vezes igual ao seu Bônus de Proficiência, e você restaura todos os usos gastos quando completa um Descanso Curto ou Longo. Visão no Escuro. Você tem Visão no Escuro com um alcance de 36 metros. Vigor Implacável. Ao ser reduzido a 0 Pontos de Vida, mas não morto imediatamente, você fica com 1 Ponto de Vida. Após usar este traço, você não pode fazê-lo novamente até completar um Descanso Longo."
+    },
+    {
+      "id": "tiefling",
+      "name": "Tiferino",
+      "kind": "species",
+      "summary": "Legado sobrenatural que define resistência e magias.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 196
+      },
+      "description": "Tipo de Criatura: Humanoide Tamanho: Médio (cerca de 1,20-2,10 metros de altura) ou Pequeno (cerca de 0,90-1,20 metro de altura), escolhido ao selecionar esta espécie. Deslocamento: 9 metros Visão no Escuro. Você tem Visão no Escuro com um alcance de 18 metros. Legado Ínfero. Você é o portador de um legado que lhe confere poderes sobrenaturais. Escolha um legado da tabela Legados Ínferos. Você adquire o benefício de nível 1 do legado escolhido. Ao atingir os níveis de personagem 3 e 5, você aprende magias de círculo superior, conforme indicado na Legados Ínferos Legado Nível 1 Abissal Você tem Resistência a dano Venenoso. Você conhece o truque Rajada de Veneno . Ctônico Você tem Resistência a dano Necrótico. Você conhece o truque Toque Necrótico . Infernal Você tem Resistência a dano Ígneo. Você também conhece o truque Raio de Fogo . tabela. Essas magias estão sempre preparadas e podem ser conjuradas uma vez sem usar um espaço de magia, sendo restauradas quando completa um Descanso Longo. Além disso, você pode conjurá-las utilizando qualquer espaço de magia que possua do círculo correspondente. Atributos como Inteligência, Sabedoria ou Carisma servem como seu atributo de conjuração para essas magias (escolha um atributo ao selecionar o legado). Presença Sobrenatural. Você conhece o truque Taumaturgia . Ao conjurar com este traço, a magia usa o mesmo atributo de conjuração que você usa para sua Característica Legado Ínfero. Nível 3 Nível 5 também Raio Nauseante Paralisar Pessoa também Vitalidade Vazia Raio do Enfraquecimento Repreensão Diabólica Escuridão"
+    },
+    {
+      "id": "aasimar-asas-celestiais",
+      "name": "Asas Celestiais",
+      "kind": "species-choice",
+      "parentId": "aasimar",
+      "summary": "Revelação Celestial que concede voo temporário.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 186
+      }
+    },
+    {
+      "id": "aasimar-resplendor-interior",
+      "name": "Transfiguração Radiante",
+      "kind": "species-choice",
+      "parentId": "aasimar",
+      "summary": "Revelação Celestial que causa dano radiante ao redor.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 186
+      }
+    },
+    {
+      "id": "aasimar-mortalha-necrotica",
+      "name": "Manto Necrótico",
+      "kind": "species-choice",
+      "parentId": "aasimar",
+      "summary": "Revelação Celestial ameaçadora.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 186
+      }
+    },
+    {
+      "id": "draconato-acido",
+      "name": "Ancestralidade: Ácido",
+      "kind": "species-choice",
+      "parentId": "draconato",
+      "summary": "Sopro e resistência de ácido.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 188
+      }
+    },
+    {
+      "id": "draconato-eletrico",
+      "name": "Ancestralidade: Elétrico",
+      "kind": "species-choice",
+      "parentId": "draconato",
+      "summary": "Sopro e resistência elétricos.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 188
+      }
+    },
+    {
+      "id": "draconato-fogo",
+      "name": "Ancestralidade: Fogo",
+      "kind": "species-choice",
+      "parentId": "draconato",
+      "summary": "Sopro e resistência de fogo.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 188
+      }
+    },
+    {
+      "id": "draconato-frio",
+      "name": "Ancestralidade: Frio",
+      "kind": "species-choice",
+      "parentId": "draconato",
+      "summary": "Sopro e resistência de frio.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 188
+      }
+    },
+    {
+      "id": "draconato-veneno",
+      "name": "Ancestralidade: Veneno",
+      "kind": "species-choice",
+      "parentId": "draconato",
+      "summary": "Sopro e resistência de veneno.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 188
+      }
+    },
+    {
+      "id": "elfo-drow",
+      "name": "Linhagem Drow",
+      "kind": "species-choice",
+      "parentId": "elfo",
+      "summary": "Magias drow conforme o nível.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 189
+      }
+    },
+    {
+      "id": "elfo-alto",
+      "name": "Linhagem Alto Elfo",
+      "kind": "species-choice",
+      "parentId": "elfo",
+      "summary": "Truque arcano e magias conforme o nível.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 189
+      }
+    },
+    {
+      "id": "elfo-silvestre",
+      "name": "Linhagem Elfo Silvestre",
+      "kind": "species-choice",
+      "parentId": "elfo",
+      "summary": "Deslocamento ampliado e magias conforme o nível.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 189
+      }
+    },
+    {
+      "id": "gnomo-florestal",
+      "name": "Linhagem Gnomo Florestal",
+      "kind": "species-choice",
+      "parentId": "gnomo",
+      "summary": "Ilusão e comunicação com animais.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 191
+      }
+    },
+    {
+      "id": "gnomo-das-rochas",
+      "name": "Linhagem Gnomo das Rochas",
+      "kind": "species-choice",
+      "parentId": "gnomo",
+      "summary": "Prestidigitação e engenhocas mecânicas.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 191
+      }
+    },
+    {
+      "id": "golias-nuvem",
+      "name": "Ancestralidade: Nuvem",
+      "kind": "species-choice",
+      "parentId": "golias",
+      "summary": "Teleporte curto como Ação Bônus.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 192
+      }
+    },
+    {
+      "id": "golias-fogo",
+      "name": "Ancestralidade: Fogo",
+      "kind": "species-choice",
+      "parentId": "golias",
+      "summary": "Dano de fogo adicional em um acerto.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 192
+      }
+    },
+    {
+      "id": "golias-gelo",
+      "name": "Ancestralidade: Gelo",
+      "kind": "species-choice",
+      "parentId": "golias",
+      "summary": "Dano de frio e redução do deslocamento do alvo.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 192
+      }
+    },
+    {
+      "id": "golias-colina",
+      "name": "Ancestralidade: Colina",
+      "kind": "species-choice",
+      "parentId": "golias",
+      "summary": "Derruba o alvo após causar dano.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 192
+      }
+    },
+    {
+      "id": "golias-pedra",
+      "name": "Ancestralidade: Pedra",
+      "kind": "species-choice",
+      "parentId": "golias",
+      "summary": "Reduz dano com uma Reação.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 192
+      }
+    },
+    {
+      "id": "golias-tempestade",
+      "name": "Ancestralidade: Tempestade",
+      "kind": "species-choice",
+      "parentId": "golias",
+      "summary": "Causa dano ao atacante com uma Reação.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 192
+      }
+    },
+    {
+      "id": "tiefling-abissal",
+      "name": "Legado Abissal",
+      "kind": "species-choice",
+      "parentId": "tiefling",
+      "summary": "Resistência a veneno e magias abissais.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 196
+      }
+    },
+    {
+      "id": "tiefling-ctonico",
+      "name": "Legado Ctônico",
+      "kind": "species-choice",
+      "parentId": "tiefling",
+      "summary": "Resistência necrótica e magias ctônicas.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 196
+      }
+    },
+    {
+      "id": "tiefling-infernal",
+      "name": "Legado Infernal",
+      "kind": "species-choice",
+      "parentId": "tiefling",
+      "summary": "Resistência a fogo e magias infernais.",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 196
+      }
+    }
   ],
   "rules": [
-    { "id": "species.aasimar.healing-hands", "name": "Mãos Curativas", "summary": "Toque uma criatura e restaure PV; informe a cura manualmente.", "origin": "species", "originId": "aasimar", "activation": "action", "category": "action", "conditions": [{ "type": "species", "id": "aasimar" }, { "type": "phase", "value": "own-turn" }, { "type": "action-available" }, { "type": "resource", "id": "healing-hands", "atLeast": 1, "label": "Mãos Curativas" }], "costs": [{ "type": "action" }, { "type": "resource", "id": "healing-hands", "amount": 1 }], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 187 } },
-    { "id": "species.aasimar.revelation", "name": "Revelação Celestial", "summary": "Transforme-se até o fim do próximo turno; aplique o efeito da revelação escolhida.", "origin": "species", "originId": "aasimar", "activation": "bonus-action", "category": "bonus", "conditions": [{ "type": "species", "id": "aasimar" }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }, { "type": "resource", "id": "celestial-revelation", "atLeast": 1, "label": "Revelação Celestial" }], "costs": [{ "type": "bonus-action" }, { "type": "resource", "id": "celestial-revelation", "amount": 1 }], "effects": [{ "type": "marker", "id": "celestial-revelation-active", "value": true }], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 187 } },
-    { "id": "species.anao.stonecunning", "name": "Astúcia da Pedra", "summary": "Como Ação Bônus, obtenha Percepção às Cegas temporária ao tocar pedra.", "origin": "species", "originId": "anao", "activation": "bonus-action", "category": "bonus", "conditions": [{ "type": "species", "id": "anao" }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }, { "type": "resource", "id": "stonecunning", "atLeast": 1, "label": "Astúcia da Pedra" }], "costs": [{ "type": "bonus-action" }, { "type": "resource", "id": "stonecunning", "amount": 1 }], "effects": [{ "type": "marker", "id": "stonecunning-active", "value": true }], "support": "structured", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 188 } },
-    { "id": "species.draconato.breath", "name": "Sopro Dracônico", "summary": "Substitua um ataque da ação Atacar pelo sopro e confirme as salvaguardas.", "origin": "species", "originId": "draconato", "activation": "free", "category": "modifier", "conditions": [{ "type": "species", "id": "draconato" }, { "type": "attacks-remaining" }, { "type": "resource", "id": "breath-weapon", "atLeast": 1, "label": "Sopro Dracônico" }], "costs": [{ "type": "resource", "id": "breath-weapon", "amount": 1 }], "effects": [{ "type": "perform-attack" }], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 189 } },
-    { "id": "species.draconato.flight", "name": "Voo Dracônico", "summary": "Manifeste asas espectrais e obtenha deslocamento de voo por 10 minutos.", "origin": "species", "originId": "draconato", "activation": "bonus-action", "category": "bonus", "conditions": [{ "type": "species", "id": "draconato" }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }, { "type": "resource", "id": "draconic-flight", "atLeast": 1, "label": "Voo Dracônico" }], "costs": [{ "type": "bonus-action" }, { "type": "resource", "id": "draconic-flight", "amount": 1 }], "effects": [{ "type": "marker", "id": "draconic-flight-active", "value": true }], "support": "structured", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 189 } },
-    { "id": "species.golias.cloud-jaunt", "name": "Passo da Nuvem", "summary": "Teleporte-se até 9 metros para um espaço visível.", "origin": "species", "originId": "golias-nuvem", "activation": "bonus-action", "category": "bonus", "conditions": [{ "type": "species-choice", "id": "golias-nuvem" }, { "type": "bonus-action-available" }, { "type": "resource", "id": "giant-ancestry", "atLeast": 1, "label": "Ancestralidade Gigante" }], "costs": [{ "type": "bonus-action" }, { "type": "resource", "id": "giant-ancestry", "amount": 1 }], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 192 } },
-    { "id": "species.golias.hill-tumble", "name": "Tombo da Colina", "summary": "Após causar dano, deixe o alvo Caído se ele for elegível.", "origin": "species", "originId": "golias-colina", "activation": "trigger", "trigger": "attack-hit", "category": "modifier", "conditions": [{ "type": "species-choice", "id": "golias-colina" }, { "type": "trigger", "value": "attack-hit" }, { "type": "resource", "id": "giant-ancestry", "atLeast": 1, "label": "Ancestralidade Gigante" }], "costs": [{ "type": "resource", "id": "giant-ancestry", "amount": 1 }], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 192 } },
-    { "id": "species.golias.fire-burn", "name": "Queimadura do Fogo", "summary": "Após acertar e causar dano, acrescente dano de fogo.", "origin": "species", "originId": "golias-fogo", "activation": "trigger", "trigger": "attack-hit", "category": "modifier", "conditions": [{ "type": "species-choice", "id": "golias-fogo" }, { "type": "trigger", "value": "attack-hit" }, { "type": "resource", "id": "giant-ancestry", "atLeast": 1, "label": "Ancestralidade Gigante" }], "costs": [{ "type": "resource", "id": "giant-ancestry", "amount": 1 }], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 192 } },
-    { "id": "species.golias.frost-chill", "name": "Frio do Gelo", "summary": "Após acertar e causar dano, acrescente dano de frio e reduza o deslocamento do alvo.", "origin": "species", "originId": "golias-gelo", "activation": "trigger", "trigger": "attack-hit", "category": "modifier", "conditions": [{ "type": "species-choice", "id": "golias-gelo" }, { "type": "trigger", "value": "attack-hit" }, { "type": "resource", "id": "giant-ancestry", "atLeast": 1, "label": "Ancestralidade Gigante" }], "costs": [{ "type": "resource", "id": "giant-ancestry", "amount": 1 }], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 192 } },
-    { "id": "species.golias.stone-endurance", "name": "Resistência da Pedra", "summary": "Use a Reação para reduzir o dano recebido.", "origin": "species", "originId": "golias-pedra", "activation": "reaction", "trigger": "damage-received", "category": "reaction", "conditions": [{ "type": "species-choice", "id": "golias-pedra" }, { "type": "phase", "value": "reaction-window" }, { "type": "reaction-available" }, { "type": "resource", "id": "giant-ancestry", "atLeast": 1, "label": "Ancestralidade Gigante" }, { "type": "fact", "id": "damage-received", "equals": true, "label": "você recebeu dano" }], "costs": [{ "type": "reaction" }, { "type": "resource", "id": "giant-ancestry", "amount": 1 }], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 192 } },
-    { "id": "species.golias.storm-thunder", "name": "Trovão da Tempestade", "summary": "Use a Reação para causar dano ao atacante que atingiu você.", "origin": "species", "originId": "golias-tempestade", "activation": "reaction", "trigger": "damage-received", "category": "reaction", "conditions": [{ "type": "species-choice", "id": "golias-tempestade" }, { "type": "phase", "value": "reaction-window" }, { "type": "reaction-available" }, { "type": "resource", "id": "giant-ancestry", "atLeast": 1, "label": "Ancestralidade Gigante" }, { "type": "fact", "id": "attacker-visible", "equals": true, "label": "você enxerga o atacante" }], "costs": [{ "type": "reaction" }, { "type": "resource", "id": "giant-ancestry", "amount": 1 }], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 192 } },
-    { "id": "species.golias.large-form", "name": "Forma Grande", "summary": "Como Ação Bônus, torne-se Grande por 10 minutos se houver espaço.", "origin": "species", "originId": "golias", "activation": "bonus-action", "category": "bonus", "conditions": [{ "type": "species", "id": "golias" }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }, { "type": "resource", "id": "large-form", "atLeast": 1, "label": "Forma Grande" }], "costs": [{ "type": "bonus-action" }, { "type": "resource", "id": "large-form", "amount": 1 }], "effects": [{ "type": "marker", "id": "large-form-active", "value": true }], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 192 } },
-    { "id": "species.orc.adrenaline-rush", "name": "Ímpeto de Adrenalina", "summary": "Use Correr como Ação Bônus e receba PV temporários.", "origin": "species", "originId": "orc", "activation": "bonus-action", "category": "bonus", "conditions": [{ "type": "species", "id": "orc" }, { "type": "phase", "value": "own-turn" }, { "type": "bonus-action-available" }, { "type": "resource", "id": "adrenaline-rush", "atLeast": 1, "label": "Ímpeto de Adrenalina" }], "costs": [{ "type": "bonus-action" }, { "type": "resource", "id": "adrenaline-rush", "amount": 1 }], "effects": [{ "type": "movement-gain", "amount": "speed" }], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 195 } },
-    { "id": "species.orc.relentless-endurance", "name": "Resistência Implacável", "summary": "Ao cair a 0 PV sem morrer imediatamente, fique com 1 PV.", "origin": "species", "originId": "orc", "activation": "trigger", "category": "modifier", "conditions": [{ "type": "species", "id": "orc" }, { "type": "resource", "id": "relentless-endurance", "atLeast": 1, "label": "Resistência Implacável" }, { "type": "fact", "id": "reduced-to-zero-hp", "equals": true, "label": "você foi reduzido a 0 PV sem morrer imediatamente" }], "costs": [{ "type": "resource", "id": "relentless-endurance", "amount": 1 }], "effects": [], "support": "prompt", "source": { "book": "Livro do Jogador", "revision": "2024 - Erratas de Agosto", "page": 195 } }
+    {
+      "id": "species.aasimar.healing-hands",
+      "name": "Mãos Curativas",
+      "summary": "Toque uma criatura e restaure PV; informe a cura manualmente.",
+      "origin": "species",
+      "originId": "aasimar",
+      "activation": "action",
+      "category": "action",
+      "conditions": [
+        {
+          "type": "species",
+          "id": "aasimar"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "action-available"
+        },
+        {
+          "type": "resource",
+          "id": "healing-hands",
+          "atLeast": 1,
+          "label": "Mãos Curativas"
+        }
+      ],
+      "costs": [
+        {
+          "type": "action"
+        },
+        {
+          "type": "resource",
+          "id": "healing-hands",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 186
+      }
+    },
+    {
+      "id": "species.aasimar.revelation",
+      "name": "Revelação Celestial",
+      "summary": "Transforme-se até o fim do próximo turno; aplique o efeito da revelação escolhida.",
+      "origin": "species",
+      "originId": "aasimar",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "species",
+          "id": "aasimar"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "resource",
+          "id": "celestial-revelation",
+          "atLeast": 1,
+          "label": "Revelação Celestial"
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        },
+        {
+          "type": "resource",
+          "id": "celestial-revelation",
+          "amount": 1
+        }
+      ],
+      "effects": [
+        {
+          "type": "marker",
+          "id": "celestial-revelation-active",
+          "value": true
+        }
+      ],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 186
+      }
+    },
+    {
+      "id": "species.anao.stonecunning",
+      "name": "Astúcia da Pedra",
+      "summary": "Como Ação Bônus, obtenha Percepção às Cegas temporária ao tocar pedra.",
+      "origin": "species",
+      "originId": "anao",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "species",
+          "id": "anao"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "resource",
+          "id": "stonecunning",
+          "atLeast": 1,
+          "label": "Astúcia da Pedra"
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        },
+        {
+          "type": "resource",
+          "id": "stonecunning",
+          "amount": 1
+        }
+      ],
+      "effects": [
+        {
+          "type": "marker",
+          "id": "stonecunning-active",
+          "value": true
+        }
+      ],
+      "support": "structured",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 187
+      }
+    },
+    {
+      "id": "species.draconato.breath",
+      "name": "Sopro Dracônico",
+      "summary": "Substitua um ataque da ação Atacar pelo sopro e confirme as salvaguardas.",
+      "origin": "species",
+      "originId": "draconato",
+      "activation": "free",
+      "category": "modifier",
+      "conditions": [
+        {
+          "type": "species",
+          "id": "draconato"
+        },
+        {
+          "type": "attacks-remaining"
+        },
+        {
+          "type": "resource",
+          "id": "breath-weapon",
+          "atLeast": 1,
+          "label": "Sopro Dracônico"
+        }
+      ],
+      "costs": [
+        {
+          "type": "resource",
+          "id": "breath-weapon",
+          "amount": 1
+        }
+      ],
+      "effects": [
+        {
+          "type": "perform-attack"
+        }
+      ],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 188
+      }
+    },
+    {
+      "id": "species.draconato.flight",
+      "name": "Voo Dracônico",
+      "summary": "Manifeste asas espectrais e obtenha deslocamento de voo por 10 minutos.",
+      "origin": "species",
+      "originId": "draconato",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "species",
+          "id": "draconato"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "resource",
+          "id": "draconic-flight",
+          "atLeast": 1,
+          "label": "Voo Dracônico"
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        },
+        {
+          "type": "resource",
+          "id": "draconic-flight",
+          "amount": 1
+        }
+      ],
+      "effects": [
+        {
+          "type": "marker",
+          "id": "draconic-flight-active",
+          "value": true
+        }
+      ],
+      "support": "structured",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 188
+      }
+    },
+    {
+      "id": "species.golias.cloud-jaunt",
+      "name": "Passo da Nuvem",
+      "summary": "Teleporte-se até 9 metros para um espaço visível.",
+      "origin": "species",
+      "originId": "golias-nuvem",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "species-choice",
+          "id": "golias-nuvem"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "resource",
+          "id": "giant-ancestry",
+          "atLeast": 1,
+          "label": "Ancestralidade Gigante"
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        },
+        {
+          "type": "resource",
+          "id": "giant-ancestry",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 192
+      }
+    },
+    {
+      "id": "species.golias.hill-tumble",
+      "name": "Tombo da Colina",
+      "summary": "Após causar dano, deixe o alvo Caído se ele for elegível.",
+      "origin": "species",
+      "originId": "golias-colina",
+      "activation": "trigger",
+      "trigger": "attack-hit",
+      "category": "modifier",
+      "conditions": [
+        {
+          "type": "species-choice",
+          "id": "golias-colina"
+        },
+        {
+          "type": "trigger",
+          "value": "attack-hit"
+        },
+        {
+          "type": "resource",
+          "id": "giant-ancestry",
+          "atLeast": 1,
+          "label": "Ancestralidade Gigante"
+        }
+      ],
+      "costs": [
+        {
+          "type": "resource",
+          "id": "giant-ancestry",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 192
+      }
+    },
+    {
+      "id": "species.golias.fire-burn",
+      "name": "Queimadura do Fogo",
+      "summary": "Após acertar e causar dano, acrescente dano de fogo.",
+      "origin": "species",
+      "originId": "golias-fogo",
+      "activation": "trigger",
+      "trigger": "attack-hit",
+      "category": "modifier",
+      "conditions": [
+        {
+          "type": "species-choice",
+          "id": "golias-fogo"
+        },
+        {
+          "type": "trigger",
+          "value": "attack-hit"
+        },
+        {
+          "type": "resource",
+          "id": "giant-ancestry",
+          "atLeast": 1,
+          "label": "Ancestralidade Gigante"
+        }
+      ],
+      "costs": [
+        {
+          "type": "resource",
+          "id": "giant-ancestry",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 192
+      }
+    },
+    {
+      "id": "species.golias.frost-chill",
+      "name": "Frio do Gelo",
+      "summary": "Após acertar e causar dano, acrescente dano de frio e reduza o deslocamento do alvo.",
+      "origin": "species",
+      "originId": "golias-gelo",
+      "activation": "trigger",
+      "trigger": "attack-hit",
+      "category": "modifier",
+      "conditions": [
+        {
+          "type": "species-choice",
+          "id": "golias-gelo"
+        },
+        {
+          "type": "trigger",
+          "value": "attack-hit"
+        },
+        {
+          "type": "resource",
+          "id": "giant-ancestry",
+          "atLeast": 1,
+          "label": "Ancestralidade Gigante"
+        }
+      ],
+      "costs": [
+        {
+          "type": "resource",
+          "id": "giant-ancestry",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 192
+      }
+    },
+    {
+      "id": "species.golias.stone-endurance",
+      "name": "Resistência da Pedra",
+      "summary": "Use a Reação para reduzir o dano recebido.",
+      "origin": "species",
+      "originId": "golias-pedra",
+      "activation": "reaction",
+      "trigger": "damage-received",
+      "category": "reaction",
+      "conditions": [
+        {
+          "type": "species-choice",
+          "id": "golias-pedra"
+        },
+        {
+          "type": "phase",
+          "value": "reaction-window"
+        },
+        {
+          "type": "reaction-available"
+        },
+        {
+          "type": "resource",
+          "id": "giant-ancestry",
+          "atLeast": 1,
+          "label": "Ancestralidade Gigante"
+        },
+        {
+          "type": "fact",
+          "id": "damage-received",
+          "equals": true,
+          "label": "você recebeu dano"
+        }
+      ],
+      "costs": [
+        {
+          "type": "reaction"
+        },
+        {
+          "type": "resource",
+          "id": "giant-ancestry",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 192
+      }
+    },
+    {
+      "id": "species.golias.storm-thunder",
+      "name": "Trovão da Tempestade",
+      "summary": "Use a Reação para causar dano ao atacante que atingiu você.",
+      "origin": "species",
+      "originId": "golias-tempestade",
+      "activation": "reaction",
+      "trigger": "damage-received",
+      "category": "reaction",
+      "conditions": [
+        {
+          "type": "species-choice",
+          "id": "golias-tempestade"
+        },
+        {
+          "type": "phase",
+          "value": "reaction-window"
+        },
+        {
+          "type": "reaction-available"
+        },
+        {
+          "type": "resource",
+          "id": "giant-ancestry",
+          "atLeast": 1,
+          "label": "Ancestralidade Gigante"
+        },
+        {
+          "type": "fact",
+          "id": "attacker-visible",
+          "equals": true,
+          "label": "você enxerga o atacante"
+        }
+      ],
+      "costs": [
+        {
+          "type": "reaction"
+        },
+        {
+          "type": "resource",
+          "id": "giant-ancestry",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 192
+      }
+    },
+    {
+      "id": "species.golias.large-form",
+      "name": "Forma Grande",
+      "summary": "Como Ação Bônus, torne-se Grande por 10 minutos se houver espaço.",
+      "origin": "species",
+      "originId": "golias",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "species",
+          "id": "golias"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "resource",
+          "id": "large-form",
+          "atLeast": 1,
+          "label": "Forma Grande"
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        },
+        {
+          "type": "resource",
+          "id": "large-form",
+          "amount": 1
+        }
+      ],
+      "effects": [
+        {
+          "type": "marker",
+          "id": "large-form-active",
+          "value": true
+        }
+      ],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 192
+      }
+    },
+    {
+      "id": "species.orc.adrenaline-rush",
+      "name": "Ímpeto de Adrenalina",
+      "summary": "Use Correr como Ação Bônus e receba PV temporários.",
+      "origin": "species",
+      "originId": "orc",
+      "activation": "bonus-action",
+      "category": "bonus",
+      "conditions": [
+        {
+          "type": "species",
+          "id": "orc"
+        },
+        {
+          "type": "phase",
+          "value": "own-turn"
+        },
+        {
+          "type": "bonus-action-available"
+        },
+        {
+          "type": "resource",
+          "id": "adrenaline-rush",
+          "atLeast": 1,
+          "label": "Ímpeto de Adrenalina"
+        }
+      ],
+      "costs": [
+        {
+          "type": "bonus-action"
+        },
+        {
+          "type": "resource",
+          "id": "adrenaline-rush",
+          "amount": 1
+        }
+      ],
+      "effects": [
+        {
+          "type": "movement-gain",
+          "amount": "speed"
+        }
+      ],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 194
+      }
+    },
+    {
+      "id": "species.orc.relentless-endurance",
+      "name": "Resistência Implacável",
+      "summary": "Ao cair a 0 PV sem morrer imediatamente, fique com 1 PV.",
+      "origin": "species",
+      "originId": "orc",
+      "activation": "trigger",
+      "category": "modifier",
+      "conditions": [
+        {
+          "type": "species",
+          "id": "orc"
+        },
+        {
+          "type": "resource",
+          "id": "relentless-endurance",
+          "atLeast": 1,
+          "label": "Resistência Implacável"
+        },
+        {
+          "type": "fact",
+          "id": "reduced-to-zero-hp",
+          "equals": true,
+          "label": "você foi reduzido a 0 PV sem morrer imediatamente"
+        }
+      ],
+      "costs": [
+        {
+          "type": "resource",
+          "id": "relentless-endurance",
+          "amount": 1
+        }
+      ],
+      "effects": [],
+      "support": "prompt",
+      "source": {
+        "book": "Livro do Jogador",
+        "revision": "2024 - Erratas de Agosto",
+        "page": 194
+      }
+    }
   ]
 }

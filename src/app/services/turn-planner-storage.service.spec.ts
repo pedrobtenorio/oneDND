@@ -25,7 +25,7 @@ const profile = (id = 'profile-1'): CharacterProfile => ({
 
 describe('TurnPlannerStorageService', () => {
   beforeEach(() => {
-    localStorage.removeItem('dnd.turn-planner.profiles.v1');
+    for (const key of ['profiles.v1','profiles.v2','drafts.v1','drafts.v2','backup.v1']) localStorage.removeItem(`dnd.turn-planner.${key}`);
     localStorage.removeItem('dnd.turn-planner.drafts.v1');
     TestBed.configureTestingModule({ providers: [TurnPlannerStorageService] });
   });
@@ -76,4 +76,58 @@ describe('TurnPlannerStorageService', () => {
     }))).toThrow();
     expect(service.profiles.map((item) => item.id)).toEqual(['profile-1']);
   });
+  it('backs up v1 and migrates without applying any ability bonuses', () => {
+    const old = profile();
+    localStorage.setItem('dnd.turn-planner.profiles.v1', JSON.stringify([old]));
+    localStorage.setItem('dnd.turn-planner.drafts.v1', '[]');
+    const service = TestBed.inject(TurnPlannerStorageService);
+    expect(service.profiles[0].abilities).toEqual(old.abilities);
+    expect(service.profiles[0].abilityMode).toBe('legacy-final');
+    expect(service.profiles[0].needsReview).toBeTrue();
+    expect(service.profiles[0].id).toBe(old.id);
+    expect(localStorage.getItem('dnd.turn-planner.backup.v1')).not.toBeNull();
+    expect(localStorage.getItem('dnd.turn-planner.profiles.v1')).toBe(JSON.stringify([old]));
+    expect(JSON.parse(service.exportLibrary()).schemaVersion).toBe(2);
+  });
+
+  it('round-trips level 8 v2 profiles with source selections and base abilities', () => {
+    const service = TestBed.inject(TurnPlannerStorageService);
+    const p = profile(); p.classes[0].level=8;
+    p.abilityMode='base'; p.baseAbilities={...p.abilities,dexterity:12,intelligence:9}; p.backgroundId='background.criminoso';
+    p.backgroundBonuses={dexterity:2,intelligence:1};
+    p.choices={invocations:['invocation.pacto-da-lamina']};
+    p.spellSelections={'class.mago':['luz']};
+    p.featSelections=[{source:'class.ladino.4',optionId:'aumento-no-valor-de-atributo',bonuses:{dexterity:2}}];
+    service.importLibrary(JSON.stringify({schemaVersion:2,profiles:[p],drafts:[]}));
+    const saved = new TurnPlannerStorageService().profiles[0];
+    expect(saved).toEqual(p);
+    expect(JSON.parse(service.exportLibrary()).profiles[0]).toEqual(p);
+  });
+
+  it('rejects malformed v2 source allocations before changing the library', () => {
+    const service = TestBed.inject(TurnPlannerStorageService);
+    const p = {...profile(),abilityMode:'base',baseAbilities:profile().abilities,spellSelections:{mago:'invalid'}};
+    expect(() => service.importLibrary(JSON.stringify({schemaVersion:2,profiles:[p],drafts:[]}))).toThrow();
+    expect(service.profiles).toEqual([]);
+  });
+
+  it('rejects v2 profiles whose final abilities would apply bonuses twice', () => {
+    const service = TestBed.inject(TurnPlannerStorageService);
+    const p = profile();
+    p.abilityMode='base'; p.baseAbilities={...p.abilities}; p.backgroundId='background.criminoso';
+    p.backgroundBonuses={dexterity:2,intelligence:1}; p.featSelections=[];
+    expect(() => service.importLibrary(JSON.stringify({schemaVersion:2,profiles:[p],drafts:[]}))).toThrowError(/Atributos finais/);
+    expect(service.profiles).toEqual([]);
+  });
+
+  it('keeps the original library accessible when backup storage fails', () => {
+    const old = profile();
+    localStorage.setItem('dnd.turn-planner.profiles.v1',JSON.stringify([old]));
+    spyOn(localStorage,'setItem').and.throwError('quota');
+    const service = TestBed.inject(TurnPlannerStorageService);
+    expect(service.profiles[0].id).toBe(old.id);
+    expect(service.profiles[0].abilities).toEqual(old.abilities);
+    expect(localStorage.getItem('dnd.turn-planner.profiles.v2')).toBeNull();
+  });
+
 });

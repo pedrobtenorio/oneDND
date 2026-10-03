@@ -5,6 +5,7 @@ export interface SpellTable {
 }
 
 export interface Spell {
+  sourcePage?: number;
   id: string;
   name: string;
   level: number;

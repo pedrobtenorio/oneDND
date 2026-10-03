@@ -6,15 +6,13 @@
   border: 2px solid #6b2a0a;
   border-radius: 8px;
   background: #f7e8c8;
-  box-shadow: 4px 6px 18px rgba(47, 20, 5, 0.24);
+  box-shadow: var(--shadow);
 }
 
 .stat-header {
   padding: 9px 14px 11px;
-  background:
-    linear-gradient(180deg, rgba(255, 224, 160, 0.12), transparent),
-    linear-gradient(135deg, #7a1c0c, #3f0d08);
-  color: #fdf6ec;
+  background: var(--surface);
+  color: var(--ink-soft);
   border-bottom: 2px solid #c5953f;
 }
 
@@ -36,7 +34,7 @@
 
 .block-body {
   padding: 10px 14px 12px;
-  background: linear-gradient(180deg, #fff4da, #ead0a2);
+  background: var(--surface);
 }
 
 .stat-section {
