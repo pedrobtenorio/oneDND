@@ -1,6 +1,7 @@
 import { TurnClassId } from '../models/turn-planner.models';
 import { PAPERMAGE_PORTRAITS } from './papermage-portraits';
 import { PRINTABLEHEROES_PORTRAITS } from './printableheroes-portraits';
+import { PORTRAIT_FRAMES } from './portrait-frames';
 
 export type PortraitAppearance = 'masculina' | 'feminina';
 export interface CharacterPortrait {
@@ -63,4 +64,5 @@ export const CHARACTER_PORTRAITS: CharacterPortrait[] = [
 
 export const findPortrait = (id?: string): CharacterPortrait | undefined => CHARACTER_PORTRAITS.find(p => p.id === id);
 export const portraitCollection = (id: string): string => id.startsWith('printableheroes-') ? 'printableheroes' : id.startsWith('papermage-') ? 'papermage' : 'wesnoth';
+export const portraitFraming = (id?: string): string | null => PORTRAIT_FRAMES[id ?? ''] ?? null;
 export const portraitPath = (id: string): string => `/assets/art/${findPortrait(id)?.file ?? id + '.webp'}`;

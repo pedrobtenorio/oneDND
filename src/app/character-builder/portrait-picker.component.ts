@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TurnClassId } from '../models/turn-planner.models';
 import { UiMotionDirective } from '../shared/ui-motion.directive';
-import { CHARACTER_PORTRAITS, findPortrait, portraitPath, portraitCollection, PORTRAIT_CLASS_LABELS, PORTRAIT_ORIGIN_LABELS } from '../utils/portrait-catalog';
+import { CHARACTER_PORTRAITS, findPortrait, portraitPath, portraitCollection, portraitFraming, PORTRAIT_CLASS_LABELS, PORTRAIT_ORIGIN_LABELS } from '../utils/portrait-catalog';
 
 @Component({
   selector: 'app-portrait-picker',
@@ -11,7 +11,7 @@ import { CHARACTER_PORTRAITS, findPortrait, portraitPath, portraitCollection, PO
   template: `
     <section class="portrait-picker" aria-label="Retrato do personagem">
       <div class="portrait-preview">
-        <img [src]="previewImage" [appMotion]="selectedId" motionKind="pulse" alt="Prévia do retrato escolhido" width="92" height="108" />
+        <img [src]="previewImage" [style.object-view-box]="portraitFraming(selectedId)" [class.framed]="!!portraitFraming(selectedId)" [appMotion]="selectedId" motionKind="pulse" alt="Prévia do retrato escolhido" width="92" height="108" />
         <div><h3>Retrato do personagem</h3><strong>{{ selected?.name ?? (selectedId ? 'Retrato indisponível' : 'Retrato padrão') }}</strong>
           <p>Escolha uma ilustração para sua ficha. A imagem não altera as regras do personagem.</p>
           @if (selectedId && !selected) { <p role="status">O retrato anterior foi preservado, mas não está nesta galeria. Você pode escolher outro.</p> }
@@ -31,7 +31,7 @@ import { CHARACTER_PORTRAITS, findPortrait, portraitPath, portraitCollection, PO
           @for (portrait of filteredPortraits; track portrait.id) {
             <label class="portrait-option" [appMotion]="selectedId === portrait.id" motionKind="select" [class.selected]="selectedId === portrait.id">
               <input type="radio" name="character-portrait" [checked]="selectedId === portrait.id" (change)="portraitChange.emit(portrait.id)" />
-              <img [src]="portraitPath(portrait.id)" alt="" loading="lazy" width="140" height="150" />
+              <img [src]="portraitPath(portrait.id)" [class.framed]="!!portraitFraming(portrait.id)" [style.object-view-box]="portraitFraming(portrait.id)" alt="" loading="lazy" width="140" height="150" />
               <strong>{{ portrait.name }}</strong><small>{{ portrait.appearance === 'masculina' ? 'Masculina' : 'Feminina' }} · {{ originLabels[portrait.origin] }}</small>
             </label>
           }
@@ -53,6 +53,7 @@ export class PortraitPickerComponent {
   collectionFilter = '';
   readonly defaultPortrait = portraitPath('humans-thief+female');
   readonly portraitPath = portraitPath;
+  readonly portraitFraming = portraitFraming;
   readonly originLabels = PORTRAIT_ORIGIN_LABELS;
   readonly styles = Object.entries(PORTRAIT_CLASS_LABELS).map(([id,name]) => ({id,name})).sort((a,b) => a.name.localeCompare(b.name,'pt-BR'));
   readonly origins = Object.entries(PORTRAIT_ORIGIN_LABELS).filter(([id]) => CHARACTER_PORTRAITS.some(p => p.origin === id)).map(([id,name]) => ({id,name})).sort((a,b) => a.name.localeCompare(b.name,'pt-BR'));
